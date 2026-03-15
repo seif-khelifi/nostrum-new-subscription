@@ -1,0 +1,16 @@
+.app-navbar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 4rem; /* 64px */
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	background-color: var(--background);
+}
+
+.app-navbar__title {
+	font-family: var(--font-bricolage);
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}

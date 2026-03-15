@@ -1,0 +1,23 @@
+.mobile-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	height: 3.5rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	background-color: var(--background);
+	border-bottom: 1px solid #E9E6DF;
+}
+
+.mobile-header__logo {
+	font-family: var(--font-bricolage);
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+.mobile-header__actions {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}

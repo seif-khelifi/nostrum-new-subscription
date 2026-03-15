@@ -1,0 +1,50 @@
+/* ── Sidebar variables ───────────────────────────────── */
+:root {
+	--sidebar-width: 16rem;
+	--sidebar-width-collapsed: 120px;
+}
+
+/* ── Base sidebar (non-responsive styles only) ───────── */
+.app-sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	background-color: var(--background);
+	border-right: 1px solid #E9E6DF;
+	z-index: 40;
+	overflow: hidden;
+	transition: width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ── Logo area ───────────────────────────────────────── */
+.app-sidebar__logo {
+	display: flex;
+	align-items: center;
+	height: 4rem;
+	flex-shrink: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	transition: padding 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.app-sidebar__logo-text {
+	font-family: var(--font-bricolage);
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+.app-sidebar__logo-icon {
+	font-family: var(--font-bricolage);
+	font-size: 1.25rem;
+	font-weight: 700;
+	letter-spacing: -0.025em;
+}
+
+/* ── Expanded label text (nav link labels, etc.) ─────── */
+.app-sidebar__label {
+	white-space: nowrap;
+	overflow: hidden;
+	transition: opacity 200ms ease 100ms, width 300ms cubic-bezier(0.4, 0, 0.2, 1);
+}

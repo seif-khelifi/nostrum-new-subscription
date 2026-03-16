@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
+import type { SexeValue } from "@/types/subscription";
 
 const OPTIONS = [
 	{ value: "homme", label: "Un homme" },
@@ -14,7 +15,9 @@ const OPTIONS = [
 
 export function SexeStep() {
 	const { next } = useStepper();
-	const [selected, setSelected] = useState<string | null>(null);
+	const { formData, updateFormData } = useSituationForm();
+
+	const selected = formData.sexe;
 
 	return (
 		<StepScreen
@@ -29,7 +32,7 @@ export function SexeStep() {
 					variant="selectOption"
 					size="select"
 					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
+					onClick={() => updateFormData({ sexe: opt.value as SexeValue })}
 					className="justify-between"
 				>
 					<span>{opt.label}</span>

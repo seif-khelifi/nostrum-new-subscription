@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
+import type { ProtegerValue } from "@/types/subscription";
 
 const OPTIONS = [
 	{ value: "moi", label: "Seulement moi" },
@@ -14,15 +15,13 @@ const OPTIONS = [
 	{ value: "famille", label: "Toute ma famille" },
 ] as const;
 
-type ProtegerValue = (typeof OPTIONS)[number]["value"];
-
 export function ProtegerStep() {
 	const { goToStepById } = useStepper();
-	const [selected, setSelected] = useState<ProtegerValue | null>(null);
+	const { formData, updateFormData } = useSituationForm();
 
-	const selectedLabel = selected
-		? OPTIONS.find((o) => o.value === selected)?.label ?? ""
-		: "";
+	const selected = formData.proteger;
+
+	const selectedLabel = selected ? (OPTIONS.find((o) => o.value === selected)?.label ?? "") : "";
 
 	const handleNext = () => {
 		if (!selected) return;
@@ -43,13 +42,7 @@ export function ProtegerStep() {
 
 	return (
 		<StepScreen
-			title={
-				<>
-					Qui souhaitez-vous
-					<br />
-					protéger ?
-				</>
-			}
+			title={<>Qui souhaitez-vous protéger ?</>}
 			subtitle={
 				<div className="flex flex-wrap items-center gap-2">
 					<span>Je souhaite protéger</span>
@@ -70,7 +63,7 @@ export function ProtegerStep() {
 					variant="selectOption"
 					size="select"
 					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
+					onClick={() => updateFormData({ proteger: opt.value as ProtegerValue })}
 					className="justify-between"
 				>
 					<span>{opt.label}</span>

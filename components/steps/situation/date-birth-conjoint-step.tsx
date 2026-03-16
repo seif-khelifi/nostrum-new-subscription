@@ -1,33 +1,38 @@
 "use client";
 
-import { useState } from "react";
 import { InfoIcon } from "lucide-react";
 import { PillInput } from "@/components/ui/pill-input";
 import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
+
+/** Labels matching the commenceParQui step options */
+const COMMENCE_LABELS: Record<string, string> = {
+	conjoint: "Mon conjoint(e)",
+	enfant: "Mon enfant",
+};
 
 export function DateBirthConjointStep() {
 	const { next } = useStepper();
-	const [birthDate, setBirthDate] = useState("");
+	const { formData, updateFormData } = useSituationForm();
+
+	const birthDate = formData.conjoint?.birthDate ?? "";
+	const commenceLabel = formData.commenceParQui
+		? (COMMENCE_LABELS[formData.commenceParQui] ?? "")
+		: "";
 
 	const canProceed = birthDate.trim().length > 0;
 
 	return (
 		<StepScreen
-			title={
-				<>
-					On commence
-					<br />
-					par qui ?
-				</>
-			}
+			title={<>On commence par qui ?</>}
 			subtitle={
 				<div className="flex flex-wrap items-center gap-2">
 					<span>Je veux protéger en premier mon</span>
 					<PillInput
 						readOnly
-						value=""
+						value={commenceLabel}
 						placeholder=""
 						inputClassName="min-w-[100px] sm:min-w-[140px]"
 					/>
@@ -36,7 +41,11 @@ export function DateBirthConjointStep() {
 						type="date"
 						placeholder="JJ/MM/AAAA"
 						value={birthDate}
-						onChange={(e) => setBirthDate(e.target.value)}
+						onChange={(e) =>
+							updateFormData({
+								conjoint: { ...formData.conjoint, birthDate: e.target.value },
+							})
+						}
 						inputClassName="min-w-[120px] sm:min-w-[160px]"
 					/>
 				</div>

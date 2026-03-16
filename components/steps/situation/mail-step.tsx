@@ -1,13 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
 
 export function MailStep() {
 	const { next } = useStepper();
-	const [email, setEmail] = useState("");
+	const { formData, updateFormData } = useSituationForm();
+
+	const email = formData.email;
 
 	const canProceed = email.trim().length > 0;
 
@@ -21,7 +23,7 @@ export function MailStep() {
 						type="email"
 						placeholder="votre@email.com"
 						value={email}
-						onChange={(e) => setEmail(e.target.value)}
+						onChange={(e) => updateFormData({ email: e.target.value })}
 						inputClassName="min-w-[180px] sm:min-w-[240px]"
 					/>
 				</div>

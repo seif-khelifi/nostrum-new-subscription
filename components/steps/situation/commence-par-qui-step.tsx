@@ -1,26 +1,25 @@
 "use client";
 
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
+import type { CommenceParQuiValue } from "@/types/subscription";
 
 const OPTIONS = [
 	{ value: "conjoint", label: "Mon conjoint(e)" },
 	{ value: "enfant", label: "Mon enfant" },
 ] as const;
 
-type CommenceValue = (typeof OPTIONS)[number]["value"];
-
 export function CommenceParQuiStep() {
 	const { goToStepById } = useStepper();
-	const [selected, setSelected] = useState<CommenceValue | null>(null);
+	const { formData, updateFormData } = useSituationForm();
 
-	const selectedLabel = selected
-		? OPTIONS.find((o) => o.value === selected)?.label ?? ""
-		: "";
+	const selected = formData.commenceParQui;
+
+	const selectedLabel = selected ? (OPTIONS.find((o) => o.value === selected)?.label ?? "") : "";
 
 	const handleNext = () => {
 		if (!selected) return;
@@ -38,13 +37,7 @@ export function CommenceParQuiStep() {
 
 	return (
 		<StepScreen
-			title={
-				<>
-					On commence
-					<br />
-					par qui ?
-				</>
-			}
+			title={<>On commence par qui ?</>}
 			subtitle={
 				<div className="flex flex-wrap items-center gap-2">
 					<span>Je veux protéger en premier mon</span>
@@ -65,7 +58,7 @@ export function CommenceParQuiStep() {
 					variant="selectOption"
 					size="select"
 					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
+					onClick={() => updateFormData({ commenceParQui: opt.value as CommenceParQuiValue })}
 					className="justify-between"
 				>
 					<span>{opt.label}</span>

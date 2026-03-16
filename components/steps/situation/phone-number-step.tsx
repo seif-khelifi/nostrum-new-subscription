@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
 import { InfoIcon } from "lucide-react";
 import { PillInput } from "@/components/ui/pill-input";
 import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
 
 export function PhoneNumberStep() {
 	const { next } = useStepper();
-	const [phone, setPhone] = useState("");
+	const { formData, updateFormData } = useSituationForm();
+
+	const phone = formData.phone;
 
 	const canProceed = phone.trim().length > 0;
 
@@ -23,7 +25,7 @@ export function PhoneNumberStep() {
 						type="tel"
 						placeholder="06 12 34 56 78"
 						value={phone}
-						onChange={(e) => setPhone(e.target.value)}
+						onChange={(e) => updateFormData({ phone: e.target.value })}
 						inputClassName="min-w-[150px] sm:min-w-[200px]"
 					/>
 					<span>pour obtenir des précieux conseils.</span>

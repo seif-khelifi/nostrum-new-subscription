@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
+import type { ProfilValue } from "@/types/subscription";
 
 const OPTIONS = [
 	{ value: "salarie", label: "Salarié(e)" },
@@ -18,11 +19,11 @@ const OPTIONS = [
 
 export function ProfilStep() {
 	const { next } = useStepper();
-	const [selected, setSelected] = useState<string | null>(null);
+	const { formData, updateFormData } = useSituationForm();
 
-	const selectedLabel = selected
-		? OPTIONS.find((o) => o.value === selected)?.label ?? ""
-		: "";
+	const selected = formData.profil;
+
+	const selectedLabel = selected ? (OPTIONS.find((o) => o.value === selected)?.label ?? "") : "";
 
 	return (
 		<StepScreen
@@ -47,7 +48,7 @@ export function ProfilStep() {
 					variant="selectOption"
 					size="select"
 					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
+					onClick={() => updateFormData({ profil: opt.value as ProfilValue })}
 					className="justify-between"
 				>
 					<span>{opt.label}</span>

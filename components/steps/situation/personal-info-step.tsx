@@ -1,15 +1,15 @@
 "use client";
 
-import { useState } from "react";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
+import { useSituationForm } from "@/context/SituationFormContext";
 
 export function PersonalInfoStep() {
 	const { next } = useStepper();
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [birthDate, setBirthDate] = useState("");
+	const { formData, updateFormData } = useSituationForm();
+
+	const { firstName, lastName, birthDate } = formData;
 
 	const canProceed =
 		firstName.trim().length > 0 && lastName.trim().length > 0 && birthDate.trim().length > 0;
@@ -23,13 +23,13 @@ export function PersonalInfoStep() {
 					<PillInput
 						placeholder="Prénom"
 						value={firstName}
-						onChange={(e) => setFirstName(e.target.value)}
+						onChange={(e) => updateFormData({ firstName: e.target.value })}
 						inputClassName="min-w-[100px] sm:min-w-[140px]"
 					/>
 					<PillInput
 						placeholder="Nom"
 						value={lastName}
-						onChange={(e) => setLastName(e.target.value)}
+						onChange={(e) => updateFormData({ lastName: e.target.value })}
 						inputClassName="min-w-[100px] sm:min-w-[140px]"
 					/>
 					<span>, née le</span>
@@ -37,7 +37,7 @@ export function PersonalInfoStep() {
 						type="date"
 						placeholder="JJ/MM/AAAA"
 						value={birthDate}
-						onChange={(e) => setBirthDate(e.target.value)}
+						onChange={(e) => updateFormData({ birthDate: e.target.value })}
 						inputClassName="min-w-[120px] sm:min-w-[160px]"
 					/>
 				</div>

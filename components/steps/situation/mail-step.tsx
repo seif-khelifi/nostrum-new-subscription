@@ -1,44 +1,36 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
 
-const OPTIONS = [
-	{ value: "personnel", label: "E-mail personnel" },
-	{ value: "professionnel", label: "E-mail professionnel" },
-] as const;
-
 export function MailStep() {
 	const { next } = useStepper();
-	const [selected, setSelected] = useState<string | null>(null);
+	const [email, setEmail] = useState("");
+
+	const canProceed = email.trim().length > 0;
 
 	return (
 		<StepScreen
-			title="Faisons connaissance"
-			subtitle="Quel type d'e-mail souhaitez-vous utiliser ?"
-			canProceed={selected !== null}
+			title={<>Et pour vous contacter ?</>}
+			subtitle={
+				<div className="flex flex-wrap items-center gap-2">
+					<span>{"Je souhaite recevoir un devis personnalisé à l'adresse"}</span>
+					<PillInput
+						type="email"
+						placeholder="votre@email.com"
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+						inputClassName="min-w-[180px] sm:min-w-[240px]"
+					/>
+				</div>
+			}
+			canProceed={canProceed}
 			onNext={next}
 		>
-			{OPTIONS.map((opt) => (
-				<Button
-					key={opt.value}
-					variant="selectOption"
-					size="select"
-					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
-					className="justify-between"
-				>
-					<span>{opt.label}</span>
-					{selected === opt.value && (
-						<span className="flex size-6 items-center justify-center rounded-full bg-[#490076] text-white">
-							<Check className="size-3.5" />
-						</span>
-					)}
-				</Button>
-			))}
+			{/* No additional children — form is in subtitle */}
+			<></>
 		</StepScreen>
 	);
 }

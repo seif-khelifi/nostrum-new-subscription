@@ -1,48 +1,52 @@
 "use client";
 
 import { useState } from "react";
-import { Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
 
-const OPTIONS = [
-	{ value: "celibataire", label: "Célibataire" },
-	{ value: "marie", label: "Marié(e)" },
-	{ value: "pacse", label: "Pacsé(e)" },
-	{ value: "concubinage", label: "En concubinage" },
-	{ value: "divorce", label: "Divorcé(e)" },
-	{ value: "veuf", label: "Veuf / Veuve" },
-] as const;
-
 export function PersonalInfoStep() {
 	const { next } = useStepper();
-	const [selected, setSelected] = useState<string | null>(null);
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [birthDate, setBirthDate] = useState("");
+
+	const canProceed =
+		firstName.trim().length > 0 && lastName.trim().length > 0 && birthDate.trim().length > 0;
 
 	return (
 		<StepScreen
-			title="Faisons connaissance"
-			subtitle="Quelle est votre situation familiale ?"
-			canProceed={selected !== null}
+			title={<>Dites-nous qui vous êtes ?</>}
+			subtitle={
+				<div className="flex flex-wrap items-center gap-2">
+					<span>Je m&apos;appelle</span>
+					<PillInput
+						placeholder="Prénom"
+						value={firstName}
+						onChange={(e) => setFirstName(e.target.value)}
+						inputClassName="min-w-[100px] sm:min-w-[140px]"
+					/>
+					<PillInput
+						placeholder="Nom"
+						value={lastName}
+						onChange={(e) => setLastName(e.target.value)}
+						inputClassName="min-w-[100px] sm:min-w-[140px]"
+					/>
+					<span>, née le</span>
+					<PillInput
+						type="date"
+						placeholder="JJ/MM/AAAA"
+						value={birthDate}
+						onChange={(e) => setBirthDate(e.target.value)}
+						inputClassName="min-w-[120px] sm:min-w-[160px]"
+					/>
+				</div>
+			}
+			canProceed={canProceed}
 			onNext={next}
 		>
-			{OPTIONS.map((opt) => (
-				<Button
-					key={opt.value}
-					variant="selectOption"
-					size="select"
-					selected={selected === opt.value}
-					onClick={() => setSelected(opt.value)}
-					className="justify-between"
-				>
-					<span>{opt.label}</span>
-					{selected === opt.value && (
-						<span className="flex size-6 items-center justify-center rounded-full bg-[#490076] text-white">
-							<Check className="size-3.5" />
-						</span>
-					)}
-				</Button>
-			))}
+			{/* No additional children — form is in subtitle */}
+			<></>
 		</StepScreen>
 	);
 }

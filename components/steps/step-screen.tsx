@@ -5,10 +5,12 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export interface StepScreenProps {
-	/** Section title (e.g. "Faisons connaissance") */
-	title: string;
-	/** Subtitle / question for this step */
-	subtitle: string;
+	/** Section title (e.g. "Votre situation pro ?") */
+	title: ReactNode;
+	/** Subtitle / question for this step (optional — can be text or a ReactNode with PillInput) */
+	subtitle?: ReactNode;
+	/** Optional info card (AlertBanner) displayed between heading and content */
+	infoCard?: ReactNode;
 	/** Whether the "Suivant" button should be enabled */
 	canProceed: boolean;
 	/** Called when the user clicks "Suivant" */
@@ -19,29 +21,37 @@ export interface StepScreenProps {
 
 /**
  * Shared layout for every step screen:
- * title → subtitle → selection options → "Suivant" button (right-aligned)
+ * title → subtitle → info card → selection options → "Suivant" button (right-aligned)
  *
  * Positioned to the left of the content area with offset from the sidebar.
  */
 export function StepScreen({
 	title,
 	subtitle,
+	infoCard,
 	canProceed,
 	onNext,
 	children,
 }: StepScreenProps) {
 	return (
-		<div className="flex flex-col gap-8 pl-4 pt-10">
+		<div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0 pt-6 sm:pt-4">
 			{/* Heading block */}
-			<div className="flex flex-col gap-1">
+			<div className="flex flex-col gap-2">
 				<h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20]">
 					{title}
 				</h1>
-				<p className="text-lg text-[#444444]">{subtitle}</p>
+				{subtitle && (
+					<div className="font-semibold text-base sm:text-lg text-[#1D1B20]">
+						{subtitle}
+					</div>
+				)}
 			</div>
 
+			{/* Info card */}
+			{infoCard}
+
 			{/* Selection options — inline, sized to content */}
-			<div className="flex flex-col items-start gap-3">{children}</div>
+			<div className="flex flex-col items-start gap-2 sm:gap-3">{children}</div>
 
 			{/* Suivant button — right-aligned under the section */}
 			<div className="flex justify-end">

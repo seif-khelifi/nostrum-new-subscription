@@ -1,4 +1,4 @@
-.app-navbar {
+.desktop-navbar {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -8,7 +8,7 @@
 	background-color: var(--background);
 }
 
-.app-navbar__title {
+.desktop-navbar__title {
 	font-family: var(--font-bricolage);
 	font-size: 1.125rem;
 	font-weight: 700;

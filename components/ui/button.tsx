@@ -31,8 +31,8 @@ const buttonVariants = cva(
 
         ctaPurple:
           [
-            "h-12 rounded-full px-6 border-transparent",
-            "bg-[#490076] text-white text-base font-semibold",
+            "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+            "bg-[#490076] text-white text-sm sm:text-base font-semibold",
             "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
             "hover:bg-[#5a0a8f]",
             "active:translate-y-[1px]",
@@ -41,7 +41,7 @@ const buttonVariants = cva(
 
         selectOption:
           [
-            "h-12 rounded-[20px] px-5 text-base font-medium",
+            "h-10 sm:h-12 rounded-[16px] sm:rounded-[20px] px-4 sm:px-5 text-sm sm:text-base font-medium",
             "border bg-white text-[#490076]",
             "border-input shadow-xs",
             "hover:border-[#C86FFE]/70 hover:bg-[#faf7fc]",
@@ -61,8 +61,8 @@ const buttonVariants = cva(
         "icon-sm":
           "size-7 rounded-[min(var(--radius-md),12px)] in-data-[slot=button-group]:rounded-lg",
         "icon-lg": "size-9",
-        cta: "h-12 gap-2 px-6",
-        select: "h-12 gap-2 px-5",
+        cta: "h-10 sm:h-12 gap-2 px-5 sm:px-6",
+        select: "h-10 sm:h-12 gap-2 px-4 sm:px-5",
       },
 
       selected: {

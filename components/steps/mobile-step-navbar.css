@@ -1,0 +1,146 @@
+/* ── Mobile Step Navbar ───────────────────────────────── */
+
+.mobile-step-navbar {
+	background: #490076;
+	color: white;
+	padding: 16px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ── Top row: back + step pills ──────────────────────── */
+
+.mobile-step-navbar__top {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.mobile-step-navbar__back {
+	color: white;
+	border-radius: 999px;
+	width: 36px;
+	height: 36px;
+	flex-shrink: 0;
+	background: rgba(255, 255, 255, 0.1);
+}
+
+.mobile-step-navbar__back:hover {
+	color: white;
+	background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-step-navbar__back:active {
+	color: white;
+	background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Step pills (horizontal scroll) ──────────────────── */
+
+.mobile-step-navbar__steps {
+	display: flex;
+	gap: 8px;
+	overflow-x: auto;
+	/* hide scrollbar but keep scrollability */
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.mobile-step-navbar__steps::-webkit-scrollbar {
+	display: none;
+}
+
+.mobile-step-navbar__step {
+	font-size: 14px;
+	font-weight: 600;
+	padding: 8px 14px;
+	border-radius: 999px;
+	background: transparent;
+	opacity: 0.65;
+	white-space: nowrap;
+	cursor: pointer;
+	border: none;
+	color: inherit;
+	transition: background 200ms ease, opacity 200ms ease, color 200ms ease;
+}
+
+.mobile-step-navbar__step--active {
+	background: white;
+	color: #490076;
+	opacity: 1;
+}
+
+/* ── CTA row (no card background) ────────────────────── */
+
+.mobile-step-navbar__cta {
+	margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 0;
+}
+
+.mobile-step-navbar__cta-title {
+	font-weight: 600;
+	font-size: 15px;
+	margin: 0;
+}
+
+.mobile-step-navbar__cta-sub {
+	font-size: 13px;
+	opacity: 0.75;
+	margin: 2px 0 0;
+}
+
+/* ── CTA right side: avatars then call button ─────────── */
+
+.mobile-step-navbar__cta-right {
+	display: flex;
+	align-items: center;
+	/* no gap — overlap handled via negative margin on the call btn */
+}
+
+/* ── Avatar group with gradient halo ─────────────────── */
+
+.mobile-step-navbar__avatars {
+	display: flex;
+	padding: 3px;
+	border-radius: 999px;
+	background: radial-gradient(
+		272.27% 150% at 50.79% 95.31%,
+		#490076 0%,
+		#9000e3 19.23%,
+		#ce99ff 37.02%,
+		#fea8cd 65.87%,
+		#fbf4ea 100%
+	);
+}
+
+.mobile-step-navbar__avatar {
+	width: 34px;
+	height: 34px;
+	border-radius: 999px;
+	object-fit: cover;
+	border: 2px solid #ce99ff;
+	margin-left: -8px;
+}
+
+.mobile-step-navbar__avatar:first-child {
+	margin-left: 0;
+}
+
+/* ── Phone button: circle, overlaps avatar group ─────── */
+
+.mobile-step-navbar__call {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: 999px;
+	background: #e0b1ff;
+	color: #490076;
+	flex-shrink: 0;
+	margin-left: -10px;
+	position: relative;
+	z-index: 1;
+}

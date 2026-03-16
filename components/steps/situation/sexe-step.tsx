@@ -34,8 +34,8 @@ export function SexeStep() {
 				>
 					<span>{opt.label}</span>
 					{selected === opt.value && (
-						<span className="flex size-6 items-center justify-center rounded-full bg-[#490076] text-white">
-							<Check className="size-3.5" />
+						<span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-[#490076] text-white">
+							<Check className="size-3 sm:size-3.5" />
 						</span>
 					)}
 				</Button>

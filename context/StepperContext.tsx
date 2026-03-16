@@ -1,11 +1,6 @@
 "use client";
 
-import * as React from "react";
 import { createContext, useContext, useState, useMemo, useCallback, type ReactNode } from "react";
-
-/* ------------------------------------------------------------------ */
-/*  Step & Group definitions                                          */
-/* ------------------------------------------------------------------ */
 
 export type StepId =
 	| "profil"
@@ -20,32 +15,26 @@ export type StepId =
 
 export interface StepDef {
 	id: StepId;
-	/** Human-readable label (used for headings, accessibility) */
 	label: string;
 }
 
 export interface StepGroup {
-	/** 1-based sidebar group id — maps to SidebarStepper item ids */
 	id: number;
 	label: string;
 	steps: StepDef[];
 }
 
-/**
- * Ordered array of step groups.
- * The sidebar stepper shows one item per group.
- * Each group contains an ordered array of sub-steps.
- */
 export const STEP_GROUPS: StepGroup[] = [
 	{
 		id: 1,
 		label: "Situation",
 		steps: [
 			{ id: "profil", label: "Profil" },
-			{ id: "sexe", label: "Sexe" },
 			{ id: "personalInfo", label: "Informations personnelles" },
 			{ id: "mail", label: "Adresse e-mail" },
 			{ id: "phoneNumber", label: "Numéro de téléphone" },
+
+			{ id: "sexe", label: "Sexe" },
 		],
 	},
 	{
@@ -136,8 +125,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 	const groups = STEP_GROUPS;
 	const allSteps = ALL_STEPS;
 
-	const safeInitial =
-		initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
+	const safeInitial = initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
 	const [activeStep, setActiveStep] = useState(safeInitial);
 
 	const currentStepDef = allSteps[activeStep];
@@ -198,9 +186,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 		],
 	);
 
-	return (
-		<StepperContext.Provider value={value}>{children}</StepperContext.Provider>
-	);
+	return <StepperContext.Provider value={value}>{children}</StepperContext.Provider>;
 }
 
 export function useStepper() {

@@ -3,3 +3,7 @@ export { SexeStep } from "./sexe-step";
 export { PersonalInfoStep } from "./personal-info-step";
 export { MailStep } from "./mail-step";
 export { PhoneNumberStep } from "./phone-number-step";
+export { ProtegerStep } from "./proteger-step";
+export { NousSommesStep } from "./nous-sommes-step";
+export { CommenceParQuiStep } from "./commence-par-qui-step";
+export { DateBirthConjointStep } from "./date-birth-conjoint-step";

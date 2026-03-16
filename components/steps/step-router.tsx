@@ -8,6 +8,10 @@ import {
 	PersonalInfoStep,
 	MailStep,
 	PhoneNumberStep,
+	ProtegerStep,
+	NousSommesStep,
+	CommenceParQuiStep,
+	DateBirthConjointStep,
 } from "./situation";
 
 /**
@@ -20,6 +24,10 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	personalInfo: PersonalInfoStep,
 	mail: MailStep,
 	phoneNumber: PhoneNumberStep,
+	proteger: ProtegerStep,
+	nousSommes: NousSommesStep,
+	commenceParQui: CommenceParQuiStep,
+	dateBirthConjoint: DateBirthConjointStep,
 
 	// Placeholder steps — will be replaced with real screens later
 	sante_placeholder: () => <PlaceholderScreen label="Santé" />,

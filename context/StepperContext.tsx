@@ -8,6 +8,10 @@ export type StepId =
 	| "personalInfo"
 	| "mail"
 	| "phoneNumber"
+	| "proteger"
+	| "nousSommes"
+	| "commenceParQui"
+	| "dateBirthConjoint"
 	// placeholders for future groups
 	| "sante_placeholder"
 	| "devis_placeholder"
@@ -33,8 +37,11 @@ export const STEP_GROUPS: StepGroup[] = [
 			{ id: "personalInfo", label: "Informations personnelles" },
 			{ id: "mail", label: "Adresse e-mail" },
 			{ id: "phoneNumber", label: "Numéro de téléphone" },
-
 			{ id: "sexe", label: "Sexe" },
+			{ id: "proteger", label: "Protection" },
+			{ id: "nousSommes", label: "Nous sommes" },
+			{ id: "commenceParQui", label: "On commence par qui" },
+			{ id: "dateBirthConjoint", label: "Date de naissance conjoint" },
 		],
 	},
 	{
@@ -84,6 +91,8 @@ interface StepperContextValue {
 	back: () => void;
 	/** Jump to a specific flat step index */
 	goToStep: (index: number) => void;
+	/** Jump to a step by its id */
+	goToStepById: (id: StepId) => void;
 	/** Jump to the first step of a sidebar group */
 	goToGroup: (groupId: number) => void;
 }
@@ -110,6 +119,11 @@ function getFirstFlatIndexOfGroup(groups: StepGroup[], groupId: number): number 
 		index += group.steps.length;
 	}
 	return 0;
+}
+
+function getFlatIndexById(allSteps: StepDef[], id: StepId): number {
+	const idx = allSteps.findIndex((s) => s.id === id);
+	return idx >= 0 ? idx : 0;
 }
 
 /* ------------------------------------------------------------------ */
@@ -150,6 +164,13 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 		[allSteps.length],
 	);
 
+	const goToStepById = useCallback(
+		(id: StepId) => {
+			setActiveStep(getFlatIndexById(allSteps, id));
+		},
+		[allSteps],
+	);
+
 	const goToGroup = useCallback(
 		(groupId: number) => {
 			setActiveStep(getFirstFlatIndexOfGroup(groups, groupId));
@@ -170,6 +191,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 			next,
 			back,
 			goToStep,
+			goToStepById,
 			goToGroup,
 		}),
 		[
@@ -182,6 +204,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 			next,
 			back,
 			goToStep,
+			goToStepById,
 			goToGroup,
 		],
 	);

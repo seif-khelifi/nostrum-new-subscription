@@ -17,6 +17,8 @@ export interface StepScreenProps {
 	onNext: () => void;
 	/** Selection content */
 	children: ReactNode;
+	/** When true, the button will be type="submit" (for form wrappers) */
+	isForm?: boolean;
 }
 
 /**
@@ -32,6 +34,7 @@ export function StepScreen({
 	canProceed,
 	onNext,
 	children,
+	isForm,
 }: StepScreenProps) {
 	return (
 		<div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0 pt-6 sm:pt-4">
@@ -56,10 +59,11 @@ export function StepScreen({
 			{/* Suivant button — right-aligned under the section */}
 			<div className="flex justify-end">
 				<Button
+					type={isForm ? "submit" : "button"}
 					variant="ctaPurple"
 					size="cta"
 					disabled={!canProceed}
-					onClick={onNext}
+					onClick={isForm ? undefined : onNext}
 				>
 					Suivant
 					<ArrowRight className="size-5" />

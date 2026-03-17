@@ -7,6 +7,8 @@ type PillInputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, "size"> 
 	className?: string;
 	inputClassName?: string;
 	onAccessoryClick?: () => void;
+	/** When true, applies error ring styling to the pill */
+	hasError?: boolean;
 };
 
 /* ── tiny three-dot icon (vertical) ── */
@@ -22,16 +24,53 @@ function ThreeDotsVertical({ className }: { className?: string }) {
 
 const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
 	(
-		{ className, inputClassName, onAccessoryClick, value, defaultValue, placeholder, ...props },
+		{
+			className,
+			inputClassName,
+			onAccessoryClick,
+			value,
+			defaultValue,
+			placeholder,
+			hasError,
+			onChange,
+			...props
+		},
 		ref,
 	) => {
-		const filled = Boolean(value ?? defaultValue);
+		/**
+		 * Track an internal mirror of the input value so the "filled" styling
+		 * works both when the component is:
+		 *  - controlled (value prop) → uses value directly
+		 *  - uncontrolled / register() (no value prop) → uses internalValue
+		 */
+		const [internalValue, setInternalValue] = React.useState(
+			String(value ?? defaultValue ?? ""),
+		);
+
+		// Keep internalValue in sync when controlled value changes
+		React.useEffect(() => {
+			if (value !== undefined) {
+				setInternalValue(String(value));
+			}
+		}, [value]);
+
+		const filled = Boolean(value !== undefined ? value : internalValue);
+
+		const handleChange = React.useCallback(
+			(e: React.ChangeEvent<HTMLInputElement>) => {
+				setInternalValue(e.target.value);
+				onChange?.(e);
+			},
+			[onChange],
+		);
 
 		/* ── hidden sizer: mirrors the visible text to auto-size the wrapper ── */
 		const sizerRef = React.useRef<HTMLSpanElement>(null);
 		const [inputWidth, setInputWidth] = React.useState<number | undefined>(undefined);
 
-		const displayText = filled ? String(value ?? defaultValue) : (placeholder ?? "");
+		const displayText = filled
+			? String(value !== undefined ? value : internalValue)
+			: (placeholder ?? "");
 
 		React.useLayoutEffect(() => {
 			if (sizerRef.current) {
@@ -50,6 +89,8 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
 					"focus-within:ring-2 focus-within:ring-primary/20",
 					/* state colours */
 					filled ? "bg-[#490076] text-white" : "bg-[#F3E5FA] text-[#490076]",
+					/* error state — red ring */
+					hasError && "ring-2 ring-red-500/60 hover:ring-red-500/80 focus-within:ring-red-500/80",
 					className,
 				)}
 			>
@@ -81,6 +122,7 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
 					)}
 					value={value}
 					defaultValue={defaultValue}
+					onChange={handleChange}
 					{...props}
 				/>
 

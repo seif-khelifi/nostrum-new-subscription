@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Providers } from "./providers";
+import { Toaster } from "@/components/ui/sonner";
 import "./globals.css";
 
 const inter = localFont({
@@ -42,6 +43,7 @@ export default function RootLayout({
 		<html lang="en" className={`${inter.variable} ${bricolage.variable}`}>
 			<body className="antialiased">
 				<Providers>{children}</Providers>
+				<Toaster />
 			</body>
 		</html>
 	);

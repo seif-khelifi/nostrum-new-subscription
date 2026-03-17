@@ -39,6 +39,16 @@ const buttonVariants = cva(
             "disabled:bg-[#490076]/40",
           ].join(" "),
 
+        ctaPurpleSquared:
+          [
+            "h-12 sm:h-14 rounded-3xl px-6 sm:px-8 border-transparent",
+            "bg-[#490076] text-white text-base sm:text-lg font-semibold",
+            "shadow-[0_2px_4px_rgba(0,0,0,0.12)]",
+            "hover:bg-[#5a0a8f]",
+            "active:translate-y-[1px]",
+            "disabled:bg-[#490076]/40",
+          ].join(" "),
+
         selectOption:
           [
             "h-10 sm:h-12 rounded-[16px] sm:rounded-[20px] px-4 sm:px-5 text-sm sm:text-base font-medium",

@@ -29,7 +29,7 @@ export function ProtegerStep() {
 		switch (selected) {
 			case "moi":
 				// seulement moi → go to santé
-				goToStepById("sante_placeholder");
+				goToStepById("sante_yeux");
 				break;
 			case "conjoint_et_moi":
 			case "enfants_et_moi":

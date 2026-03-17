@@ -13,12 +13,17 @@ import {
 	CommenceParQuiStep,
 	DateBirthConjointStep,
 } from "./situation";
+import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
+import { OnboardingStep } from "./onboarding-step";
 
 /**
  * Maps each StepId to the component that should render for it.
  * Add entries here as new step screens are implemented.
  */
 const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
+	// Onboarding hero
+	onboarding: OnboardingStep,
+
 	profil: ProfilStep,
 	sexe: SexeStep,
 	personalInfo: PersonalInfoStep,
@@ -29,8 +34,15 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	commenceParQui: CommenceParQuiStep,
 	dateBirthConjoint: DateBirthConjointStep,
 
+	// Santé group
+	sante_yeux: YeuxStep,
+	sante_dents: DentsStep,
+	sante_bien_etre: BienEtreStep,
+
+	// Transition offer — empty for now
+	transition_offer: () => <PlaceholderScreen label="Offre de transition" />,
+
 	// Placeholder steps — will be replaced with real screens later
-	sante_placeholder: () => <PlaceholderScreen label="Santé" />,
 	devis_placeholder: () => <PlaceholderScreen label="Devis" />,
 	souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,
 };

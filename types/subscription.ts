@@ -78,3 +78,25 @@ export const INITIAL_SITUATION: SituationFormData = {
 	conjoint: null,
 	enfants: [],
 };
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  Santé (Health) form data                                         */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+export type YeuxValue = "rien" | "lunettes_lentilles" | "specifique";
+
+export type DentsValue = "routine" | "soins_reguliers" | "soins_specifiques";
+
+export type BienEtreValue = "classiques" | "medecines_douces" | "routine_complete";
+
+export interface SanteFormData {
+	yeux: YeuxValue | null;
+	dents: DentsValue | null;
+	bienEtre: BienEtreValue | null;
+}
+
+export const INITIAL_SANTE: SanteFormData = {
+	yeux: null,
+	dents: null,
+	bienEtre: null,
+};

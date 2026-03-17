@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useMemo, useCallback, type ReactNode } from "react";
 
 export type StepId =
+	| "onboarding"
 	| "profil"
 	| "sexe"
 	| "personalInfo"
@@ -12,8 +13,12 @@ export type StepId =
 	| "nousSommes"
 	| "commenceParQui"
 	| "dateBirthConjoint"
+	// santé group
+	| "sante_yeux"
+	| "sante_dents"
+	| "sante_bien_etre"
+	| "transition_offer"
 	// placeholders for future groups
-	| "sante_placeholder"
 	| "devis_placeholder"
 	| "souscription_placeholder";
 
@@ -31,6 +36,11 @@ export interface StepGroup {
 export const STEP_GROUPS: StepGroup[] = [
 	{
 		id: 1,
+		label: "Onboarding",
+		steps: [{ id: "onboarding", label: "Onboarding" }],
+	},
+	{
+		id: 2,
 		label: "Situation",
 		steps: [
 			{ id: "profil", label: "Profil" },
@@ -45,17 +55,26 @@ export const STEP_GROUPS: StepGroup[] = [
 		],
 	},
 	{
-		id: 2,
+		id: 3,
 		label: "Santé",
-		steps: [{ id: "sante_placeholder", label: "Santé" }],
+		steps: [
+			{ id: "sante_yeux", label: "Yeux" },
+			{ id: "sante_dents", label: "Dents" },
+			{ id: "sante_bien_etre", label: "Bien-être" },
+		],
 	},
 	{
-		id: 3,
+		id: 4,
+		label: "Transition",
+		steps: [{ id: "transition_offer", label: "Offre de transition" }],
+	},
+	{
+		id: 5,
 		label: "Devis",
 		steps: [{ id: "devis_placeholder", label: "Devis" }],
 	},
 	{
-		id: 4,
+		id: 6,
 		label: "Souscription",
 		steps: [{ id: "souscription_placeholder", label: "Souscription" }],
 	},

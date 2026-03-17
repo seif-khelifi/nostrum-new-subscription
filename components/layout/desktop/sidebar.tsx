@@ -22,10 +22,10 @@ export interface DesktopSidebarProps {
 }
 
 const stepItems = [
-	{ id: 1, label: "Situation", icon: <Rocket className="h-4 w-4" /> },
-	{ id: 2, label: "Santé", icon: <HeartPulse className="h-4 w-4" /> },
-	{ id: 3, label: "Devis", icon: <CircleDollarSign className="h-4 w-4" /> },
-	{ id: 4, label: "Souscription", icon: <WalletCards className="h-4 w-4" /> },
+	{ id: 2, label: "Situation", icon: <Rocket className="h-4 w-4" /> },
+	{ id: 3, label: "Santé", icon: <HeartPulse className="h-4 w-4" /> },
+	{ id: 5, label: "Devis", icon: <CircleDollarSign className="h-4 w-4" /> },
+	{ id: 6, label: "Souscription", icon: <WalletCards className="h-4 w-4" /> },
 ];
 
 /**

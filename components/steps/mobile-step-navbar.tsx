@@ -16,10 +16,10 @@ export interface MobileStepNavbarProps {
  * but adds emojis for the compact mobile display.
  */
 const stepPills = [
-	{ groupId: 1, label: "Situation", emoji: "🦻" },
-	{ groupId: 2, label: "Santé", emoji: "💖" },
-	{ groupId: 3, label: "Devis", emoji: "🪙" },
-	{ groupId: 4, label: "Souscription", emoji: "🖊️" },
+	{ groupId: 2, label: "Situation", emoji: "🦻" },
+	{ groupId: 3, label: "Santé", emoji: "💖" },
+	{ groupId: 5, label: "Devis", emoji: "🪙" },
+	{ groupId: 6, label: "Souscription", emoji: "🖊️" },
 ];
 
 /**

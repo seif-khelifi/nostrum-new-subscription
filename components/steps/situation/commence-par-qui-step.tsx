@@ -29,8 +29,8 @@ export function CommenceParQuiStep() {
 				goToStepById("dateBirthConjoint");
 				break;
 			case "enfant":
-				// enfant flow not implemented yet — placeholder
-				goToStepById("sante_placeholder");
+				// enfant flow not implemented yet — skip to santé
+				goToStepById("sante_yeux");
 				break;
 		}
 	};

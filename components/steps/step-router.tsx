@@ -8,10 +8,14 @@ import {
 	PersonalInfoStep,
 	MailStep,
 	PhoneNumberStep,
+	AddressStep,
+	BirthPlaceStep,
 	ProtegerStep,
 	NousSommesStep,
 	CommenceParQuiStep,
 	DateBirthConjointStep,
+	RecapStep,
+	EnvoiSmsStep,
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
@@ -29,10 +33,14 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	personalInfo: PersonalInfoStep,
 	mail: MailStep,
 	phoneNumber: PhoneNumberStep,
+	address: AddressStep,
+	birthPlace: BirthPlaceStep,
 	proteger: ProtegerStep,
 	nousSommes: NousSommesStep,
 	commenceParQui: CommenceParQuiStep,
 	dateBirthConjoint: DateBirthConjointStep,
+	recap: RecapStep,
+	envoiSms: EnvoiSmsStep,
 
 	// Santé group
 	sante_yeux: YeuxStep,

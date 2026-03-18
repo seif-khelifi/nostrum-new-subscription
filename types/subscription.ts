@@ -60,6 +60,16 @@ export interface SituationFormData {
 
 	/* ── Children ── */
 	enfants: EnfantInfo[];
+
+	/* ── address step ── */
+	addressStreet: string;
+	addressComplement: string;
+	addressPostalCode: string;
+	addressCity: string;
+
+	/* ── birthPlace step ── */
+	birthCountry: string;
+	birthCity: string;
 }
 
 /* ─── Initial / empty state ─── */
@@ -77,6 +87,12 @@ export const INITIAL_SITUATION: SituationFormData = {
 	commenceParQui: null,
 	conjoint: null,
 	enfants: [],
+	addressStreet: "",
+	addressComplement: "",
+	addressPostalCode: "",
+	addressCity: "",
+	birthCountry: "",
+	birthCity: "",
 };
 
 /* ═══════════════════════════════════════════════════════════════════ */

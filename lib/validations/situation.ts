@@ -77,3 +77,84 @@ export const mailSchema = z.object({
 });
 
 export type MailFormValues = z.infer<typeof mailSchema>;
+
+/** recap step — confirm all personal info (phone editable) */
+export const recapSchema = z.object({
+	firstName: z
+		.string()
+		.trim()
+		.min(1, "Le prénom est requis")
+		.min(2, "Le prénom doit contenir au moins 2 caractères"),
+	lastName: z
+		.string()
+		.trim()
+		.min(1, "Le nom est requis")
+		.min(2, "Le nom doit contenir au moins 2 caractères"),
+	birthDate: birthDateSchema(19, 95),
+	email: z
+		.string()
+		.trim()
+		.min(1, "L'adresse email est requise")
+		.regex(
+			/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+			"Veuillez entrer une adresse email valide",
+		),
+	phone: z
+		.string()
+		.trim()
+		.min(1, "Le numéro de téléphone est requis")
+		.regex(
+			/^(?:0|\+33|0033)[1-9](?:[\s.-]?\d{2}){4}$/,
+			"Veuillez entrer un numéro de téléphone français valide (ex: 06 12 34 56 78)",
+		),
+});
+
+export type RecapFormValues = z.infer<typeof recapSchema>;
+
+/** envoiSms step — OTP code (6 digits) */
+export const otpSchema = z.object({
+	otp: z
+		.string()
+		.length(6, "Le code doit contenir 6 chiffres")
+		.regex(/^\d{6}$/, "Le code ne doit contenir que des chiffres"),
+});
+
+export type OtpFormValues = z.infer<typeof otpSchema>;
+
+/** birthPlace step — birth country + city */
+export const birthPlaceSchema = z.object({
+	birthCountry: z
+		.string()
+		.trim()
+		.min(1, "Le pays de naissance est requis"),
+	birthCity: z
+		.string()
+		.trim()
+		.min(1, "La ville de naissance est requise"),
+});
+
+export type BirthPlaceFormValues = z.infer<typeof birthPlaceSchema>;
+
+/** address step — manual address entry */
+export const addressSchema = z.object({
+	street: z
+		.string()
+		.trim()
+		.min(1, "Le numéro et la voie sont requis"),
+	complement: z
+		.string()
+		.trim()
+		.optional()
+		.or(z.literal("")),
+	postalCode: z
+		.string()
+		.trim()
+		.min(1, "Le code postal est requis")
+		.regex(/^\d{5}$/, "Le code postal doit contenir 5 chiffres"),
+	city: z
+		.string()
+		.trim()
+		.min(1, "La ville est requise"),
+});
+
+export type AddressFormValues = z.infer<typeof addressSchema>;

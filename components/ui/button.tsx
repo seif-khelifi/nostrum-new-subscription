@@ -49,6 +49,16 @@ const buttonVariants = cva(
             "disabled:bg-[#490076]/40",
           ].join(" "),
 
+        ctaRenvoyer:
+          [
+            "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+            "bg-[#F6F0E6] text-[#660053] text-sm sm:text-base font-semibold",
+            "shadow-none",
+            "hover:bg-[#EDE7DA]",
+            "active:translate-y-[1px]",
+            "disabled:bg-[#F6F0E6]/60 disabled:text-[#660053]/50",
+          ].join(" "),
+
         selectOption:
           [
             "h-10 sm:h-12 rounded-[16px] sm:rounded-[20px] px-4 sm:px-5 text-sm sm:text-base font-medium",

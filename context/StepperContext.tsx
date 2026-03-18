@@ -9,10 +9,15 @@ export type StepId =
 	| "personalInfo"
 	| "mail"
 	| "phoneNumber"
+	| "address"
+	| "birthPlace"
 	| "proteger"
 	| "nousSommes"
 	| "commenceParQui"
 	| "dateBirthConjoint"
+	// compte (recap + SMS verification)
+	| "recap"
+	| "envoiSms"
 	// santé group
 	| "sante_yeux"
 	| "sante_dents"
@@ -47,7 +52,6 @@ export const STEP_GROUPS: StepGroup[] = [
 			{ id: "personalInfo", label: "Informations personnelles" },
 			{ id: "mail", label: "Adresse e-mail" },
 			{ id: "phoneNumber", label: "Numéro de téléphone" },
-			{ id: "sexe", label: "Sexe" },
 			{ id: "proteger", label: "Protection" },
 			{ id: "nousSommes", label: "Nous sommes" },
 			{ id: "commenceParQui", label: "On commence par qui" },
@@ -76,7 +80,14 @@ export const STEP_GROUPS: StepGroup[] = [
 	{
 		id: 6,
 		label: "Souscription",
-		steps: [{ id: "souscription_placeholder", label: "Souscription" }],
+		steps: [
+			{ id: "sexe", label: "Sexe" },
+			{ id: "recap", label: "Récapitulatif" },
+			{ id: "envoiSms", label: "Vérification SMS" },
+			{ id: "address", label: "Adresse postale" },
+			{ id: "birthPlace", label: "Lieu de naissance" },
+			{ id: "souscription_placeholder", label: "Souscription" },
+		],
 	},
 ];
 

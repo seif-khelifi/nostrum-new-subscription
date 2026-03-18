@@ -19,6 +19,8 @@ export interface StepScreenProps {
 	children: ReactNode;
 	/** When true, the button will be type="submit" (for form wrappers) */
 	isForm?: boolean;
+	/** Optional custom action button that replaces the default "Suivant" button */
+	customAction?: ReactNode;
 }
 
 /**
@@ -35,6 +37,7 @@ export function StepScreen({
 	onNext,
 	children,
 	isForm,
+	customAction,
 }: StepScreenProps) {
 	return (
 		<div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0 pt-6 sm:pt-4">
@@ -56,18 +59,20 @@ export function StepScreen({
 			{/* Selection options — inline, sized to content */}
 			<div className="flex flex-col items-start gap-2 sm:gap-3">{children}</div>
 
-			{/* Suivant button — right-aligned under the section */}
+			{/* Action button — right-aligned under the section */}
 			<div className="flex justify-end">
-				<Button
-					type={isForm ? "submit" : "button"}
-					variant="ctaPurple"
-					size="cta"
-					disabled={!canProceed}
-					onClick={isForm ? undefined : onNext}
-				>
-					Suivant
-					<ArrowRight className="size-5" />
-				</Button>
+				{customAction ?? (
+					<Button
+						type={isForm ? "submit" : "button"}
+						variant="ctaPurple"
+						size="cta"
+						disabled={!canProceed}
+						onClick={isForm ? undefined : onNext}
+					>
+						Suivant
+						<ArrowRight className="size-5" />
+					</Button>
+				)}
 			</div>
 		</div>
 	);

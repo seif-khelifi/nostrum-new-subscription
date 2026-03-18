@@ -25,6 +25,12 @@ export type StepId =
 	| "transition_offer"
 	// placeholders for future groups
 	| "devis_placeholder"
+	// souscription steps
+	| "socialSecurity"
+	| "resilierMutuelle"
+	| "currentInsurance"
+	| "dateSignatureAncien"
+	| "dateDebutNostrum"
 	| "souscription_placeholder";
 
 export interface StepDef {
@@ -86,6 +92,11 @@ export const STEP_GROUPS: StepGroup[] = [
 			{ id: "envoiSms", label: "Vérification SMS" },
 			{ id: "address", label: "Adresse postale" },
 			{ id: "birthPlace", label: "Lieu de naissance" },
+			{ id: "socialSecurity", label: "Sécurité sociale" },
+			{ id: "resilierMutuelle", label: "Résilier mutuelle" },
+			{ id: "currentInsurance", label: "Mutuelle actuelle" },
+			{ id: "dateSignatureAncien", label: "Date signature ancien contrat" },
+			{ id: "dateDebutNostrum", label: "Date début contrat Nostrum" },
 			{ id: "souscription_placeholder", label: "Souscription" },
 		],
 	},

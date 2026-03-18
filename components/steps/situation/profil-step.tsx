@@ -12,7 +12,7 @@ const OPTIONS = [
 	{ value: "salarie", label: "Salarié(e)" },
 	{ value: "independant_tns", label: "Indépendant(e) /TNS" },
 	{ value: "etudiant", label: "Étudiant(e)" },
-	{ value: "independant", label: "Indépendant(e) /TNS" },
+	{ value: "independant", label: "Indépendant(e)" },
 	{ value: "retraite", label: "Retraité(e)" },
 	{ value: "recherche_emploi", label: "En recherche d'emploi" },
 ] as const;

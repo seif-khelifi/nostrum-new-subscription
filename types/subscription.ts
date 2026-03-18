@@ -14,6 +14,8 @@ export type ProtegerValue = "moi" | "conjoint_et_moi" | "enfants_et_moi" | "fami
 
 export type CommenceParQuiValue = "conjoint" | "enfant";
 
+export type ResilierMutuelleValue = "pas_de_mutuelle" | "mutuelle_a_resilier";
+
 /* ─── Nested structures for family members ─── */
 
 export interface ConjointInfo {
@@ -70,6 +72,25 @@ export interface SituationFormData {
 	/* ── birthPlace step ── */
 	birthCountry: string;
 	birthCity: string;
+
+	/* ── socialSecurity step ── */
+	socialSecurityNumber: string;
+
+	/* ── resilierMutuelle step ── */
+	resilierMutuelle: ResilierMutuelleValue | null;
+
+	/* ── currentInsurance step ── */
+	currentInsuranceName: string;
+	currentInsuranceStreet: string;
+	currentInsuranceComplement: string;
+	currentInsurancePostalCode: string;
+	currentInsuranceCity: string;
+
+	/* ── dateSignatureAncien step ── */
+	dateSignatureAncienContrat: string;
+
+	/* ── dateDebutNostrum step ── */
+	dateDebutContratNostrum: string;
 }
 
 /* ─── Initial / empty state ─── */
@@ -93,6 +114,15 @@ export const INITIAL_SITUATION: SituationFormData = {
 	addressCity: "",
 	birthCountry: "",
 	birthCity: "",
+	socialSecurityNumber: "",
+	resilierMutuelle: null,
+	currentInsuranceName: "",
+	currentInsuranceStreet: "",
+	currentInsuranceComplement: "",
+	currentInsurancePostalCode: "",
+	currentInsuranceCity: "",
+	dateSignatureAncienContrat: "",
+	dateDebutContratNostrum: "",
 };
 
 /* ═══════════════════════════════════════════════════════════════════ */

@@ -16,6 +16,11 @@ import {
 	DateBirthConjointStep,
 	RecapStep,
 	EnvoiSmsStep,
+	SocialSecurityStep,
+	ResilierMutuelleStep,
+	CurrentInsuranceStep,
+	DateSignatureAncienStep,
+	DateDebutNostrumStep,
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
@@ -41,6 +46,11 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	dateBirthConjoint: DateBirthConjointStep,
 	recap: RecapStep,
 	envoiSms: EnvoiSmsStep,
+	socialSecurity: SocialSecurityStep,
+	resilierMutuelle: ResilierMutuelleStep,
+	currentInsurance: CurrentInsuranceStep,
+	dateSignatureAncien: DateSignatureAncienStep,
+	dateDebutNostrum: DateDebutNostrumStep,
 
 	// Santé group
 	sante_yeux: YeuxStep,

@@ -158,3 +158,69 @@ export const addressSchema = z.object({
 });
 
 export type AddressFormValues = z.infer<typeof addressSchema>;
+
+/** socialSecurity step — French social security number (15 digits with key check) */
+export const socialSecuritySchema = z.object({
+	socialSecurityNumber: z
+		.string()
+		.trim()
+		.min(1, "Le numéro de sécurité sociale est requis")
+		.transform((val) => val.replace(/\s/g, ""))
+		.pipe(
+			z
+				.string()
+				.regex(/^\d{15}$/, "Le numéro doit contenir exactement 15 chiffres")
+				.refine(
+					(val) => {
+						const base = parseInt(val.slice(0, 13), 10);
+						const key = parseInt(val.slice(13, 15), 10);
+						return key === 97 - (base % 97);
+					},
+					{ message: "La clé de contrôle du numéro de sécurité sociale est invalide" },
+				),
+		),
+});
+
+export type SocialSecurityFormValues = z.infer<typeof socialSecuritySchema>;
+
+/** currentInsurance step — current insurance name + address */
+export const currentInsuranceSchema = z.object({
+	insuranceName: z
+		.string()
+		.trim()
+		.min(1, "Le nom de la mutuelle est requis"),
+	street: z
+		.string()
+		.trim()
+		.min(1, "Le numéro et la voie sont requis"),
+	complement: z
+		.string()
+		.trim()
+		.optional()
+		.or(z.literal("")),
+	postalCode: z
+		.string()
+		.trim()
+		.min(1, "Le code postal est requis")
+		.regex(/^\d{5}$/, "Le code postal doit contenir 5 chiffres"),
+	city: z
+		.string()
+		.trim()
+		.min(1, "La ville est requise"),
+});
+
+export type CurrentInsuranceFormValues = z.infer<typeof currentInsuranceSchema>;
+
+/** dateSignatureAncien step — date of old contract signature */
+export const dateSignatureAncienSchema = z.object({
+	dateSignature: z.date({ invalid_type_error: "Veuillez sélectionner une date" }),
+});
+
+export type DateSignatureAncienFormValues = z.infer<typeof dateSignatureAncienSchema>;
+
+/** dateDebutNostrum step — desired start date for Nostrum contract */
+export const dateDebutNostrumSchema = z.object({
+	dateDebut: z.date({ invalid_type_error: "Veuillez sélectionner une date" }),
+});
+
+export type DateDebutNostrumFormValues = z.infer<typeof dateDebutNostrumSchema>;

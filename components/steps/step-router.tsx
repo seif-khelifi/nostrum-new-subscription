@@ -24,6 +24,24 @@ import {
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
+import { DevisVariantA, DevisVariantB } from "./devis";
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware devis step                                          */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Reads the devis variant from StepperContext and renders the
+ * correct variant component. No routes or URL changes involved.
+ */
+function DevisStep() {
+	const { devisVariant } = useStepper();
+	return devisVariant === "b" ? <DevisVariantB /> : <DevisVariantA />;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Step → Component map                                              */
+/* ------------------------------------------------------------------ */
 
 /**
  * Maps each StepId to the component that should render for it.
@@ -60,8 +78,10 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	// Transition offer — empty for now
 	transition_offer: () => <PlaceholderScreen label="Offre de transition" />,
 
+	// Devis — renders variant A or B based on session assignment
+	devis_placeholder: DevisStep,
+
 	// Placeholder steps — will be replaced with real screens later
-	devis_placeholder: () => <PlaceholderScreen label="Devis" />,
 	souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,
 };
 

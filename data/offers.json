@@ -1,0 +1,46 @@
+{
+  "offers": [
+    {
+      "plan": "decouverte",
+      "tone": "default",
+      "price": "32,10€",
+      "period": "/mois",
+      "ctaLabel": "Choisir cette offre",
+      "descriptionTitle": "🌱 Le premier pas",
+      "description": "L'essentiel pour commencer. Couverture de base à petit prix, idéale pour les jeunes actifs."
+    },
+    {
+      "plan": "bronze",
+      "tone": "default",
+      "price": "42,50€",
+      "period": "/mois",
+      "ctaLabel": "Choisir cette offre",
+      "descriptionTitle": "🥉 L'essentiel sans superflu",
+      "description": "Simple, efficace et pas chère. Tes yeux te remercient déjà."
+    },
+    {
+      "plan": "silver",
+      "tone": "recommended",
+      "price": "54,23€",
+      "period": "/mois",
+      "badgeTitle": "Recommandé pour vous",
+      "ctaLabel": "Choisir cette offre",
+      "descriptionTitle": "🩶 L'équilibre parfait",
+      "description": "Bien couvert sans se ruiner. Couronne remboursée à 90 %, rentabilisée en un clin d'œil."
+    },
+    {
+      "plan": "gold",
+      "tone": "default",
+      "price": "72,80€",
+      "period": "/mois",
+      "ctaLabel": "Choisir cette offre",
+      "descriptionTitle": "👑 La tranquillité absolue",
+      "description": "Le meilleur remboursement du marché. Zéro reste à charge sur l'essentiel."
+    }
+  ],
+  "compareCard": {
+    "title": "Et si vous compariez ?",
+    "description": "Bronze ? Gold +15€/mois ? Voir les écarts en détail :",
+    "ctaLabel": "Comparer les formules"
+  }
+}

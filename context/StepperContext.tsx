@@ -1,6 +1,15 @@
 "use client";
 
-import { createContext, useContext, useState, useMemo, useCallback, type ReactNode } from "react";
+import {
+	createContext,
+	useContext,
+	useState,
+	useEffect,
+	useRef,
+	useMemo,
+	useCallback,
+	type ReactNode,
+} from "react";
 
 export type StepId =
 	| "onboarding"
@@ -106,6 +115,32 @@ export const STEP_GROUPS: StepGroup[] = [
 export const ALL_STEPS: StepDef[] = STEP_GROUPS.flatMap((g) => g.steps);
 
 /* ------------------------------------------------------------------ */
+/*  Variant system                                                    */
+/* ------------------------------------------------------------------ */
+
+export type DevisVariant = "a" | "b";
+
+const VARIANT_STORAGE_KEY = "nostrum_devis_variant";
+
+/**
+ * Get or assign a random devis variant for this session.
+ * Once assigned, the same variant is returned for the entire session.
+ */
+function getOrAssignVariant(): DevisVariant {
+	if (typeof window === "undefined") return "a";
+	try {
+		const stored = sessionStorage.getItem(VARIANT_STORAGE_KEY);
+		if (stored === "a" || stored === "b") return stored;
+		const variant: DevisVariant = Math.random() < 0.5 ? "a" : "b";
+		sessionStorage.setItem(VARIANT_STORAGE_KEY, variant);
+		console.log("Assigned devis variant:", variant);
+		return variant;
+	} catch {
+		return "a";
+	}
+}
+
+/* ------------------------------------------------------------------ */
 /*  Context value                                                     */
 /* ------------------------------------------------------------------ */
 
@@ -125,6 +160,9 @@ interface StepperContextValue {
 
 	isFirstStep: boolean;
 	isLastStep: boolean;
+
+	/** The devis variant assigned to this session ("a" or "b") */
+	devisVariant: DevisVariant;
 
 	/** Advance to the next step */
 	next: () => void;
@@ -183,6 +221,50 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 	const safeInitial = initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
 	const [activeStep, setActiveStep] = useState(safeInitial);
 
+	// Assign a random devis variant once per session
+	const [devisVariant] = useState<DevisVariant>(getOrAssignVariant);
+
+	// ── Browser history sync ──────────────────────────────────────────
+	// We use a ref to track whether a state change came from popstate
+	// (browser back/forward) so we don't push a duplicate history entry.
+	const isPopstateRef = useRef(false);
+
+	// Push a history entry whenever the step changes (unless it was
+	// triggered by the browser back/forward button itself).
+	useEffect(() => {
+		if (isPopstateRef.current) {
+			// This change was caused by popstate — don't push again
+			isPopstateRef.current = false;
+			return;
+		}
+		// Push the step index into history state so popstate can read it
+		window.history.pushState({ step: activeStep }, "");
+	}, [activeStep]);
+
+	// Listen for browser back/forward and sync the stepper
+	useEffect(() => {
+		function handlePopState(event: PopStateEvent) {
+			const state = event.state as { step?: number } | null;
+			if (state && typeof state.step === "number") {
+				isPopstateRef.current = true;
+				setActiveStep(state.step);
+			} else {
+				// No state — user went back past the first step.
+				// Go to step 0 (or you could let the browser navigate away).
+				isPopstateRef.current = true;
+				setActiveStep(0);
+			}
+		}
+
+		window.addEventListener("popstate", handlePopState);
+
+		// Seed the initial history entry so the first back press works
+		window.history.replaceState({ step: activeStep }, "");
+
+		return () => window.removeEventListener("popstate", handlePopState);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []); // Run once on mount
+
 	const currentStepDef = allSteps[activeStep];
 	const currentGroup = useMemo(
 		() => getGroupForFlatIndex(groups, activeStep),
@@ -195,7 +277,14 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 	}, [allSteps.length]);
 
 	const back = useCallback(() => {
-		setActiveStep((prev) => Math.max(prev - 1, 0));
+		// Use browser history.back() so the popstate handler syncs the step.
+		// This prevents the double-action bug where setActiveStep + popstate
+		// both fire and the user ends up going back two steps.
+		if (typeof window !== "undefined" && window.history.length > 1) {
+			window.history.back();
+		} else {
+			setActiveStep((prev) => Math.max(prev - 1, 0));
+		}
 	}, []);
 
 	const goToStep = useCallback(
@@ -229,6 +318,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 			sidebarGroupId,
 			isFirstStep: activeStep === 0,
 			isLastStep: activeStep === allSteps.length - 1,
+			devisVariant,
 			next,
 			back,
 			goToStep,
@@ -242,6 +332,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 			currentStepDef,
 			currentGroup,
 			sidebarGroupId,
+			devisVariant,
 			next,
 			back,
 			goToStep,

@@ -82,12 +82,14 @@ export interface OfferCardProps
   logo?: React.ReactNode
   descriptionTitle: React.ReactNode
   description: React.ReactNode
-  ctaLabel: React.ReactNode
+  ctaLabel?: React.ReactNode
   onCtaClick?: () => void
   /** Label shown in the gradient footer for recommended cards */
   moreLabel?: string
   /** Handler for the "En savoir plus" link (recommended gradient footer) */
   onMoreClick?: () => void
+  /** Hide the CTA button — use for summary/preview mode */
+  hideCta?: boolean
 }
 
 /* ------------------------------------------------------------------ */
@@ -111,6 +113,7 @@ function OfferCard({
   onCtaClick,
   moreLabel = "En savoir plus",
   onMoreClick,
+  hideCta = false,
   ...props
 }: OfferCardProps) {
   const isRecommended = tone === "recommended"
@@ -130,6 +133,7 @@ function OfferCard({
     description,
     ctaLabel,
     onCtaClick,
+    hideCta,
   }
 
   return (
@@ -169,7 +173,7 @@ function OfferCard({
                 <button
                   type="button"
                   onClick={onMoreClick}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-white transition-opacity hover:opacity-80"
+                  className="inline-flex items-center gap-1 text-sm font-medium text-white transition-all hover:opacity-80 active:scale-95 active:opacity-60"
                 >
                   {moreLabel}
                   <ChevronRight className="h-4 w-4" />
@@ -200,8 +204,10 @@ type OfferInnerCardProps = {
   logo?: React.ReactNode
   descriptionTitle: React.ReactNode
   description: React.ReactNode
-  ctaLabel: React.ReactNode
+  ctaLabel?: React.ReactNode
   onCtaClick?: () => void
+  /** Hide the CTA button — use for summary/preview mode */
+  hideCta?: boolean
 }
 
 function OfferInnerCard({
@@ -215,6 +221,7 @@ function OfferInnerCard({
   description,
   ctaLabel,
   onCtaClick,
+  hideCta = false,
 }: OfferInnerCardProps) {
   const isSm = size === "sm"
 
@@ -273,22 +280,24 @@ function OfferInnerCard({
           isSm ? "gap-4 px-4 pb-4" : "gap-5 px-5 pb-5"
         )}
       >
-        {/* CTA button — bulkier on mobile */}
-        <Button
-          variant="ctaPurple"
-          size="cta"
-          className={cn(
-            "w-full bg-[#5B007F] hover:bg-[#6A0B95] rounded-[20px]",
-            "h-[52px] text-sm font-semibold",
-            "lg:h-11 lg:text-[0.95rem]"
-          )}
-          onClick={onCtaClick}
-        >
-          {ctaLabel}
-        </Button>
+        {/* CTA button — bulkier on mobile, generous padding on desktop */}
+        {!hideCta && ctaLabel && (
+          <Button
+            variant="ctaPurple"
+            size="cta"
+            className={cn(
+              "w-full bg-[#5B007F] hover:bg-[#6A0B95] rounded-[20px]",
+              "h-[52px] text-sm font-semibold",
+              "lg:h-12 lg:px-6 lg:text-[0.95rem]"
+            )}
+            onClick={onCtaClick}
+          >
+            {ctaLabel}
+          </Button>
+        )}
 
-        {/* Description block */}
-        <div className="text-center">
+        {/* Description block — generous spacing above */}
+        <div className="text-center mt-4 lg:mt-6">
           <div
             className={cn(
               "font-bold text-[#490076]",
@@ -408,7 +417,7 @@ function OfferCardMoreFooter({
           <button
             type="button"
             onClick={onMoreClick}
-            className="inline-flex items-center gap-1 text-sm font-medium text-[#490076] transition-opacity hover:opacity-80"
+            className="inline-flex items-center gap-1 text-sm font-medium text-[#490076] transition-all hover:opacity-80 active:scale-95 active:opacity-60"
           >
             {moreLabel}
             <ChevronRight className="h-4 w-4" />
@@ -420,8 +429,9 @@ function OfferCardMoreFooter({
 }
 
 /* ------------------------------------------------------------------ */
-/*  OfferCardHoverGroup — desktop wrapper with hover ring + external  */
-/*  "En savoir plus" link below the card.                             */
+/*  OfferCardHoverGroup — desktop wrapper using same card content as  */
+/*  mobile. On hover: #F3E5FA bg + "En savoir plus" footer appears.   */
+/*  Card content stays identical (no size change = smooth transition). */
 /* ------------------------------------------------------------------ */
 
 function OfferCardHoverGroup({
@@ -438,22 +448,29 @@ function OfferCardHoverGroup({
   return (
     <div
       className={cn(
-        "group/offer flex flex-col rounded-[28px] transition-all",
-        "hover:ring-2 hover:ring-[#C86FFE]/50",
+        "group/offer rounded-[28px] p-[3px] pb-0 overflow-hidden transition-colors duration-200",
+        "bg-transparent hover:bg-[#F3E5FA]",
         className,
       )}
     >
-      {children}
+      <div className="rounded-t-[25px]">{children}</div>
 
+      {/* Footer — hidden by default, slides in on hover */}
       {onMoreClick && (
-        <button
-          type="button"
-          onClick={onMoreClick}
-          className="mx-auto inline-flex items-center gap-1 py-3 text-sm font-medium text-[#490076] transition-opacity hover:opacity-80"
-        >
-          {moreLabel}
-          <ChevronRight className="h-4 w-4" />
-        </button>
+        <div className="grid grid-rows-[0fr] group-hover/offer:grid-rows-[1fr] transition-[grid-template-rows] duration-200">
+          <div className="overflow-hidden">
+            <div className="flex items-center justify-center px-5 pt-3 pb-4">
+              <button
+                type="button"
+                onClick={onMoreClick}
+                className="inline-flex items-center gap-1 text-sm font-medium text-[#490076] transition-opacity hover:opacity-80"
+              >
+                {moreLabel}
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

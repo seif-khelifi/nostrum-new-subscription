@@ -1,0 +1,324 @@
+{
+	"common": {
+		"title": "Et concrètement, les avantages pour vous ?",
+		"subtitleTemplate": "Découvrez pourquoi {offer} est faite pour vous, en prenant soin de ce que les autres oublient.",
+		"seeGuaranteesLabel": "Voir le tableau de garanties",
+		"ctaTemplate": "Je choisis la formule {offer}"
+	},
+	"offerColors": {
+		"decouverte": "#F3E5FA",
+		"bronze": "#FFF7E8",
+		"silver": "#F4F3FA",
+		"gold": "#FEFFF4"
+	},
+	"accordion": {
+		"decouverte": [
+			{
+				"value": "soins-courants",
+				"title": "Prendre en charge c'est bien, prendre en compte  le bien-être c'est mieux",
+				"description": "Silver c'est Ostéo, médecines douces, compléments alimentaires. Ce que le Silver offre en plus :",
+				"colorScheme": "purple",
+				"cards": [
+					{
+						"title": "Téléconsulta tion médecin",
+						"description": "6/ an"
+					},
+					{
+						"title": "Chat médical psy",
+						"description": "7j/7 de 8h à 22h"
+					}
+				],
+				"detailCard": {
+					"highlightText": "<b>1 consultation psy offerte </b> pour 3 consultations réalisées ",
+					"ctaLabel": "Mes remboursements bien-être",
+					"infoTitle": "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+					"infoText": "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+					"rightCard": {
+						"title": "Psy",
+						"description": "5 séances/an pour 30€"
+					}
+				}
+			},
+			{
+				"value": "dentaire-optique",
+				"title": "Nostrum Vita couvre aussi vos besoins de santé classiques",
+				"description": "On rembourse les frais en Optique, Dentaire, Hospitalisation et de médecine courante",
+				"colorScheme": "warm",
+				"cards": [
+					{
+						"title": "Optique",
+						"description": "100 %"
+					},
+					{
+						"title": "Dentaire",
+						"description": "100 %"
+					},
+					{
+						"title": "Médecins & téléconsultations",
+						"description": "100 %"
+					},
+					{
+						"title": "Hospitalisation",
+						"description": "Remboursement total"
+					}
+				],
+				"ctaLabel": "Voir les détails dentaire & optique"
+			},
+			{
+				"value": "hospitalisation",
+				"title": "Des avantages et services en plus",
+				"description": "",
+				"colorScheme": "blue",
+				"cards": [
+					{
+						"title": "Club Avantages",
+						"description": "-10% à -50% (vacances, ciné,  sport, shopping et  bien plus)"
+					},
+					{
+						"title": "Téléconsulta tion",
+						"description": "En visio ou par téléphone, assurée par un médecin, disponible 24h/24h et 7j/7 partout dans le monde."
+					},
+					{
+						"title": "Soins à l'étranger",
+						"description": "Vos frais médicaux à l'étranger sont pris en charge pendant un séjour temporaire de moins 3 mois."
+					},
+					{
+						"title": "Visible patient",
+						"description": "La modélisation des organes en 3D à partir d’un Scanner ou d’une IRM inclus dans la formule"
+					}
+				]
+			}
+		],
+		"bronze": [
+			{
+				"value": "soins-courants",
+				"title": "Soins courants & prévention",
+				"description": "Un bon niveau de couverture pour vos consultations régulières.",
+				"colorScheme": "purple",
+				"cards": [
+					{
+						"title": "Consultations généralistes",
+						"description": "Remboursement à 100 % du tarif conventionné, sans avance de frais."
+					},
+					{
+						"title": "Pharmacie & médicaments",
+						"description": "Prise en charge complète des médicaments prescrits courants."
+					}
+				],
+				"detailCard": {
+					"highlightText": "Exemple : une consultation chez un généraliste à 25 €, <b>reste à charge de 1 €</b> avec Bronze.",
+					"ctaLabel": "Comparer les formules",
+					"infoTitle": "Tarif de convention",
+					"infoText": "Le tarif de convention est fixé par l'Assurance Maladie. Il sert de base au calcul des remboursements.",
+					"rightCard": {
+						"title": "Médecine douce",
+						"description": "2 séances par an remboursées (ostéopathie, acupuncture)."
+					}
+				}
+			},
+			{
+				"value": "dentaire-optique",
+				"title": "Dentaire & Optique",
+				"description": "Des remboursements solides pour vos postes les plus courants.",
+				"colorScheme": "warm",
+				"cards": [
+					{
+						"title": "Couronnes",
+						"description": "Remboursement jusqu'à 60 % sur les prothèses dentaires courantes."
+					},
+					{
+						"title": "Implants",
+						"description": "Forfait implant de 200 € par an, cumulable avec la Sécu."
+					},
+					{
+						"title": "Lunettes & montures",
+						"description": "Équipement complet tous les 2 ans : monture + verres jusqu'à 200 €."
+					},
+					{
+						"title": "Lentilles",
+						"description": "Forfait annuel de 100 € pour les lentilles correctrices."
+					}
+				],
+				"ctaLabel": "Voir les détails dentaire & optique"
+			},
+			{
+				"value": "hospitalisation",
+				"title": "Hospitalisation & spécialistes",
+				"description": "Couverture confortable pour les séjours et consultations spécialisées.",
+				"colorScheme": "blue",
+				"cards": [
+					{
+						"title": "Chambre particulière",
+						"description": "Forfait de 40 € / jour pour une chambre individuelle."
+					},
+					{
+						"title": "Dépassements d'honoraires",
+						"description": "Prise en charge jusqu'à 100 % du tarif Sécu."
+					},
+					{
+						"title": "Frais de séjour",
+						"description": "Forfait hospitalier intégralement couvert."
+					},
+					{
+						"title": "Transport médical",
+						"description": "Ambulance et VSL remboursés à 100 % sur prescription."
+					}
+				]
+			}
+		],
+		"silver": [
+			{
+				"value": "soins-courants",
+				"title": "Soins courants & prévention",
+				"description": "On rembourse les frais en Optique, Dentaire, Hospitalisation et de médecine courante",
+				"colorScheme": "purple",
+				"cards": [
+					{
+						"title": "Consultations généralistes",
+						"description": "Remboursement à 100 % du tarif conventionné, sans avance de frais chez les médecins partenaires."
+					},
+					{
+						"title": "Pharmacie & médicaments",
+						"description": "Prise en charge complète des médicaments prescrits, y compris les génériques."
+					}
+				],
+				"detailCard": {
+					"highlightText": "Exemple : une consultation chez un généraliste à 25 €, <b>reste à charge de 0 €</b> avec votre formule Silver.",
+					"ctaLabel": "Comparer les formules",
+					"infoTitle": "Tarif de convention",
+					"infoText": "Le tarif de convention est fixé par l'Assurance Maladie. Il sert de base au calcul des remboursements.",
+					"rightCard": {
+						"title": "Médecine douce",
+						"description": "Ostéopathie, acupuncture, naturopathie : jusqu'à 4 séances par an remboursées."
+					}
+				}
+			},
+			{
+				"value": "dentaire-optique",
+				"title": "Dentaire & Optique",
+				"description": "Couronnes, implants, lunettes, lentilles… Des remboursements renforcés pour les postes les plus coûteux.",
+				"colorScheme": "warm",
+				"cards": [
+					{
+						"title": "Couronnes & bridges",
+						"description": "Remboursement jusqu'à 90 % sur les prothèses dentaires, sans plafond annuel."
+					},
+					{
+						"title": "Implants dentaires",
+						"description": "Forfait implant de 400 € par an, cumulable avec la prise en charge Sécu."
+					},
+					{
+						"title": "Lunettes & montures",
+						"description": "Équipement complet tous les 2 ans : monture + verres remboursés jusqu'à 300 €."
+					},
+					{
+						"title": "Lentilles de contact",
+						"description": "Forfait annuel de 200 € pour les lentilles correctrices, sur prescription."
+					}
+				],
+				"ctaLabel": "Voir tous les détails dentaire & optique"
+			},
+			{
+				"value": "hospitalisation",
+				"title": "Hospitalisation & spécialistes",
+				"description": "Chambre particulière, dépassements d'honoraires, chirurgie… Vous êtes couvert sans surprise.",
+				"colorScheme": "blue",
+				"cards": [
+					{
+						"title": "Chambre particulière",
+						"description": "Forfait journalier de 80 € pour une chambre individuelle, sans limitation de durée."
+					},
+					{
+						"title": "Dépassements d'honoraires",
+						"description": "Prise en charge jusqu'à 200 % du tarif Sécu pour les chirurgiens et spécialistes."
+					},
+					{
+						"title": "Frais de séjour",
+						"description": "Forfait hospitalier intégralement couvert, y compris le forfait patient urgences."
+					},
+					{
+						"title": "Transport médical",
+						"description": "Ambulance et VSL remboursés à 100 % sur prescription, sans avance de frais."
+					}
+				]
+			}
+		],
+		"gold": [
+			{
+				"value": "soins-courants",
+				"title": "Soins courants & prévention",
+				"description": "Le meilleur remboursement du marché pour vos consultations et analyses.",
+				"colorScheme": "purple",
+				"cards": [
+					{
+						"title": "Consultations généralistes",
+						"description": "Remboursement à 100 % y compris dépassements d'honoraires, sans avance de frais."
+					},
+					{
+						"title": "Pharmacie & médicaments",
+						"description": "Prise en charge intégrale de tous les médicaments, y compris non remboursés Sécu."
+					}
+				],
+				"detailCard": {
+					"highlightText": "Exemple : une consultation chez un spécialiste à 70 €, <b>reste à charge de 0 €</b> avec Gold.",
+					"ctaLabel": "Comparer les formules",
+					"infoTitle": "Tarif de convention",
+					"infoText": "Le tarif de convention est fixé par l'Assurance Maladie. Il sert de base au calcul des remboursements.",
+					"rightCard": {
+						"title": "Médecine douce",
+						"description": "Ostéopathie, acupuncture, naturopathie, sophrologie : jusqu'à 8 séances par an remboursées."
+					}
+				}
+			},
+			{
+				"value": "dentaire-optique",
+				"title": "Dentaire & Optique",
+				"description": "On rembourse les frais en Optique, Dentaire, Hospitalisation et de médecine courante",
+				"colorScheme": "warm",
+				"cards": [
+					{
+						"title": "Couronnes & bridges",
+						"description": "Remboursement à 100 % sans plafond pour toutes les prothèses dentaires."
+					},
+					{
+						"title": "Implants dentaires",
+						"description": "Forfait implant de 800 € par an, le plus élevé du marché."
+					},
+					{
+						"title": "Lunettes & montures",
+						"description": "Équipement premium chaque année : monture + verres progressifs jusqu'à 500 €."
+					},
+					{
+						"title": "Lentilles de contact",
+						"description": "Forfait annuel de 400 € pour toutes les lentilles, y compris journalières."
+					}
+				],
+				"ctaLabel": "Voir tous les détails dentaire & optique"
+			},
+			{
+				"value": "hospitalisation",
+				"title": "Hospitalisation & spécialistes",
+				"description": "La couverture la plus complète : chambre privée, chirurgie, spécialistes, tout est inclus.",
+				"colorScheme": "blue",
+				"cards": [
+					{
+						"title": "Chambre particulière",
+						"description": "Forfait journalier de 150 € pour une chambre individuelle, durée illimitée."
+					},
+					{
+						"title": "Dépassements d'honoraires",
+						"description": "Prise en charge jusqu'à 300 % du tarif Sécu pour tous les praticiens."
+					},
+					{
+						"title": "Frais de séjour",
+						"description": "Couverture intégrale : forfait hospitalier, urgences, soins intensifs."
+					},
+					{
+						"title": "Transport médical",
+						"description": "Tous les transports sanitaires remboursés à 100 %, y compris rapatriement."
+					}
+				]
+			}
+		]
+	}
+}

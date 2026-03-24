@@ -4,8 +4,6 @@ import {
 	createContext,
 	useContext,
 	useState,
-	useEffect,
-	useRef,
 	useMemo,
 	useCallback,
 	type ReactNode,
@@ -34,6 +32,7 @@ export type StepId =
 	| "transition_offer"
 	// placeholders for future groups
 	| "devis_placeholder"
+	| "garanties"
 	// souscription steps
 	| "socialSecurity"
 	| "resilierMutuelle"
@@ -90,7 +89,10 @@ export const STEP_GROUPS: StepGroup[] = [
 	{
 		id: 5,
 		label: "Devis",
-		steps: [{ id: "devis_placeholder", label: "Devis" }],
+		steps: [
+			{ id: "devis_placeholder", label: "Devis" },
+			{ id: "garanties", label: "Garanties" },
+		],
 	},
 	{
 		id: 6,
@@ -224,47 +226,6 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 	// Assign a random devis variant once per session
 	const [devisVariant] = useState<DevisVariant>(getOrAssignVariant);
 
-	// ── Browser history sync ──────────────────────────────────────────
-	// We use a ref to track whether a state change came from popstate
-	// (browser back/forward) so we don't push a duplicate history entry.
-	const isPopstateRef = useRef(false);
-
-	// Push a history entry whenever the step changes (unless it was
-	// triggered by the browser back/forward button itself).
-	useEffect(() => {
-		if (isPopstateRef.current) {
-			// This change was caused by popstate — don't push again
-			isPopstateRef.current = false;
-			return;
-		}
-		// Push the step index into history state so popstate can read it
-		window.history.pushState({ step: activeStep }, "");
-	}, [activeStep]);
-
-	// Listen for browser back/forward and sync the stepper
-	useEffect(() => {
-		function handlePopState(event: PopStateEvent) {
-			const state = event.state as { step?: number } | null;
-			if (state && typeof state.step === "number") {
-				isPopstateRef.current = true;
-				setActiveStep(state.step);
-			} else {
-				// No state — user went back past the first step.
-				// Go to step 0 (or you could let the browser navigate away).
-				isPopstateRef.current = true;
-				setActiveStep(0);
-			}
-		}
-
-		window.addEventListener("popstate", handlePopState);
-
-		// Seed the initial history entry so the first back press works
-		window.history.replaceState({ step: activeStep }, "");
-
-		return () => window.removeEventListener("popstate", handlePopState);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []); // Run once on mount
-
 	const currentStepDef = allSteps[activeStep];
 	const currentGroup = useMemo(
 		() => getGroupForFlatIndex(groups, activeStep),
@@ -277,14 +238,7 @@ export function StepperProvider({ initialStep = 0, children }: StepperProviderPr
 	}, [allSteps.length]);
 
 	const back = useCallback(() => {
-		// Use browser history.back() so the popstate handler syncs the step.
-		// This prevents the double-action bug where setActiveStep + popstate
-		// both fire and the user ends up going back two steps.
-		if (typeof window !== "undefined" && window.history.length > 1) {
-			window.history.back();
-		} else {
-			setActiveStep((prev) => Math.max(prev - 1, 0));
-		}
+		setActiveStep((prev) => Math.max(prev - 1, 0));
 	}, []);
 
 	const goToStep = useCallback(

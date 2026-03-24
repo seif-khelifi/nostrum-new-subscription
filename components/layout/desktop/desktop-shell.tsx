@@ -1,5 +1,9 @@
+"use client";
+
 import { type ReactNode } from "react";
 import { DesktopSidebar } from "./sidebar";
+import { cn } from "@/lib/utils";
+import { useStepper } from "@/context/StepperContext";
 import "./desktop-shell.css";
 
 export interface DesktopShellProps {
@@ -23,6 +27,9 @@ export interface DesktopShellProps {
  * - lg+: full sidebar (16rem)
  * - sm → lg: collapsed sidebar (120px, icon-only)
  * - < sm: hidden entirely (mobile shell takes over)
+ *
+ * Sidebar is hidden for certain steps (e.g. Devis) to allow
+ * full-width content layouts.
  */
 export function DesktopShell({
 	title,
@@ -31,11 +38,21 @@ export function DesktopShell({
 	customNavbar,
 	children,
 }: DesktopShellProps) {
+	const { currentGroup } = useStepper();
+
+	/* Hide sidebar on the Devis step (group 5) */
+	const hideSidebar = currentGroup.id === 5;
+
 	return (
 		<div className="hidden sm:flex h-screen">
-			<DesktopSidebar>{sidebarContent}</DesktopSidebar>
+			{!hideSidebar && <DesktopSidebar>{sidebarContent}</DesktopSidebar>}
 
-			<div className="flex flex-col flex-1 transition-[margin-left] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)] sm:ml-[120px] lg:ml-64">
+			<div
+				className={cn(
+					"flex flex-col flex-1 transition-[margin-left] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
+					hideSidebar ? "ml-0" : "sm:ml-[120px] lg:ml-64",
+				)}
+			>
 				{customNavbar ?? (
 					<header className="desktop-navbar">
 						<div>
@@ -45,7 +62,9 @@ export function DesktopShell({
 					</header>
 				)}
 
-				<main className="flex-1 overflow-y-auto p-6">{children}</main>
+				<main data-slot="desktop-main" className={cn("flex-1 overflow-y-auto p-6", hideSidebar && "bg-white")}>
+					{children}
+				</main>
 			</div>
 		</div>
 	);

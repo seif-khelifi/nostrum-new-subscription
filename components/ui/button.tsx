@@ -29,6 +29,15 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
 
+        linkChevron:
+          [
+            "h-auto px-0 py-0 border-transparent bg-transparent shadow-none",
+            "text-sm font-medium text-[#490076]",
+            "transition-opacity hover:opacity-80 hover:bg-transparent",
+            "active:translate-y-0",
+            "gap-1",
+          ].join(" "),
+
         ctaPurple:
           [
             "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { useStepper } from "@/context/StepperContext";
 import type { StepId } from "@/context/StepperContext";
 import {
@@ -25,6 +26,7 @@ import {
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
 import { DevisVariantA, DevisVariantB } from "./devis";
+import { GarantiesStep } from "./garanties";
 
 /* ------------------------------------------------------------------ */
 /*  Variant-aware devis step                                          */
@@ -81,6 +83,9 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 	// Devis — renders variant A or B based on session assignment
 	devis_placeholder: DevisStep,
 
+	// Garanties — navigated to via "En savoir plus" from devis
+	garanties: GarantiesStep,
+
 	// Placeholder steps — will be replaced with real screens later
 	souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,
 };
@@ -100,8 +105,28 @@ function PlaceholderScreen({ label }: { label: string }) {
  * Renders the component for the currently active step.
  */
 export function StepRouter() {
-	const { currentStepDef } = useStepper();
+	const { currentStepDef, activeStep } = useStepper();
 	const Component = STEP_COMPONENTS[currentStepDef.id];
+	const prevStepRef = useRef(activeStep);
+
+	// Scroll all scrollable containers to top on step change
+	useEffect(() => {
+		if (prevStepRef.current !== activeStep) {
+			prevStepRef.current = activeStep;
+			// Mobile shell <main> — the overflow-y-auto scroll container
+			const mobileMain = document.querySelector('[data-slot="mobile-main"]');
+			if (mobileMain) {
+				mobileMain.scrollTop = 0;
+			}
+			// Desktop shell main area
+			const desktopMain = document.querySelector('[data-slot="desktop-main"]');
+			if (desktopMain) {
+				desktopMain.scrollTop = 0;
+			}
+			// Fallback: window scroll
+			window.scrollTo(0, 0);
+		}
+	}, [activeStep]);
 
 	if (!Component) {
 		return (

@@ -26,7 +26,7 @@ export function MobileShell({
 		<div className="flex flex-col h-screen sm:hidden">
 			{customHeader}
 
-			<main className={`flex-1 overflow-y-auto p-4${navItems ? " pb-14" : ""}`}>
+			<main data-slot="mobile-main" className={`flex-1 overflow-y-auto p-4${navItems ? " pb-14" : ""}`}>
 				{children}
 			</main>
 

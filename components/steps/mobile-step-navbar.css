@@ -49,29 +49,6 @@
 	display: none;
 }
 
-.mobile-step-navbar__step {
-	display: flex;
-	align-items: center;
-	gap: 4px;
-	font-size: 14px;
-	font-weight: 600;
-	padding: 8px 14px;
-	border-radius: 999px;
-	background: transparent;
-	opacity: 0.65;
-	white-space: nowrap;
-	cursor: pointer;
-	border: none;
-	color: inherit;
-	transition: background 200ms ease, opacity 200ms ease, color 200ms ease;
-}
-
-.mobile-step-navbar__step--active {
-	background: white;
-	color: #490076;
-	opacity: 1;
-}
-
 /* ── CTA row (no card background) ────────────────────── */
 
 .mobile-step-navbar__cta {
@@ -102,46 +79,18 @@
 	/* no gap — overlap handled via negative margin on the call btn */
 }
 
-/* ── Avatar group with gradient halo ─────────────────── */
+/* ── Advisor pill illustration ────────────────────────── */
 
-.mobile-step-navbar__avatars {
-	display: flex;
-	padding: 3px;
-	border-radius: 999px;
-	background: radial-gradient(
-		272.27% 150% at 50.79% 95.31%,
-		#490076 0%,
-		#9000e3 19.23%,
-		#ce99ff 37.02%,
-		#fea8cd 65.87%,
-		#fbf4ea 100%
-	);
+.mobile-step-navbar__pill-illustration {
+	height: 40px;
+	width: auto;
+	object-fit: contain;
+	flex-shrink: 0;
 }
 
-.mobile-step-navbar__avatar {
-	width: 34px;
-	height: 34px;
-	border-radius: 999px;
-	object-fit: cover;
-	border: 2px solid #ce99ff;
-	margin-left: -8px;
-}
-
-.mobile-step-navbar__avatar:first-child {
-	margin-left: 0;
-}
-
-/* ── Phone button: circle, overlaps avatar group ─────── */
+/* ── Phone button: pill, overlaps illustration ─────────── */
 
 .mobile-step-navbar__call {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	width: 44px;
-	height: 44px;
-	border-radius: 999px;
-	background: #e0b1ff;
-	color: #490076;
 	flex-shrink: 0;
 	margin-left: -10px;
 	position: relative;

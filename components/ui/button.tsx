@@ -76,6 +76,24 @@ const buttonVariants = cva(
             "hover:border-[#C86FFE]/70 hover:bg-[#faf7fc]",
             "active:scale-[0.985]",
           ].join(" "),
+
+        mobileStepPill:
+          [
+            "h-auto gap-1 rounded-full px-3.5 py-2 border-transparent",
+            "bg-transparent text-white text-sm font-semibold opacity-65",
+            "whitespace-nowrap shadow-none",
+            "transition-all duration-200 ease-out",
+            "hover:opacity-80 hover:bg-white/10",
+            "active:translate-y-0",
+          ].join(" "),
+
+        mobileCallPill:
+          [
+            "h-10 rounded-full px-3 border-2 border-[#CE99FF]",
+            "bg-[#E0B1FF] text-white shadow-none",
+            "hover:bg-[#d4a0f0]",
+            "active:translate-y-[1px]",
+          ].join(" "),
       },
 
       size: {
@@ -117,6 +135,11 @@ const buttonVariants = cva(
           "border-[#E9E3DD]",
           "shadow-none",
         ].join(" "),
+      },
+      {
+        variant: "mobileStepPill",
+        selected: true,
+        className: "bg-white text-[#490076] opacity-100 hover:bg-white/90 hover:opacity-100",
       },
     ],
 

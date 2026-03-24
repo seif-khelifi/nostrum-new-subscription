@@ -82,11 +82,8 @@ export function GarantiesVariantA() {
 		<>
 			{/* ─── Mobile layout (<lg) ─── */}
 			<div className="flex flex-col lg:hidden">
-				{/* ── Variant indicator ── */}
-				<h1 className="py-6 text-center text-5xl font-black text-[#9000E3]">VARIANT A</h1>
-
 				{/* ── Colored hero section ── */}
-				<div className="-mx-4 px-4 pt-6 pb-8 sm:-mx-6 sm:px-6" style={{ backgroundColor: bgColor }}>
+				<div className="-mx-4 -mt-4 px-4 pt-6 pb-8 sm:-mx-6 sm:-mt-6 sm:px-6" style={{ backgroundColor: bgColor }}>
 					{/* Title */}
 					<h3 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold leading-tight text-[#290E67]">
 						{common.title}
@@ -297,7 +294,6 @@ export function GarantiesVariantA() {
 
 			{/* ─── Desktop placeholder (lg+) ─── */}
 			<div className="hidden items-center justify-center py-16 lg:flex flex-col gap-4">
-				<h1 className="text-5xl font-black text-[#9000E3]">VARIANT A</h1>
 				<p className="text-lg text-[#444444]">
 					Version desktop à venir — veuillez utiliser la version mobile.
 				</p>

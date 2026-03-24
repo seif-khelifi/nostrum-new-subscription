@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/components/ui/offer-card";
 import { PlanLogo } from "@/components/ui/plan-logo";
+import { GarantieBreakdownCard } from "@/components/ui/garantie-breakdown-card";
+import type { BreakdownValues } from "@/components/ui/garantie-breakdown-card";
 import {
 	Tabs,
 	TabsList,
@@ -54,6 +56,24 @@ const LEGEND_ITEMS = [
 ] as const;
 
 /* ------------------------------------------------------------------ */
+/*  Data types for the JSON tab structure                               */
+/* ------------------------------------------------------------------ */
+
+type CategoryMeta = {
+	key: string;
+	icon: string;
+	title: string;
+	subtitle: string;
+};
+
+type TabBreakdowns = Record<string, BreakdownValues>;
+type OfferTabs = { sante: TabBreakdowns; bienetre: TabBreakdowns };
+type AllTabs = Record<string, OfferTabs>;
+
+const categories: CategoryMeta[] = garantiesData.categories as CategoryMeta[];
+const tabsData: AllTabs = garantiesData.tabs as AllTabs;
+
+/* ------------------------------------------------------------------ */
 /*  GarantiesVariantB                                                  */
 /* ------------------------------------------------------------------ */
 
@@ -69,28 +89,71 @@ export function GarantiesVariantB() {
 	const compare = offersData.compareCard;
 	const common = garantiesData.common;
 
+	// Also persist price in session storage
 	const { setValue: setSelectedOffer } = useSessionStorage<number | null>("selectedOffer", null);
+	const { setValue: setSelectedPrice } = useSessionStorage<string | null>("selectedOfferPrice", null);
+
+	// Resolve tab data for the current offer
+	const offerTabs: OfferTabs = tabsData[planName] ?? tabsData.silver;
+	const offerLabel = capitalize(planName);
 
 	const handleChooseOffer = () => {
 		setSelectedOffer(PLAN_INDEX[planName] ?? 0);
+		setSelectedPrice(offer?.price ?? null);
 		goToStepById("sexe");
+	};
+
+	/** Render all 5 category sections for a given tab key */
+	const renderTabCategories = (tabKey: "sante" | "bienetre") => {
+		const breakdowns: TabBreakdowns = offerTabs[tabKey] ?? {};
+		return (
+			<div className="-mx-4 sm:-mx-6">
+				{categories.map((cat, idx) => (
+					<div
+						key={cat.key}
+						className="px-4 py-5 sm:px-6"
+						style={{ backgroundColor: idx % 2 === 0 ? "#FAF4FB" : "#FFFFFF" }}
+					>
+						{/* Icon + title */}
+						<div className="flex items-center gap-2.5">
+							<span className="text-[1.35rem]" aria-hidden>
+								{cat.icon}
+							</span>
+							<h4 className="text-[1.35rem] font-bold leading-tight text-[#490076]">
+								{cat.title}
+							</h4>
+						</div>
+
+						{/* Subtitle — indented to align with title text */}
+						<p className="mt-1 pl-[34px] text-sm leading-relaxed text-[#1D1B20]">
+							{cat.subtitle}
+						</p>
+
+						{/* Breakdown card */}
+						<div className="mt-3">
+							<GarantieBreakdownCard
+								offerLabel={offerLabel}
+								breakdown={breakdowns[cat.key] ?? {}}
+							/>
+						</div>
+					</div>
+				))}
+			</div>
+		);
 	};
 
 	return (
 		<>
 			{/* ─── Mobile layout (<lg) ─── */}
 			<div className="flex flex-col lg:hidden">
-				{/* ── Variant indicator ── */}
-				<h1 className="py-6 text-center text-5xl font-black text-[#E39000]">VARIANT B</h1>
-
 				{/* ── Colored hero section ── */}
-				<div className="-mx-4 px-4 pt-6 pb-8 sm:-mx-6 sm:px-6" style={{ backgroundColor: bgColor }}>
+				<div className="-mx-4 -mt-4 px-4 pt-6 pb-8 sm:-mx-6 sm:-mt-6 sm:px-6" style={{ backgroundColor: bgColor }}>
 					<h3 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold leading-tight text-[#290E67]">
 						{common.title}
 					</h3>
 
 					<p className="mt-2 text-base font-semibold text-[#1D1B20]">
-						{common.subtitleTemplate.replace("{offer}", capitalize(planName))}
+						{common.subtitleTemplate.replace("{offer}", offerLabel)}
 					</p>
 
 					<div className="mt-6">
@@ -117,7 +180,7 @@ export function GarantiesVariantB() {
 
 				{/* ── Legend + Tabs section ── */}
 				<div className="pt-8">
-					{/* Title — normal font */}
+					{/* Title */}
 					<p className="text-base font-semibold text-[#290E67]">
 						Projetez-vous dans vos prochains soins
 					</p>
@@ -127,7 +190,7 @@ export function GarantiesVariantB() {
 						Simulez vos soins habituels et voyez votre reste à charge.
 					</p>
 
-					{/* Legend — single line, compact on mobile, centered */}
+					{/* Legend — single line */}
 					<div className="mt-3 flex items-center justify-center gap-3">
 						{LEGEND_ITEMS.map((item) => (
 							<div key={item.label} className="flex items-center gap-1">
@@ -161,13 +224,11 @@ export function GarantiesVariantB() {
 							</TabsList>
 
 							<TabsContent value="sante">
-								{/* Santé essentielle content placeholder */}
-								<p>aaaa</p>
+								{renderTabCategories("sante")}
 							</TabsContent>
 
 							<TabsContent value="bienetre">
-								{/* Bien-être & équilibre content placeholder */}
-								bbbbb
+								{renderTabCategories("bienetre")}
 							</TabsContent>
 						</Tabs>
 					</div>
@@ -190,7 +251,7 @@ export function GarantiesVariantB() {
 						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold bg-[#9000E3] hover:bg-[#7B00C4]"
 						onClick={handleChooseOffer}
 					>
-						{common.ctaTemplate.replace("{offer}", capitalize(planName))}
+						{common.ctaTemplate.replace("{offer}", offerLabel)}
 						<ArrowRight className="ml-2 h-5 w-5" />
 					</Button>
 				</div>
@@ -198,7 +259,6 @@ export function GarantiesVariantB() {
 
 			{/* ─── Desktop placeholder (lg+) ─── */}
 			<div className="hidden items-center justify-center py-16 lg:flex flex-col gap-4">
-				<h1 className="text-5xl font-black text-[#E39000]">VARIANT B</h1>
 				<p className="text-lg text-[#444444]">
 					Version desktop à venir — veuillez utiliser la version mobile.
 				</p>

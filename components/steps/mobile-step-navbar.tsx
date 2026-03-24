@@ -53,15 +53,11 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 
 				<div className="mobile-step-navbar__steps">
 					{stepPills.map((pill) => (
-						<button
+						<Button
 							key={pill.groupId}
-							type="button"
+							variant="mobileStepPill"
+							selected={pill.groupId === sidebarGroupId}
 							onClick={() => goToGroup(pill.groupId)}
-							className={cn(
-								"mobile-step-navbar__step",
-								pill.groupId === sidebarGroupId &&
-									"mobile-step-navbar__step--active",
-							)}
 						>
 							<span>{pill.label}</span>
 							<Image
@@ -72,7 +68,7 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 								className="h-4 w-4 shrink-0 object-contain"
 								unoptimized
 							/>
-						</button>
+						</Button>
 					))}
 				</div>
 			</div>
@@ -89,28 +85,29 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 				</div>
 
 				<div className="mobile-step-navbar__cta-right">
-					{/* Advisor avatar group with gradient halo */}
-					<div className="mobile-step-navbar__avatars">
-						<img
-							src="/images/advisor1.png"
-							alt="Conseiller"
-							className="mobile-step-navbar__avatar"
-						/>
-						<img
-							src="/images/advisor2.png"
-							alt="Conseiller"
-							className="mobile-step-navbar__avatar"
-						/>
-					</div>
+					{/* Advisor pill illustration */}
+					<Image
+						src="/navbarMobile/pill.svg"
+						alt="Conseillers"
+						width={80}
+						height={40}
+						className="mobile-step-navbar__pill-illustration"
+						unoptimized
+					/>
 
-					{/* Phone call button (overlaps avatar group) */}
-					<a
-						href="tel:+33000000000"
-						aria-label="Appeler un conseiller"
+					{/* Phone call button (pill-shaped, overlaps illustration) */}
+					<Button
+						variant="mobileCallPill"
+						asChild
 						className="mobile-step-navbar__call"
 					>
-						<Phone size={16} />
-					</a>
+						<a
+							href="tel:+33000000000"
+							aria-label="Appeler un conseiller"
+						>
+							<Phone size={16} />
+						</a>
+					</Button>
 				</div>
 			</div>
 		</header>

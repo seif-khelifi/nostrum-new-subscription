@@ -25,8 +25,7 @@ import {
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
-import { DevisVariantA, DevisVariantB } from "./devis";
-import { GarantiesStep } from "./garanties";
+import { DevisVariantA, DevisVariantB, GarantiesVariantA, GarantiesVariantB } from "./devis";
 
 /* ------------------------------------------------------------------ */
 /*  Variant-aware devis step                                          */
@@ -39,6 +38,19 @@ import { GarantiesStep } from "./garanties";
 function DevisStep() {
 	const { devisVariant } = useStepper();
 	return devisVariant === "b" ? <DevisVariantB /> : <DevisVariantA />;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware garanties step                                      */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Reads the devis variant from StepperContext and renders the
+ * correct garanties variant component (same A/B split as devis).
+ */
+function GarantiesStep() {
+	const { devisVariant } = useStepper();
+	return devisVariant === "b" ? <GarantiesVariantB /> : <GarantiesVariantB />;
 }
 
 /* ------------------------------------------------------------------ */

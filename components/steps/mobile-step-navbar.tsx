@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { ArrowLeft, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -13,13 +14,13 @@ export interface MobileStepNavbarProps {
 /**
  * Step-pill items shown in the mobile navbar.
  * Mirrors the group definitions in StepperContext (STEP_GROUPS)
- * but adds emojis for the compact mobile display.
+ * but uses illustrative SVG icons for the compact mobile display.
  */
 const stepPills = [
-	{ groupId: 2, label: "Situation", emoji: "🦻" },
-	{ groupId: 3, label: "Santé", emoji: "💖" },
-	{ groupId: 5, label: "Devis", emoji: "🪙" },
-	{ groupId: 6, label: "Souscription", emoji: "🖊️" },
+	{ groupId: 2, label: "Situation", icon: "/navbarMobile/illustration=Info.svg" },
+	{ groupId: 3, label: "Santé", icon: "/navbarMobile/illustration=Sante.svg" },
+	{ groupId: 5, label: "Devis", icon: "/navbarMobile/illustration=Coin.svg" },
+	{ groupId: 6, label: "Souscription", icon: "/navbarMobile/illustration=Ordonnance.svg" },
 ];
 
 /**
@@ -62,7 +63,15 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 									"mobile-step-navbar__step--active",
 							)}
 						>
-							{pill.label} {pill.emoji}
+							<span>{pill.label}</span>
+							<Image
+								src={pill.icon}
+								alt=""
+								width={16}
+								height={16}
+								className="h-4 w-4 shrink-0 object-contain"
+								unoptimized
+							/>
 						</button>
 					))}
 				</div>

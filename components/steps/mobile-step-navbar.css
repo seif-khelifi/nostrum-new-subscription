@@ -50,6 +50,9 @@
 }
 
 .mobile-step-navbar__step {
+	display: flex;
+	align-items: center;
+	gap: 4px;
 	font-size: 14px;
 	font-weight: 600;
 	padding: 8px 14px;

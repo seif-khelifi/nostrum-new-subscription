@@ -9,10 +9,7 @@ import { OfferCard, CompareCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/components/ui/offer-card";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { AlertBanner } from "@/components/ui/alert";
-import {
-	GarantieCard,
-	type GarantieCardColorScheme,
-} from "@/components/ui/garantie-card";
+import { GarantieCard, type GarantieCardColorScheme } from "@/components/ui/garantie-card";
 import {
 	Accordion,
 	AccordionContent,
@@ -20,7 +17,7 @@ import {
 	AccordionTrigger,
 } from "@/components/ui/accordion";
 import offersData from "@/data/offers.json";
-import garantiesData from "@/data/garanties.json";
+import garantiesData from "@/data/garanties-variant-a.json";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -54,19 +51,13 @@ type AccordionSection = {
 };
 
 /* ------------------------------------------------------------------ */
-/*  GarantiesStep                                                      */
+/*  GarantiesVariantA                                                  */
 /* ------------------------------------------------------------------ */
 
-export function GarantiesStep() {
+export function GarantiesVariantA() {
 	const { goToStepById } = useStepper();
-	const { value: selectedOfferIndex } = useSessionStorage<number | null>(
-		"selectedOffer",
-		null,
-	);
-	const { value: moreOfferIndex } = useSessionStorage<number | null>(
-		"moreOffer",
-		null,
-	);
+	const { value: selectedOfferIndex } = useSessionStorage<number | null>("selectedOffer", null);
+	const { value: moreOfferIndex } = useSessionStorage<number | null>("moreOffer", null);
 
 	// Determine which offer to show: "moreOffer" (from en savoir plus) or "selectedOffer"
 	const offerIndex = moreOfferIndex ?? selectedOfferIndex ?? 2; // default to silver
@@ -80,10 +71,7 @@ export function GarantiesStep() {
 	const accordionData = garantiesData.accordion as Record<string, AccordionSection[]>;
 	const sections: AccordionSection[] = accordionData[planName] ?? accordionData.silver;
 
-	const { setValue: setSelectedOffer } = useSessionStorage<number | null>(
-		"selectedOffer",
-		null,
-	);
+	const { setValue: setSelectedOffer } = useSessionStorage<number | null>("selectedOffer", null);
 
 	const handleChooseOffer = () => {
 		setSelectedOffer(PLAN_INDEX[planName] ?? 0);
@@ -94,11 +82,11 @@ export function GarantiesStep() {
 		<>
 			{/* ─── Mobile layout (<lg) ─── */}
 			<div className="flex flex-col lg:hidden">
+				{/* ── Variant indicator ── */}
+				<h1 className="py-6 text-center text-5xl font-black text-[#9000E3]">VARIANT A</h1>
+
 				{/* ── Colored hero section ── */}
-				<div
-					className="-mx-4 -mt-4 px-4 pt-6 pb-8 sm:-mx-6 sm:-mt-6 sm:px-6"
-					style={{ backgroundColor: bgColor }}
-				>
+				<div className="-mx-4 px-4 pt-6 pb-8 sm:-mx-6 sm:px-6" style={{ backgroundColor: bgColor }}>
 					{/* Title */}
 					<h3 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold leading-tight text-[#290E67]">
 						{common.title}
@@ -151,22 +139,12 @@ export function GarantiesStep() {
 
 				{/* ── Accordion ── */}
 				<div className="pt-8">
-					<Accordion
-						type="multiple"
-						className="w-full"
-						defaultValue={[sections[0]?.value]}
-					>
+					<Accordion type="multiple" className="w-full" defaultValue={[sections[0]?.value]}>
 						{sections.map((section, sectionIdx) => (
-							<AccordionItem
-								key={section.value}
-								value={section.value}
-								className="border-b-0"
-							>
+							<AccordionItem key={section.value} value={section.value} className="border-b-0">
 								<AccordionTrigger className="py-4 hover:no-underline">
 									{/* Normal font (Inter), text-2xl, bold */}
-									<span className="text-2xl font-bold text-[#490076]">
-										{section.title}
-									</span>
+									<span className="text-2xl font-bold text-[#490076]">{section.title}</span>
 								</AccordionTrigger>
 								<AccordionContent className="pb-6">
 									{/* Description */}
@@ -318,7 +296,8 @@ export function GarantiesStep() {
 			</div>
 
 			{/* ─── Desktop placeholder (lg+) ─── */}
-			<div className="hidden items-center justify-center py-16 lg:flex">
+			<div className="hidden items-center justify-center py-16 lg:flex flex-col gap-4">
+				<h1 className="text-5xl font-black text-[#9000E3]">VARIANT A</h1>
 				<p className="text-lg text-[#444444]">
 					Version desktop à venir — veuillez utiliser la version mobile.
 				</p>

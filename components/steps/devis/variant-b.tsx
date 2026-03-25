@@ -141,14 +141,14 @@ export function DevisVariantB() {
 				</div>
 
 				{/* Compare card */}
-				<div className="pt-8 pb-4">
-					<CompareCard
-						title={compare.title}
-						description={compare.description}
-						ctaLabel={compare.ctaLabel}
-						onCtaClick={() => {}}
-					/>
-				</div>
+					<div className="pt-8 pb-4">
+						<CompareCard
+							title={compare.title}
+							description={compare.description}
+							ctaLabel={compare.ctaLabel}
+							onCtaClick={() => goToStepById("offre_comparateur")}
+						/>
+					</div>
 			</div>
 
 			{/* ─── Desktop layout (lg+) ─── */}

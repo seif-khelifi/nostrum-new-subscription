@@ -25,7 +25,7 @@ import {
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
-import { DevisVariantA, DevisVariantB, GarantiesVariantA, GarantiesVariantB } from "./devis";
+import { DevisVariantA, DevisVariantB, GarantiesVariantA, GarantiesVariantB, ComparateurVariantA, ComparateurVariantB } from "./devis";
 
 /* ------------------------------------------------------------------ */
 /*  Variant-aware devis step                                          */
@@ -51,6 +51,19 @@ function DevisStep() {
 function GarantiesStep() {
 	const { devisVariant } = useStepper();
 	return devisVariant === "b" ? <GarantiesVariantB /> : <GarantiesVariantB />;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware comparateur step                                     */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Reads the devis variant from StepperContext and renders the
+ * correct comparateur variant component (same A/B split as devis).
+ */
+function ComparateurStep() {
+	const { devisVariant } = useStepper();
+	return devisVariant === "b" ? <ComparateurVariantB /> : <ComparateurVariantA />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -97,6 +110,9 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 
 	// Garanties — navigated to via "En savoir plus" from devis
 	garanties: GarantiesStep,
+
+	// Offre comparateur — compare offers side by side
+	offre_comparateur: ComparateurStep,
 
 	// Placeholder steps — will be replaced with real screens later
 	souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,

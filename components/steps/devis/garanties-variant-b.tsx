@@ -1,9 +1,11 @@
 "use client";
 
+import { useState } from "react";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
+import { GarantiesCompareDrawer } from "./drawers";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/components/ui/offer-card";
 import { PlanLogo } from "@/components/ui/plan-logo";
@@ -79,6 +81,7 @@ const tabsData: AllTabs = garantiesData.tabs as AllTabs;
 
 export function GarantiesVariantB() {
 	const { goToStepById } = useStepper();
+	const [drawerOpen, setDrawerOpen] = useState(false);
 	const { value: selectedOfferIndex } = useSessionStorage<number | null>("selectedOffer", null);
 	const { value: moreOfferIndex } = useSessionStorage<number | null>("moreOffer", null);
 
@@ -235,14 +238,20 @@ export function GarantiesVariantB() {
 				</div>
 
 				{/* ── Compare card ── */}
-				<div className="pb-4 pt-6">
-					<CompareCard
-						title={compare.title}
-						description={compare.description}
-						ctaLabel={compare.ctaLabel}
-						onCtaClick={() => {}}
+					<div className="pb-4 pt-6">
+						<CompareCard
+							title={compare.title}
+							description={compare.description}
+							ctaLabel={compare.ctaLabel}
+							onCtaClick={() => setDrawerOpen(true)}
+						/>
+					</div>
+	
+					{/* ── Bottom Drawer — compare offers (extracted component) ── */}
+					<GarantiesCompareDrawer
+						open={drawerOpen}
+						onOpenChange={setDrawerOpen}
 					/>
-				</div>
 
 				{/* ── Bottom CTA ── */}
 				<div className="pb-8 pt-4">

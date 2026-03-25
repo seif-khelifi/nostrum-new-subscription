@@ -270,14 +270,14 @@ export function GarantiesVariantA() {
 				</div>
 
 				{/* ── Compare card — reuses CompareCard from devis ── */}
-				<div className="pb-4 pt-6">
-					<CompareCard
-						title={compare.title}
-						description={compare.description}
-						ctaLabel={compare.ctaLabel}
-						onCtaClick={() => {}}
-					/>
-				</div>
+					<div className="pb-4 pt-6">
+						<CompareCard
+							title={compare.title}
+							description={compare.description}
+							ctaLabel={compare.ctaLabel}
+							onCtaClick={() => goToStepById("offre_comparateur")}
+						/>
+					</div>
 
 				{/* ── Bottom CTA — #9000E3 bg, ctaPurple variant with override ── */}
 				<div className="pb-8 pt-4">

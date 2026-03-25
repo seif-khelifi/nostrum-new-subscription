@@ -33,6 +33,7 @@ export type StepId =
 	// placeholders for future groups
 	| "devis_placeholder"
 	| "garanties"
+	| "offre_comparateur"
 	// souscription steps
 	| "socialSecurity"
 	| "resilierMutuelle"
@@ -92,6 +93,7 @@ export const STEP_GROUPS: StepGroup[] = [
 		steps: [
 			{ id: "devis_placeholder", label: "Devis" },
 			{ id: "garanties", label: "Garanties" },
+			{ id: "offre_comparateur", label: "Offre Comparateur" },
 		],
 	},
 	{

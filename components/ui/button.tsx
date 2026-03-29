@@ -94,6 +94,22 @@ const buttonVariants = cva(
             "hover:bg-[#d4a0f0]",
             "active:translate-y-[1px]",
           ].join(" "),
+
+        callToAdvisor:
+          [
+            "inline-flex items-center gap-2 rounded-full",
+            "bg-[#490076] px-4 py-2.5",
+            "text-sm font-medium text-white whitespace-nowrap",
+            "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
+          ].join(" "),
+
+        closeComparateur:
+          [
+            "inline-flex items-center gap-2 rounded-full",
+            "bg-[#490076] py-1.5 pl-4 pr-1.5",
+            "text-sm font-medium text-[#F3E5FA] whitespace-nowrap",
+            "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
+          ].join(" "),
       },
 
       size: {

@@ -122,9 +122,9 @@ export function GarantiesVariantB() {
 							<span className="text-[1.35rem]" aria-hidden>
 								{cat.icon}
 							</span>
-							<h4 className="text-[1.35rem] font-bold leading-tight text-[#490076]">
+							<p className="text-[1.35rem] font-bold leading-tight text-[#490076]">
 								{cat.title}
-							</h4>
+							</p>
 						</div>
 
 						{/* Subtitle — indented to align with title text */}

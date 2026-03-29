@@ -4,3 +4,4 @@ export { GarantiesVariantA } from "./garanties-variant-a";
 export { GarantiesVariantB } from "./garanties-variant-b";
 export { ComparateurVariantA } from "./comparateur-variant-a";
 export { ComparateurVariantB } from "./comparateur-variant-b";
+export { OptionsStep } from "./options";

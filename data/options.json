@@ -1,0 +1,66 @@
+{
+  "decouverte": [
+    {
+      "id": "telmed",
+      "title": "Téléconsultation illimitée",
+      "price": "4,50€",
+      "description": "Accès 24/7 à un médecin généraliste ou spécialiste.",
+      "detailedDescription": "Plus besoin d'attendre pour avoir un rendez-vous. Avec cette option, consultez un médecin en visio 24h/24 et 7j/7, recevez une ordonnance directement sur votre smartphone et bénéficiez d'un suivi médical sans avance de frais."
+    }
+  ],
+  "bronze": [
+    {
+      "id": "telmed",
+      "title": "Téléconsultation illimitée",
+      "price": "4,50€",
+      "description": "Accès 24/7 à un médecin généraliste ou spécialiste.",
+      "detailedDescription": "Plus besoin d'attendre pour avoir un rendez-vous. Avec cette option, consultez un médecin en visio 24h/24 et 7j/7, recevez une ordonnance directement sur votre smartphone et bénéficiez d'un suivi médical sans avance de frais."
+    },
+    {
+      "id": "med-douce",
+      "title": "Pack Médecines Douces",
+      "price": "6,00€",
+      "description": "Jusqu'à 150€/an pour l'ostéopathie, diététique, etc.",
+      "detailedDescription": "Prenez soin de vous au naturel. Cette option vous offre un forfait de 150€ par an pour rembourser vos séances chez l'ostéopathe, le chiropracteur, le diététicien ou encore l'acupuncteur."
+    }
+  ],
+  "silver": [
+    {
+      "id": "telmed",
+      "title": "Téléconsultation illimitée",
+      "price": "4,50€",
+      "description": "Accès 24/7 à un médecin.",
+      "detailedDescription": "Plus besoin d'attendre pour avoir un rendez-vous. Avec cette option, consultez un médecin en visio 24h/24 et 7j/7, recevez une ordonnance directement sur votre smartphone et bénéficiez d'un suivi médical sans avance de frais."
+    },
+    {
+      "id": "med-douce",
+      "title": "Pack Médecines Douces Plus",
+      "price": "8,50€",
+      "description": "Jusqu'à 250€/an pour les praticiens non conventionnés.",
+      "detailedDescription": "Idéal pour les adeptes des médecines douces. Le forfait est étendu à 250€ par an, couvrant un large éventail de spécialités (ostéopathie, psychologie, acupuncture...)."
+    },
+    {
+      "id": "chambre-part",
+      "title": "Chambre Particulière",
+      "price": "12,00€",
+      "description": "Remboursement jusqu'à 80€/jour en cas d'hospitalisation.",
+      "detailedDescription": "En cas de pépin, reposez-vous confortablement. Nous prenons en charge les frais de chambre individuelle jusqu'à 80€ par jour, sans limite de durée."
+    }
+  ],
+  "gold": [
+    {
+      "id": "bien-etre",
+      "title": "Pack Bien-Être Premium",
+      "price": "15,00€",
+      "description": "Cure thermale, spa thérapeutique, accompagnement psy.",
+      "detailedDescription": "Parce que la santé passe aussi par le bien-être. Bénéficiez d'avantages exclusifs pour vos séjours en thalassothérapie, cures thermales et un accès prioritaire à notre réseau Mieux-Être."
+    },
+    {
+      "id": "sport",
+      "title": "Licence Sportive",
+      "price": "5,00€",
+      "description": "Participation annuelle à vos frais de club de sport.",
+      "detailedDescription": "Nous encourageons la pratique sportive ! Recevez un forfait de 50€ par an sur présentation de votre licence sportive ou de votre abonnement en salle de sport."
+    }
+  ]
+}

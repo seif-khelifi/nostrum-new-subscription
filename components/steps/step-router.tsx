@@ -25,7 +25,7 @@ import {
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { OnboardingStep } from "./onboarding-step";
-import { DevisVariantA, DevisVariantB, GarantiesVariantA, GarantiesVariantB, ComparateurVariantA, ComparateurVariantB } from "./devis";
+import { DevisVariantA, DevisVariantB, GarantiesVariantA, GarantiesVariantB, ComparateurVariantA, ComparateurVariantB, OptionsStep } from "./devis";
 
 /* ------------------------------------------------------------------ */
 /*  Variant-aware devis step                                          */
@@ -113,6 +113,9 @@ const STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 
 	// Offre comparateur — compare offers side by side
 	offre_comparateur: ComparateurStep,
+
+	// Options
+	options: OptionsStep,
 
 	// Placeholder steps — will be replaced with real screens later
 	souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,

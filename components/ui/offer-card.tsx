@@ -335,6 +335,7 @@ export interface CompareCardProps extends Omit<React.ComponentProps<"div">, "tit
   description: React.ReactNode
   ctaLabel: React.ReactNode
   onCtaClick?: () => void
+  buttonClassName?: string
 }
 
 function CompareCard({
@@ -343,6 +344,7 @@ function CompareCard({
   description,
   ctaLabel,
   onCtaClick,
+  buttonClassName,
   ...props
 }: CompareCardProps) {
   return (
@@ -372,7 +374,8 @@ function CompareCard({
             "w-full rounded-[20px] border-0 bg-white text-[#490076]",
             "h-[48px] text-sm font-semibold",
             "shadow-none hover:bg-white/90",
-            "lg:h-11"
+            "lg:h-11",
+            buttonClassName
           )}
           onClick={onCtaClick}
         >

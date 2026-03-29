@@ -152,7 +152,7 @@ export function DevisVariantA() {
 			</div>
 
 			{/* ─── Desktop layout (lg+) ─── */}
-			<div className="hidden lg:block px-6">
+			<div className="hidden lg:block max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
 				{/* 4-column grid — equal-width cards, stretch to match heights */}
 				<div className="grid grid-cols-4 gap-6 items-stretch">
 					{/* Recommended offer — black bg section spanning 1 col */}

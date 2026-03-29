@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowRight, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import { ArrowRight, ChevronRight, Check } from "lucide-react";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
@@ -107,15 +108,15 @@ export function GarantiesVariantB() {
 	};
 
 	/** Render all 5 category sections for a given tab key */
-	const renderTabCategories = (tabKey: "sante" | "bienetre") => {
+	const renderTabCategories = (tabKey: "sante" | "bienetre", isDesktop = false) => {
 		const breakdowns: TabBreakdowns = offerTabs[tabKey] ?? {};
 		return (
-			<div className="-mx-4 sm:-mx-6">
+			<div className={isDesktop ? "flex flex-col gap-4" : "-mx-4 sm:-mx-6"}>
 				{categories.map((cat, idx) => (
 					<div
 						key={cat.key}
-						className="px-4 py-5 sm:px-6"
-						style={{ backgroundColor: idx % 2 === 0 ? "#FAF4FB" : "#FFFFFF" }}
+						className={isDesktop ? "bg-white rounded-[24px] p-6 shadow-sm" : "px-4 py-5 sm:px-6"}
+						style={isDesktop ? undefined : { backgroundColor: idx % 2 === 0 ? "#FAF4FB" : "#FFFFFF" }}
 					>
 						{/* Icon + title */}
 						<div className="flex items-center gap-2.5">
@@ -266,11 +267,114 @@ export function GarantiesVariantB() {
 				</div>
 			</div>
 
-			{/* ─── Desktop placeholder (lg+) ─── */}
-			<div className="hidden items-center justify-center py-16 lg:flex flex-col gap-4">
-				<p className="text-lg text-[#444444]">
-					Version desktop à venir — veuillez utiliser la version mobile.
-				</p>
+			{/* ─── Desktop layout (lg+) ─── */}
+			<div className="hidden lg:grid lg:grid-cols-12 lg:gap-8 max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
+				{/* ── Left Column ── */}
+				<div className="lg:col-span-4 flex flex-col gap-6">
+					{/* "Votre offre" card */}
+					<div className="bg-white rounded-[24px] overflow-hidden flex flex-col pt-6 px-6 pb-6 shadow-sm border border-[#E9E3DD]">
+						<h1 className="font-bold text-black mb-6">Votre offre</h1>
+						<div className="flex items-start justify-between gap-3 mb-6">
+							<div className="min-w-0">
+								<p className="capitalize font-bold text-black text-[1.5rem] leading-none mb-2">
+									{planName}
+								</p>
+								<div className="mt-1 flex items-end gap-0.5">
+									<span className="font-bold tracking-tight text-black text-[2rem] leading-none">
+										{offer?.price ?? ""}
+									</span>
+									<span className="font-semibold text-black text-sm mb-0.5">
+										/mois
+									</span>
+								</div>
+							</div>
+							<div className="shrink-0">
+								<Image src="/garanties/Logo-produit.svg" alt="Product logo" width={48} height={48} />
+							</div>
+						</div>
+
+						<p className="text-[#1D1B20] text-[0.95rem] leading-relaxed mb-8">
+							Remboursement renforcé sur les soins courants Couverture médecine douce incluse Tarifs ajustés selon votre profil Flexibilité si vos besoins évoluent
+						</p>
+
+						<div className="mt-auto flex flex-col gap-3">
+							<Button
+								variant="ghost"
+								className="w-full h-[52px] rounded-[24px] bg-[#1D1B201A] text-black text-sm font-semibold hover:bg-[#1D1B202A] transition-colors"
+							>
+								Voir le tableau de garantie
+							</Button>
+							<Button
+								variant="ctaPurple"
+								className="w-full h-[52px] rounded-[24px] px-6 text-sm font-semibold"
+								onClick={handleChooseOffer}
+							>
+								Choisir cette offre
+								<Check className="ml-2 h-5 w-5" />
+							</Button>
+						</div>
+					</div>
+
+					{/* "Comparer nos offres" card */}
+					<div className="mt-2 text-left">
+						<div className="bg-black w-full overflow-hidden rounded-[24px] p-6 flex flex-col gap-4">
+							<h3 className="text-xl font-bold leading-tight text-white">
+								Comparer nos offres
+							</h3>
+							<p className="text-sm leading-snug text-white/90">
+								Découvrez en un clin d'œil l'offre Nostrum qui optimise le mieux vos remboursements.
+							</p>
+							<Button
+								variant="default"
+								className="w-full rounded-[20px] border-0 bg-white text-black h-[48px] text-sm font-semibold shadow-none hover:bg-white/90 lg:h-11"
+								onClick={() => setDrawerOpen(true)}
+							>
+								Je compare
+								<ArrowRight className="ml-2 h-4 w-4" />
+							</Button>
+						</div>
+					</div>
+				</div>
+
+				{/* ── Right Column ── */}
+				<div className="lg:col-span-8 flex flex-col gap-6">
+					{/* "Vos remboursements" card */}
+					<div className="bg-black rounded-[24px] p-6 text-white flex flex-col justify-start min-h-[140px]">
+						<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight">
+							Vos Garanties
+						</h1>
+					</div>
+
+					{/* Tabs area */}
+					<div className="w-full mt-2">
+						<Tabs defaultValue="sante" className="w-full">
+							<TabsList variant="essential" className="mb-6 w-full max-w-sm">
+								<TabsTrigger
+									value="sante"
+									variant="essential"
+									icon={<span aria-hidden>💘</span>}
+								>
+									Santé essentielle
+								</TabsTrigger>
+								<TabsTrigger
+									value="bienetre"
+									variant="essential"
+									icon={<span aria-hidden>🧠</span>}
+								>
+									Bien-être &amp; équilibre
+								</TabsTrigger>
+							</TabsList>
+
+							<TabsContent value="sante">
+								{renderTabCategories("sante", true)}
+							</TabsContent>
+
+							<TabsContent value="bienetre">
+								{renderTabCategories("bienetre", true)}
+							</TabsContent>
+						</Tabs>
+					</div>
+				</div>
 			</div>
 		</>
 	);

@@ -23,6 +23,9 @@ export function useFormErrorToast(
   const prevSubmitCount = useRef(0);
 
   useEffect(() => {
+    // On mobile (< sm = 640px) skip toasts — the inline sentence in StepScreen handles it
+    if (typeof window !== "undefined" && window.innerWidth < 640) return;
+
     // Nothing to show
     if (!errKey) {
       prevKey.current = "";

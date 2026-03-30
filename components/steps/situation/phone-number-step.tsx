@@ -84,6 +84,7 @@ export function PhoneNumberStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
+        errors={errors}
       >
         {/* No additional children — form is in subtitle */}
         <></>

@@ -251,6 +251,7 @@ export function AddressStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onManualSubmit)()}
         isForm
+        errors={errors}
       >
         <button
           type="button"

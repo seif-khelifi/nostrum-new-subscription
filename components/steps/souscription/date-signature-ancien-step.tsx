@@ -71,6 +71,7 @@ export function DateSignatureAncienStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
+        errors={errors}
       >
         {/* No additional children — form is in subtitle */}
         <></>

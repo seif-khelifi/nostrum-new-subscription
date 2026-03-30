@@ -2,6 +2,7 @@
 
 import { type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
+import { type FieldErrors } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 export interface StepScreenProps {
@@ -21,6 +22,8 @@ export interface StepScreenProps {
   isForm?: boolean;
   /** Optional custom action button that replaces the default "Suivant" button */
   customAction?: ReactNode;
+  /** Optional form errors to display right before the action button */
+  errors?: FieldErrors;
 }
 
 /**
@@ -42,6 +45,7 @@ export function StepScreen({
   children,
   isForm,
   customAction,
+  errors,
 }: StepScreenProps) {
   return (
     <div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0">
@@ -54,6 +58,12 @@ export function StepScreen({
           <div className="font-semibold text-base sm:text-lg text-[#1D1B20]">
             {subtitle}
           </div>
+        )}
+        {/* Mobile-only inline error — shows below subtitle, hidden on sm+ where toasts are used */}
+        {errors && Object.keys(errors).length > 0 && (
+          <p className="sm:hidden text-sm font-medium text-red-500">
+            {(Object.values(errors)[0]?.message as string | undefined) ?? "Veuillez corriger les erreurs."}
+          </p>
         )}
       </div>
 
@@ -70,10 +80,6 @@ export function StepScreen({
             type={isForm ? "submit" : "button"}
             variant="ctaPurple"
             size="cta"
-            aria-disabled={!canProceed}
-            className={
-              !canProceed ? "opacity-50 pointer-events-auto" : undefined
-            }
             onClick={isForm ? undefined : onNext}
           >
             Suivant

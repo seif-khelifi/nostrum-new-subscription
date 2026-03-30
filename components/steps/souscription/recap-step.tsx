@@ -52,6 +52,7 @@ export function RecapStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
+        errors={errors}
       >
         {/* Recap phrase with inline pill fields */}
         <div className="flex flex-wrap items-center gap-2 font-semibold text-base sm:text-lg text-[#1D1B20]">

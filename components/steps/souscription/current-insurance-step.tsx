@@ -116,6 +116,7 @@ export function CurrentInsuranceStep() {
         canProceed={canProceed}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
+        errors={errors}
       >
         {/* Mutuelle search */}
         <SearchInput

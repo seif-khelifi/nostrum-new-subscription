@@ -54,6 +54,7 @@ export function EnvoiSmsStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
+        errors={errors}
         customAction={
           isComplete ? (
             <Button type="submit" variant="ctaPurple" size="cta">

@@ -3,6 +3,7 @@
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { X, ArrowLeft, Info as InfoIcon } from "lucide-react";
 import { OfferCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/components/ui/offer-card";
@@ -271,7 +272,7 @@ export function ComparateurVariantA() {
 				<div className="lg:col-span-4 flex flex-col gap-6">
 					
 					{/* "Vos remboursements" card with OfferCards */}
-					<div className="bg-white rounded-[24px] overflow-hidden flex flex-col pt-6 px-6 pb-6 shadow-sm border border-[#E9E3DD]">
+					<Card variant="comparateurOutline">
 						<h1 className="font-bold text-black mb-6 text-xl text-center md:text-left">Vos remboursements</h1>
 						
 						{/* 2×2 offer switch grid */}
@@ -331,15 +332,14 @@ export function ComparateurVariantA() {
 						{/* "Revenir aux offres" button */}
 						<div className="mt-auto">
 							<Button
-								variant="ghost"
-								className="w-full h-[52px] rounded-[24px] bg-[#1D1B201A] text-black text-sm font-semibold hover:bg-[#1D1B202A] transition-colors flex items-center justify-center gap-2"
+								variant="revenirOffres"
 								onClick={() => goToStepById("garanties")}
 							>
 								<ArrowLeft className="h-4 w-4" />
 								Revenir aux offres
 							</Button>
 						</div>
-					</div>
+					</Card>
 
 					{/* AlertBanner Info Popup */}
 					<div className="mt-2 text-left">
@@ -355,11 +355,11 @@ export function ComparateurVariantA() {
 				{/* ── Right Column ── */}
 				<div className="lg:col-span-8 flex flex-col gap-6">
 					{/* "Votre comparatif" card */}
-					<div className="bg-black rounded-[24px] p-6 text-white flex flex-col justify-start min-h-[140px]">
+					<Card variant="dark" className="flex flex-col justify-start min-h-[140px]">
 						<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight">
 							Votre comparatif
 						</h1>
-					</div>
+					</Card>
 
 					{/* Tabs area */}
 					<div className="w-full mt-2">

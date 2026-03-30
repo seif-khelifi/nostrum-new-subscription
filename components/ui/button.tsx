@@ -109,6 +109,18 @@ const buttonVariants = cva(
           "text-sm font-medium text-[#F3E5FA] whitespace-nowrap",
           "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
         ].join(" "),
+
+        ghostCircle: [
+          "inline-flex items-center justify-center rounded-full transition-colors",
+          "bg-black/5 hover:bg-black/10",
+        ].join(" "),
+
+        revenirOffres: [
+          "h-[52px] w-full rounded-[24px]",
+          "bg-[#1D1B201A] text-black text-sm font-semibold",
+          "hover:bg-[#1D1B202A] transition-colors",
+          "flex items-center justify-center gap-2",
+        ].join(" "),
       },
 
       size: {

@@ -5,7 +5,6 @@ import { ArrowLeft, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useStepper } from "@/context/StepperContext";
-import "./mobile-step-navbar.css";
 
 export interface MobileStepNavbarProps {
 	className?: string;
@@ -37,21 +36,20 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 	const { sidebarGroupId, goToGroup, isFirstStep, back } = useStepper();
 
 	return (
-		<header className={cn("mobile-step-navbar", className)}>
+		<header className={cn("bg-[#490076] text-white p-4 border-b border-white/10", className)}>
 			{/* ── Top row: back button + step pills ─────────── */}
-			<div className="mobile-step-navbar__top">
+			<div className="flex items-center gap-3">
 				<Button
-					size="icon"
-					variant="ghost"
+					variant="ghostCircle"
 					disabled={isFirstStep}
 					aria-label="Retour"
 					onClick={back}
-					className="mobile-step-navbar__back hover:bg-white/20 hover:text-white active:bg-white/30"
+					className="h-9 w-9 shrink-0 bg-white/10 hover:bg-white/20 hover:text-white active:bg-white/30 text-white"
 				>
 					<ArrowLeft size={18} />
 				</Button>
 
-				<div className="mobile-step-navbar__steps">
+				<div className="flex gap-2 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
 					{stepPills.map((pill) => (
 						<Button
 							key={pill.groupId}
@@ -74,24 +72,24 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 			</div>
 
 			{/* ── CTA card: "Parler à un conseiller" ────────── */}
-			<div className="mobile-step-navbar__cta">
+			<div className="mt-4 flex items-center justify-between py-2">
 				<div>
-					<p className="mobile-step-navbar__cta-title">
+					<p className="font-semibold text-[15px] m-0">
 						Parler à un conseiller
 					</p>
-					<p className="mobile-step-navbar__cta-sub">
+					<p className="text-[13px] opacity-75 mt-0.5 mb-0">
 						On vous rappelle dans la journée
 					</p>
 				</div>
 
-				<div className="mobile-step-navbar__cta-right">
+				<div className="flex items-center">
 					{/* Advisor pill illustration */}
 					<Image
 						src="/navbarMobile/pill.svg"
 						alt="Conseillers"
 						width={80}
 						height={40}
-						className="mobile-step-navbar__pill-illustration"
+						className="h-10 w-auto object-contain shrink-0"
 						unoptimized
 					/>
 
@@ -99,7 +97,7 @@ export function MobileStepNavbar({ className }: MobileStepNavbarProps) {
 					<Button
 						variant="mobileCallPill"
 						asChild
-						className="mobile-step-navbar__call"
+						className="shrink-0 -ml-2.5 relative z-10"
 					>
 						<a
 							href="tel:+33000000000"

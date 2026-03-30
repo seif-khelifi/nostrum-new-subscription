@@ -42,8 +42,7 @@ export function ComparateurVariantB() {
 
 			{/* CTA back */}
 			<Button
-				variant="ctaPurple"
-				className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold bg-[#9000E3] hover:bg-[#7B00C4]"
+				variant="revenirOffres"
 				onClick={() => goToStepById("garanties")}
 			>
 				Retour aux garanties

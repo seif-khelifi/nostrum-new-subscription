@@ -3,6 +3,7 @@
 import { ArrowLeft, Phone } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
 import { useStepper } from "@/context/StepperContext"
 
 export interface StepNavbarProps {
@@ -33,19 +34,15 @@ export function StepNavbar({ className }: StepNavbarProps) {
 			)}
 		>
 			{/* Back button — slightly oval, bigger */}
-			<button
-				type="button"
+			<Button
+				variant="ghostCircle"
 				aria-label="Retour"
 				disabled={isFirstStep}
 				onClick={back}
-				className={cn(
-					"inline-flex items-center justify-center rounded-full transition-colors",
-					"h-10 w-12 bg-black/5 hover:bg-black/10",
-					"disabled:opacity-40 disabled:pointer-events-none",
-				)}
+				className="h-10 w-12 disabled:opacity-40 disabled:pointer-events-none"
 			>
 				<ArrowLeft className="h-4 w-4 text-[#1D1B20]" />
-			</button>
+			</Button>
 
 			{/* Progress bar — stretches to fill remaining space with padding for CTA */}
 				<div className="flex-1 px-8">
@@ -53,25 +50,19 @@ export function StepNavbar({ className }: StepNavbarProps) {
 			</div>
 
 			{/* CTA: "Parler à un conseiller" */}
-			<a
-				href="tel:+33000000000"
-				className={cn(
-					"inline-flex items-center gap-2 rounded-full",
-					"bg-[#490076] px-4 py-2.5",
-					"text-sm font-medium text-white whitespace-nowrap",
-					"transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
-				)}
-			>
-				<span>Parler à un conseiller</span>
-				<span
-					className={cn(
-						"inline-flex h-8 w-8 items-center justify-center rounded-full",
-						"bg-[#CE99FF]",
-					)}
-				>
-					<Phone className="h-3.5 w-3.5" />
-				</span>
-			</a>
+			<Button variant="callToAdvisor" asChild>
+				<a href="tel:+33000000000">
+					<span>Parler à un conseiller</span>
+					<span
+						className={cn(
+							"inline-flex h-8 w-8 items-center justify-center rounded-full",
+							"bg-[#CE99FF]",
+						)}
+					>
+						<Phone className="h-3.5 w-3.5 text-[#490076]" />
+					</span>
+				</a>
+			</Button>
 		</header>
 	)
 }

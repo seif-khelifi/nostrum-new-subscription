@@ -11,7 +11,7 @@ export interface StepScreenProps {
   subtitle?: ReactNode;
   /** Optional info card (AlertBanner) displayed between heading and content */
   infoCard?: ReactNode;
-  /** Whether the "Suivant" button should be enabled */
+  /** Whether the form is currently valid (controls visual styling of the button) */
   canProceed: boolean;
   /** Called when the user clicks "Suivant" */
   onNext: () => void;
@@ -28,6 +28,10 @@ export interface StepScreenProps {
  * title → subtitle → info card → selection options → "Suivant" button (right-aligned)
  *
  * Positioned to the left of the content area with offset from the sidebar.
+ *
+ * The "Suivant" button is never truly disabled — clicking it when the form
+ * is invalid triggers validation so error toasts are shown. The button uses
+ * a muted visual style (`aria-disabled`) when `canProceed` is false.
  */
 export function StepScreen({
   title,
@@ -66,7 +70,10 @@ export function StepScreen({
             type={isForm ? "submit" : "button"}
             variant="ctaPurple"
             size="cta"
-            disabled={!canProceed}
+            aria-disabled={!canProceed}
+            className={
+              !canProceed ? "opacity-50 pointer-events-auto" : undefined
+            }
             onClick={isForm ? undefined : onNext}
           >
             Suivant

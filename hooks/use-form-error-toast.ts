@@ -6,33 +6,46 @@ import { toast } from "sonner";
 
 /**
  * Shows a Sonner toast whenever new validation errors appear.
- * Tracks which error messages have already been shown to avoid duplicates.
  *
- * Pass the serialised error key as the second argument so React can detect changes
- * (the `errors` proxy object from react-hook-form doesn't change reference).
+ * Tracks which error messages have already been shown so the same set
+ * isn't toasted twice in a row, but *will* re-toast if the user
+ * triggers validation again (e.g. by clicking "Suivant").
+ *
+ * `submitCount` from `formState` is used to detect re-submissions
+ * so the toast fires even when the error set hasn't changed.
  */
-export function useFormErrorToast(errors: FieldErrors, errorKey: string) {
-	const prevKey = useRef("");
+export function useFormErrorToast(
+  errors: FieldErrors,
+  errKey: string,
+  submitCount: number,
+) {
+  const prevKey = useRef("");
+  const prevSubmitCount = useRef(0);
 
-	useEffect(() => {
-		// Nothing to show
-		if (!errorKey) {
-			prevKey.current = "";
-			return;
-		}
+  useEffect(() => {
+    // Nothing to show
+    if (!errKey) {
+      prevKey.current = "";
+      return;
+    }
 
-		// Only show toast when errors actually changed
-		if (errorKey === prevKey.current) return;
-		prevKey.current = errorKey;
+    // Show toast when errors changed OR when a new submit attempt occurred
+    const errorsChanged = errKey !== prevKey.current;
+    const newSubmit = submitCount > prevSubmitCount.current;
 
-		const messages = Object.values(errors)
-			.map((e) => e?.message)
-			.filter(Boolean) as string[];
+    if (!errorsChanged && !newSubmit) return;
 
-		if (messages.length > 0) {
-			toast.error(messages.join(" • "), { duration: 4000 });
-		}
-	}, [errors, errorKey]);
+    prevKey.current = errKey;
+    prevSubmitCount.current = submitCount;
+
+    const messages = Object.values(errors)
+      .map((e) => e?.message)
+      .filter(Boolean) as string[];
+
+    if (messages.length > 0) {
+      toast.error(messages.join(" • "), { duration: 4000 });
+    }
+  }, [errors, errKey, submitCount]);
 }
 
 /**
@@ -40,8 +53,8 @@ export function useFormErrorToast(errors: FieldErrors, errorKey: string) {
  * Use this as the second argument to useFormErrorToast.
  */
 export function errorKey(errors: FieldErrors): string {
-	return Object.entries(errors)
-		.map(([k, v]) => `${k}:${v?.message ?? ""}`)
-		.sort()
-		.join("|");
+  return Object.entries(errors)
+    .map(([k, v]) => `${k}:${v?.message ?? ""}`)
+    .sort()
+    .join("|");
 }

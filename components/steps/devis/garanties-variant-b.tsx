@@ -268,8 +268,9 @@ export function GarantiesVariantB() {
 			</div>
 
 			{/* ─── Desktop layout (lg+) ─── */}
-			<div className="hidden lg:grid lg:grid-cols-12 lg:gap-8 max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
-				{/* ── Left Column ── */}
+			<div className="hidden lg:flex w-full bg-[#F6F4F0] min-h-screen">
+				<div className="grid grid-cols-12 gap-8 max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
+					{/* ── Left Column ── */}
 				<div className="lg:col-span-4 flex flex-col gap-6">
 					{/* "Votre offre" card */}
 					<div className="bg-white rounded-[24px] overflow-hidden flex flex-col pt-6 px-6 pb-6 shadow-sm border border-[#E9E3DD]">
@@ -375,6 +376,7 @@ export function GarantiesVariantB() {
 						</Tabs>
 					</div>
 				</div>
+			</div>
 			</div>
 		</>
 	);

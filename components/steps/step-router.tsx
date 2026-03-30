@@ -63,7 +63,7 @@ function GarantiesStep() {
  */
 function ComparateurStep() {
 	const { devisVariant } = useStepper();
-	return devisVariant === "b" ? <ComparateurVariantB /> : <ComparateurVariantA />;
+	return devisVariant === "b" ? <ComparateurVariantA /> : <ComparateurVariantA />;
 }
 
 /* ------------------------------------------------------------------ */

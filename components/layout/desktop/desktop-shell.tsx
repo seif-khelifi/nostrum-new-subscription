@@ -62,7 +62,7 @@ export function DesktopShell({
 					</header>
 				)}
 
-				<main data-slot="desktop-main" className={cn("flex-1 overflow-y-auto p-6", hideSidebar && "bg-white")}>
+				<main data-slot="desktop-main" className={cn("flex-1 overflow-y-auto", hideSidebar ? "p-0" : "p-6")}>
 					{children}
 				</main>
 			</div>

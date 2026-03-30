@@ -1,8 +1,8 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import { Slot } from "radix-ui"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { Slot } from "radix-ui";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   [
@@ -29,87 +29,86 @@ const buttonVariants = cva(
           "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
         link: "text-primary underline-offset-4 hover:underline",
 
-        linkChevron:
-          [
-            "h-auto px-0 py-0 border-transparent bg-transparent shadow-none",
-            "text-sm font-medium text-[#490076]",
-            "transition-opacity hover:opacity-80 hover:bg-transparent",
-            "active:translate-y-0",
-            "gap-1",
-          ].join(" "),
+        linkChevron: [
+          "h-auto px-0 py-0 border-transparent bg-transparent shadow-none",
+          "text-sm font-medium text-[#490076]",
+          "transition-opacity hover:opacity-80 hover:bg-transparent",
+          "active:translate-y-0",
+          "gap-1",
+        ].join(" "),
 
-        ctaPurple:
-          [
-            "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
-            "bg-[#490076] text-white text-sm sm:text-base font-semibold",
-            "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
-            "hover:bg-[#5a0a8f]",
-            "active:translate-y-[1px]",
-            "disabled:bg-[#490076]/40",
-          ].join(" "),
+        ctaPurple: [
+          "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+          "bg-[#490076] text-white text-sm sm:text-base font-semibold",
+          "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
+          "hover:bg-[#5a0a8f]",
+          "active:translate-y-[1px]",
+          "disabled:bg-[#490076]/40",
+        ].join(" "),
 
-        ctaPurpleSquared:
-          [
-            "h-12 sm:h-14 rounded-3xl px-6 sm:px-8 border-transparent",
-            "bg-[#490076] text-white text-base sm:text-lg font-semibold",
-            "shadow-[0_2px_4px_rgba(0,0,0,0.12)]",
-            "hover:bg-[#5a0a8f]",
-            "active:translate-y-[1px]",
-            "disabled:bg-[#490076]/40",
-          ].join(" "),
+        ctaPurpleSquared: [
+          "h-12 sm:h-14 rounded-3xl px-6 sm:px-8 border-transparent",
+          "bg-[#490076] text-white text-base sm:text-lg font-semibold",
+          "shadow-[0_2px_4px_rgba(0,0,0,0.12)]",
+          "hover:bg-[#5a0a8f]",
+          "active:translate-y-[1px]",
+          "disabled:bg-[#490076]/40",
+        ].join(" "),
 
-        ctaRenvoyer:
-          [
-            "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
-            "bg-[#F6F0E6] text-[#660053] text-sm sm:text-base font-semibold",
-            "shadow-none",
-            "hover:bg-[#EDE7DA]",
-            "active:translate-y-[1px]",
-            "disabled:bg-[#F6F0E6]/60 disabled:text-[#660053]/50",
-          ].join(" "),
+        ctaRenvoyer: [
+          "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+          "bg-[#F6F0E6] text-[#660053] text-sm sm:text-base font-semibold",
+          "shadow-none",
+          "hover:bg-[#EDE7DA]",
+          "active:translate-y-[1px]",
+          "disabled:bg-[#F6F0E6]/60 disabled:text-[#660053]/50",
+        ].join(" "),
 
-        selectOption:
-          [
-            "h-10 sm:h-12 rounded-[16px] sm:rounded-[20px] px-4 sm:px-5 text-sm sm:text-base font-medium",
-            "border bg-white text-[#490076]",
-            "border-input shadow-xs",
-            "hover:border-[#C86FFE]/70 hover:bg-[#faf7fc]",
-            "active:scale-[0.985]",
-          ].join(" "),
+        selectOption: [
+          "h-10 sm:h-12 rounded-[16px] sm:rounded-[20px] px-4 sm:px-5 text-sm sm:text-base font-medium",
+          "border bg-white text-[#490076]",
+          "border-input shadow-xs",
+          "hover:border-[#C86FFE]/70 hover:bg-[#faf7fc]",
+          "active:scale-[0.985]",
+        ].join(" "),
 
-        mobileStepPill:
-          [
-            "h-auto gap-1 rounded-full px-3.5 py-2 border-transparent",
-            "bg-transparent text-white text-sm font-semibold opacity-65",
-            "whitespace-nowrap shadow-none",
-            "transition-all duration-200 ease-out",
-            "hover:opacity-80 hover:bg-white/10",
-            "active:translate-y-0",
-          ].join(" "),
+        mobileStepPill: [
+          "h-auto gap-1 rounded-full px-3.5 py-2 border-transparent",
+          "bg-transparent text-white text-sm font-semibold opacity-65",
+          "whitespace-nowrap shadow-none",
+          "transition-all duration-200 ease-out",
+          "hover:opacity-80 hover:bg-white/10",
+          "active:translate-y-0",
+        ].join(" "),
 
-        mobileCallPill:
-          [
-            "h-10 rounded-full px-3 border-2 border-[#CE99FF]",
-            "bg-[#E0B1FF] text-white shadow-none",
-            "hover:bg-[#d4a0f0]",
-            "active:translate-y-[1px]",
-          ].join(" "),
+        mobileCallPill: [
+          "h-10 rounded-full px-3 border-2 border-[#CE99FF]",
+          "bg-[#E0B1FF] text-white shadow-none",
+          "hover:bg-[#d4a0f0]",
+          "active:translate-y-[1px]",
+        ].join(" "),
 
-        callToAdvisor:
-          [
-            "inline-flex items-center gap-2 rounded-full",
-            "bg-[#490076] px-4 py-2.5",
-            "text-sm font-medium text-white whitespace-nowrap",
-            "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
-          ].join(" "),
+        onboardingAdvisor: [
+          "inline-flex items-center gap-2 rounded-full",
+          "bg-[#C86FFE] px-4 py-2",
+          "text-xs font-semibold text-white whitespace-nowrap",
+          "shadow-none border-transparent",
+          "transition-colors hover:bg-[#b85fee] active:translate-y-px",
+        ].join(" "),
 
-        closeComparateur:
-          [
-            "inline-flex items-center gap-2 rounded-full",
-            "bg-[#490076] py-1.5 pl-4 pr-1.5",
-            "text-sm font-medium text-[#F3E5FA] whitespace-nowrap",
-            "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
-          ].join(" "),
+        callToAdvisor: [
+          "inline-flex items-center gap-2 rounded-full",
+          "bg-[#490076] px-4 py-2.5",
+          "text-sm font-medium text-white whitespace-nowrap",
+          "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
+        ].join(" "),
+
+        closeComparateur: [
+          "inline-flex items-center gap-2 rounded-full",
+          "bg-[#490076] py-1.5 pl-4 pr-1.5",
+          "text-sm font-medium text-[#F3E5FA] whitespace-nowrap",
+          "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
+        ].join(" "),
       },
 
       size: {
@@ -147,15 +146,13 @@ const buttonVariants = cva(
       {
         variant: "selectOption",
         selected: false,
-        className: [
-          "border-[#E9E3DD]",
-          "shadow-none",
-        ].join(" "),
+        className: ["border-[#E9E3DD]", "shadow-none"].join(" "),
       },
       {
         variant: "mobileStepPill",
         selected: true,
-        className: "bg-white text-[#490076] opacity-100 hover:bg-white/90 hover:opacity-100",
+        className:
+          "bg-white text-[#490076] opacity-100 hover:bg-white/90 hover:opacity-100",
       },
     ],
 
@@ -164,8 +161,8 @@ const buttonVariants = cva(
       size: "default",
       selected: false,
     },
-  }
-)
+  },
+);
 
 function Button({
   className,
@@ -176,9 +173,9 @@ function Button({
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
-    asChild?: boolean
+    asChild?: boolean;
   }) {
-  const Comp = asChild ? Slot.Root : "button"
+  const Comp = asChild ? Slot.Root : "button";
 
   return (
     <Comp
@@ -188,7 +185,7 @@ function Button({
       className={cn(buttonVariants({ variant, size, selected, className }))}
       {...props}
     />
-  )
+  );
 }
 
-export { Button, buttonVariants }
+export { Button, buttonVariants };

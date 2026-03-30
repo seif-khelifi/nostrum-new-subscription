@@ -1,14 +1,28 @@
 "use client";
 
-import { OnboardingHero } from "@/components/onboarding";
+import { OnboardingHero, MobileOnboardingHero } from "@/components/onboarding";
 import { useStepper } from "@/context/StepperContext";
 
 /**
  * Step-aware wrapper for the onboarding hero.
- * Calls `next()` from the stepper when the user clicks "C'est parti".
+ *
+ * Desktop: renders the original OnboardingHero (hidden below sm).
+ * Mobile:  renders the new MobileOnboardingHero (hidden at sm and above).
+ *
+ * Both call `next()` from the stepper when the user clicks the CTA.
  */
 export function OnboardingStep() {
-	const { next } = useStepper();
+  const { next } = useStepper();
 
-	return <OnboardingHero onStart={next} />;
+  return (
+    <>
+      {/* Desktop hero — hidden on mobile */}
+      <div className="hidden sm:block h-full">
+        <OnboardingHero onStart={next} />
+      </div>
+
+      {/* Mobile hero — hidden on desktop */}
+      <MobileOnboardingHero onStart={next} />
+    </>
+  );
 }

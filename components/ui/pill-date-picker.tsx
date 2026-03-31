@@ -103,11 +103,9 @@ export function PillDatePicker({
 
           <span
             className={cn(
-              "ml-1 mr-1 inline-flex h-6 w-3 items-center justify-center rounded-md",
-              "transition-colors duration-200 ease-out",
-              filled
-                ? "bg-[#D9D9D9] text-[#490076]"
-                : "bg-[#490076] text-white",
+              "mr-1 inline-flex h-6 w-5 shrink-0 items-center justify-center rounded-md",
+              "transition-[transform,opacity,background-color,color] duration-200 ease-out",
+              filled ? "bg-white/20 text-white" : "bg-[#490076] text-white",
             )}
           >
             <ThreeDotsVertical />

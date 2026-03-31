@@ -54,27 +54,29 @@ export function StepScreen({
         <h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4">
           {title}
         </h1>
+        {errors && Object.keys(errors).length > 0 && (
+          <p className="sm:hidden text-sm font-medium text-red-500">
+            {(Object.values(errors)[0]?.message as string | undefined) ??
+              "Veuillez corriger les erreurs."}
+          </p>
+        )}
         {subtitle && (
           <div className="font-semibold text-base sm:text-lg text-[#1D1B20]">
             {subtitle}
           </div>
-        )}
-        {/* Mobile-only inline error — shows below subtitle, hidden on sm+ where toasts are used */}
-        {errors && Object.keys(errors).length > 0 && (
-          <p className="sm:hidden text-sm font-medium text-red-500">
-            {(Object.values(errors)[0]?.message as string | undefined) ?? "Veuillez corriger les erreurs."}
-          </p>
         )}
       </div>
 
       {/* Info card */}
       {infoCard}
 
+      {/* Mobile-only inline error — shows below form fields, hidden on sm+ where toasts are used */}
+
       {/* Selection options — inline, sized to content */}
       <div className="flex flex-col items-start gap-2 sm:gap-3">{children}</div>
 
-      {/* Action button — right-aligned under the section */}
-      <div className="flex justify-end">
+      {/* Action button — centered on mobile, right-aligned on desktop */}
+      <div className="flex justify-center sm:justify-end">
         {customAction ?? (
           <Button
             type={isForm ? "submit" : "button"}

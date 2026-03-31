@@ -58,6 +58,8 @@ export function RecapStep() {
         {/* Continuous line form with inline editable fields */}
         <div className="flex flex-wrap items-center gap-2 font-semibold text-base sm:text-lg text-[#1D1B20]">
           <span>Mes informations sont exactes :</span>
+          <br />
+          <span>Je suis</span>
           <PillInput
             placeholder="Prénom"
             {...register("firstName")}
@@ -70,6 +72,7 @@ export function RecapStep() {
             hasError={!!errors.lastName}
             inputClassName="min-w-[100px] sm:min-w-[140px]"
           />
+          <span>, né(e) le</span>
           <Controller
             name="birthDate"
             control={control}
@@ -83,6 +86,7 @@ export function RecapStep() {
               />
             )}
           />
+          <span>Mon e-mail est</span>
           <PillInput
             type="email"
             placeholder="votre@email.com"
@@ -90,6 +94,7 @@ export function RecapStep() {
             hasError={!!errors.email}
             inputClassName="min-w-[180px] sm:min-w-[240px]"
           />
+          <span>et mon numéro de téléphone est</span>
           <Controller
             name="phone"
             control={control}

@@ -48,6 +48,7 @@ const PhoneInput: React.ForwardRefExoticComponent<PhoneInputProps> =
             "focus-within:ring-2 focus-within:ring-primary/20",
             /* state colours – same as PillInput */
             filled ? "bg-[#490076] text-white" : "bg-[#F3E5FA] text-[#490076]",
+            "[&:has(input:-webkit-autofill)]:bg-[#490076] [&:has(input:-webkit-autofill)]:text-white",
             /* error state — red ring */
             hasError &&
               "ring-2 ring-red-500/60 hover:ring-red-500/80 focus-within:ring-red-500/80",
@@ -78,19 +79,33 @@ PhoneInput.displayName = "PhoneInput";
 const PillInputComponent = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<"input">
->(({ className, ...props }, ref) => (
-  <input
-    className={cn(
-      "h-full flex-1 rounded-r-xl bg-transparent pl-2 pr-3 text-[15px] font-medium outline-none",
-      "text-inherit placeholder:text-inherit/60",
-      "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
-      "selection:bg-white/30 selection:text-inherit",
-      className,
-    )}
-    {...props}
-    ref={ref}
-  />
-));
+>(({ className, value, ...props }, ref) => {
+  const isFilled = Boolean(value);
+  return (
+    <input
+      className={cn(
+        "h-full flex-1 rounded-r-xl bg-transparent pl-2 pr-3 text-[15px] font-medium outline-none",
+        isFilled
+          ? "text-white placeholder:text-white/60"
+          : "text-[#490076] placeholder:text-[#490076]/60",
+        "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+        "selection:bg-white/30 selection:text-inherit",
+
+        "[&:-webkit-autofill]:[-webkit-text-fill-color:white]",
+        "[&:-webkit-autofill]:[caret-color:white]",
+        "[&:-webkit-autofill]:[box-shadow:0_0_0_1000px_#490076_inset]",
+        "[&:-webkit-autofill:hover]:[box-shadow:0_0_0_1000px_#490076_inset]",
+        "[&:-webkit-autofill:focus]:[box-shadow:0_0_0_1000px_#490076_inset]",
+        "[&:-webkit-autofill]:[transition:background-color_9999s_ease-out_0s]",
+
+        className,
+      )}
+      {...props}
+      value={value}
+      ref={ref}
+    />
+  );
+});
 PillInputComponent.displayName = "PillInputComponent";
 
 type CountryEntry = { label: string; value: RPNInput.Country | undefined };

@@ -1,9 +1,9 @@
 "use client";
 
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { InfoIcon } from "lucide-react";
-import { PillInput } from "@/components/ui/pill-input";
+import { PhoneInput } from "@/components/ui/phone-input";
 import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
@@ -14,36 +14,18 @@ import {
   type PhoneNumberFormValues,
 } from "@/lib/validations/situation";
 
-/**
- * Normalises a French phone number to international +33 format.
- * e.g. "06 12 34 56 78" → "+33612345678"
- */
-function normaliseFrenchPhone(raw: string): string {
-  const digits = raw.replace(/[\s.\-()]/g, "");
-  if (digits.startsWith("0")) {
-    return "+33" + digits.slice(1);
-  }
-  if (digits.startsWith("0033")) {
-    return "+33" + digits.slice(4);
-  }
-  if (digits.startsWith("+33")) {
-    return digits;
-  }
-  return "+33" + digits;
-}
-
 export function PhoneNumberStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
 
   const {
-    register,
+    control,
     handleSubmit,
     formState: { errors, isValid, submitCount },
   } = useForm<PhoneNumberFormValues>({
     resolver: standardSchemaResolver(phoneNumberSchema),
     defaultValues: {
-      phone: formData.phone,
+      phone: formData.phone || "",
     },
     mode: "onTouched",
   });
@@ -51,8 +33,7 @@ export function PhoneNumberStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: PhoneNumberFormValues) => {
-    const normalised = normaliseFrenchPhone(data.phone);
-    updateFormData({ phone: normalised });
+    updateFormData({ phone: data.phone });
     next();
   };
 
@@ -63,12 +44,17 @@ export function PhoneNumberStep() {
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Vous pouvez aussi me joindre au</span>
-            <PillInput
-              type="tel"
-              placeholder="06 12 34 56 78"
-              {...register("phone")}
-              hasError={!!errors.phone}
-              inputClassName="min-w-[150px] sm:min-w-[200px]"
+            <Controller
+              name="phone"
+              control={control}
+              render={({ field }) => (
+                <PhoneInput
+                  {...field}
+                  placeholder="06 12 34 56 78"
+                  hasError={!!errors.phone}
+                  defaultCountry="FR"
+                />
+              )}
             />
             <span>pour obtenir des précieux conseils.</span>
           </div>

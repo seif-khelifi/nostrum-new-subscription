@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 /* ─── Helpers ─── */
 
@@ -52,15 +53,21 @@ export type DateBirthConjointFormValues = z.infer<
   typeof dateBirthConjointSchema
 >;
 
-/** phoneNumber step — French phone number */
+/** phoneNumber step — International phone number with validation */
 export const phoneNumberSchema = z.object({
   phone: z
     .string()
     .trim()
     .min(1, "Le numéro de téléphone est requis")
-    .regex(
-      /^(?:0|\+33|0033)[1-9](?:[\s.-]?\d{2}){4}$/,
-      "Veuillez entrer un numéro de téléphone français valide (ex: 06 12 34 56 78)",
+    .refine(
+      (value) => {
+        if (!value) return false;
+        // isValidPhoneNumber expects the number in E.164 format or with country code
+        return isValidPhoneNumber(value);
+      },
+      {
+        message: "Veuillez entrer un numéro de téléphone valide",
+      },
     ),
 });
 
@@ -105,9 +112,14 @@ export const recapSchema = z.object({
     .string()
     .trim()
     .min(1, "Le numéro de téléphone est requis")
-    .regex(
-      /^(?:0|\+33|0033)[1-9](?:[\s.-]?\d{2}){4}$/,
-      "Veuillez entrer un numéro de téléphone français valide (ex: 06 12 34 56 78)",
+    .refine(
+      (value) => {
+        if (!value) return false;
+        return isValidPhoneNumber(value);
+      },
+      {
+        message: "Veuillez entrer un numéro de téléphone valide",
+      },
     ),
 });
 

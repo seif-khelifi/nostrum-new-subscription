@@ -155,25 +155,21 @@ export function CurrentInsuranceStep() {
                 placeholder="Numéro et voie"
                 {...register("street")}
                 hasError={!!errors.street}
-                inputClassName="min-w-[180px] sm:min-w-[260px]"
               />
               <PillInput
                 placeholder="Complément (optionnel)"
                 {...register("complement")}
                 hasError={!!errors.complement}
-                inputClassName="min-w-[180px] sm:min-w-[240px]"
               />
               <PillInput
                 placeholder="Code postal"
                 {...register("postalCode")}
                 hasError={!!errors.postalCode}
-                inputClassName="min-w-[100px] sm:min-w-[130px]"
               />
               <PillInput
                 placeholder="Ville"
                 {...register("city")}
                 hasError={!!errors.city}
-                inputClassName="min-w-[120px] sm:min-w-[180px]"
               />
             </div>
           </div>

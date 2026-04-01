@@ -9,7 +9,12 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
-import { recapSchema, type RecapFormValues } from "@/lib/validations/situation";
+import {
+  recapSchema,
+  type RecapFormValues,
+  ADHERENT_MIN_AGE,
+  ADHERENT_MAX_AGE,
+} from "@/lib/validations/situation";
 
 export function RecapStep() {
   const { next } = useStepper();
@@ -59,42 +64,39 @@ export function RecapStep() {
         <div className="flex flex-wrap items-center gap-2 font-semibold text-base sm:text-lg text-[#1D1B20]">
           <span>Mes informations sont exactes :</span>
           <br />
-          <span>Je suis</span>
           <PillInput
             placeholder="Prénom"
             {...register("firstName")}
             hasError={!!errors.firstName}
-            inputClassName="min-w-[100px] sm:min-w-[140px]"
           />
           <PillInput
             placeholder="Nom"
             {...register("lastName")}
             hasError={!!errors.lastName}
-            inputClassName="min-w-[100px] sm:min-w-[140px]"
           />
-          <span>, né(e) le</span>
           <Controller
             name="birthDate"
             control={control}
-            render={({ field }) => (
-              <PillDatePicker
-                value={field.value}
-                onChange={field.onChange}
-                placeholder="JJ/MM/AAAA"
-                hasError={!!errors.birthDate}
-                inputClassName="min-w-[120px] sm:min-w-[160px]"
-              />
-            )}
+            render={({ field }) => {
+              const now = new Date();
+              return (
+                <PillDatePicker
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="JJ/MM/AAAA"
+                  hasError={!!errors.birthDate}
+                  fromYear={now.getFullYear() - ADHERENT_MAX_AGE}
+                  toYear={now.getFullYear() - ADHERENT_MIN_AGE}
+                />
+              );
+            }}
           />
-          <span>Mon e-mail est</span>
           <PillInput
             type="email"
             placeholder="votre@email.com"
             {...register("email")}
             hasError={!!errors.email}
-            inputClassName="min-w-[180px] sm:min-w-[240px]"
           />
-          <span>et mon numéro de téléphone est</span>
           <Controller
             name="phone"
             control={control}

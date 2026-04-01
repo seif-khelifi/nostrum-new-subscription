@@ -46,7 +46,6 @@ export function MailStep() {
               placeholder="votre@email.com"
               {...register("email")}
               hasError={!!errors.email}
-              inputClassName="min-w-[180px] sm:min-w-[240px]"
             />
           </div>
         }

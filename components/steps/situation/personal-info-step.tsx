@@ -11,6 +11,8 @@ import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   personalInfoSchema,
   type PersonalInfoFormValues,
+  ADHERENT_MIN_AGE,
+  ADHERENT_MAX_AGE,
 } from "@/lib/validations/situation";
 
 export function PersonalInfoStep() {
@@ -46,7 +48,12 @@ export function PersonalInfoStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Dites-nous qui vous êtes ?</>}
+        title={
+          <>
+            Dites-nous <br />
+            qui vous êtes ?{" "}
+          </>
+        }
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je m&apos;appelle</span>
@@ -54,27 +61,30 @@ export function PersonalInfoStep() {
               placeholder="Prénom"
               {...register("firstName")}
               hasError={!!errors.firstName}
-              inputClassName="min-w-[100px] sm:min-w-[140px]"
             />
             <PillInput
               placeholder="Nom"
               {...register("lastName")}
               hasError={!!errors.lastName}
-              inputClassName="min-w-[100px] sm:min-w-[140px]"
             />
             <span>, née le</span>
             <Controller
               name="birthDate"
               control={control}
-              render={({ field }) => (
-                <PillDatePicker
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="JJ/MM/AAAA"
-                  hasError={!!errors.birthDate}
-                  inputClassName="min-w-[120px] sm:min-w-[160px]"
-                />
-              )}
+              render={({ field }) => {
+                const now = new Date();
+                return (
+                  <PillDatePicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="JJ/MM/AAAA"
+                    hasError={!!errors.birthDate}
+                    inputClassName="min-w-[120px] sm:min-w-[160px]"
+                    fromYear={now.getFullYear() - ADHERENT_MAX_AGE}
+                    toYear={now.getFullYear() - ADHERENT_MIN_AGE}
+                  />
+                );
+              }}
             />
           </div>
         }

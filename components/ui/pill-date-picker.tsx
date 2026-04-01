@@ -66,7 +66,7 @@ export function PillDatePicker({
       })
     : "";
 
-  // Compute year bounds: default to age 19–95
+  // Compute year bounds from props (caller should pass fromYear / toYear based on min/max age)
   const now = new Date();
   const startYear = fromYear ?? now.getFullYear() - 95;
   const endYear = toYear ?? now.getFullYear() - 19;

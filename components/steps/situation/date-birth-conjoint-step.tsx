@@ -13,6 +13,8 @@ import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   dateBirthConjointSchema,
   type DateBirthConjointFormValues,
+  CONJOINT_MIN_AGE,
+  CONJOINT_MAX_AGE,
 } from "@/lib/validations/situation";
 
 /** Labels matching the commenceParQui step options */
@@ -71,15 +73,20 @@ export function DateBirthConjointStep() {
             <Controller
               name="conjointBirthDate"
               control={control}
-              render={({ field }) => (
-                <PillDatePicker
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="JJ/MM/AAAA"
-                  hasError={!!errors.conjointBirthDate}
-                  inputClassName="min-w-[120px] sm:min-w-[160px]"
-                />
-              )}
+              render={({ field }) => {
+                const now = new Date();
+                return (
+                  <PillDatePicker
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder="JJ/MM/AAAA"
+                    hasError={!!errors.conjointBirthDate}
+                    inputClassName="min-w-[120px] sm:min-w-[160px]"
+                    fromYear={now.getFullYear() - CONJOINT_MAX_AGE}
+                    toYear={now.getFullYear() - CONJOINT_MIN_AGE}
+                  />
+                );
+              }}
             />
           </div>
         }

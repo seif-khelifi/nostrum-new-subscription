@@ -11,7 +11,6 @@ type PillInputProps = Omit<
   inputClassName?: string;
   onAccessoryClick?: () => void;
   hasError?: boolean;
-  minTextWidth?: number;
 };
 
 function ThreeDotsVertical({ className }: { className?: string }) {
@@ -44,50 +43,83 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
       placeholder,
       hasError,
       onChange,
-      minTextWidth = 120,
       ...props
     },
     ref,
   ) => {
-    const isControlled = value !== undefined;
+    // Track the display value — works with both controlled (value prop)
+    // and uncontrolled (react-hook-form register / defaultValue) inputs.
+    const innerRef = React.useRef<HTMLInputElement | null>(null);
 
-    const [internalValue, setInternalValue] = React.useState(
+    const [displayValue, setDisplayValue] = React.useState(
       String(value ?? defaultValue ?? ""),
     );
 
+    // Sync when the controlled `value` prop changes
     React.useEffect(() => {
-      if (isControlled) {
-        setInternalValue(String(value ?? ""));
+      if (value !== undefined) {
+        setDisplayValue(String(value ?? ""));
       }
-    }, [isControlled, value]);
+    }, [value]);
 
-    const currentValue = isControlled ? String(value ?? "") : internalValue;
-    const filled = currentValue.length > 0;
+    // For uncontrolled inputs (e.g. react-hook-form register), read the
+    // DOM value after mount so pre-filled defaults are picked up.
+    React.useEffect(() => {
+      if (value === undefined && innerRef.current) {
+        const domVal = innerRef.current.value;
+        if (domVal) setDisplayValue(domVal);
+      }
+    }, [value]);
+
+    const filled = displayValue.length > 0;
 
     const handleChange = React.useCallback(
       (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (!isControlled) setInternalValue(e.target.value);
+        setDisplayValue(e.target.value);
         onChange?.(e);
       },
-      [isControlled, onChange],
+      [onChange],
     );
 
-    const sizerRef = React.useRef<HTMLSpanElement>(null);
-    const [inputWidth, setInputWidth] = React.useState(minTextWidth);
+    // Merge the forwarded ref with our internal ref
+    const mergedRef = React.useCallback(
+      (node: HTMLInputElement | null) => {
+        innerRef.current = node;
+        if (typeof ref === "function") ref(node);
+        else if (ref)
+          (ref as React.MutableRefObject<HTMLInputElement | null>).current =
+            node;
+      },
+      [ref],
+    );
 
-    const displayText = currentValue || placeholder || "\u00A0";
+    const valueSizerRef = React.useRef<HTMLSpanElement>(null);
+    const placeholderSizerRef = React.useRef<HTMLSpanElement>(null);
+    const [inputWidth, setInputWidth] = React.useState<number | undefined>(
+      undefined,
+    );
 
+    const measure = React.useCallback(() => {
+      const padding = INPUT_LEFT_PADDING + INPUT_RIGHT_PADDING + CARET_BUFFER;
+
+      if (filled && valueSizerRef.current) {
+        const textWidth = valueSizerRef.current.scrollWidth;
+        setInputWidth(textWidth + padding);
+      } else if (placeholderSizerRef.current) {
+        const placeholderWidth = placeholderSizerRef.current.scrollWidth;
+        setInputWidth(placeholderWidth + padding);
+      }
+    }, [filled]);
+
+    // Measure on value / placeholder changes
     React.useLayoutEffect(() => {
-      if (!sizerRef.current) return;
+      measure();
+    }, [displayValue, placeholder, filled, measure]);
 
-      const textWidth = sizerRef.current.scrollWidth;
-      const nextWidth = Math.max(
-        minTextWidth,
-        textWidth + INPUT_LEFT_PADDING + INPUT_RIGHT_PADDING + CARET_BUFFER,
-      );
-
-      setInputWidth(nextWidth);
-    }, [displayText, minTextWidth]);
+    // Re-measure after fonts finish loading (scrollWidth may change)
+    React.useEffect(() => {
+      document.fonts?.ready?.then(() => measure());
+    }, [measure]);
 
     return (
       <div
@@ -103,8 +135,9 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
           className,
         )}
       >
+        {/* Hidden sizer for the actual value text */}
         <span
-          ref={sizerRef}
+          ref={valueSizerRef}
           aria-hidden
           className={cn(
             "pointer-events-none invisible absolute left-0 top-0 h-0 overflow-hidden whitespace-pre",
@@ -112,11 +145,24 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
             inputClassName,
           )}
         >
-          {displayText}
+          {displayValue || "\u00A0"}
+        </span>
+
+        {/* Hidden sizer for the placeholder text */}
+        <span
+          ref={placeholderSizerRef}
+          aria-hidden
+          className={cn(
+            "pointer-events-none invisible absolute left-0 top-0 h-0 overflow-hidden whitespace-pre",
+            "text-[15px] font-medium leading-none",
+            inputClassName,
+          )}
+        >
+          {placeholder || "\u00A0"}
         </span>
 
         <input
-          ref={ref}
+          ref={mergedRef}
           data-slot="pill-input"
           placeholder={placeholder}
           value={value}

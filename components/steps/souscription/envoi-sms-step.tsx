@@ -76,7 +76,7 @@ export function EnvoiSmsStep() {
       >
         {/* Phrase with inline OTP field */}
         <div className="flex flex-wrap items-center gap-2 font-semibold text-base sm:text-lg text-[#1D1B20]">
-          <span>Mon code est le</span>
+          <span>Mon code est </span>
           <Controller
             name="otp"
             control={control}
@@ -93,15 +93,15 @@ export function EnvoiSmsStep() {
                       key={i}
                       index={i}
                       className={`
-												size-10 sm:size-12 text-lg sm:text-xl font-semibold
-												transition-colors duration-200
-												${
-                          field.value[i]
-                            ? "border-[#490076] bg-[#490076] text-white"
-                            : "border-[#E9E3DD] bg-[#F3E5FA] text-[#490076]"
-                        }
-												data-[active=true]:border-[#C86FFE] data-[active=true]:ring-2 data-[active=true]:ring-[#C86FFE]/40
-											`}
+            size-8 sm:size-10 text-base sm:text-lg font-semibold
+            transition-colors duration-200
+            ${
+              field.value[i]
+                ? "border-[#490076] bg-[#490076] text-white"
+                : "border-[#E9E3DD] bg-[#F3E5FA] text-[#490076]"
+            }
+            data-[active=true]:border-[#C86FFE] data-[active=true]:ring-2 data-[active=true]:ring-[#C86FFE]/40
+           `}
                     />
                   ))}
                 </InputOTPGroup>

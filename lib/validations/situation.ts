@@ -86,6 +86,18 @@ const addressFields = {
 } as const;
 
 /* ═══════════════════════════════════════════════════════════════════ */
+/*  Age-range constants                                               */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/** Adhérent principal: minimum 1 year old, maximum 95 years old. */
+export const ADHERENT_MIN_AGE = 19;
+export const ADHERENT_MAX_AGE = 95;
+
+/** Conjoint: minimum 18 years old, maximum 95 years old. */
+export const CONJOINT_MIN_AGE = 18;
+export const CONJOINT_MAX_AGE = 95;
+
+/* ═══════════════════════════════════════════════════════════════════ */
 /*  Situation step schemas                                            */
 /* ═══════════════════════════════════════════════════════════════════ */
 
@@ -93,13 +105,13 @@ const addressFields = {
 export const personalInfoSchema = z.object({
   firstName: firstNameField,
   lastName: lastNameField,
-  birthDate: birthDateSchema(19, 95),
+  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
 });
 export type PersonalInfoFormValues = z.infer<typeof personalInfoSchema>;
 
 /** dateBirthConjoint step — conjoint's birthDate */
 export const dateBirthConjointSchema = z.object({
-  conjointBirthDate: birthDateSchema(19, 95),
+  conjointBirthDate: birthDateSchema(CONJOINT_MIN_AGE, CONJOINT_MAX_AGE),
 });
 export type DateBirthConjointFormValues = z.infer<
   typeof dateBirthConjointSchema
@@ -134,7 +146,7 @@ export type MailFormValues = z.infer<typeof mailSchema>;
 export const recapSchema = z.object({
   firstName: firstNameField,
   lastName: lastNameField,
-  birthDate: birthDateSchema(19, 95),
+  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
   email: emailField,
   phone: phoneField,
 });

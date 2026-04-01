@@ -19,6 +19,8 @@ export interface AddressSearchInputProps {
   onSelect: (fulltext: string) => void;
   /** Called when user clears selection by typing */
   onClear: () => void;
+  /** Called when the API fetch fails or returns an error */
+  onError?: () => void;
   placeholder?: string;
   /** Extra class names for the outer wrapper */
   wrapperClassName?: string;
@@ -30,6 +32,7 @@ export function AddressSearchInput({
   selected,
   onSelect,
   onClear,
+  onError,
   placeholder = "Rechercher une adresse...",
   wrapperClassName,
 }: AddressSearchInputProps) {
@@ -39,25 +42,45 @@ export function AddressSearchInput({
   const abortRef = useRef<AbortController | null>(null);
   const skipFetchRef = useRef(false);
 
-  const fetchSuggestions = useCallback(async (text: string) => {
-    abortRef.current?.abort();
-    const controller = new AbortController();
-    abortRef.current = controller;
-    setLoading(true);
+  const fetchSuggestions = useCallback(
+    async (text: string) => {
+      abortRef.current?.abort();
+      const controller = new AbortController();
+      abortRef.current = controller;
+      setLoading(true);
 
-    try {
-      const params = new URLSearchParams({ text });
-      const res = await fetch(`/api/searchBAN?${params}`, {
-        signal: controller.signal,
-      });
-      const data = await res.json();
-      setSuggestions(data.results ?? []);
-    } catch {
-      if (!controller.signal.aborted) setSuggestions([]);
-    } finally {
-      if (!controller.signal.aborted) setLoading(false);
-    }
-  }, []);
+      try {
+        const params = new URLSearchParams({ text });
+        const res = await fetch(`/api/searchBAN?${params}`, {
+          signal: controller.signal,
+        });
+        if (!res.ok) {
+          if (!controller.signal.aborted) {
+            setSuggestions([]);
+            onError?.();
+          }
+          return;
+        }
+        const data = await res.json();
+        if (data.error) {
+          if (!controller.signal.aborted) {
+            setSuggestions([]);
+            onError?.();
+          }
+          return;
+        }
+        setSuggestions(data.results ?? []);
+      } catch {
+        if (!controller.signal.aborted) {
+          setSuggestions([]);
+          onError?.();
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoading(false);
+      }
+    },
+    [onError],
+  );
 
   useEffect(() => {
     if (skipFetchRef.current) {

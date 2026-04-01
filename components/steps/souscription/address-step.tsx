@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { ChevronRight } from "lucide-react";
 import { AddressSearchInput } from "@/components/ui/search-input";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
@@ -23,6 +24,11 @@ export function AddressStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const [mode, setMode] = useState<"search" | "manual">("search");
+  const [apiError, setApiError] = useState(false);
+
+  const handleApiError = useCallback(() => {
+    setApiError(true);
+  }, []);
 
   /* ── Search form ── */
   const searchForm = useForm<AddressSearchFormValues>({
@@ -109,21 +115,26 @@ export function AddressStep() {
           isForm
           errors={searchErrors}
         >
-          <AddressSearchInput
-            selected={selectedFulltext}
-            onSelect={onSelect}
-            onClear={onClear}
-          />
+          <div className="w-full self-stretch flex flex-col gap-2">
+            <AddressSearchInput
+              selected={selectedFulltext}
+              onSelect={onSelect}
+              onClear={onClear}
+              onError={handleApiError}
+              wrapperClassName="w-full"
+            />
 
-          {!!searchErrors.fulltext && (
-            <button
-              type="button"
-              onClick={() => setMode("manual")}
-              className="mt-1 text-sm font-medium text-[#9000E3] underline underline-offset-2 hover:text-[#7a00c4] transition-colors"
-            >
-              Renseigner manuellement
-            </button>
-          )}
+            {(!!searchErrors.fulltext || apiError) && (
+              <button
+                type="button"
+                onClick={() => setMode("manual")}
+                className="mt-1 inline-flex items-center gap-1 text-sm font-medium text-[#490076] transition-all hover:opacity-80 active:scale-95 active:opacity-60"
+              >
+                Renseigner manuellement
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            )}
+          </div>
         </StepScreen>
       </form>
     );
@@ -167,9 +178,10 @@ export function AddressStep() {
         <button
           type="button"
           onClick={() => setMode("search")}
-          className="text-sm font-medium text-[#9000E3] underline underline-offset-2 hover:text-[#7a00c4] transition-colors"
+          className="inline-flex items-center gap-1 text-sm font-medium text-[#490076] transition-all hover:opacity-80 active:scale-95 active:opacity-60"
         >
           Rechercher une adresse
+          <ChevronRight className="h-4 w-4" />
         </button>
       </StepScreen>
     </form>

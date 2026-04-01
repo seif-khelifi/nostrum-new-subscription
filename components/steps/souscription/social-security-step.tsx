@@ -48,7 +48,6 @@ export function SocialSecurityStep() {
               placeholder="1 23 45 678 901 234 56"
               {...register("socialSecurityNumber")}
               hasError={!!errors.socialSecurityNumber}
-              inputClassName="min-w-[200px] sm:min-w-[280px]"
             />
           </div>
         }

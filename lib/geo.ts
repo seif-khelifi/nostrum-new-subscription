@@ -12,6 +12,7 @@ export interface GeoPFResult {
 }
 
 export interface GeoPFResponse {
+  status: string;
   results: GeoPFResult[];
 }
 

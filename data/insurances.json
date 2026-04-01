@@ -1,0 +1,4048 @@
+{
+  "insurances": [
+    {
+      "name": "525EME MUTUELLE D ENTREPRISES",
+      "street": "4 ET 5 PLACE STEVEN SPIELBERG CITE BERLIET - AVENUE C",
+      "city": "SAINT PRIEST",
+      "postal": "69800"
+    },
+    {
+      "name": "A2VIP",
+      "street": "185 RUE DE BERCY",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "ACE EUROPE LIFE SE",
+      "street": "31 PLACE DES COROLLES LA TOUR CARPE DIEM, ESPLANADE NORD",
+      "city": "COURBEVOIE",
+      "postal": "92400"
+    },
+    {
+      "name": "ACORIS MUTUELLES",
+      "street": "6 A 8  VIADUC KENNEDY",
+      "city": "NANCY",
+      "postal": "54000"
+    },
+    {
+      "name": "ACTA ASSURANCE",
+      "street": "PARC DES TUILERIES CS 80117",
+      "city": "LIMONEST CEDEX",
+      "postal": "69578"
+    },
+    {
+      "name": "ACTE IARD",
+      "street": "14 AVENUE DE L EUROPE ESPACE EUROPEEN DE L ENTREPRISE",
+      "city": "SCHILTIGHEIM",
+      "postal": "67300"
+    },
+    {
+      "name": "ACTE VIE",
+      "street": "14 AVENUE DE L EUROPE ESPACE EUROPEEN DE L ENTREPRISE",
+      "city": "SCHILTIGHEIM",
+      "postal": "67300"
+    },
+    {
+      "name": "AESIO MUTUELLE",
+      "street": "4 RUE DU GENERAL FOY",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "AFFINEO ASSUR",
+      "street": "301  GRANDE RUE",
+      "city": "NEUVILLE LES DAMES",
+      "postal": "01400"
+    },
+    {
+      "name": "AFI ESCA IARD",
+      "street": "4 SQUARE DUTILLEUL",
+      "city": "LILLE",
+      "postal": "59800"
+    },
+    {
+      "name": "AFI-ESCA",
+      "street": "2 QUAI KLEBER CS 30441",
+      "city": "STRASBOURG CEDEX",
+      "postal": "67008"
+    },
+    {
+      "name": "AG2R PREVOYANCE",
+      "street": "14-16 BOULEVARD MALESHERBES",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "AGEAS FRANCE",
+      "street": "50 PLACE DE L ELLIPSE   VILLAGE 5  CS 30024",
+      "city": "PARIS LA DEFENSE",
+      "postal": "92985"
+    },
+    {
+      "name": "AGPM ASSURANCES",
+      "street": "RUE NICOLAS APPERT QUARTIER SAINTE MUSSE",
+      "city": "TOULON CEDEX 9",
+      "postal": "83086"
+    },
+    {
+      "name": "AGPM VIE",
+      "street": "RUE NICOLAS APPERT QUARTIER SAINTE MUSSE",
+      "city": "TOULON CEDEX 9",
+      "postal": "83086"
+    },
+    {
+      "name": "AGRI PREVOYANCE",
+      "street": "21 RUE DE LA BIENFAISANCE",
+      "city": "PARIS CEDEX 08",
+      "postal": "75382"
+    },
+    {
+      "name": "ALAN",
+      "street": "117 QUAI VALMY",
+      "city": "PARIS",
+      "postal": "75010"
+    },
+    {
+      "name": "ALBINGIA",
+      "street": "109 A 111 RUE VICTOR HUGO",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "ALLIANCE DES MUTUALISTES DU TRANSPORT ET DU SECTEUR SOCIAL",
+      "street": "5 PROMENADE DES CANAUX",
+      "city": "NANCY",
+      "postal": "54000"
+    },
+    {
+      "name": "ALLIANZ IARD",
+      "street": "1 COURS  MICHELET CS 30051",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92076"
+    },
+    {
+      "name": "ALLIANZ RETRAITE",
+      "street": "1 COURS MICHELET   CS 30051",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92076"
+    },
+    {
+      "name": "ALLIANZ VIE",
+      "street": "1 COURS  MICHELET CS 30051",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92076"
+    },
+    {
+      "name": "ALTIMA ASSURANCES",
+      "street": "275 RUE DU STADE",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "AMELLIS MUTUELLES",
+      "street": "8  RUE DE LA POYAT",
+      "city": "SAINT CLAUDE",
+      "postal": "39200"
+    },
+    {
+      "name": "ANIPS",
+      "street": "IMMEUBLE WEST PARK 2   2 BOULEVARD PESARO",
+      "city": "NANTERRE",
+      "postal": "92024"
+    },
+    {
+      "name": "ANTARIUS",
+      "street": "59 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "APGIS",
+      "street": "12 RUE MASSUE",
+      "city": "VINCENNES CEDEX",
+      "postal": "94684"
+    },
+    {
+      "name": "APICIL EPARGNE",
+      "street": "38 RUE FRANÇOIS PEISSEL",
+      "city": "CALUIRE ET CUIRE",
+      "postal": "69300"
+    },
+    {
+      "name": "APICIL MUTUELLE",
+      "street": "38 RUE  FRANCOIS PEISSEL",
+      "city": "CALUIRE ET CUIRE",
+      "postal": "69300"
+    },
+    {
+      "name": "APICIL PREVOYANCE",
+      "street": "38 RUE FRANÇOIS PEISSEL BP 47",
+      "city": "CALUIRE ET CUIRE CEDEX",
+      "postal": "69642"
+    },
+    {
+      "name": "APIVIA MACIF MUTUELLE",
+      "street": "17-21 PLACE ETIENNE PERNET",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "AREAS DOMMAGES",
+      "street": "47 A 49 RUE DE MIROMESNIL",
+      "city": "PARIS CEDEX O8",
+      "postal": "75380"
+    },
+    {
+      "name": "AREAS VIE",
+      "street": "49 RUE DE MIROMESNIL",
+      "city": "PARIS CEDEX O8",
+      "postal": "75380"
+    },
+    {
+      "name": "ARIAL CNP ASSURANCES",
+      "street": "32 AVENUE EMILE ZOLA",
+      "city": "MONS EN BAROEUL",
+      "postal": "59370"
+    },
+    {
+      "name": "ARPEGE PREVOYANCE",
+      "street": "143 AVENUE ARISTIDE BRIAND - BP 2439",
+      "city": "MULHOUSE CEDEX",
+      "postal": "68067"
+    },
+    {
+      "name": "ASSOCIATION GENERALE DES MEDECINS DE FRANCE PREVOYANCE",
+      "street": "1 BOULEVARD PASTEUR",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "ASSOCIATION GENERALE DES MUTUELLES",
+      "street": "35 BOULEVARD  BRUNE",
+      "city": "PARIS",
+      "postal": "75014"
+    },
+    {
+      "name": "ASSURANCE CONSEIL DEFENSE ET  RECOURS",
+      "street": "21 AVENUE LEON BLUM BP 40016",
+      "city": "MONS EN BAROEUL",
+      "postal": "59370"
+    },
+    {
+      "name": "ASSURANCE MUTUELLE D ILLKIRCH GRAFFENSTADEN",
+      "street": "46 ROUTE DE LYON",
+      "city": "ILLKIRCH- GRAFFENSTADEN",
+      "postal": "67400"
+    },
+    {
+      "name": "ASSURANCE MUTUELLE D OUTREMER",
+      "street": "ESCALIER C - 1er ETAGE CENTRE DELGRES MORNE DILLON  BP 897",
+      "city": "FORT DE FRANCE CEDEX -  MARTINIQUE",
+      "postal": "97245"
+    },
+    {
+      "name": "ASSURANCE MUTUELLE DES FONCTIONNAIRES ET ASSIMILES DES COMPTABLES PUBLICS ET DES AGENTS COMPTABLES",
+      "street": "111 RUE DU CHATEAU DES RENTIERS",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "ASSURANCE MUTUELLE DES MOTARDS",
+      "street": "270 IMPASSE ADAM SMITH",
+      "city": "PEROLS",
+      "postal": "34479"
+    },
+    {
+      "name": "ASSURANCE MUTUELLE VAL DE SAONE BEAUJOLAIS",
+      "street": "LE BOURG",
+      "city": "CHALEINS",
+      "postal": "01480"
+    },
+    {
+      "name": "ASSURANCES DU CREDIT MUTUEL IARD",
+      "street": "4 RUE FREDERIC-GUILLAUME RAIFFEISEN",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "ASSURANCES DU CREDIT MUTUEL VIE",
+      "street": "4 rue FREDERIC-GUILLAUME RAIFFEISEN",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "ASSURANCES DU CREDIT MUTUEL VIE SA",
+      "street": "4 rue FREDERIC-GUILLAUME RAIFFEISEN",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "ASSURANCES MUTUELLES  LE CONSERVATEUR",
+      "street": "59 RUE DE LA FAISANDERIE",
+      "city": "PARIS",
+      "postal": "75116"
+    },
+    {
+      "name": "ASSURANCES MUTUELLES DE FRANCE",
+      "street": "148 RUE ANATOLE FRANCE",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "ASSURANCES MUTUELLES DE PICARDIE",
+      "street": "2 RUE DE L ILE MYSTERIEUSE",
+      "city": "BOVES",
+      "postal": "80440"
+    },
+    {
+      "name": "ASSURED GUARANTY EUROPE SA",
+      "street": "71 rue du Faubourg St Honoré",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "ASSURIMA",
+      "street": "118 AVENUE DE PARIS",
+      "city": "NIORT",
+      "postal": "79000"
+    },
+    {
+      "name": "AUBEANE MUTUELLE DE FRANCE",
+      "street": "59 BOULEVARD BLANQUI BP 3013",
+      "city": "TROYES CEDEX",
+      "postal": "10012"
+    },
+    {
+      "name": "AUDIENS SANTE-PREVOYANCE",
+      "street": "74 RUE JEAN BLEUZEN",
+      "city": "VANVES CEDEX",
+      "postal": "92177"
+    },
+    {
+      "name": "AUXIA",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "AUXIA ASSISTANCE",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "AVENIR MUTUEL DES PROFESSIONS LIBERALES ET INDEPENDANTES",
+      "street": "27 BOULEVARD BERTHIER",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "AVENIR MUTUELLE",
+      "street": "173 RUE DE BERCY",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "AVENIR SANTE",
+      "street": "4 PLACE RAOUL DAUTRY",
+      "city": "PARIS CEDEX 15",
+      "postal": "75716"
+    },
+    {
+      "name": "AVENIR SANTE MUTUELLE",
+      "street": "12  AVENUE DU GENERAL MANGIN",
+      "city": "VERSAILLES",
+      "postal": "78027"
+    },
+    {
+      "name": "AVIVA ASSURANCES",
+      "street": "13 RUE DU MOULIN BAILLY",
+      "city": "BOIS COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "AVIVA EPARGNE RETRAITE",
+      "street": "70 AVENUE DE L EUROPE",
+      "city": "BOIS COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "AVIVA RETRAITE PROFESSIONNELLE",
+      "street": "70 AVENUE DE L EUROPE",
+      "city": "BOIS COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "AVIVA VIE",
+      "street": "70 AVENUE DE L EUROPE",
+      "city": "BOIS COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "AWP HEALTH & LIFE",
+      "street": "7 RUE DORA MAAR",
+      "city": "SAINT OUEN",
+      "postal": "93400"
+    },
+    {
+      "name": "AWP P&C",
+      "street": "7 RUE DORA MAAR",
+      "city": "SAINT OUEN",
+      "postal": "93400"
+    },
+    {
+      "name": "AXA ASSISTANCE FRANCE ASSURANCES",
+      "street": "6 RUE ANDRE GIDE - LE CARAT",
+      "city": "CHATILLON",
+      "postal": "92320"
+    },
+    {
+      "name": "AXA ASSURANCES IARD MUTUELLE",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXA ASSURANCES VIE MUTUELLE",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXA ASSURCREDIT",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXA FRANCE IARD",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXA FRANCE VIE",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXA GLOBAL RE",
+      "street": "61 RUE MSTISLAV ROSTROPOVITCH",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "AXA RETRAITE ENTREPRISE",
+      "street": "313 TERRASSES DE L'ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "AXERIA IARD",
+      "street": "27 RUE MAURICE FLANDIN",
+      "city": "LYON CEDEX 03",
+      "postal": "69444"
+    },
+    {
+      "name": "AXERIA PREVOYANCE",
+      "street": "90 AVENUE FELIX FAURE",
+      "city": "LYON CEDEX 03",
+      "postal": "69439"
+    },
+    {
+      "name": "BANQUE POPULAIRE MUTUALITE",
+      "street": "10 QUAI DES QUEYRIES",
+      "city": "BORDEAUX",
+      "postal": "33100"
+    },
+    {
+      "name": "BPCE ASSURANCES",
+      "street": "88 AVENUE  DE FRANCE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "BPCE IARD",
+      "street": "CHABAN",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "BPCE MUTUELLE",
+      "street": "7 RUE LEON PATOUX CS 51032",
+      "city": "REIMS CEDEX 2",
+      "postal": "51686"
+    },
+    {
+      "name": "BPCE PREVOYANCE",
+      "street": "30 AVENUE PIERRE MENDES FRANCE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "BPCE VIE",
+      "street": "30 AVENUE PIERRE MENDES FRANCE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "CAISSE CENTRALE DE REASSURANCE",
+      "street": "157 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "CAISSE D ACTION SOCIALE DU PERSONNEL DES FINANCES DU HAUT RHIN",
+      "street": "6 RUE BRUAT",
+      "city": "COLMAR",
+      "postal": "68000"
+    },
+    {
+      "name": "CAISSE D ACTION SOCIALE DU PERSONNEL DES FINANCES PUBLIQUES DU BAS-RHIN",
+      "street": "4 PLACE DE LA REPUBLIQUE DRFIP",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "CAISSE D ASSURANCE MUTUELLE DES SYLVICULTEURS",
+      "street": "32 ALLEES D ORLEANS",
+      "city": "BORDEAUX",
+      "postal": "33000"
+    },
+    {
+      "name": "CAISSE D ASSURANCE MUTUELLE DU BATIMENT ET DES TRAVAUX PUBLICS",
+      "street": "14 AVENUE DE L EUROPE ESPACE EUROPEEN DE L ENTREPRISE",
+      "city": "SCHILTIGHEIM",
+      "postal": "67300"
+    },
+    {
+      "name": "CAISSE D ASSURANCES MUTUELLES DU CREDIT AGRICOLE",
+      "street": "53 RUE LA BOÉTIE BP 336 08",
+      "city": "PARIS CEDEX 08",
+      "postal": "75365"
+    },
+    {
+      "name": "CAISSE DE GARANTIE IMMOBILIERE DU BATIMENT",
+      "street": "6 RUE LA PÉROUSE",
+      "city": "PARIS CEDEX 16",
+      "postal": "75784"
+    },
+    {
+      "name": "CAISSE DE PREVOYANCE DES AGENTS DE  LA SECURITE SOCIALE ET ASSIMILES",
+      "street": "2 TER BOULEVARD SAINT MARTIN",
+      "city": "PARIS",
+      "postal": "75010"
+    },
+    {
+      "name": "CAISSE DE PREVOYANCE DES CADRES D'ENTREPRISES AGRICOLES",
+      "street": "21 RUE DE LA BIENFAISANCE",
+      "city": "PARIS CEDEX 08",
+      "postal": "75382"
+    },
+    {
+      "name": "CAISSE DE PREVOYANCE DU  PORT DE BORDEAUX",
+      "street": "152 QUAI DE BACALAN BP 350",
+      "city": "BORDEAUX CEDEX",
+      "postal": "33042"
+    },
+    {
+      "name": "CAISSE DE REASSURANCE MUTUELLE AGRICOLE DES PRODUCTEURS DE TABAC",
+      "street": "19 RUE BALLU",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "CAISSE DE REASSURANCE MUTUELLE AGRICOLE DU CENTRE MANCHE",
+      "street": "10 RUE BLAISE PASCAL BP 20337",
+      "city": "CHARTRES CEDEX",
+      "postal": "28006"
+    },
+    {
+      "name": "CAISSE DE RETRAITE COMPLEMENTAIRE DES CLERCS ET EMPLOYES DES HUISSIERS DE JUSTICE",
+      "street": "15 AVENUE DE L OPERA",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "CAISSE DE SECOURS STAUBLI FAVERGES",
+      "street": "PLACE  ROBERT STAUBLI",
+      "city": "FAVERGES",
+      "postal": "74210"
+    },
+    {
+      "name": "CAISSE DE SOLIDARITE",
+      "street": "RUE KLEBER   BAT 202  SITE ADISHAT DE L ARSENAL",
+      "city": "TARBES",
+      "postal": "65000"
+    },
+    {
+      "name": "CAISSE DE SOLIDARITE DES ETABLISSEMENTS D ARMEMENT DE BOURGES",
+      "street": "8 BOULEVARD LAHITOLLE",
+      "city": "BOURGES",
+      "postal": "18000"
+    },
+    {
+      "name": "CAISSE FRATERNELLE D EPARGNE",
+      "street": "150 RUE D ATHENES CS 30022",
+      "city": "EURALILLE",
+      "postal": "59777"
+    },
+    {
+      "name": "CAISSE FRATERNELLE VIE",
+      "street": "150 RUE D ATHENES CS30022",
+      "city": "EURALILLE",
+      "postal": "59777"
+    },
+    {
+      "name": "CAISSE GENERALE DE PREVOYANCE DES CAISSES D'EPARGNE",
+      "street": "30 PLACE D ITALIE CS 71339",
+      "city": "PARIS CEDEX 13",
+      "postal": "75627"
+    },
+    {
+      "name": "CAISSE INTERCOMMUNALE D ASSURANCES DES DEPARTEMENTS DE L EST",
+      "street": "50 RUE DU PRUNIER",
+      "city": "COLMAR CEDEX",
+      "postal": "68027"
+    },
+    {
+      "name": "CAISSE INTERPROFESSIONNELLE DE PREVOYANCE",
+      "street": "9 AVENUE VICTOR HUGO",
+      "city": "EPINAL",
+      "postal": "88000"
+    },
+    {
+      "name": "CAISSE MEUSIENNE D ASSURANCES MUTUELLES",
+      "street": "22 RUE DU DOCTEUR NÈVE BP 56",
+      "city": "BAR LE DUC CEDEX",
+      "postal": "55001"
+    },
+    {
+      "name": "CAISSE MUTUELLE D ASSURANCES SUR LA VIE",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "CAISSE MUTUELLE DE PREVOYANCE DU PERSONNEL DES COLLECTIVITES TERRITORIALES DE LA HAUTE SAVOIE",
+      "street": "55 RUE DU VAL VERT MAISON DE LA FONCTION PUBLIQUE TERRITORIALE DE LAHAUTE- SAVOIE",
+      "city": "SEYNOD",
+      "postal": "74600"
+    },
+    {
+      "name": "CAISSE MUTUELLE MARNAISE  D ASSURANCE",
+      "street": "3 COURS D ORMESSON BP 216",
+      "city": "CHALONS EN CHAMPAGNE CEDEX",
+      "postal": "51010"
+    },
+    {
+      "name": "CAISSE NATIONALE DE REASSURANCE MUTUELLE AGRICOLE GROUPAMA",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "CAISSE NATIONALE MUTUALISTE PREVOYANCE SANTE",
+      "street": "93 A RUE OBERKAMPF",
+      "city": "PARIS CEDEX 11",
+      "postal": "75553"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES ANTILLES GUYANE",
+      "street": "10 LOTISSEMENT  BARDINET DILLON BP 559",
+      "city": "FORT DE FRANCE (MARTINIQUE) CEDEX",
+      "postal": "97242"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES BRETAGNE-PAYS DE LA LOIRE",
+      "street": "23 BOULEVARD SOLFÉRINO CS 51209",
+      "city": "RENNES CEDEX",
+      "postal": "35012"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES DE L OCEAN INDIEN",
+      "street": "7 RUE ANDRE LARDY BP 103",
+      "city": "SAINTE MARIE (REUNION)",
+      "postal": "97438"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES DE RHONE-ALPES AUVERGNE",
+      "street": "50 RUE DE SAINT CYR",
+      "city": "LYON",
+      "postal": "69009"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES D'OC",
+      "street": "14 RUE VIDAILHAN",
+      "city": "BALMA",
+      "postal": "31130"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES DU NORD-EST",
+      "street": "2 RUE LÉON-PATOUX BP 1028",
+      "city": "REIMS CEDEX 2",
+      "postal": "51686"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES MEDITERRANEE",
+      "street": "24 PARC DU GOLF   ZAC DE PICHAURY  BP 10359",
+      "city": "AIX EN PROVENCE CEDEX 03",
+      "postal": "13799"
+    },
+    {
+      "name": "CAISSE REGIONALE D ASSURANCES MUTUELLES AGRICOLES PARIS VAL-DE-LOIRE",
+      "street": "161 AVENUE PAUL VAILLANT COUTURIER",
+      "city": "GENTILLY",
+      "postal": "94250"
+    },
+    {
+      "name": "CAISSE REGIONALE DE PREVOYANCE DU BATIMENT ET DES TRAVAUX PUBLICS DES ANTILLES ET DE LA GUYANE FRANCAISES",
+      "street": "RUE AMEDEE ABARRE-ROUTE PROVIDENCE - BP 603",
+      "city": "ABYMES (GUADELOUPE) CEDEX",
+      "postal": "97176"
+    },
+    {
+      "name": "CAISSE REGIONALE DE REASSURANCES MUTUELLES AGRICOLES DU GRAND EST",
+      "street": "101 ROUTE DE HAUSBERGEN BP 30014 SCHILTIGHEIM",
+      "city": "STRASBOURG CEDEX",
+      "postal": "67012"
+    },
+    {
+      "name": "CAISSE REUNIONNAISE DE PREVOYANCE",
+      "street": "2 BIS RUELLE PAVEE BP 1071",
+      "city": "SAINT DENIS CEDEX",
+      "postal": "97482"
+    },
+    {
+      "name": "CALYPSO",
+      "street": "1 COURS  MICHELET CS 30051",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92076"
+    },
+    {
+      "name": "CAPMA & CAPMI",
+      "street": "36 A 38  RUE DE SAINT PETERSBOURG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "CAPREVAL",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "CARCEPT ACCIDENT",
+      "street": "4  RUE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "CARCEPT PREVOYANCE",
+      "street": "4  RUE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "CARDIF - ASSURANCES RISQUES DIVERS",
+      "street": "1 BOULEVARD HAUSSMANN TSA 93000",
+      "city": "PARIS CEDEX 09",
+      "postal": "75318"
+    },
+    {
+      "name": "CARDIF ASSURANCE VIE",
+      "street": "1 BOULEVARD HAUSSMANN TSA 93000",
+      "city": "PARIS CEDEX 09",
+      "postal": "75318"
+    },
+    {
+      "name": "CARDIF IARD",
+      "street": "1 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "CARMA",
+      "street": "4 A 8 RUE DU MARQUIS-DE- RAIES",
+      "city": "EVRY CEDEX",
+      "postal": "91008"
+    },
+    {
+      "name": "CARMA VIE",
+      "street": "1 RUE JEAN MERMOZ",
+      "city": "EVRY CEDEX",
+      "postal": "91002"
+    },
+    {
+      "name": "CARPILIG/P",
+      "street": "108 RUE DE LOURMEL",
+      "city": "PARIS CEDEX 15",
+      "postal": "75718"
+    },
+    {
+      "name": "CCMO MUTUELLE",
+      "street": "6 AVENUE DU BEAUVAISIS PAE DU HAUT-VILLE CS 50993",
+      "city": "BEAUVAIS CEDEX",
+      "postal": "60014"
+    },
+    {
+      "name": "CCPMA PREVOYANCE",
+      "street": "21 RUE DE LA BIENFAISANCE",
+      "city": "PARIS CEDEX 08",
+      "postal": "75382"
+    },
+    {
+      "name": "CCR RE",
+      "street": "157 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "CDC MUTUELLE",
+      "street": "12 AVENUE PIERRE MENDES FRANCE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "CENTRE MUTUALISTE INTERPROFESSIONNEL",
+      "street": "53 AVENUE DE SENLIS",
+      "city": "CREPY EN VALOIS",
+      "postal": "60800"
+    },
+    {
+      "name": "CFDP ASSURANCES",
+      "street": "62 RUE DE BONNEL",
+      "city": "LYON",
+      "postal": "69003"
+    },
+    {
+      "name": "CGPA",
+      "street": "46 RUE CARDINET",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "CHORUM",
+      "street": "4 A 8 RUE  GAMBETTA",
+      "city": "MALAKOFF",
+      "postal": "92240"
+    },
+    {
+      "name": "CHUBB EUROPEAN GROUP SE",
+      "street": "31 PLACE  DES COROLLES LA TOUR CARPE DIEM, ESPLANADE NORD",
+      "city": "COURBEVOIE",
+      "postal": "92400"
+    },
+    {
+      "name": "CIOTAT NORD MEDITERRANEE",
+      "street": "10 RUE BOURONNE",
+      "city": "LA CIOTAT",
+      "postal": "13600"
+    },
+    {
+      "name": "CNP ASSURANCES",
+      "street": "4 PLACE RAOUL DAUTRY",
+      "city": "PARIS CEDEX 15",
+      "postal": "75716"
+    },
+    {
+      "name": "CNP CAUTION",
+      "street": "4 PLACE RAOUL DAUTRY",
+      "city": "PARIS CEDEX 15",
+      "postal": "75716"
+    },
+    {
+      "name": "COMPAGNIE EUROPEENNE DE GARANTIES ET CAUTIONS",
+      "street": "16 RUE HOCHE   TOUR KUPKA B",
+      "city": "LA DEFENSE CEDEX",
+      "postal": "92919"
+    },
+    {
+      "name": "COMPAGNIE FRANCAISE D ASSURANCE POUR LE COMMERCE EXTERIEUR",
+      "street": "1 PLACE COSTES ET BELLONTE",
+      "city": "BOIS-COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "COMPAGNIE NANTAISE D ASSURANCES MARITIMES ET TERRESTRES",
+      "street": "46 BIS RUE DES HAUTS PAVES BP 80205",
+      "city": "NANTES CEDEX",
+      "postal": "44002"
+    },
+    {
+      "name": "COMPLEVIE",
+      "street": "6 RUE SAINT NICOLAS",
+      "city": "CAEN",
+      "postal": "14000"
+    },
+    {
+      "name": "CORUM LIFE SA",
+      "street": "1 RUE EULER",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "COVEA COOPERATIONS",
+      "street": "14 BOULEVARD MARIE ET ALEXANDRE OYON",
+      "city": "LE MANS",
+      "postal": "72000"
+    },
+    {
+      "name": "COVEA PROTECTION JURIDIQUE",
+      "street": "33 RUE DE SYDNEY",
+      "city": "LE MANS CEDEX 2",
+      "postal": "72045"
+    },
+    {
+      "name": "CREDIT AGRICOLE INDOSUEZ RISK SOLUTIONS ASSURANCE",
+      "street": "12 PLACE DES ETATS-UNIS  CS 70052",
+      "city": "MONTROUGE CEDEX",
+      "postal": "92547"
+    },
+    {
+      "name": "DASSAULT REASSURANCE",
+      "street": "78 QUAI MARCEL DASSAULT",
+      "city": "SAINT CLOUD",
+      "postal": "92210"
+    },
+    {
+      "name": "EMOA MUTUELLE DU VAR",
+      "street": "89 PLACE DE LA LIBERTE",
+      "city": "TOULON CEDEX 9",
+      "postal": "83041"
+    },
+    {
+      "name": "ENERGIE MUTUELLE",
+      "street": "66 AVENUE DU MAINE",
+      "city": "PARIS",
+      "postal": "75014"
+    },
+    {
+      "name": "ESPACE MUTUALISTE GIVORDIN",
+      "street": "1 RUE ROBESPIERRE",
+      "city": "GIVORS",
+      "postal": "69700"
+    },
+    {
+      "name": "EUROMAF",
+      "street": "189 BOULEVARD MALESHERBES",
+      "city": "PARIS CEDEX 17",
+      "postal": "75856"
+    },
+    {
+      "name": "EUROP ASSISTANCE SA",
+      "street": "1 PROMENADE DE LA BONNETTE",
+      "city": "GENNEVILLIERS",
+      "postal": "92230"
+    },
+    {
+      "name": "FIDELIA ASSISTANCE",
+      "street": "27 QUAI CARNOT",
+      "city": "SAINT CLOUD",
+      "postal": "92212"
+    },
+    {
+      "name": "FILASSISTANCE INTERNATIONAL",
+      "street": "108  BUREAUX DE LA COLLINE",
+      "city": "SAINT CLOUD CEDEX",
+      "postal": "92213"
+    },
+    {
+      "name": "FRAGONARD ASSURANCES",
+      "street": "2 RUE FRAGONARD",
+      "city": "PARIS CEDEX 17",
+      "postal": "75807"
+    },
+    {
+      "name": "GALIAN ASSURANCES",
+      "street": "89 RUE LA BOETIE",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GAN ASSURANCES",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GAN OUTRE MER IARD",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GARANCE",
+      "street": "51 RUE DE CHATEAUDUN",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "GENERALI  IARD",
+      "street": "2 RUE PILLET-WILL",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "GENERALI VIE",
+      "street": "2 RUE PILLET-WILL",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "GENERATION VIE",
+      "street": "20 PLACE DE SEINE   TOUR NEPTUNE",
+      "city": "COURBEVOIE",
+      "postal": "92400"
+    },
+    {
+      "name": "GFA CARAIBES",
+      "street": "104 A 106 BOULEVARD  DU GENERAL DE GAULLE",
+      "city": "FORT DE FRANCE (MARTINIQUE) CEDEX",
+      "postal": "97206"
+    },
+    {
+      "name": "GMC SANTE",
+      "street": "14 BOULEVARD DU GENERAL LECLERC",
+      "city": "NEUILLY SUR SEINE",
+      "postal": "92200"
+    },
+    {
+      "name": "GMF ASSURANCES",
+      "street": "148 RUE ANATOLE FRANCE",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "GMF VIE",
+      "street": "1 RUE RAOUL DAUTRY",
+      "city": "ERMONT",
+      "postal": "95120"
+    },
+    {
+      "name": "GPM ASSURANCES SA",
+      "street": "34 BOULEVARD DE COURCELLES",
+      "city": "PARIS CEDEX 17",
+      "postal": "75809"
+    },
+    {
+      "name": "GRAND EST MUTUELLE",
+      "street": "95 RUE VENDOME",
+      "city": "LYON CEDEX 06",
+      "postal": "69453"
+    },
+    {
+      "name": "GRESHAM",
+      "street": "20 RUE  DE LA BAUME",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GROUPAMA ASSURANCE-CREDIT & CAUTION",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GROUPAMA CENTRE-ATLANTIQUE",
+      "street": "1 AVENUE DE LIMOGES",
+      "city": "NIORT CEDEX 9",
+      "postal": "79044"
+    },
+    {
+      "name": "GROUPAMA GAN VIE",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GROUPE DES ASSURANCES MUTUELLES DE L EST",
+      "street": "6 BOULEVARD DE L EUROPE BP 3169",
+      "city": "MULHOUSE CEDEX",
+      "postal": "68063"
+    },
+    {
+      "name": "GROUPE DES MUTUELLES INDEPENDANTES",
+      "street": "4 RUE FELIX HESS",
+      "city": "VILLERUPT",
+      "postal": "54190"
+    },
+    {
+      "name": "GROUPE FRANCE MUTUELLE",
+      "street": "56 RUE DE MONCEAU",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "GROUPE SMISO MUTUELLE DES CADRES",
+      "street": "7/9 PLACE DU THEATRE",
+      "city": "LILLE",
+      "postal": "59800"
+    },
+    {
+      "name": "GROUPEMENT DES PROPRIETAIRES NAVIGANTS DU PORT D ETAPLES",
+      "street": "QUAI DE LA CANCHE",
+      "city": "ETAPLES",
+      "postal": "62630"
+    },
+    {
+      "name": "GROUPEMENT FRANCAIS DE CAUTION",
+      "street": "58 RUE DU GÉNÉRAL FERRIÉ",
+      "city": "GRENOBLE",
+      "postal": "38100"
+    },
+    {
+      "name": "HARMONIE MUTUELLE",
+      "street": "143 RUE  BLOMET",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "HELVETIA ASSURANCES SA",
+      "street": "25 QUAI LAMANDE",
+      "city": "LE HAVRE",
+      "postal": "76600"
+    },
+    {
+      "name": "HELVETIA COMPAGNIE SUISSE  D ASSURANCES",
+      "street": "25 QUAI LAMANDE",
+      "city": "LE HAVRE",
+      "postal": "76600"
+    },
+    {
+      "name": "HSBC ASSURANCES VIE (FRANCE)",
+      "street": "15 RUE VERNET",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "IBAMEO",
+      "street": "110 BOULEVARD DE LA SALLE",
+      "city": "BOIGNY SUR BIONNE",
+      "postal": "45760"
+    },
+    {
+      "name": "ICARE ASSURANCE",
+      "street": "93 RUE NATIONALE",
+      "city": "BOULOGNE BILLANCOURT",
+      "postal": "92100"
+    },
+    {
+      "name": "IDENTITES MUTUELLE",
+      "street": "24 BOULEVARD DE COURCELLES",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "IMA ASSURANCES",
+      "street": "118 AVENUE DE PARIS",
+      "city": "NIORT",
+      "postal": "79033"
+    },
+    {
+      "name": "IMHOTEP ASSURANCES",
+      "street": "12 A 14 ROND POINT DES CHAMPS ELYSEES",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "IMPERIO ASSURANCES ET CAPITALISATION",
+      "street": "18 A 20 RUE CLEMENT BAYARD",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "INSTITUTION DE PREVOYANCE BANQUE POPULAIRE",
+      "street": "64 RUE DE LA BOETIE",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "INSTITUTION DE PREVOYANCE DES SALARIES DES ENTREPRISES DU GROUPE DE LA CAISSE DES DEPOTS ET AUTRES COLLECTIVITES",
+      "street": "16 A 18 PLACE DU GENERAL CATROUX",
+      "city": "PARIS CEDEX 17",
+      "postal": "75848"
+    },
+    {
+      "name": "INSTITUTION DE PREVOYANCE DU BATIMENT ET DES TRAVAUX PUBLICS",
+      "street": "7 RUE DU REGARD",
+      "city": "PARIS CEDEX 06",
+      "postal": "75294"
+    },
+    {
+      "name": "INSTITUTION DE RETRAITE PROFESSIONNELLE SUPPLÉMENTAIRE AUSTERLITZ",
+      "street": "30 AVENUE PIERRE MENDES FRANCE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "INSTITUTION NATIONALE DE PREVOYANCE DES REPRESENTANTS",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "INTEGRANCE",
+      "street": "89 RUE DAMREMONT",
+      "city": "PARIS CEDEX 18",
+      "postal": "75882"
+    },
+    {
+      "name": "INTER MUTUELLES ENTREPRISES",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN",
+      "postal": "76100"
+    },
+    {
+      "name": "INTERIALE",
+      "street": "32 RUE BLANCHE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "IPECA-PREVOYANCE",
+      "street": "5 RUE PAUL BARRUEL",
+      "city": "PARIS CEDEX 15",
+      "postal": "75740"
+    },
+    {
+      "name": "IPRIAC",
+      "street": "4  RUE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "IRCEM MUTUELLE",
+      "street": "261 AVENUE DES NATIONS UNIES",
+      "city": "ROUBAIX",
+      "postal": "59100"
+    },
+    {
+      "name": "IRCEM PREVOYANCE",
+      "street": "261 AVENUE DES NATIONS UNIES BP 593",
+      "city": "ROUBAIX CEDEX 1",
+      "postal": "59060"
+    },
+    {
+      "name": "IRP AUTO - IENA PREVOYANCE",
+      "street": "39 AVENUE D IENA",
+      "city": "PARIS",
+      "postal": "75016"
+    },
+    {
+      "name": "IRP AUTO MPA",
+      "street": "39 AVENUE  D IENA",
+      "city": "PARIS CEDEX 16",
+      "postal": "75202"
+    },
+    {
+      "name": "IRP AUTO PREVOYANCE-SANTE",
+      "street": "39 AVENUE D IÉNA",
+      "city": "PARIS CEDEX 16",
+      "postal": "75783"
+    },
+    {
+      "name": "JURIDICA",
+      "street": "1 PLACE VICTORIEN SARDOU",
+      "city": "MARLY LE ROI CEDEX",
+      "postal": "78166"
+    },
+    {
+      "name": "JUST",
+      "street": "53 AVENUE DE VERDUN BP 30259",
+      "city": "VALENCIENNES CEDEX",
+      "postal": "59306"
+    },
+    {
+      "name": "KERIALIS PREVOYANCE",
+      "street": "80 RUE SAINT LAZARE",
+      "city": "PARIS CEDEX 09",
+      "postal": "75455"
+    },
+    {
+      "name": "KLESIA MUT",
+      "street": "4 RUE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "KLESIA PREVOYANCE",
+      "street": "4  RUE MARIE-GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "KLESIA SA",
+      "street": "4 RUE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "L AUXILIAIRE",
+      "street": "50 COURS FRANKLIN ROOSEVELT BP 6402",
+      "city": "LYON CEDEX O6",
+      "postal": "69413"
+    },
+    {
+      "name": "L AUXILIAIRE VIE",
+      "street": "50 COURS FRANKLIN ROOSEVELT BP 6402",
+      "city": "LYON CEDEX 06",
+      "postal": "69413"
+    },
+    {
+      "name": "L EQUITE",
+      "street": "2 RUE PILLET-WILL",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "L ETOILE",
+      "street": "16 AVENUE HOCHE 1er ETAGE",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "L&J RE",
+      "street": "41 RUE MARTRE",
+      "city": "CLICHY",
+      "postal": "92117"
+    },
+    {
+      "name": "LA BANQUE POSTALE ASSURANCE SANTE",
+      "street": "30 BOULEVARD GALLIENI",
+      "city": "ISSY LES MOULINEAUX",
+      "postal": "92130"
+    },
+    {
+      "name": "LA BANQUE POSTALE ASSURANCES IARD",
+      "street": "30 BOULEVARD GALLIENI",
+      "city": "ISSY LES MOULINEAUX",
+      "postal": "92130"
+    },
+    {
+      "name": "LA BANQUE POSTALE PREVOYANCE",
+      "street": "30 BOULEVARD GALLIENI",
+      "city": "ISSY LES MOULINEAUX",
+      "postal": "92130"
+    },
+    {
+      "name": "LA BRESSANE",
+      "street": "94  GRANDE RUE",
+      "city": "BAGE LE CHATEL",
+      "postal": "01380"
+    },
+    {
+      "name": "LA CHOLETAISE",
+      "street": "1 RUE DE LA SARTHE",
+      "city": "CHOLET",
+      "postal": "49306"
+    },
+    {
+      "name": "LA FRANCE MUTUALISTE",
+      "street": "11-13 COURS VALMY   TOUR PACIFIC",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92977"
+    },
+    {
+      "name": "LA FRATERNELLE DE SAINT VINCENT DE PAUL",
+      "street": "MAIRIE",
+      "city": "AMOU",
+      "postal": "40330"
+    },
+    {
+      "name": "LA FRATERNELLE DES TERRITORIAUX",
+      "street": "9 RUE GENERAL FERRIE",
+      "city": "GRENOBLE",
+      "postal": "38100"
+    },
+    {
+      "name": "LA FRATERNELLE MUTUELLE INTERENTREPRISES",
+      "street": "225 AVENUE CHARLES DE GAULLE",
+      "city": "NEUILLY SUR SEINE CEDEX",
+      "postal": "92528"
+    },
+    {
+      "name": "LA FRONTALIERE",
+      "street": "15  TARTRE MARIN BP 43121",
+      "city": "MORTEAU",
+      "postal": "25503"
+    },
+    {
+      "name": "LA GARANTIE MUTUELLE DES FONCTIONNAIRES",
+      "street": "148 RUE ANATOLE FRANCE",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "LA MEDICALE DE FRANCE",
+      "street": "50 A 56 RUE DE LA PROCESSION",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "LA MONDIALE",
+      "street": "32 AVENUE EMILE ZOLA",
+      "city": "MONS EN BAROEUL",
+      "postal": "59370"
+    },
+    {
+      "name": "LA MONDIALE PARTENAIRE",
+      "street": "14-16 BOULEVARD MALESHERBES",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "LA MUTUELLE CATALANE",
+      "street": "20 AVENUE  DE GRANDE BRETAGNE",
+      "city": "PERPIGNAN",
+      "postal": "66029"
+    },
+    {
+      "name": "LA MUTUELLE DE BAGNEAUX",
+      "street": "67 A 69 RUE DU GATINAIS",
+      "city": "BAGNEAUX SUR LOING",
+      "postal": "77167"
+    },
+    {
+      "name": "LA MUTUELLE DES ETUDIANTS",
+      "street": "19 RUE BLANCHE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "LA MUTUELLE GENERALE",
+      "street": "1 A 11 RUE BRILLAT SAVARIN",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "LA MUTUELLE PHOCEENNE ASSURANCE",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "LA MUTUELLE VERTE",
+      "street": "78 COURS LAFAYETTE",
+      "city": "TOULON",
+      "postal": "83000"
+    },
+    {
+      "name": "LA PREVOYANCE ARTISANALE, COMMERCIALE ET SALARIALE",
+      "street": "83 AVENUE DE LA FORET NOIRE BP 77",
+      "city": "STRASBOURG",
+      "postal": "67016"
+    },
+    {
+      "name": "LA PROBITE",
+      "street": "6 AVENUE YOLANDE D ARAGON",
+      "city": "ANGERS",
+      "postal": "49100"
+    },
+    {
+      "name": "LA RURALE",
+      "street": "20 PLACE DE SEINE   TOUR NEPTUNE",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92086"
+    },
+    {
+      "name": "LA SAUVEGARDE",
+      "street": "148 RUE ANATOLE FRANCE",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "LA SECURITE FAMILIALE",
+      "street": "4 RUE DE CLICHY",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "LA SOLIDARITE MUTUALISTE",
+      "street": "32 RUE  DE CAMBRAI",
+      "city": "PARIS",
+      "postal": "75019"
+    },
+    {
+      "name": "LAMIE MUTUELLE",
+      "street": "18 RUE LEON JOUHAUX",
+      "city": "PARIS CEDEX 10",
+      "postal": "75483"
+    },
+    {
+      "name": "LE FINISTERE ASSURANCE",
+      "street": "3 RUE DE KERVILOU",
+      "city": "QUIMPER CEDEX 9",
+      "postal": "29556"
+    },
+    {
+      "name": "LE REFUGE MUTUALISTE AVEYRONNAIS",
+      "street": "5 RUE  SAULIGNAC ET RUE CLAUSEL DE COUSSERGUES BP 50313",
+      "city": "MILLAU CEDEX",
+      "postal": "12103"
+    },
+    {
+      "name": "LES ASSOCIATIONS MUTUELLES  LE CONSERVATEUR",
+      "street": "59 RUE DE LA FAISANDERIE",
+      "city": "PARIS",
+      "postal": "75116"
+    },
+    {
+      "name": "LES MUTUELLES LIGERIENNES",
+      "street": "12 RUE BEAUSOLEIL",
+      "city": "VIEILLEVIGNE",
+      "postal": "44116"
+    },
+    {
+      "name": "LOURMEL SOLUTIONS ASSURANCES",
+      "street": "108 RUE LOURMEL",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "M COMME MUTUELLE",
+      "street": "88 BOULEVARD DE LA LIBERTE CS 80039",
+      "city": "LILLE Cedex",
+      "postal": "59046"
+    },
+    {
+      "name": "MAAF ASSURANCES",
+      "street": "CHABAN",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "MAAF ASSURANCES SA",
+      "street": "CHABAN",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "MAAF SANTE",
+      "street": "CHABAN",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "MAAF VIE",
+      "street": "CHABAN",
+      "city": "CHAURAY",
+      "postal": "79180"
+    },
+    {
+      "name": "MACIFILIA",
+      "street": "2 ET 4 RUE DU PIED DE FOND",
+      "city": "NIORT",
+      "postal": "79000"
+    },
+    {
+      "name": "MACSF EPARGNE RETRAITE",
+      "street": "10 COURS DU TRIANGLE DE L ARCHE",
+      "city": "LA DEFENSE CEDEX",
+      "postal": "92919"
+    },
+    {
+      "name": "MACSF LIBEA",
+      "street": "10 RUE DE VALMY   COURS DU TRANGLE",
+      "city": "PUTEAUX",
+      "postal": "92800"
+    },
+    {
+      "name": "MACSF PREVOYANCE",
+      "street": "10 RUE DE VALMY   COURS DU TRIANGLE",
+      "city": "PUTEAUX",
+      "postal": "92800"
+    },
+    {
+      "name": "MADP ASSURANCES",
+      "street": "44 AVENUE GEORGE V",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MAE",
+      "street": "62 RUE LOUIS BOUILHET",
+      "city": "ROUEN",
+      "postal": "76044"
+    },
+    {
+      "name": "MAE VIE",
+      "street": "62 RUE LOUIS-BOUILHET",
+      "city": "ROUEN CEDEX",
+      "postal": "76044"
+    },
+    {
+      "name": "MAIF VIE",
+      "street": "50 AVENUE SALVADOR ALLENDE",
+      "city": "NIORT",
+      "postal": "79000"
+    },
+    {
+      "name": "MALAKOFF HUMANIS ASSURANCES",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MALAKOFF HUMANIS NATIONALE",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MALAKOFF HUMANIS PREVOYANCE",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS CEDEX 09",
+      "postal": "75317"
+    },
+    {
+      "name": "MALAKOFF HUMANIS RETRAITE SUPPLEMENTAIRE",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MAPA - MUTUELLE D ASSURANCE",
+      "street": "1 RUE ANATOLE CONTRÉ BP 60037",
+      "city": "SAINT JEAN D ANGELY CEDEX",
+      "postal": "17411"
+    },
+    {
+      "name": "MAPA-RCBF VIE",
+      "street": "1 RUE ANATOLE CONTRE",
+      "city": "SAINT JEAN D ANGELY",
+      "postal": "17400"
+    },
+    {
+      "name": "MATMUT & CO",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN",
+      "postal": "76100"
+    },
+    {
+      "name": "MATMUT MUTUALITE",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN",
+      "postal": "76100"
+    },
+    {
+      "name": "MATMUT PROTECTION JURIDIQUE",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN CEDEX 1",
+      "postal": "76030"
+    },
+    {
+      "name": "MATMUT VIE",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN CEDEX 01",
+      "postal": "76030"
+    },
+    {
+      "name": "MBA MUTUELLE",
+      "street": "5 BOULEVARD DE LATTRE DE TASSIGNY",
+      "city": "RENNES",
+      "postal": "35029"
+    },
+    {
+      "name": "MCLR",
+      "street": "37 BOULEVARD VIVIER MERLE",
+      "city": "LYON",
+      "postal": "69003"
+    },
+    {
+      "name": "MFPRECAUTION",
+      "street": "59-61 BIS RUE PERNETY",
+      "city": "PARIS",
+      "postal": "75014"
+    },
+    {
+      "name": "MFPREVOYANCE",
+      "street": "62 RUE JEANNE D ARC",
+      "city": "PARIS CEDEX 13",
+      "postal": "75640"
+    },
+    {
+      "name": "MG UNION",
+      "street": "1 A 11 RUE BRILLAT SAVARIN",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "MGEN FILIA",
+      "street": "3 SQUARE MAX HYMANS",
+      "city": "PARIS CEDEX 15",
+      "postal": "75748"
+    },
+    {
+      "name": "MGEN VIE",
+      "street": "3 SQUARE MAX HYMANS",
+      "city": "PARIS CEDEX 15",
+      "postal": "75748"
+    },
+    {
+      "name": "MIC INSURANCE COMPANY",
+      "street": "28 RUE DE L'AMIRAL HAMELIN",
+      "city": "PARIS",
+      "postal": "75016"
+    },
+    {
+      "name": "MILLEIS VIE",
+      "street": "2 à 22 PLACE DES VINS DE FRANCE",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "MILTIS",
+      "street": "25 COURS ALBERT THOMAS",
+      "city": "LYON",
+      "postal": "69003"
+    },
+    {
+      "name": "MMA IARD",
+      "street": "14 BOULEVARD MARIE ET ALEXANDRE OYON",
+      "city": "LE MANS CEDEX 9",
+      "postal": "72030"
+    },
+    {
+      "name": "MMA IARD ASSURANCES MUTUELLES",
+      "street": "14 BOULEVARD MARIE ET ALEXANDRE OYON",
+      "city": "LE MANS CEDEX 9",
+      "postal": "72030"
+    },
+    {
+      "name": "MMA VIE",
+      "street": "14 BOULEVARD MARIE E T ALEXANDRE OYON",
+      "city": "LE MANS CEDEX 9",
+      "postal": "72030"
+    },
+    {
+      "name": "MMA VIE ASSURANCES MUTUELLES",
+      "street": "14 BOULEVARD MARIE ET ALEXANDRE OYON",
+      "city": "LE MANS CEDEX 9",
+      "postal": "72030"
+    },
+    {
+      "name": "MMH",
+      "street": "22 RUE RENE COCHE",
+      "city": "VANVES CEDEX",
+      "postal": "92175"
+    },
+    {
+      "name": "MNH PREVOYANCE",
+      "street": "331 AVENUE D ANTIBES",
+      "city": "AMILLY",
+      "postal": "45200"
+    },
+    {
+      "name": "MONCEAU GENERALE ASSURANCES",
+      "street": "1 AVENUE DES CITES UNIES D EUROPE",
+      "city": "VENDOME",
+      "postal": "41100"
+    },
+    {
+      "name": "MONCEAU RETRAITE & EPARGNE",
+      "street": "36 A 38  RUE  DE SAINT PETERSBOURG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MTRL UNE MUTUELLE POUR TOUS",
+      "street": "37 AVENUE JEAN JAURES",
+      "city": "LYON",
+      "postal": "69007"
+    },
+    {
+      "name": "MUDETAF(MUTUELLE CONFEDERALE D ASSURANCES DES DEBITANTS DE TABAC DE FRANCE)",
+      "street": "75 RUE D AMSTERDAM",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUT EST",
+      "street": "11 BOULEVARD DU PRESIDENT WILSON",
+      "city": "STRASBOURG CEDEX",
+      "postal": "67082"
+    },
+    {
+      "name": "MUTA SANTE - MUTUELLE ALSACIENNE POUR LA SANTE",
+      "street": "20B RUE DE CHEMNITZ",
+      "city": "MULHOUSE",
+      "postal": "68200"
+    },
+    {
+      "name": "MUTAC",
+      "street": "771 AVENUE ALFRED SAUVY IMMEUBLE LES COROLLYS - ZAC ODE ACTE I",
+      "city": "PEROLS",
+      "postal": "34470"
+    },
+    {
+      "name": "MUTAERO",
+      "street": "34 BOULEVARD RIQUET CS 21504",
+      "city": "TOULOUSE CEDEX 6",
+      "postal": "31015"
+    },
+    {
+      "name": "MUTAME & PLUS",
+      "street": "4 RUE EMILE ENAULT CS 72208",
+      "city": "SAINT LO CEDEX",
+      "postal": "50008"
+    },
+    {
+      "name": "MUTAMI",
+      "street": "70 BOULEVARD MATABIAU BP 7051",
+      "city": "TOULOUSE CEDEX 7",
+      "postal": "31069"
+    },
+    {
+      "name": "MUTARIS CAUTION",
+      "street": "1 A 11 RUE BRILLAT SAVARIN",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "MUTAVIE SE",
+      "street": "9 RUE DES IRIS",
+      "city": "BESSINES",
+      "postal": "79000"
+    },
+    {
+      "name": "MUTEX",
+      "street": "140 AVENUE  DE LA REPUBLIQUE",
+      "city": "CHATILLON",
+      "postal": "92320"
+    },
+    {
+      "name": "MUTEX UNION",
+      "street": "125 AVENUE DE PARIS",
+      "city": "CHATILLON CEDEX",
+      "postal": "92327"
+    },
+    {
+      "name": "MUTLOG GARANTIES",
+      "street": "75 QUAI DE LA SEINE",
+      "city": "PARIS",
+      "postal": "75019"
+    },
+    {
+      "name": "MUTLOR LES MUTUELLES DE LORRAINE",
+      "street": "11 RUE DU COLONEL MERLIN CS 21415",
+      "city": "LONGWY CEDEX",
+      "postal": "54414"
+    },
+    {
+      "name": "MUTUAIDE ASSISTANCE",
+      "street": "126 RUE DE LA PIAZZA",
+      "city": "NOISY-LE-GRAND",
+      "postal": "93160"
+    },
+    {
+      "name": "MUTUALE, LA MUTUELLE FAMILIALE",
+      "street": "6 RUE GALILEE",
+      "city": "LA CHAUSSEE SAINT VICTOR",
+      "postal": "41260"
+    },
+    {
+      "name": "MUTUALIA ALLIANCE SANTE",
+      "street": "1 RUE ANDRE GATOUX",
+      "city": "ARRAS CEDEX",
+      "postal": "62024"
+    },
+    {
+      "name": "MUTUALIA GRAND OUEST",
+      "street": "6 RUE ANITA CONTI PARC D ACTIVITE DE LAROISEAU  CS 82320",
+      "city": "VANNES CEDEX",
+      "postal": "56008"
+    },
+    {
+      "name": "MUTUALIA TERRITOIRES SOLIDAIRES",
+      "street": "75 AVENUE GABRIEL PERI",
+      "city": "SAINT MARTIN D HERES",
+      "postal": "38400"
+    },
+    {
+      "name": "MUTUALITE DE LA REUNION",
+      "street": "14 BOULEVARD DORET BP 340",
+      "city": "SAINT DENIS CEDEX (REUNION)",
+      "postal": "97467"
+    },
+    {
+      "name": "MUTUALITE FAMILIALE DU CORPS MEDICAL FRANCAIS DIT MUTUELLE DU MEDECIN",
+      "street": "31 AVENUE DE L OPERA",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "MUTUALP",
+      "street": "144 RUE GARIBALDI",
+      "city": "LYON",
+      "postal": "69006"
+    },
+    {
+      "name": "MUTUELLE  DES TERRITORIAUX  ET HOSPITALIERS",
+      "street": "30 RUE SERVIENT",
+      "city": "LYON",
+      "postal": "69003"
+    },
+    {
+      "name": "MUTUELLE 403",
+      "street": "16 RUE RENE GOSCINNY  CS 20000",
+      "city": "ANGOULEME CEDEX",
+      "postal": "16013"
+    },
+    {
+      "name": "MUTUELLE ACCIDENTS DE LA CONFEDERATION GENERALE DES OEUVRES LAIQUES",
+      "street": "3 RUE RECAMIER",
+      "city": "PARIS",
+      "postal": "75007"
+    },
+    {
+      "name": "MUTUELLE ACTIVE DES ORGANISMES SOCIAUX ET DIVERS",
+      "street": "3 AVENUE JULES CANTINI",
+      "city": "MARSEILLE",
+      "postal": "13006"
+    },
+    {
+      "name": "MUTUELLE AIDE ET SOLIDARITE",
+      "street": "12 PLACE PAUL VAILLANT COUTURIER",
+      "city": "ISSY LES MOULINEAUX",
+      "postal": "92130"
+    },
+    {
+      "name": "MUTUELLE ALSACE LORRAINE JURA",
+      "street": "6 BOULEVARD DE L  EUROPE BP 3169",
+      "city": "MULHOUSE CEDEX",
+      "postal": "68063"
+    },
+    {
+      "name": "MUTUELLE ASSURANCE DE L EDUCATION",
+      "street": "62 RUE LOUIS BOUILHET",
+      "city": "ROUEN CEDEX",
+      "postal": "76044"
+    },
+    {
+      "name": "MUTUELLE ASSURANCE DES COMMERCANTS ET INDUSTRIELS DE FRANCE ET DES CADRES ET SALARIES DE L INDUSTRIE ET DU COMMERCE",
+      "street": "2 ET 4 RUE DE PIED DE FOND",
+      "city": "NIORT CEDEX 9",
+      "postal": "79037"
+    },
+    {
+      "name": "MUTUELLE ASSURANCE DES INSTITUTEURS DE FRANCE",
+      "street": "200 AVENUE SALVADOR ALLENDE",
+      "city": "NIORT CEDEX 09",
+      "postal": "79038"
+    },
+    {
+      "name": "MUTUELLE ASSURANCE DES TRAVAILLEURS MUTUALISTES",
+      "street": "66 RUE DE SOTTEVILLE",
+      "city": "ROUEN",
+      "postal": "76100"
+    },
+    {
+      "name": "MUTUELLE ASSURANCE DU MIDI",
+      "street": "14 AVENUE DU GRAND RAMIER",
+      "city": "TOULOUSE",
+      "postal": "31500"
+    },
+    {
+      "name": "MUTUELLE AUTOnameE GENERALE EDUCATION",
+      "street": "43 RUE JABOULAY",
+      "city": "LYON CEDEX 07",
+      "postal": "69349"
+    },
+    {
+      "name": "MUTUELLE BATIMENTRAIDE",
+      "street": "8 RUE LOUIS ARMAND",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "MUTUELLE BLEUE",
+      "street": "68 RUE DU ROCHER",
+      "city": "PARIS CEDEX 08",
+      "postal": "75396"
+    },
+    {
+      "name": "MUTUELLE BOISSIERE DU BTP",
+      "street": "38 RUE GUY DE MAUPASSANT",
+      "city": "ROUEN",
+      "postal": "76000"
+    },
+    {
+      "name": "MUTUELLE CARCEPT PREV",
+      "street": "4  RUE  GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "MUTUELLE CENTRALE D ASSURANCES",
+      "street": "36 A 38  RUE DE SAINT PETERSBOURG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE CENTRALE DE REASSURANCE",
+      "street": "36 A 38  RUE DE SAINT PETERSBOURG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE CENTRALE DES FINANCES",
+      "street": "5 A 7 AVENUE DE PARIS CS 40009",
+      "city": "VINCENNES",
+      "postal": "94306"
+    },
+    {
+      "name": "MUTUELLE CHEMINOTS NORD",
+      "street": "52 BOULEVARD CARNOT",
+      "city": "LILLE",
+      "postal": "59000"
+    },
+    {
+      "name": "MUTUELLE CHIRURGICALE MEDICALE CORSE",
+      "street": "2 AVENUE DE LA GRANDE ARMEE   IMMEUBLE LE ROND POINT",
+      "city": "AJACCIO",
+      "postal": "20000"
+    },
+    {
+      "name": "MUTUELLE CITRAM",
+      "street": "9 AVENUE PUY PELAT BASSENS",
+      "city": "CARBON BLANC CEDEX",
+      "postal": "33530"
+    },
+    {
+      "name": "MUTUELLE COMPLEMENTAIRE ASSURANCE MALADIE INTERDEPARTEMENTALE FAMILIALE",
+      "street": "21 RUE DU FAUBOURG SAINT ANTOINE",
+      "city": "PARIS",
+      "postal": "75011"
+    },
+    {
+      "name": "MUTUELLE COMPLEMENTAIRE D ALSACE",
+      "street": "6 ROUTE DE ROUFFACH CS 40062",
+      "city": "COLMAR CEDEX",
+      "postal": "68027"
+    },
+    {
+      "name": "MUTUELLE COMPLEMENTAIRE DE LA VILLE DE PARIS, DE L ASSISTANCE PUBLIQUE ET DES ADMINISTRATIONS ANNEXES",
+      "street": "52 RUE DE SEVIGNE",
+      "city": "PARIS",
+      "postal": "75003"
+    },
+    {
+      "name": "MUTUELLE CYBELE SOLIDARITE",
+      "street": "1 RUE WINSTON CHURCHILL - DOMAINE DES TOURELLES",
+      "city": "MERIGNAC",
+      "postal": "33700"
+    },
+    {
+      "name": "MUTUELLE D ARGENSON ET DES FONCTIONNAIRES DE L ENSEIGNEMENT PUBLIC",
+      "street": "7 A 9 VILLA DE LOURCINE",
+      "city": "PARIS",
+      "postal": "75014"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCE DE L ARTISANAT DES TRANSPORTS",
+      "street": "34 RUE KLEBER",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCE DE LA VILLE DE THANN",
+      "street": "78 FAUBOURG DES VOSGES",
+      "city": "THANN",
+      "postal": "68800"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCE DES ARMEES",
+      "street": "27 RUE DE MADRID",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCE DU PERSONNEL EXTERIEUR SALARIE DU GROUPE AXA",
+      "street": "313 TERRASSES DE L ARCHE",
+      "city": "NANTERRE CEDEX",
+      "postal": "92727"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCE SOLIDAIRE",
+      "street": "39 RUE DE JOURDIL",
+      "city": "CRAN GEVRIER",
+      "postal": "74690"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCES DE LA VILLE DE COLMAR",
+      "street": "5 RUE  ETROITE",
+      "city": "COLMAR",
+      "postal": "68000"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCES DE LA VILLE DE MULHOUSE",
+      "street": "3 PASSAGE DE L HÔTEL DE VILLE",
+      "city": "MULHOUSE",
+      "postal": "68100"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCES DES TECHNICIENS DE L EDUCATION ROUTIERE",
+      "street": "ALLEE DE LA MARQUE BATIMENT F  CENTRE D AFFAIRES LE MOLINEL",
+      "city": "WASQUEHAL",
+      "postal": "59290"
+    },
+    {
+      "name": "MUTUELLE D ASSURANCES DU CORPS DE SANTE FRANCAIS",
+      "street": "10 RUE DE VALMY   COURS DU TRIANGLE",
+      "city": "PUTEAUX",
+      "postal": "92800"
+    },
+    {
+      "name": "MUTUELLE D ENTRAIDE DE LA MUTUALITE FRANCAISE",
+      "street": "255 RUE DE VAUGIRARD",
+      "city": "PARIS CEDEX 15",
+      "postal": "75719"
+    },
+    {
+      "name": "MUTUELLE D ENTREPRISE 341",
+      "street": "2 RUE  DE LA LIBERTE",
+      "city": "GUEUGNON",
+      "postal": "71130"
+    },
+    {
+      "name": "MUTUELLE D ENTREPRISE DES ETABLISSEMENTS DE LA FONDATION DU BON SAUVEUR D ALBY",
+      "street": "1 RUE LAVAZIERE BP 94",
+      "city": "ALBI CEDEX",
+      "postal": "81003"
+    },
+    {
+      "name": "MUTUELLE D ENTREPRISE DU PERSONNEL DE LA SOCIETE DES EAUX DE MARSEILLE",
+      "street": "25 RUE E DELANGLADE",
+      "city": "MARSEILLE",
+      "postal": "13006"
+    },
+    {
+      "name": "MUTUELLE D ENTREPRISE FACOM",
+      "street": "22 CHEMIN DES MARATS",
+      "city": "CERNY",
+      "postal": "91590"
+    },
+    {
+      "name": "MUTUELLE D ENTREPRISES SCHNEIDER ELECTRIC",
+      "street": "4 RUE DE L'OCTANT   PARC SUD GALAXIE, BATIMENT ALPHA,2 EME ETAGE",
+      "city": "ECHIROLLES",
+      "postal": "38130"
+    },
+    {
+      "name": "MUTUELLE D EPARGNE DE RETRAITE ET DE PREVOYANCE CARAC",
+      "street": "159 AVENUE ACHILLE PERETTI CS 40091",
+      "city": "NEUILLY SUR SEINE CEDEX",
+      "postal": "92200"
+    },
+    {
+      "name": "MUTUELLE D IVRY LA FRATERNELLE",
+      "street": "23 RUE YVES TOUDIC",
+      "city": "PARIS CEDEX 10",
+      "postal": "75481"
+    },
+    {
+      "name": "MUTUELLE D OUEST FRANCE",
+      "street": "10 RUE DU BREIL",
+      "city": "RENNES CEDEX 9",
+      "postal": "35051"
+    },
+    {
+      "name": "MUTUELLE DASSAULT AVIATION BIARRITZ",
+      "street": "8 AVENUE MARCEL DASSAULT",
+      "city": "ANGLET",
+      "postal": "64600"
+    },
+    {
+      "name": "MUTUELLE D'ASSURANCE DE LA BOULANGERIE",
+      "street": "27 AVENUE D EYLAU",
+      "city": "PARIS CEDEX 16",
+      "postal": "75782"
+    },
+    {
+      "name": "MUTUELLE DE FRANCE ALPES DU SUD",
+      "street": "16 AVENUE DES ARCADES BP 2",
+      "city": "SISTERON CEDEX",
+      "postal": "04201"
+    },
+    {
+      "name": "MUTUELLE DE FRANCE DES HOSPITALIERS",
+      "street": "CHU GRENOBLE BP 217",
+      "city": "GRENOBLE CEDEX 9",
+      "postal": "38043"
+    },
+    {
+      "name": "MUTUELLE DE FRANCE DES HOSPITALIERS, DES PERSONNELS ET PROFESSIONNELS DE SANTE, DE L ACTION SOCIALE, DES TERRITORIAUX, PUBLICS ET PRIVES",
+      "street": "310 AVENUE EUGENE AVINEE PARC EURASANTE OUEST",
+      "city": "LOOS LEZ LILLE",
+      "postal": "59120"
+    },
+    {
+      "name": "MUTUELLE DE FRANCE SAMIR",
+      "street": "7 RUE PASTEUR",
+      "city": "VALENCE",
+      "postal": "26000"
+    },
+    {
+      "name": "MUTUELLE DE FRANCE UNIE",
+      "street": "39 RUE  DU JOURDIL - CRAN GEVRIER BP 9029",
+      "city": "ANNECY CEDEX 9",
+      "postal": "74991"
+    },
+    {
+      "name": "MUTUELLE DE L ENSEIGNEMENT CATHOLIQUE DE L ANJOU",
+      "street": "5 RUE DU HAUT PRESSOIR BP 61028",
+      "city": "ANGERS",
+      "postal": "49010"
+    },
+    {
+      "name": "MUTUELLE DE L ENSEIGNEMENT CATHOLIQUE DES COTES D ARMOR",
+      "street": "7 RUE JULES VERNE",
+      "city": "SAINT BRIEUC",
+      "postal": "22000"
+    },
+    {
+      "name": "MUTUELLE DE L ENSEIGNEMENT PRIVE CATHOLIQUE DE LA MAYENNE",
+      "street": "10 RUE D AVESNIERES BP 31225",
+      "city": "LAVAL CEDEX",
+      "postal": "53012"
+    },
+    {
+      "name": "MUTUELLE DE L EST LA BRESSE",
+      "street": "8 AVENUE LOUIS JOURDAN BP 158",
+      "city": "BOURG EN BRESSE",
+      "postal": "01004"
+    },
+    {
+      "name": "MUTUELLE DE L ILE DE LA CITE",
+      "street": "37 A 39 RUE  DE L AMIRAL MOUCHEZ",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "MUTUELLE DE L INDUSTRIE DU PETROLE",
+      "street": "178 RUE MONTMARTRE",
+      "city": "PARIS",
+      "postal": "75096"
+    },
+    {
+      "name": "MUTUELLE DE L'IRSID",
+      "street": "VOIE ROMAINE BP 30320",
+      "city": "MAIZIERES LES METZ CEDEX",
+      "postal": "57283"
+    },
+    {
+      "name": "MUTUELLE DE L OISE DES AGENTS TERRITORIAUX",
+      "street": "21 RUE JULES FERRY",
+      "city": "BEAUVAIS CEDEX",
+      "postal": "60004"
+    },
+    {
+      "name": "MUTUELLE DE L OUEST",
+      "street": "58 BOULEVARD HUBERT DELISLE BP 388",
+      "city": "SAINT PIERRE CEDEX (REUNION)",
+      "postal": "97457"
+    },
+    {
+      "name": "MUTUELLE DE LA CORSE",
+      "street": "8 A 10 AVENUE MARECHAL SEBASTIANI",
+      "city": "BASTIA",
+      "postal": "20200"
+    },
+    {
+      "name": "MUTUELLE DE LA MEDITERRANEE",
+      "street": "IMPASSE GAY LUSSAC",
+      "city": "LA SEYNE SUR MER",
+      "postal": "83500"
+    },
+    {
+      "name": "MUTUELLE DE LA PAPETERIE D ARCHES",
+      "street": "48 ROUTE DE REMIREMONT",
+      "city": "ARCHES",
+      "postal": "88380"
+    },
+    {
+      "name": "MUTUELLE DE LA POLICE NATIONALE",
+      "street": "1 RUE DE ROSHEIM BP 50024",
+      "city": "SCHILTIGHEIM CEDEX",
+      "postal": "67301"
+    },
+    {
+      "name": "MUTUELLE DE LA VERRERIE D ALBI",
+      "street": "RUE FRANCOIS ARAGO",
+      "city": "ALBI CEDEX 09",
+      "postal": "81011"
+    },
+    {
+      "name": "MUTUELLE DE POITIERS ASSURANCES",
+      "street": "LIEU DIT BOIS DU FIEF CLAIRET",
+      "city": "LIGUGE",
+      "postal": "86240"
+    },
+    {
+      "name": "MUTUELLE DE PONTOISE",
+      "street": "77 BIS RUE DE GISORS - \nRésidence WIMBLEDON",
+      "city": "PONTOISE",
+      "postal": "95300"
+    },
+    {
+      "name": "MUTUELLE DE PREVOYANCE ET DE L HABITAT DE LA REUNION",
+      "street": "112 TER AVENUE PIERRE MENDES FRANCE",
+      "city": "SAINTE SUZANNE (REUNION)",
+      "postal": "97441"
+    },
+    {
+      "name": "MUTUELLE DE PREVOYANCE ET DE SANTE",
+      "street": "13 RUE DE LA MAIRIE",
+      "city": "CHATILLON",
+      "postal": "92324"
+    },
+    {
+      "name": "MUTUELLE DE PREVOYANCE INTERPROFESSIONNELLE",
+      "street": "9 RUE BACHAUMONT",
+      "city": "PARIS",
+      "postal": "75002"
+    },
+    {
+      "name": "MUTUELLE DE SAINT JUNIEN",
+      "street": "27  RUE LUCIEN DUMAS",
+      "city": "SAINT JUNIEN",
+      "postal": "87200"
+    },
+    {
+      "name": "MUTUELLE DE SAINT SIMON",
+      "street": "14 RUE RENE CASSIN",
+      "city": "MELUN",
+      "postal": "77000"
+    },
+    {
+      "name": "MUTUELLE DES AFFAIRES ETRANGERES ET EUROPEENNES",
+      "street": "37 QUAI D ORSAY",
+      "city": "PARIS",
+      "postal": "75007"
+    },
+    {
+      "name": "MUTUELLE DES ANCIENS DES CHANTIERS LA ROCHELLE PALLICE",
+      "street": "11 RUE LEO LAGRANGE",
+      "city": "DOMPIERRE SUR MER",
+      "postal": "17139"
+    },
+    {
+      "name": "MUTUELLE DES ARCHITECTES FRANCAIS ASSURANCES",
+      "street": "189 BOULEVARD MALESHERBES",
+      "city": "PARIS CEDEX 17",
+      "postal": "75856"
+    },
+    {
+      "name": "MUTUELLE DES ASSURES SOCIAUX",
+      "street": "393 AVENUE DU PRADO",
+      "city": "MARSEILLE",
+      "postal": "13008"
+    },
+    {
+      "name": "MUTUELLE DES AUTEURS ET COMPOSITEURS DRAMATIQUES",
+      "street": "9 RUE BALLU",
+      "city": "PARIS CEDEX 09",
+      "postal": "75442"
+    },
+    {
+      "name": "MUTUELLE DES CHAMBRES DE COMMERCE ET D INDUSTRIE",
+      "street": "26 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "MUTUELLE DES CHEMINOTS DE LA REGION DE NANTES",
+      "street": "4 PLACE DES JACOBINS",
+      "city": "NANTES",
+      "postal": "44000"
+    },
+    {
+      "name": "MUTUELLE DES CHEMINOTS DE NORMANDIE",
+      "street": "39 RUE DU 11 NOVEMBRE",
+      "city": "CAEN",
+      "postal": "14000"
+    },
+    {
+      "name": "MUTUELLE DES CLERCS ET EMPLOYES NOTAIRES",
+      "street": "22 RUE DE L ARCADE",
+      "city": "PARIS CEDEX 8",
+      "postal": "75397"
+    },
+    {
+      "name": "MUTUELLE DES CLINIQUES DE FRANCE",
+      "street": "28 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "MUTUELLE DES ELUS LOCAUX",
+      "street": "26 BOULEVARD DE SEBASTOPOL",
+      "city": "PARIS",
+      "postal": "75004"
+    },
+    {
+      "name": "MUTUELLE DES EMPLOYES TERRITORIAUX DE SAINT RAPHAEL",
+      "street": "HOTEL DE VILLE BP 80160",
+      "city": "SAINT RAPHAEL CEDEX",
+      "postal": "83701"
+    },
+    {
+      "name": "MUTUELLE DES ENTREPRISES  DES INDEPENDANTS DU COMMERCE ET DE L INDUSTRIE ET DES SERVICES",
+      "street": "18 RUE DE L AMIRAL HAMELIN",
+      "city": "PARIS CEDEX 16",
+      "postal": "75780"
+    },
+    {
+      "name": "MUTUELLE DES ETUDIANTS DE PROVENCE",
+      "street": "10 RUE LEON PAULET CS 40042",
+      "city": "MARSEILLE CEDEX 08",
+      "postal": "13417"
+    },
+    {
+      "name": "MUTUELLE DES ETUDIANTS DU NORD ET DU NORD OUEST",
+      "street": "43 BOULEVARD DE LA LIBERTE",
+      "city": "LILLE CEDEX",
+      "postal": "59040"
+    },
+    {
+      "name": "MUTUELLE DES HOPITAUX DE LA VIENNE",
+      "street": "RUE  DE LA MILETRIE PAVILLON RENE LE BLAYE   BP 59",
+      "city": "POITIERS CEDEX",
+      "postal": "86002"
+    },
+    {
+      "name": "MUTUELLE DES HOSPITALIERS DE ST ETIENNE",
+      "street": "44 RUE POINTE CADET",
+      "city": "SAINT ETIENNE",
+      "postal": "42055"
+    },
+    {
+      "name": "MUTUELLE DES ILES SAINT-PIERRE ET MIQUELON",
+      "street": "52 RUE MARÉCHAL FOCH BP 1112",
+      "city": "SAINT PIERRE ET MIQUELON",
+      "postal": "97500"
+    },
+    {
+      "name": "MUTUELLE DES INDUSTRIES AERONAUTIQUES SPATIALES ET CONNEXES",
+      "street": "38 RUE LOUIS ROUQUIER",
+      "city": "LEVALLOIS-PERRET CEDEX",
+      "postal": "92532"
+    },
+    {
+      "name": "MUTUELLE DES INTERNES ET ANCIENS INTERNES DES HOPITAUX DE MARSEILLE",
+      "street": "270 BOULEVARD DE SAINTE MARGUERITE   HOPITAL SAINTE MARGUERITE",
+      "city": "MARSEILLE",
+      "postal": "13009"
+    },
+    {
+      "name": "MUTUELLE DES METIERS ELECTRONIQUE ET INFORMATIQUE",
+      "street": "122 RUE DE JAVEL",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "MUTUELLE DES ORGANISMES SOCIAUX",
+      "street": "8 ROND POINT  DE LA NATION IMMEUBLE APOGEE B",
+      "city": "DIJON",
+      "postal": "21000"
+    },
+    {
+      "name": "MUTUELLE DES ORPHELINS CHARLES EDMOND FLAMAND",
+      "street": "139 RUE DU FAUBOURG ST DENIS",
+      "city": "PARIS",
+      "postal": "75010"
+    },
+    {
+      "name": "MUTUELLE DES PAYS DE VAUCLUSE",
+      "street": "16 RUE ALEXANDRE BLANC",
+      "city": "AVIGNON",
+      "postal": "84000"
+    },
+    {
+      "name": "MUTUELLE DES PAYS DE VILAINE",
+      "street": "13 RUE DES DOUVES  BP 90646",
+      "city": "REDON CEDEX",
+      "postal": "35506"
+    },
+    {
+      "name": "MUTUELLE DES PERES ET MERES DE FAMILLE DU MORNE PITAULT LAMENTIN",
+      "street": "CHEMIN LA MICHELE MORNE PITAULT",
+      "city": "LE LAMENTIN (MARTINIQUE)",
+      "postal": "97232"
+    },
+    {
+      "name": "MUTUELLE DES PERSONNELS DU CENTRE HOSPITALIER D ALES",
+      "street": "811 AVENUE DU DOCTEUR JEAN GOUBERT BP 20139",
+      "city": "ALES CEDEX",
+      "postal": "30103"
+    },
+    {
+      "name": "MUTUELLE DES PERSONNELS DU CH MONTPERRIN",
+      "street": "109 AVENUE DU PETIT BARTHELEMY",
+      "city": "AIX EN PROVENCE",
+      "postal": "13617"
+    },
+    {
+      "name": "MUTUELLE DES PERSONNELS MARITIMES",
+      "street": "32 RUE MAZENOD",
+      "city": "MARSEILLE",
+      "postal": "13002"
+    },
+    {
+      "name": "MUTUELLE DES PROFESSIONS JUDICIAIRES",
+      "street": "35 BOULEVARD BRUNE",
+      "city": "PARIS",
+      "postal": "75014"
+    },
+    {
+      "name": "MUTUELLE DES RESIDENTS DE L'OUEST",
+      "street": "13 RUE DE L EGLISE",
+      "city": "LES AVIRONS (REUNION)",
+      "postal": "97425"
+    },
+    {
+      "name": "MUTUELLE DES RETRAITES AGF ET ALLIANZ",
+      "street": "13/27 ESPLANADE CHARLES DE GAULLE QUARTIER MICHELET",
+      "city": "PUTEAUX LA DEFENSE",
+      "postal": "92800"
+    },
+    {
+      "name": "MUTUELLE DES RISQUES D ASSURANCES DES CAISSES D EPARGNE DE FRANCE - MURACEF",
+      "street": "5 RUE MASSERAN",
+      "city": "PARIS",
+      "postal": "75007"
+    },
+    {
+      "name": "MUTUELLE DES SAPEURS POMPIERS DE PARIS",
+      "street": "104 AVENUE DE FONTAINEBLEAU",
+      "city": "LE KREMLIN BICETRE",
+      "postal": "94270"
+    },
+    {
+      "name": "MUTUELLE DES SAPEURS POMPIERS DU GERS",
+      "street": "59 ROUTE DE PESSAN RESIDENCE STE BARBE",
+      "city": "AUCH",
+      "postal": "32000"
+    },
+    {
+      "name": "MUTUELLE DES SCOP ET DES SCIC",
+      "street": "12 QUAI DE LA MEGISSERIE",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "MUTUELLE DES SERVICES PUBLICS",
+      "street": "1 RUE F MOISSON  MAISON DE LA MUTUALITE",
+      "city": "MARSEILLE",
+      "postal": "13002"
+    },
+    {
+      "name": "MUTUELLE DES SPORTIFS",
+      "street": "2 A 4 RUE LOUIS DAVID",
+      "city": "PARIS",
+      "postal": "75016"
+    },
+    {
+      "name": "MUTUELLE DES TRANSPORTS",
+      "street": "29 RUE PASTORELLI",
+      "city": "NICE",
+      "postal": "06000"
+    },
+    {
+      "name": "MUTUELLE DES TRANSPORTS EN COMMUN DE L AGGLOMERATION TROYENNE",
+      "street": "20 RUE AUX MOINES",
+      "city": "TROYES",
+      "postal": "10901"
+    },
+    {
+      "name": "MUTUELLE DES TRAVAILLEURS DES ENTREPRISES PRIVEES",
+      "street": "45 RUE CHARLES GOUNOD",
+      "city": "SAINT DENIS (REUNION)",
+      "postal": "97400"
+    },
+    {
+      "name": "MUTUELLE DU BATIMENT DES TRAVAUX PUBLICS DU NORD DES AUTRES REGIONS DE FRANCE ET D'EUROPE",
+      "street": "ALLEE DE LA MARQUE   CENTRE D AFFAIRES LE MOLINEL BAT D CS 41001",
+      "city": "WASQUEHAL CEDEX",
+      "postal": "59447"
+    },
+    {
+      "name": "MUTUELLE DU BATIMENT ET DES TRAVAUX PUBLICS DU SUD-EST ET DES REGIONS DE FRANCE",
+      "street": "5 RUE JEAN MARIE CHAVANT",
+      "city": "LYON",
+      "postal": "69369"
+    },
+    {
+      "name": "MUTUELLE DU CHAMPAGNE",
+      "street": "14 BOULEVARD DIEU LUMIERE",
+      "city": "REIMS",
+      "postal": "51100"
+    },
+    {
+      "name": "MUTUELLE DU CHU ET HOPITAUX DU PUY DE DOME",
+      "street": "2 RUE  TOUSSAINT LOUVERTURE",
+      "city": "CLERMONT FERRAND",
+      "postal": "63100"
+    },
+    {
+      "name": "MUTUELLE DU GRAND PORT MARITIME DU HAVRE",
+      "street": "TERRE PLEIN DE LA BARRE - CS 81413",
+      "city": "LE HAVRE CEDEX",
+      "postal": "76067"
+    },
+    {
+      "name": "MUTUELLE DU GROUPE BNP PARIBAS",
+      "street": "16 BOULEVARD DES ITALIENS",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MUTUELLE DU LOGEMENT MUTLOG",
+      "street": "75 QUAI DE LA SEINE",
+      "city": "PARIS",
+      "postal": "75019"
+    },
+    {
+      "name": "MUTUELLE DU MINISTERE DE LA JUSTICE",
+      "street": "53 RUE DE RIVOLI",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "MUTUELLE DU PAYS MARTEGAL",
+      "street": "AVENUE CALMETTE ET GUERIN",
+      "city": "MARTIGUES",
+      "postal": "13500"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DE L AGENCE FRANCE PRESSE - AFP",
+      "street": "13 PLACE DE LA BOURSE",
+      "city": "PARIS",
+      "postal": "75002"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DE L EST REPUBLICAIN",
+      "street": "RUE THEOPHRASTE RENAUDOT NANCY HOUDEMONT",
+      "city": "HEILLECOURT",
+      "postal": "54185"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DE LA BANQUE POPULAIRE DU SUD",
+      "street": "38 BOULEVARD GEORGES CLEMENCEAU",
+      "city": "PERPIGNAN CEDEX 09",
+      "postal": "66966"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DE LA COMPAGNIE FERMIERE DE VICHY",
+      "street": "1 ET 3 AVENUE EISENHOWER",
+      "city": "VICHY",
+      "postal": "03200"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DE LA MACIF",
+      "street": "2 ET 4 RUE DE PIED DE FOND",
+      "city": "NIORT",
+      "postal": "79037"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DES COLLECTIVITES TERRITORIALES DE LA REUNION",
+      "street": "112 TER AVENUE PIERRE MENDES FRANCE",
+      "city": "SAINTE SUZANNE (REUNION)",
+      "postal": "97441"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DES ORGANISMES SOCIAUX",
+      "street": "32 RUE DU 71EME  RI",
+      "city": "SAINT BRIEUC",
+      "postal": "22000"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DES ORGANISMES SOCIAUX ET SIMILAIRES DE LA REGION MIDI PYRENEES",
+      "street": "174 AVENUE DES MINIMES",
+      "city": "TOULOUSE",
+      "postal": "31200"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DES PORTS DU DETROIT",
+      "street": "54  RUE DU QUAI DE LA LOIRE PORT DE CALAIS",
+      "city": "CALAIS",
+      "postal": "62100"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DES TRANSPORTS URBAINS DE CANNES",
+      "street": "108 A 114 AVENUE DE LA ROUBINE",
+      "city": "CANNES LA BOCCA CEDEX",
+      "postal": "06156"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DU CHU",
+      "street": "4 RUE  LARREY CHU",
+      "city": "ANGERS CEDEX 9",
+      "postal": "49933"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DU GROUPE RATP",
+      "street": "62 QUAI DE LA RAPEE",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL DU GROUPE SOCIETE GENERALE",
+      "street": "29 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL FLEURY MICHON",
+      "street": "ROUTE DE LA GARE",
+      "city": "POUZAUGES",
+      "postal": "85707"
+    },
+    {
+      "name": "MUTUELLE DU PERSONNEL SALARIE OU RETRAITE DE COOP ATLANTIQUE",
+      "street": "3  RUE  DU DOCTEUR JEAN",
+      "city": "SAINTES",
+      "postal": "17100"
+    },
+    {
+      "name": "MUTUELLE DU REMPART",
+      "street": "4 A 6 BOULEVARD DE STRASBOURG",
+      "city": "TOULOUSE",
+      "postal": "31000"
+    },
+    {
+      "name": "MUTUELLE DU SUD",
+      "street": "58 BOULEVARD HUBERT DELISLE BP 388",
+      "city": "SAINT PIERRE CEDEX (REUNION)",
+      "postal": "97457"
+    },
+    {
+      "name": "MUTUELLE DU VAL DE SEVRE",
+      "street": "6 RUE DU PUY PELE BP 7",
+      "city": "TIFFAUGES",
+      "postal": "85130"
+    },
+    {
+      "name": "MUTUELLE ENSEMBLE",
+      "street": "2 BOULEVARD JACQUES MONOD",
+      "city": "AVIGNON",
+      "postal": "84000"
+    },
+    {
+      "name": "MUTUELLE ENTRAIN",
+      "street": "5 BOULEVARD CAMILLE FLAMMARION   LE MASSILIA",
+      "city": "MARSEILLE",
+      "postal": "13001"
+    },
+    {
+      "name": "MUTUELLE ENTRENOUS",
+      "street": "27 ALLEE ALBERT SYLVESTRE IMMEUBLE OMEGA POLYGONE IV",
+      "city": "CHAMBERY",
+      "postal": "73000"
+    },
+    {
+      "name": "MUTUELLE EPARGNE RETRAITE",
+      "street": "17 RUE DE LA VICTOIRE",
+      "city": "LYON",
+      "postal": "69003"
+    },
+    {
+      "name": "MUTUELLE EPC",
+      "street": "50 AVENUE DAUMESNIL",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE",
+      "street": "52 RUE D HAUTEVILLE",
+      "city": "PARIS",
+      "postal": "75010"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DE L ILE DE FRANCE MFIF",
+      "street": "12  VILLA LAUGIER",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DE L INDRE",
+      "street": "2 AVENUE ANDRE LE NOTRE BP 294",
+      "city": "CHATEAUROUX CEDEX",
+      "postal": "36006"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DE LA REUNION",
+      "street": "112 TER AVENUE PIERRE MENDES FRANCE",
+      "city": "SAINTE SUZANNE (REUNION)",
+      "postal": "97441"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DE NORMANDIE",
+      "street": "1 AVENUE DU 6 JUIN",
+      "city": "LISIEUX",
+      "postal": "14100"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DES CHEMINOTS DE FRANCE",
+      "street": "4 A 22 RUE MARIE GEORGES PICQUART",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DES TRAVAILLEURS DE LA SNECMA",
+      "street": "ROND POINT  RENE RAVAUD BP 7018",
+      "city": "MOISSY CRAMAYEL CEDEX",
+      "postal": "77550"
+    },
+    {
+      "name": "MUTUELLE FAMILIALE DES TRAVAILLEURS DU GROUPE SAFRAN",
+      "street": "RUE HENRY AUGUSTE DESBRUERES BP 151",
+      "city": "EVRY CEDEX",
+      "postal": "91005"
+    },
+    {
+      "name": "MUTUELLE FRANC AU DECES DE TROIS BASSINS",
+      "street": "58 BOULEVARD HUBERT DELISLE BP 388",
+      "city": "SAINT PIERRE CEDEX (REUNION)",
+      "postal": "97457"
+    },
+    {
+      "name": "MUTUELLE FRATERNELLE D ASSURANCES",
+      "street": "6 RUE FOURNIER BP 311",
+      "city": "CLICHY CEDEX",
+      "postal": "92111"
+    },
+    {
+      "name": "MUTUELLE GENERALE D AVIGNON",
+      "street": "375 RUE PIERRE SEGHERS IMMEUBLE LE POLARIS - CAP SUD",
+      "city": "AVIGNON",
+      "postal": "84000"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE L ECOnameIE, DES FINANCES ET DE L INDUSTRIE",
+      "street": "6 RUE BOUCHARDON -  CS 50070",
+      "city": "PARIS CEDEX 10",
+      "postal": "75481"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE L EDUCATION NATIONALE",
+      "street": "3 SQUARE MAX  HYMANS",
+      "city": "PARIS CEDEX 15",
+      "postal": "75748"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE LA DISTRIBUTION",
+      "street": "5 RUE GEOFFROY MARIE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE LA POLICE DITE MGP",
+      "street": "10 RUE DES SAUSSAIES",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE PREVOYANCE",
+      "street": "39 RUE DU JOURDIL",
+      "city": "CRAN GEVRIER",
+      "postal": "74960"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE PREVOYANCE ET D ASSISTANCE",
+      "street": "ROCHES CARRÉES",
+      "city": "LE LAMENTIN (MARTINIQUE)",
+      "postal": "97232"
+    },
+    {
+      "name": "MUTUELLE GENERALE DE PREVOYANCE SOCIALE",
+      "street": "BATIMENT B 2EME ETAGE JARRY  CENTRE COMMERCIAL LES GALERIES DE HOUELBOURG",
+      "city": "BAIE MAHAULT (GUADELOUPE)",
+      "postal": "97122"
+    },
+    {
+      "name": "MUTUELLE GENERALE DES AFFAIRES SOCIALES",
+      "street": "96  AVENUE  DE SUFFREN",
+      "city": "PARIS CEDEX 15",
+      "postal": "75730"
+    },
+    {
+      "name": "MUTUELLE GENERALE DES CHEMINOTS",
+      "street": "2 ET 4 PLACE DE L ABBE GEORGES HENOCQUE",
+      "city": "PARIS CEDEX 13",
+      "postal": "75637"
+    },
+    {
+      "name": "MUTUELLE GENERALE DES ETUDIANTS DE L EST",
+      "street": "44 COURS LEOPOLD",
+      "city": "NANCY",
+      "postal": "54000"
+    },
+    {
+      "name": "MUTUELLE GENERALE INTERPROFESSIONNELLE",
+      "street": "108 RUE DE LOURMEL",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "MUTUELLE GENERALE SOLIDARITE DE LA REUNION",
+      "street": "14 BOULEVARD DORET BP 340",
+      "city": "SAINT DENIS CEDEX (REUNION)",
+      "postal": "97467"
+    },
+    {
+      "name": "MUTUELLE GEODIS",
+      "street": "7 A 9 ALLEE DE L EUROPE",
+      "city": "CLICHY CEDEX",
+      "postal": "92615"
+    },
+    {
+      "name": "MUTUELLE GOODYEAR DUNLOP TIRES",
+      "street": "238  ROUTE DE L EMPEREUR",
+      "city": "RUEIL MALMAISON CEDEX",
+      "postal": "92500"
+    },
+    {
+      "name": "MUTUELLE GROUPE LA DEPECHE DU MIDI COMPLEMENTAIRE SANTE",
+      "street": "AVENUE JEAN BAYLET",
+      "city": "TOULOUSE",
+      "postal": "31100"
+    },
+    {
+      "name": "MUTUELLE INTER REGION DES FONCTIONNAIRES TERRITORIAUX",
+      "street": "73 AVENUE DE LA REPUBLIQUE",
+      "city": "MONTLUCON",
+      "postal": "03100"
+    },
+    {
+      "name": "MUTUELLE INTERDIOCESAINE RHONE ET LOIRE",
+      "street": "137 CHEMIN DU PELET",
+      "city": "VERNAISON",
+      "postal": "69390"
+    },
+    {
+      "name": "MUTUELLE INTERENTREPRISES DES CAVES",
+      "street": "2 AVENUE FRANCOIS GALTIER",
+      "city": "ROQUEFORT SUR SOULZON",
+      "postal": "12250"
+    },
+    {
+      "name": "MUTUELLE INTERENTREPRISES DU GAN",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE INTERENTREPRISES DU PERSONNEL DE LA SECURITE SOCIALE DE LA REGION AUVERGNE",
+      "street": "RUE PELISSIER IMMEUBLE CAF CITE ADMINISTRATIVE",
+      "city": "CLERMONT FERRAND CEDEX 9",
+      "postal": "63032"
+    },
+    {
+      "name": "MUTUELLE INTERENTREPRISES ERAM",
+      "street": "BP 10",
+      "city": "MONTREVAULT-SUR- ÈVRE",
+      "postal": "49110"
+    },
+    {
+      "name": "MUTUELLE INTERGROUPES D'ENTRAIDE",
+      "street": "16 AVENUE LOUISON BOBET Immeuble Le Péricentre CS60005",
+      "city": "FONTENAY-SOUS-BOIS CEDEX",
+      "postal": "94132"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONELLE SMI",
+      "street": "2 RUE DE LABORDE",
+      "city": "PARIS",
+      "postal": "75374"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONNELLE ANTILLES GUYANE",
+      "street": "RUE PAUL LACAVE",
+      "city": "POINTE A PITRE (GUADELOUPE)",
+      "postal": "97110"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONNELLE DE PREVOYANCE",
+      "street": "18 RUE BAUDOT",
+      "city": "BASSE TERRE (GUADELOUPE)",
+      "postal": "97100"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONNELLE DU PERSONNEL DES ORGANISMES SOCIAUX",
+      "street": "86 RUE MASSENA",
+      "city": "LYON",
+      "postal": "69006"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONNELLE ECOnameIQUE LIGERIENNE",
+      "street": "11 RUE DU GRIS DE LIN",
+      "city": "SAINT ETIENNE CEDEX 1",
+      "postal": "42021"
+    },
+    {
+      "name": "MUTUELLE INTERPROFESSIONNELLE LES MENAGES PREVOYANTS",
+      "street": "11 RUE ALBERT SARRAUT",
+      "city": "VERSAILLES",
+      "postal": "78000"
+    },
+    {
+      "name": "MUTUELLE KEOLIS RENNES",
+      "street": "RUE JEAN MARIE HUCHET",
+      "city": "RENNES",
+      "postal": "35000"
+    },
+    {
+      "name": "MUTUELLE LA FRANCE MARITIME",
+      "street": "131 AVENUE DU PRADO IMMEUBLE CIRCE",
+      "city": "MARSEILLE",
+      "postal": "13008"
+    },
+    {
+      "name": "MUTUELLE LA SECURITE ASTURIENNE",
+      "street": "UMICORE FRANCE",
+      "city": "AUBY",
+      "postal": "59950"
+    },
+    {
+      "name": "MUTUELLE LE LIBRE CHOIX",
+      "street": "BOULEVARD DE L EUROPE",
+      "city": "MAUBEUGE CEDEX",
+      "postal": "59602"
+    },
+    {
+      "name": "MUTUELLE LE RALLIEMENT",
+      "street": "10 RUE LITTRE",
+      "city": "TOURS",
+      "postal": "37000"
+    },
+    {
+      "name": "MUTUELLE LE TELEGRAMME",
+      "street": "11 RUE ANATOLE LE BRAZ",
+      "city": "MORLAIX",
+      "postal": "29600"
+    },
+    {
+      "name": "MUTUELLE LOIRE FOREZ",
+      "street": "44 RUE DE LA CHAUX",
+      "city": "BOEN SUR LIGNON",
+      "postal": "42130"
+    },
+    {
+      "name": "MUTUELLE MALAKOFF HUMANIS",
+      "street": "21 RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MUTUELLE MARE GAILLARD",
+      "street": "SECTION BERNARD",
+      "city": "LE GOSIER (GUADELOUPE)",
+      "postal": "97190"
+    },
+    {
+      "name": "MUTUELLE MARSEILLE METROPOLE - MUTAME PROVENCE",
+      "street": "4 RUE VENTURE",
+      "city": "MARSEILLE",
+      "postal": "13001"
+    },
+    {
+      "name": "MUTUELLE MATH",
+      "street": "01 BIS BOULEVARD DALGABIO",
+      "city": "SAINT-ETIENNE",
+      "postal": "42000"
+    },
+    {
+      "name": "MUTUELLE MEDICALE CHIRURGICALE ATLANTIQUE",
+      "street": "1 RUE PIERRE CHAREAU LES DIVERSITES",
+      "city": "BORDEAUX",
+      "postal": "33300"
+    },
+    {
+      "name": "MUTUELLE MEDICO-CHIRURGICALE",
+      "street": "6 RUE PAUL MOREL",
+      "city": "VESOUL",
+      "postal": "70000"
+    },
+    {
+      "name": "MUTUELLE MEUSREC",
+      "street": "3 BIS RUE DU STADE BP 24",
+      "city": "BELLEVILLE SUR VIE",
+      "postal": "85170"
+    },
+    {
+      "name": "MUTUELLE MIEUX-ETRE",
+      "street": "171 AVENUE LEDRU ROLLIN",
+      "city": "PARIS",
+      "postal": "75011"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES CONSTRUCTEURS ET ACCEDANTS A LA PROPRIETE",
+      "street": "5 RUE DOSNE",
+      "city": "PARIS",
+      "postal": "75116"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES CONSTRUCTEURS ET ACCEDANTS A LA PROPRIETE - ASSURANCES CAUTION - PROTECTION CHOMAGE",
+      "street": "5 RUE DOSNE",
+      "city": "PARIS",
+      "postal": "75116"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES FONCTIONNAIRES DES COLLECTIVITES TERRITORIALES",
+      "street": "3 RUE FRANKLIN CS 30036",
+      "city": "MONTREUIL CEDEX",
+      "postal": "93108"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES HOSPITALIERS ET DES PROFESSIONNELS DE LA SANTE ET DU SOCIAL",
+      "street": "331 AVENUE D ANTIBES",
+      "city": "AMILLY",
+      "postal": "45200"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES PERSONNELS AIR FRANCE",
+      "street": "3 PLACE DE LONDRES CS 11692 - TREMBLAY EN FRANCE - Bâtiment URANUS 3",
+      "city": "ROISSY CHARLES DE GAULLE CEDEX",
+      "postal": "95725"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DES SAPEURS- POMPIERS DE FRANCE",
+      "street": "32 RUE BREGUET",
+      "city": "PARIS",
+      "postal": "75011"
+    },
+    {
+      "name": "MUTUELLE NATIONALE DU PERSONNEL DES ETABLISSEMENTS MICHELIN",
+      "street": "2 RUE DE BIEN ASSIS",
+      "city": "CLERMONT FERRAND CEDEX 9",
+      "postal": "63040"
+    },
+    {
+      "name": "MUTUELLE NATIONALE TERRITORIALE",
+      "street": "4 A 6 RUE  D ATHENES",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "MUTUELLE NOVAMUT",
+      "street": "31 A 33 RUE CHRISTIAN PFISTER",
+      "city": "NANCY",
+      "postal": "54000"
+    },
+    {
+      "name": "MUTUELLE OCIANE",
+      "street": "35 RUE CLAUDE BONNIER",
+      "city": "BORDEAUX",
+      "postal": "33000"
+    },
+    {
+      "name": "MUTUELLE PRECOCIA",
+      "street": "27 RUE MONTLOSIER",
+      "city": "CLERMONT FERRAND",
+      "postal": "63058"
+    },
+    {
+      "name": "MUTUELLE PREVIFRANCE",
+      "street": "80 RUE MATABIAU BP 71269",
+      "city": "TOULOUSE CEDEX 6",
+      "postal": "31012"
+    },
+    {
+      "name": "MUTUELLE PREVOYANCE ALSACE",
+      "street": "10 RUE DE LA DURANCE BP 50213",
+      "city": "STRASBOURG CEDEX 1",
+      "postal": "67022"
+    },
+    {
+      "name": "MUTUELLE PROVENCE ENTREPRISES",
+      "street": "2504 ROUTE DE SORGUES",
+      "city": "LE PONTET",
+      "postal": "84130"
+    },
+    {
+      "name": "MUTUELLE REGIONALE DES ORGANISMES SOCIAUX DU CENTRE",
+      "street": "26 BOULEVARD MARIE STUART",
+      "city": "ORLEANS",
+      "postal": "45000"
+    },
+    {
+      "name": "MUTUELLE RENAULT",
+      "street": "9 RUE DE CLAMART",
+      "city": "BOULOGNE BILLANCOURT",
+      "postal": "92772"
+    },
+    {
+      "name": "MUTUELLE SAINT MARTIN",
+      "street": "3 RUE DUGUAY TROUIN",
+      "city": "PARIS",
+      "postal": "75006"
+    },
+    {
+      "name": "MUTUELLE SAINT-AUBANNAISE",
+      "street": "1 RUE EMILE BOYOUD -  BP 25",
+      "city": "SAINT AUBAN",
+      "postal": "04600"
+    },
+    {
+      "name": "MUTUELLE SAINT-CHRISTOPHE ASSURANCES",
+      "street": "277 RUE SAINT JACQUES",
+      "city": "PARIS CEDEX 05",
+      "postal": "75256"
+    },
+    {
+      "name": "MUTUELLE SANTE",
+      "street": "3 PARC TERTIAIRE DE VALGORA - CENTRE HERMES   BP60539",
+      "city": "LAVALETTE DU VAR",
+      "postal": "83160"
+    },
+    {
+      "name": "MUTUELLE SANTE DE L UNION NATIONALE DES COMBATTANTS",
+      "street": "5 RUE DU HAVRE",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "MUTUELLE SANTE EIFFAGE ENERGIE",
+      "street": "117 RUE DU LANDY BP 80008",
+      "city": "LA PLAINE SANT DENIS CEDEX",
+      "postal": "93123"
+    },
+    {
+      "name": "MUTUELLE SERVICE D ASSAINISSEMENT MARSEILLE METROPOLE (SERAMM)",
+      "street": "35 BOULEVARD   CAPITAINE GEZE -   PARC DES AYGALADES BT C",
+      "city": "MARSEILLE",
+      "postal": "13014"
+    },
+    {
+      "name": "MUTUELLE SOLIDARITE D'AQUITAINE",
+      "street": "90 AVENUE THIERS",
+      "city": "BORDEAUX CEDEX",
+      "postal": "33072"
+    },
+    {
+      "name": "MUTUELLE SOLIMUT CENTRE OCEAN",
+      "street": "66 RUE DU CHATEAU D EAU",
+      "city": "MAINVILLIERS",
+      "postal": "28300"
+    },
+    {
+      "name": "MUTUELLE TANIN ET PANNEAUX DE LABRUGUIERE",
+      "street": "10 BOULEVARD PASTEUR",
+      "city": "LABRUGUIERE",
+      "postal": "81290"
+    },
+    {
+      "name": "MUTUELLE UNION DES TRAVAILLEURS DE DIEPPE",
+      "street": "38 BOULEVARD GENERAL DE GAULLE",
+      "city": "DIEPPE",
+      "postal": "76200"
+    },
+    {
+      "name": "MUTUELLE VALEO",
+      "street": "78 BOULEVARD SAINT GERMAIN",
+      "city": "PARIS",
+      "postal": "75005"
+    },
+    {
+      "name": "MUTUELLE VAROISE DES TRAVAILLEURS DE L ETAT",
+      "street": "215 PLACE DE LA LIBERTE",
+      "city": "TOULON",
+      "postal": "83000"
+    },
+    {
+      "name": "MUTUELLE VERRIERS ET ASSIMILES",
+      "street": "6 PLACE DU MARCHE",
+      "city": "SAINT-ROMAIN LE PUY",
+      "postal": "42610"
+    },
+    {
+      "name": "MUTUELLE VICTOR HUGO",
+      "street": "9 AVENUE VICTOR HUGO",
+      "city": "EPINAL",
+      "postal": "88000"
+    },
+    {
+      "name": "MUTUELLES DU PAYS HAUT",
+      "street": "10  AVENUE DE SAINTIGNON CS 51418",
+      "city": "LONGWY",
+      "postal": "54414"
+    },
+    {
+      "name": "MUTUELLES DU SOLEIL LIVRE II",
+      "street": "36 A 36 BIS AVENUE DU MARECHAL FOCH",
+      "city": "NICE",
+      "postal": "06000"
+    },
+    {
+      "name": "NAGICO INSURANCE COMPANY LIMITED",
+      "street": "17 RUE DE LA REPUBLIQUE - MARIGOT BP 444",
+      "city": "SAINT MARTIN CEDEX",
+      "postal": "97055"
+    },
+    {
+      "name": "NEUFLIZE VIE",
+      "street": "3 AVENUE HOCHE",
+      "city": "PARIS CEDEX 08",
+      "postal": "75410"
+    },
+    {
+      "name": "NYMPHEA SANTE",
+      "street": "160 RUE HENRI CHAMPION TSA 50002",
+      "city": "LE MANS CEDEX 09",
+      "postal": "72030"
+    },
+    {
+      "name": "OCEANE SANTE SAINTE PHILOMENE",
+      "street": "92 A 94 AVENUE DES CHUTES LAVIE - RESIDENCE HAUTEVILLE OFFICE MARCEL ESQUENET",
+      "city": "MARSEILLE",
+      "postal": "13004"
+    },
+    {
+      "name": "OCIRP",
+      "street": "17 RUE DE MARIGNAN CS 50003",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "OCIRP VIE",
+      "street": "17 RUE DE MARIGNAN CS 50003",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "ODYSSEY RE EUROPE",
+      "street": "15 RUE DU 4 SEPTEMBRE",
+      "city": "PARIS",
+      "postal": "75002"
+    },
+    {
+      "name": "OPTEVEN",
+      "street": "35 A 37 RUE LOUIS GUERIN   LE PATIO",
+      "city": "VILLEURBANNE",
+      "postal": "69100"
+    },
+    {
+      "name": "OPTIM ASSURANCES",
+      "street": "14 RUE PASTEUR",
+      "city": "BOURG EN BRESSE",
+      "postal": "01000"
+    },
+    {
+      "name": "OPTIMUM VIE",
+      "street": "94 RUE DE COURCELLES",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "ORADEA VIE",
+      "street": "17 BIS PLACE DES REFLETS TOUR D2",
+      "city": "PARIS LA DEFENSE 2",
+      "postal": "92919"
+    },
+    {
+      "name": "ORANO ASSURANCE & REASSURANCE",
+      "street": "125 AVENUE DE PARIS",
+      "city": "CHATILLON",
+      "postal": "92320"
+    },
+    {
+      "name": "ORPHELINAT MUTUALISTE DE LA POLICE NATIONALE PREVOYANCE",
+      "street": "44 RUE ROGER SALENGRO",
+      "city": "FONTENAY-SOUS-BOIS",
+      "postal": "94120"
+    },
+    {
+      "name": "PACIFICA",
+      "street": "8 A 10 BOULEVARD DE VAUGIRARD",
+      "city": "PARIS CEDEX 15",
+      "postal": "75724"
+    },
+    {
+      "name": "PANACEA ASSURANCES",
+      "street": "1 BOULEVARD PASTEUR",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "PARNASSE GARANTIES",
+      "street": "1 BIS RUE JEAN WIENER",
+      "city": "CHAMPS SUR MARNE",
+      "postal": "77420"
+    },
+    {
+      "name": "PAVILLON PREVOYANCE",
+      "street": "90 AVENUE THIERS",
+      "city": "BORDEAUX",
+      "postal": "33072"
+    },
+    {
+      "name": "PLEYEL SANTE",
+      "street": "187 BOULEVARD ANATOLE FRANCE",
+      "city": "SAINT DENIS",
+      "postal": "93200"
+    },
+    {
+      "name": "POUEY RENSEIGNEMENT COMMERCIAL GARANTI SA",
+      "street": "11 RUE DE MADRID",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "PREDICA - PREVOYANCE DIALOGUE DU CREDIT AGRICOLE",
+      "street": "16-18 boulevard de Vaugirard",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "PREPAR IARD",
+      "street": "101 QUARTIER BOIELDIEU TOUR FRANKLIN",
+      "city": "PUTEAUX",
+      "postal": "92800"
+    },
+    {
+      "name": "PREPAR VIE",
+      "street": "101 QUARTIER BOIELDIEU TOUR FRANKLIN",
+      "city": "PUTEAUX",
+      "postal": "92800"
+    },
+    {
+      "name": "PREVOIR VIE",
+      "street": "19 RUE D AUMALE",
+      "city": "PARIS CEDEX 09",
+      "postal": "75306"
+    },
+    {
+      "name": "PREVOYANCE AESIO MACIF",
+      "street": "25 PLACE DE LA MADELEINE",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "PREVOYANCE MUTUALISTE D ILE DE FRANCE",
+      "street": "26 RUE DU GENERAL LECLERC",
+      "city": "GROSLAY",
+      "postal": "95410"
+    },
+    {
+      "name": "PRIMA",
+      "street": "37 BOULEVARD BRUNE",
+      "city": "PARIS CEDEX 14",
+      "postal": "75680"
+    },
+    {
+      "name": "PRO BTP EPARGNE-RETRAITE-PREVOYANCE",
+      "street": "7 RUE DU REGARD",
+      "city": "PARIS",
+      "postal": "75006"
+    },
+    {
+      "name": "PROTEC BTP",
+      "street": "8 RUE LOUIS ARMAND",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "PROTECTION MUTUELLE ET FAMILIALE",
+      "street": "30 RUE KAGENECK",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "PROTEXIA FRANCE",
+      "street": "1 COURS MICHELET CS 30051",
+      "city": "PARIS LA DEFENSE CEDEX",
+      "postal": "92076"
+    },
+    {
+      "name": "PRUDENCE CREOLE",
+      "street": "32 RUE ALEXIS DE VILLENEUVE CS 71081",
+      "city": "SAINT-DENIS (REUNION) CEDEX",
+      "postal": "97404"
+    },
+    {
+      "name": "QBE INSURANCE (INTERNATIONAL) LIMITED",
+      "street": "110 ESPLANADE DU GENERAL DE GAULLE   COEUR DEFENSE - TOUR A",
+      "city": "LA DEFENSE CEDEX",
+      "postal": "92931"
+    },
+    {
+      "name": "QUATREM",
+      "street": "21  RUE LAFFITTE",
+      "city": "PARIS",
+      "postal": "75009"
+    },
+    {
+      "name": "RESSOURCES MUTUELLES ASSISTANCE",
+      "street": "46 RUE DU MOULIN BP 62127",
+      "city": "VERTOU CEDEX",
+      "postal": "44121"
+    },
+    {
+      "name": "RETRAITE SUPPLEMENTAIRE BANQUE POPULAIRE",
+      "street": "22 RUE DU CHATEAU",
+      "city": "NEUILLY SUR SEINE",
+      "postal": "92200"
+    },
+    {
+      "name": "REUNION DES MUTUELLES D ASSURANCES REGIONALES",
+      "street": "137 RUE VICTOR HUGO",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "REUNISOLIDARITE",
+      "street": "47 RUE LUC LORION BP 390",
+      "city": "SAINT PIERRE CEDEX (REUNION)",
+      "postal": "97457"
+    },
+    {
+      "name": "S.3.R.",
+      "street": "BOULEVARD DE L EUROPE BP 177",
+      "city": "EVRY COURCOURONNES",
+      "postal": "91006"
+    },
+    {
+      "name": "SAINT-CHRISTOPHE PREVOYANCE",
+      "street": "277 RUE SAINT JACQUES",
+      "city": "PARIS CEDEX 05",
+      "postal": "75256"
+    },
+    {
+      "name": "SANTE MUT ROANNE",
+      "street": "14 RUE ROGER SALENGRO",
+      "city": "ROANNE",
+      "postal": "42300"
+    },
+    {
+      "name": "SCOR EUROPE SE",
+      "street": "5 AVENUE KLEBER",
+      "city": "PARIS",
+      "postal": "75116"
+    },
+    {
+      "name": "SCOR SE",
+      "street": "5 AVENUE KLEBER",
+      "city": "PARIS CEDEX 16",
+      "postal": "75795"
+    },
+    {
+      "name": "SEREINA MUTUELLE",
+      "street": "99 RUE DE LA REPUBLIQUE - RESIDENCE ALBANIA",
+      "city": "AUBAGNE",
+      "postal": "13400"
+    },
+    {
+      "name": "SERENIS ASSURANCES",
+      "street": "25 RUE DU DOCTEUR HENRI ABEL",
+      "city": "VALENCE",
+      "postal": "26000"
+    },
+    {
+      "name": "SEYNA",
+      "street": "20 BIS RUE LOUIS PHILIPPE",
+      "city": "NEUILLY SUR SEINE",
+      "postal": "92200"
+    },
+    {
+      "name": "SHAM VIE",
+      "street": "18 RUE EDOUARD ROCHET",
+      "city": "LYON",
+      "postal": "69008"
+    },
+    {
+      "name": "SM INTERPROFESSIONNELLE DE LA REGION SUD EST DE PARIS",
+      "street": "69 A 71 AVENUE DE CASANOVA BP 39",
+      "city": "IVRY SUR SEINE",
+      "postal": "94200"
+    },
+    {
+      "name": "SMA SA",
+      "street": "8 RUE LOUIS ARMAND",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "SMACL ASSURANCES",
+      "street": "141 AVENUE SALVADOR ALLENDE",
+      "city": "NIORT CEDEX 9",
+      "postal": "79031"
+    },
+    {
+      "name": "SMERRA - MUTUELLE ETUDIANTE",
+      "street": "43 RUE JABOULAY",
+      "city": "LYON CEDEX 07",
+      "postal": "69349"
+    },
+    {
+      "name": "SMPS (SOCIETE MUTUALISTE DU PERSONNEL DE LA SNECMA)",
+      "street": "CHEMIN DE VIERCY",
+      "city": "LIMOGES FOURCHES",
+      "postal": "77550"
+    },
+    {
+      "name": "SO LYON MUTUELLE",
+      "street": "18 RUE GABRIEL PERI CS 30094",
+      "city": "VILLEURBANNE CEDEX",
+      "postal": "69623"
+    },
+    {
+      "name": "SOCIETE ANONYME DE DEFENSE ET D ASSURANCES",
+      "street": "4 RUE SCATISSE",
+      "city": "NIMES CEDEX 9",
+      "postal": "30934"
+    },
+    {
+      "name": "SOCIETE ANONYME GENERALE  D ASSURANCE SUR LA VIE",
+      "street": "8 RUE LOUIS ARMAND",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "SOCIETE D ASSURANCE MUTUELLE BRESSE BUGEY",
+      "street": "275 RUE PROSPER CONVERT",
+      "city": "VIRIAT",
+      "postal": "01440"
+    },
+    {
+      "name": "SOCIETE D ASSURANCE MUTUELLE DES ARMATEURS ET PROFESSIONNELS DE LA MER",
+      "street": "6 PLACE PIERRE SEMARD METEOR A1",
+      "city": "SAINT NAZAIRE",
+      "postal": "44600"
+    },
+    {
+      "name": "SOCIETE D'ASSURANCES DE CONSOLIDATION DES RETRAITES DE L'ASSURANCE",
+      "street": "1 RUE JULES LEFEBVRE",
+      "city": "PARIS CEDEX 09",
+      "postal": "75431"
+    },
+    {
+      "name": "SOCIETE D ASSURANCES MUTUELLES BRETAGNE OCEAN",
+      "street": "68 QUAI DE L ODET BP 98",
+      "city": "QUIMPER CEDEX",
+      "postal": "29196"
+    },
+    {
+      "name": "SOCIETE D'ASSURANCES FAMILIALES DES SALARIES ET ARTISANS IARD",
+      "street": "7 RUE DU REGARD",
+      "city": "PARIS",
+      "postal": "75006"
+    },
+    {
+      "name": "SOCIETE D'ASSURANCES FAMILIALES DES SALARIES ET ARTISANS VIE",
+      "street": "7 RUE DU REGARD",
+      "city": "PARIS",
+      "postal": "75006"
+    },
+    {
+      "name": "SOCIETE DE PREVOYANCE MUTUALISTE DU PERSONNEL DE LA BANQUE DE FRANCE",
+      "street": "39 RUE CROIX DES PETITS CHAMPS   80-1655",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "SOCIETE DES ETUDIANTS MUTUALISTES",
+      "street": "28 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "SOCIETE FAMILIALE MUTUALISTE DES SAPEURS POMPIERS DE NICE",
+      "street": "2 BOULEVARD DE LA MADELEINE - CORPS DES SAPEURS POMPIERS DE NICE BP 718",
+      "city": "NICE CEDEX 1",
+      "postal": "06012"
+    },
+    {
+      "name": "SOCIETE FRANCAISE DE PROTECTION JURIDIQUE",
+      "street": "8 A 10 RUE D ASTORG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "SOCIETE HOSPITALIERE D ASSURANCES MUTUELLES",
+      "street": "18 RUE EDOUARD ROCHET",
+      "city": "LYON CEDEX 08",
+      "postal": "69372"
+    },
+    {
+      "name": "SOCIETE INTERPROFESSIONNELLE MUTUALISTE INDEPENDANTE DE LA REGION PARISIENNE",
+      "street": "107 A 109 RUE DU PRESIDENT WILSON",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE CHIRURGICALE ET COMPLEMENTAIRE DU PERSONNEL DE LA BANQUE DE FRANCE",
+      "street": "2 AVENUE PIERRE MENDES FRANCE",
+      "city": "NOISIEL",
+      "postal": "77186"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE D ENTREPRISE KSB, BERRY FONDERIE, NEUVY MOTORS & ESPA",
+      "street": "ALLEE DE SAGAN BP 189",
+      "city": "CHATEAUROUX CEDEX",
+      "postal": "36004"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DE LA SEPR",
+      "street": "2528 ROUTE DE SORGUES",
+      "city": "LE PONTET",
+      "postal": "84130"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DES AUTEURS COMPOSITEURS ET EDITEURS DE MUSIQUE",
+      "street": "225  AVENUE  CHARLES DE GAULLE",
+      "city": "NEUILLY SUR SEINE",
+      "postal": "92200"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DES ETUDIANTS DE LA REGION ANTILLES GUYANE",
+      "street": "35 RUE SCHOELCHER",
+      "city": "FORT DE FRANCE (MARTINIQUE)",
+      "postal": "97200"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DES ETUDIANTS DE LA REGION PARISIENNE",
+      "street": "28 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DU PERSONNEL ACTIF ET RETRAITE DE LA MARQUE",
+      "street": "7 ALLEE DES AJONCS ZAC EST DE LA MONTANE",
+      "city": "EYREIN",
+      "postal": "19800"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE DU SALEVE",
+      "street": "33 CHEMIN DU PEROUZET",
+      "city": "COLLONGES SOUS SALEVE",
+      "postal": "74160"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE GENERALE DE PREVOYANCE",
+      "street": "28 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE INTER ENTREPRISES D ORGANISMES SOCIAUX DE BRETAGNE",
+      "street": "67 RUE ANITA CONTI   PA LAROISEAU II",
+      "city": "VANNES",
+      "postal": "56000"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE INTERDEPARTEMENTALE DE BANQUE",
+      "street": "137 RUE SAINT DIZIER",
+      "city": "NANCY",
+      "postal": "54000"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE INTERENTREPRISES DU PERSONNEL DES ORGANISMES SOCIAUX DU LOT",
+      "street": "238 RUE HAUTESSERRE",
+      "city": "CAHORS",
+      "postal": "46015"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE INTERPROFESSIONNELLE SANTE",
+      "street": "10 RUE LEON PAULET CS 40042",
+      "city": "MARSEILLE CEDEX 08",
+      "postal": "13417"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE MUTACOP",
+      "street": "44 A 48 AVENUE DU GENERAL DE GAULLE",
+      "city": "L HAY LES ROSES",
+      "postal": "94240"
+    },
+    {
+      "name": "SOCIETE MUTUALISTE PERNOD",
+      "street": "120 AVENUE DU MARECHAL FOCH",
+      "city": "CRETEIL",
+      "postal": "94015"
+    },
+    {
+      "name": "SOCIETE MUTUELLE D ASSURANCE DES MUSICIENS ET DES METIERS DE LA MUSIQUE",
+      "street": "95 RUE D AMSTERDAM",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "SOCIETE MUTUELLE D ASSURANCE DU BATIMENT ET DES TRAVAUX PUBLICS",
+      "street": "8 RUE LOUIS ARMAND CS 71201",
+      "city": "PARIS CEDEX 15",
+      "postal": "75738"
+    },
+    {
+      "name": "SOCIETE MUTUELLE D ASSURANCE SUR LA VIE DU BATIMENT ET DES TRAVAUX PUBLICS",
+      "street": "8 RUE LOUIS ARMAND CS 71201",
+      "city": "PARIS CEDEX 15",
+      "postal": "75738"
+    },
+    {
+      "name": "SOCIETE MUTUELLE D ASSURANCES DE BOURGOGNE",
+      "street": "32 RUE DE LA PRÉFECTURE",
+      "city": "DIJON",
+      "postal": "21000"
+    },
+    {
+      "name": "SOCIETE MUTUELLE D ASSURANCES MARITIMES DU LITTORAL ATLANTIQUE",
+      "street": "28 RUE DU DANEMARK   ESPACE OCEANE  BP 10405",
+      "city": "AURAY CEDEX",
+      "postal": "56404"
+    },
+    {
+      "name": "SOCIETE MUTUELLE INTERENTREPRISES DU PERSONNEL DES SOCIETES DU GROUPE AVIVA FRANCE",
+      "street": "80 AVENUE DE L EUROPE",
+      "city": "BOIS COLOMBES",
+      "postal": "92270"
+    },
+    {
+      "name": "SOCIETE SUISSE D ASSURANCE CONTRE LA GRELE",
+      "street": "8 RUE JEANNE BARRET",
+      "city": "DIJON",
+      "postal": "21000"
+    },
+    {
+      "name": "SOGECAP",
+      "street": "17 BIS PLACE  DES REFLETS TOUR D2",
+      "city": "PARIS LA DEFENSE 2",
+      "postal": "92919"
+    },
+    {
+      "name": "SOGESSUR",
+      "street": "17 BIS PLACE DES REFLETS TOUR D2",
+      "city": "PARIS LA DEFENSE 2",
+      "postal": "92919"
+    },
+    {
+      "name": "SOLIDARITE MUTUALISTE DE L'ASSOCIATION DES TRAVAILLEURS INDEPENDANTS ET SALARIES DE FRANCE",
+      "street": "6 RUE DU PIAVE CS 90000",
+      "city": "ANGOULEME CEDEX 9",
+      "postal": "16920"
+    },
+    {
+      "name": "SOLIDARITE RURALE ET URBAINE D'ALSACE",
+      "street": "7 PLACE DES HALLES",
+      "city": "STRASBOURG",
+      "postal": "67000"
+    },
+    {
+      "name": "SOLIMUT MUTUELLE DE FRANCE",
+      "street": "146 A AVENUE DE TOULON",
+      "city": "MARSEILLE",
+      "postal": "13010"
+    },
+    {
+      "name": "SOLIMUT MUTUELLE DU LACYDON",
+      "street": "1 RUE FRANCOIS MOISSON MAISON DE LA MUTUALITE",
+      "city": "MARSEILLE",
+      "postal": "13002"
+    },
+    {
+      "name": "SOLIMUT MUTUELLE PERSONNELS ORGANISMES SOCIAUX",
+      "street": "146 A  AVENUE DE TOULON",
+      "city": "MARSEILLE",
+      "postal": "13010"
+    },
+    {
+      "name": "SOLUCIA PROTECTION JURIDIQUE",
+      "street": "3 A 5 BOULEVARD DIDEROT",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "SPHERIA VIE",
+      "street": "23 BOULEVARD JEAN JAURES",
+      "city": "ORLEANS",
+      "postal": "45000"
+    },
+    {
+      "name": "SPIRICA",
+      "street": "50 A 56  RUE DE LA PROCESSION",
+      "city": "PARIS CEDEX 15",
+      "postal": "75724"
+    },
+    {
+      "name": "SURAVENIR",
+      "street": "232 RUE GÉNÉRAL PAULET BP 103",
+      "city": "BREST CEDEX 9",
+      "postal": "29802"
+    },
+    {
+      "name": "SURAVENIR ASSURANCES",
+      "street": "2 RUE VASCO DE GAMA",
+      "city": "SAINT HERBLAIN",
+      "postal": "44800"
+    },
+    {
+      "name": "SWISSLIFE ASSURANCE ET PATRIMOINE",
+      "street": "7 RUE BELGRAND",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "SWISSLIFE ASSURANCES DE BIENS",
+      "street": "7 RUE BELGRAND",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "SWISSLIFE PREVOYANCE ET SANTE",
+      "street": "7 RUE BELGRAND",
+      "city": "LEVALLOIS PERRET",
+      "postal": "92300"
+    },
+    {
+      "name": "TERRITORIA MUTUELLE",
+      "street": "20  AVENUE LEO LAGRANGE CS 79650",
+      "city": "NIORT CEDEX 9",
+      "postal": "79061"
+    },
+    {
+      "name": "THELEM ASSURANCES",
+      "street": "LE CROC  BP 63130",
+      "city": "CHECY CEDEX",
+      "postal": "45431"
+    },
+    {
+      "name": "THELEM PREVOYANCE",
+      "street": "LE CROC",
+      "city": "CHECY",
+      "postal": "45430"
+    },
+    {
+      "name": "THEMIS",
+      "street": "2 ET 4 RUE DE PIED DE FOND",
+      "city": "NIORT",
+      "postal": "79000"
+    },
+    {
+      "name": "TUTELAIRE",
+      "street": "45 RUE EUGENE OUDINE",
+      "city": "PARIS",
+      "postal": "75013"
+    },
+    {
+      "name": "UMEN",
+      "street": "5 RUE PALESTRO",
+      "city": "PARIS",
+      "postal": "75002"
+    },
+    {
+      "name": "UNEO",
+      "street": "48 A 56 RUE BARBES",
+      "city": "MONTROUGE",
+      "postal": "92120"
+    },
+    {
+      "name": "UNION DE REASSURANCE ET DE SUBSTITUTION SOCIALE",
+      "street": "39 RUE DU JOURDIL",
+      "city": "CRAN GEVRIER",
+      "postal": "74960"
+    },
+    {
+      "name": "UNION DE REASSURANCE MUTUALIA",
+      "street": "19 RUE DE PARIS   LUMINEM",
+      "city": "BOBIGNY",
+      "postal": "93000"
+    },
+    {
+      "name": "UNION DES MUTUELLES D ASSURANCES MONCEAU",
+      "street": "36 A 38  RUE DE SAINT PETERSBOURG",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "UNION HARMONIE MUTUALITE",
+      "street": "143 RUE BLOMET",
+      "city": "PARIS",
+      "postal": "75015"
+    },
+    {
+      "name": "UNION INTER REGIONALE ET TECHNIQUE DES SOCIETES ETUDIANTES MUTUALISTES",
+      "street": "43 RUE JABOULAY",
+      "city": "LYON CEDEX 07",
+      "postal": "69349"
+    },
+    {
+      "name": "UNION MUTUALISTE GENERALE DE PREVOYANCE",
+      "street": "28 RUE FORTUNY",
+      "city": "PARIS",
+      "postal": "75017"
+    },
+    {
+      "name": "UNION MUTUALISTE RETRAITE",
+      "street": "12 RUE DE CORNULIER CS 73225",
+      "city": "NANTES CEDEX 1",
+      "postal": "44032"
+    },
+    {
+      "name": "UNION MUTUALITE SOLIDARITE",
+      "street": "58 BOULEVARD HUBERT DELISLE BP 388",
+      "city": "SAINT PIERRE CEDEX (REUNION)",
+      "postal": "97457"
+    },
+    {
+      "name": "UNION NATIONALE MUTUALISTE INTERPROFESSIONNELLE",
+      "street": "50 AVENUE DAUMESNIL",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "UNIPREVOYANCE",
+      "street": "10 RUE MASSUE",
+      "city": "VINCENNES CEDEX",
+      "postal": "94307"
+    },
+    {
+      "name": "UNIRE",
+      "street": "40 RUE DE LA CROIX DES HORMES",
+      "city": "MONTANAY",
+      "postal": "69250"
+    },
+    {
+      "name": "UNITE FRATERNELLE DES REGIONS",
+      "street": "CITE LACROIX",
+      "city": "LE ROBERT (MARTINIQUE)",
+      "postal": "97231"
+    },
+    {
+      "name": "UNMI'MUT",
+      "street": "50 AVENUE DAUMESNIL",
+      "city": "PARIS",
+      "postal": "75012"
+    },
+    {
+      "name": "UNOFI-ASSURANCES",
+      "street": "2 rue Montesquieu",
+      "city": "PARIS",
+      "postal": "75001"
+    },
+    {
+      "name": "VEOLIA ENVIRONNEMENT SERVICES-RE",
+      "street": "36  AVENUE KLEBER",
+      "city": "PARIS CEDEX 16",
+      "postal": "75799"
+    },
+    {
+      "name": "VIASANTE MUTUELLE",
+      "street": "104 A 110 BOULEVARD HAUSSMANN",
+      "city": "PARIS",
+      "postal": "75008"
+    },
+    {
+      "name": "WAKAM",
+      "street": "120 A 122 RUE REAUMUR",
+      "city": "PARIS",
+      "postal": "75002"
+    },
+    {
+      "name": "WORLDLINE RE",
+      "street": "80 QUAI VOLTAIRE   IMMEUBLE RIVER OUEST",
+      "city": "BEZONS",
+      "postal": "95870"
+    }
+  ]
+}

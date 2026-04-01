@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { Check } from "lucide-react";
-import { SearchInput } from "@/components/ui/search-input";
-import { Button } from "@/components/ui/button";
+import {
+  InsuranceSearchInput,
+  type InsuranceItem,
+  type InsuranceSearchResult,
+} from "@/components/ui/search-input";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
@@ -15,39 +16,22 @@ import {
   currentInsuranceSchema,
   type CurrentInsuranceFormValues,
 } from "@/lib/validations/situation";
+import insurancesData from "@/data/insurances.json";
+import { useState } from "react";
 
-/* ─── Hardcoded mutuelle list ─── */
+/* ─── Data ─── */
 
-interface MutuelleSuggestion {
-  name: string;
+const INSURANCE_LIST: InsuranceItem[] = insurancesData.insurances;
+
+/* ─── Helpers ─── */
+
+function resolveInitialSelection(name?: string): InsuranceSearchResult {
+  if (!name) return { item: null, customName: null };
+  const found = INSURANCE_LIST.find((m) => m.name === name) ?? null;
+  return found
+    ? { item: found, customName: null }
+    : { item: null, customName: name };
 }
-
-const MUTUELLE_LIST: MutuelleSuggestion[] = [
-  { name: "Harmonie Mutuelle" },
-  { name: "MGEN" },
-  { name: "Malakoff Humanis" },
-  { name: "AG2R La Mondiale" },
-  { name: "Groupama" },
-  { name: "MAIF" },
-  { name: "Macif" },
-  { name: "MMA" },
-  { name: "Allianz" },
-  { name: "Axa" },
-  { name: "Swiss Life" },
-  { name: "Generali" },
-  { name: "CNP Assurances" },
-  { name: "Crédit Agricole Assurances" },
-  { name: "Mutex" },
-  { name: "Klesia" },
-  { name: "Apicil" },
-  { name: "Covéa" },
-  { name: "Matmut" },
-  { name: "Sogécap" },
-  { name: "Ociane Vitality" },
-  { name: "Alan" },
-  { name: "April" },
-  { name: "Néoliane" },
-];
 
 /* ─── Component ─── */
 
@@ -55,31 +39,11 @@ export function CurrentInsuranceStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
 
-  /* ── Search state ── */
-  const [query, setQuery] = useState("");
-  const [selectedMutuelle, setSelectedMutuelle] = useState<string | null>(
-    formData.currentInsuranceName || null,
-  );
-
-  const suggestions = useMemo(() => {
-    const trimmed = query.trim().toLowerCase();
-    if (!trimmed) return [];
-    return MUTUELLE_LIST.filter((m) => m.name.toLowerCase().includes(trimmed));
-  }, [query]);
-
-  const handleSearch = (value: string) => {
-    setQuery(value);
-    setSelectedMutuelle(null);
-  };
-
-  const handleSelectMutuelle = (name: string) => {
-    setSelectedMutuelle(name);
-  };
-
   /* ── Address form ── */
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors, isValid, submitCount },
   } = useForm<CurrentInsuranceFormValues>({
     resolver: standardSchemaResolver(currentInsuranceSchema),
@@ -95,9 +59,42 @@ export function CurrentInsuranceStep() {
 
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
+  /* ── Search state ── */
+  const [searchResult, setSearchResult] = useState<InsuranceSearchResult>(() =>
+    resolveInitialSelection(formData.currentInsuranceName),
+  );
+
+  const hasInsurance =
+    searchResult.item !== null || searchResult.customName !== null;
+
+  const handleSelect = (result: InsuranceSearchResult) => {
+    setSearchResult(result);
+    if (result.item) {
+      /* Auto-fill address fields from the JSON data */
+      setValue("insuranceName", result.item.name);
+      setValue("street", result.item.street);
+      setValue("postalCode", result.item.postal);
+      setValue("city", result.item.city);
+    } else if (result.customName) {
+      /* Clear address fields so user fills them manually */
+      setValue("insuranceName", result.customName);
+      setValue("street", "");
+      setValue("postalCode", "");
+      setValue("city", "");
+      setValue("complement", "");
+    }
+  };
+
+  const handleClear = () => {
+    setSearchResult({ item: null, customName: null });
+  };
+
   const onSubmit = (data: CurrentInsuranceFormValues) => {
     updateFormData({
-      currentInsuranceName: selectedMutuelle ?? data.insuranceName,
+      currentInsuranceName:
+        searchResult.item?.name ??
+        searchResult.customName ??
+        data.insuranceName,
       currentInsuranceStreet: data.street,
       currentInsuranceComplement: data.complement ?? "",
       currentInsurancePostalCode: data.postalCode,
@@ -106,7 +103,7 @@ export function CurrentInsuranceStep() {
     next();
   };
 
-  const canProceed = selectedMutuelle !== null && isValid;
+  const canProceed = hasInsurance && isValid;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -119,33 +116,16 @@ export function CurrentInsuranceStep() {
         errors={errors}
       >
         {/* Mutuelle search */}
-        <SearchInput
-          value={query}
-          onChange={(e) => handleSearch(e.target.value)}
+        <InsuranceSearchInput
+          items={INSURANCE_LIST}
+          selected={searchResult}
+          onSelect={handleSelect}
+          onClear={handleClear}
           placeholder="Rechercher une mutuelle..."
         />
 
-        {suggestions.map((m, i) => (
-          <Button
-            key={`${m.name}-${i}`}
-            type="button"
-            variant="selectOption"
-            size="select"
-            selected={selectedMutuelle === m.name}
-            onClick={() => handleSelectMutuelle(m.name)}
-            className="justify-between"
-          >
-            <span>{m.name}</span>
-            {selectedMutuelle === m.name && (
-              <span className="flex size-5 sm:size-6 shrink-0 items-center justify-center rounded-full bg-[#490076] text-white">
-                <Check className="size-3 sm:size-3.5" />
-              </span>
-            )}
-          </Button>
-        ))}
-
-        {/* Address fields — shown below the search */}
-        {selectedMutuelle && (
+        {/* Address fields — shown after selection */}
+        {hasInsurance && (
           <div className="flex flex-col gap-3 w-full mt-2">
             <div className="font-semibold text-base sm:text-lg text-[#1D1B20]">
               est domiciliée à l&apos;adresse

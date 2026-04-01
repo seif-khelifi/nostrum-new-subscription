@@ -249,3 +249,164 @@ const SearchInput = React.forwardRef<HTMLInputElement, SearchInputProps>(
 SearchInput.displayName = "SearchInput";
 
 export { SearchInput };
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  InsuranceSearchInput — local-list search with custom-name fallback */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+export interface InsuranceItem {
+  name: string;
+  street: string;
+  city: string;
+  postal: string;
+}
+
+export interface InsuranceSearchResult {
+  /** The selected item from the list, or null */
+  item: InsuranceItem | null;
+  /** A custom name typed by the user (not in the list), or null */
+  customName: string | null;
+}
+
+export interface InsuranceSearchInputProps {
+  /** Full list of insurance items to filter against */
+  items: InsuranceItem[];
+  /** The currently selected result (controlled by parent) */
+  selected: InsuranceSearchResult;
+  /** Called when the user picks a suggestion or confirms a custom name */
+  onSelect: (result: InsuranceSearchResult) => void;
+  /** Called when the user clears the selection by typing */
+  onClear: () => void;
+  placeholder?: string;
+  /** Extra class names for the outer wrapper */
+  wrapperClassName?: string;
+}
+
+export function InsuranceSearchInput({
+  items,
+  selected,
+  onSelect,
+  onClear,
+  placeholder = "Rechercher une mutuelle...",
+  wrapperClassName,
+}: InsuranceSearchInputProps) {
+  const [query, setQuery] = React.useState(
+    selected.item?.name ?? selected.customName ?? "",
+  );
+
+  const hasSelection = selected.item !== null || selected.customName !== null;
+
+  /* Only filter when nothing is selected */
+  const suggestions = React.useMemo(() => {
+    if (hasSelection) return [];
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return [];
+    return items.filter((m) => m.name.toLowerCase().includes(trimmed));
+  }, [query, hasSelection, items]);
+
+  /* Show "use this name" when the user typed something but nothing matches */
+  const showCustomOption = React.useMemo(() => {
+    if (hasSelection) return false;
+    const trimmed = query.trim();
+    if (!trimmed) return false;
+    return suggestions.length === 0;
+  }, [query, hasSelection, suggestions]);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+    if (hasSelection) onClear();
+  };
+
+  const handleSelectItem = (item: InsuranceItem) => {
+    setQuery(item.name);
+    onSelect({ item, customName: null });
+  };
+
+  const handleUseCustomName = () => {
+    const name = query.trim();
+    onSelect({ item: null, customName: name });
+  };
+
+  return (
+    <div className={cn("flex flex-col gap-2", wrapperClassName)}>
+      {/* Input bar */}
+      <div
+        data-slot="search-input"
+        className={cn(
+          "flex w-full items-center overflow-hidden rounded-xl",
+          "focus-within:ring-[3px] focus-within:ring-[#490076]/20",
+          "transition-shadow duration-200 ease-out",
+        )}
+      >
+        <input
+          type="text"
+          value={query}
+          onChange={handleChange}
+          placeholder={placeholder}
+          className={cn(
+            "flex-1 h-12 px-4",
+            "rounded-none rounded-l-xl",
+            "bg-[#F3E5FA] text-[#490076]",
+            "placeholder:text-[#490076]/50",
+            "text-[15px] font-medium",
+            "border-0 shadow-none outline-none",
+            "focus-visible:ring-0",
+            "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+          )}
+        />
+        <button
+          type="button"
+          tabIndex={-1}
+          aria-label="Rechercher"
+          className={cn(
+            "h-12 w-12 shrink-0",
+            "rounded-none rounded-r-xl",
+            "bg-[#490076] text-white",
+            "inline-flex items-center justify-center",
+            "hover:bg-[#5a0a8f]",
+            "active:translate-y-px",
+            "transition-colors duration-200 ease-out",
+            "outline-none",
+          )}
+        >
+          <Search className="size-5" />
+        </button>
+      </div>
+
+      {/* Suggestions from the list */}
+      {suggestions.map((m, i) => (
+        <Button
+          key={`${m.name}-${i}`}
+          type="button"
+          variant="selectOption"
+          size="select"
+          selected={selected.item?.name === m.name}
+          onClick={() => handleSelectItem(m)}
+          className="justify-between max-w-[calc(100vw-2rem)] sm:max-w-none whitespace-normal text-left h-auto min-h-10 sm:min-h-12 py-2.5"
+        >
+          <span className="min-w-0 break-words">{m.name}</span>
+          {selected.item?.name === m.name && (
+            <span className="flex size-5 sm:size-6 shrink-0 items-center justify-center rounded-full bg-[#490076] text-white">
+              <Check className="size-3 sm:size-3.5" />
+            </span>
+          )}
+        </Button>
+      ))}
+
+      {/* Custom name fallback */}
+      {showCustomOption && (
+        <Button
+          type="button"
+          variant="selectOption"
+          size="select"
+          onClick={handleUseCustomName}
+          className="justify-between max-w-[calc(100vw-2rem)] sm:max-w-none whitespace-normal text-left h-auto min-h-10 sm:min-h-12 py-2.5"
+        >
+          <span className="min-w-0 break-words">
+            Utiliser &quot;{query.trim()}&quot;
+          </span>
+        </Button>
+      )}
+    </div>
+  );
+}

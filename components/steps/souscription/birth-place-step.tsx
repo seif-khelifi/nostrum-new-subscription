@@ -92,7 +92,6 @@ export function BirthPlaceStep() {
               placeholder="Pays"
               {...register("birthCountry")}
               hasError={!!errors.birthCountry}
-              inputClassName="min-w-[100px] sm:min-w-[140px]"
             />
             <span>à</span>
             {isFrance(country) ? (
@@ -106,7 +105,6 @@ export function BirthPlaceStep() {
                     onValueChange={field.onChange}
                     placeholder="Ville"
                     hasError={!!errors.birthCity}
-                    inputClassName="min-w-[120px] sm:min-w-[180px]"
                   />
                 )}
               />
@@ -115,7 +113,6 @@ export function BirthPlaceStep() {
                 placeholder="Ville"
                 {...register("birthCity")}
                 hasError={!!errors.birthCity}
-                inputClassName="min-w-[120px] sm:min-w-[180px]"
               />
             )}
           </div>

@@ -172,6 +172,26 @@ export type BirthPlaceFormValues = z.infer<typeof birthPlaceSchema>;
 export const addressSchema = z.object(addressFields);
 export type AddressFormValues = z.infer<typeof addressSchema>;
 
+/** address step — search mode: validates the selected fulltext is parseable */
+export const addressSearchSchema = z.object({
+  fulltext: z
+    .string()
+    .trim()
+    .min(1, "Veuillez sélectionner une adresse")
+    .refine(
+      (val) => {
+        const parts = val.split(",").map((p) => p.trim());
+        if (parts.length < 2) return false;
+        const street = parts[0];
+        if (!street || street.length < 3) return false;
+        const cityPart = parts[parts.length - 1].trim();
+        return /^\d{5}\s+.+$/.test(cityPart);
+      },
+      { message: "L'adresse sélectionnée est invalide" },
+    ),
+});
+export type AddressSearchFormValues = z.infer<typeof addressSearchSchema>;
+
 /** socialSecurity step — French social security number (15 digits with key check) */
 export const socialSecuritySchema = z.object({
   socialSecurityNumber: z

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
@@ -14,31 +15,21 @@ import {
   birthPlaceSchema,
   type BirthPlaceFormValues,
 } from "@/lib/validations/situation";
+import citiesData from "@/data/cities.json";
 
-/* ─── Hardcoded French cities for combobox ─── */
+/* ─── Pre-process: deduplicate & title-case city names (runs once at module load) ─── */
 
-const FRENCH_CITIES = [
-  "Paris",
-  "Lyon",
-  "Marseille",
-  "Toulouse",
-  "Nice",
-  "Nantes",
-  "Strasbourg",
-  "Montpellier",
-  "Bordeaux",
-  "Lille",
-  "Rennes",
-  "Reims",
-  "Saint-Étienne",
-  "Toulon",
-  "Le Havre",
-  "Grenoble",
-  "Dijon",
-  "Angers",
-  "Nîmes",
-  "Aix-en-Provence",
-];
+function toTitleCase(str: string): string {
+  return str
+    .toLowerCase()
+    .replace(/(?:^|\s|-)\S/g, (match) => match.toUpperCase());
+}
+
+const ALL_CITIES: string[] = [
+  ...new Set(citiesData.cities.map((c) => toTitleCase(c.nom_de_la_commune))),
+].sort();
+
+const MAX_SUGGESTIONS = 50;
 
 /* ─── Helper ─── */
 
@@ -53,6 +44,16 @@ export function BirthPlaceStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("birthPlace");
+
+  const [citySearch, setCitySearch] = useState("");
+
+  const filteredCities = useMemo(() => {
+    const query = citySearch.trim().toLowerCase();
+    if (!query) return ALL_CITIES.slice(0, MAX_SUGGESTIONS);
+    return ALL_CITIES.filter((city) =>
+      city.toLowerCase().startsWith(query),
+    ).slice(0, MAX_SUGGESTIONS);
+  }, [citySearch]);
 
   const {
     register,
@@ -106,9 +107,10 @@ export function BirthPlaceStep() {
                 control={control}
                 render={({ field }) => (
                   <PillCombobox
-                    options={FRENCH_CITIES}
+                    options={filteredCities}
                     value={field.value}
                     onValueChange={field.onChange}
+                    onInputValueChange={setCitySearch}
                     placeholder="Ville"
                     hasError={!!errors.birthCity}
                   />

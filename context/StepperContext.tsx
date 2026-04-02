@@ -1,23 +1,12 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useMemo,
-  useCallback,
-  type ReactNode,
-} from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import { useVariant } from "@/context/VariantContext";
 import type { StepId, StepDef, StepGroup, VariantKey } from "@/config";
 
-// Re-export types so existing imports from StepperContext keep working
 export type { StepId, StepDef, StepGroup };
 
-/**
- * @deprecated Use `VariantKey` from `@/config/variants` instead.
- * Kept for backward compatibility during migration.
- */
+/** @deprecated Use `VariantKey` from `@/config/variants` instead. */
 export type DevisVariant = VariantKey;
 
 /* ------------------------------------------------------------------ */
@@ -25,37 +14,20 @@ export type DevisVariant = VariantKey;
 /* ------------------------------------------------------------------ */
 
 interface StepperContextValue {
-  /** All step groups (from the active variant config) */
   groups: StepGroup[];
-  /** Flat list of all steps */
   allSteps: StepDef[];
-  /** Current flat index (0-based) */
   activeStep: number;
-  /** Current step definition */
   currentStepDef: StepDef;
-  /** Current group (derived from activeStep) */
   currentGroup: StepGroup;
-  /** Sidebar group id (1-based, derived from activeStep) */
   sidebarGroupId: number;
-
   isFirstStep: boolean;
   isLastStep: boolean;
-
-  /**
-   * The variant key assigned to this session ("a" or "b").
-   * @deprecated Read from `useVariant().id` instead.
-   */
+  /** @deprecated Read from `useVariant().id` instead. */
   devisVariant: VariantKey;
-
-  /** Advance to the next step */
   next: () => void;
-  /** Go back to the previous step */
   back: () => void;
-  /** Jump to a specific flat step index */
   goToStep: (index: number) => void;
-  /** Jump to a step by its id */
   goToStepById: (id: StepId) => void;
-  /** Jump to the first step of a sidebar group */
   goToGroup: (groupId: number) => void;
 }
 
@@ -94,106 +66,112 @@ function getFlatIndexById(allSteps: StepDef[], id: StepId): number {
   return idx >= 0 ? idx : 0;
 }
 
+/** Read a field from the persisted situation form in sessionStorage. */
+function getSituationField<K extends string>(field: K): string | null {
+  try {
+    const raw = sessionStorage.getItem("subscription_situation");
+    if (!raw) return null;
+    const data = JSON.parse(raw);
+    return data[field] ?? null;
+  } catch {
+    return null;
+  }
+}
+
 /* ------------------------------------------------------------------ */
 /*  Provider                                                          */
 /* ------------------------------------------------------------------ */
 
-interface StepperProviderProps {
-  initialStep?: number;
-  children: ReactNode;
-}
-
 export function StepperProvider({
   initialStep = 0,
   children,
-}: StepperProviderProps) {
-  // Read step groups from the active variant config
+}: {
+  initialStep?: number;
+  children: ReactNode;
+}) {
   const variantConfig = useVariant();
   const groups = variantConfig.stepGroups;
-  const allSteps = useMemo(() => groups.flatMap((g) => g.steps), [groups]);
+  const allSteps = groups.flatMap((g) => g.steps);
 
   const safeInitial =
     initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
   const [activeStep, setActiveStep] = useState(safeInitial);
 
   const currentStepDef = allSteps[activeStep];
-  const currentGroup = useMemo(
-    () => getGroupForFlatIndex(groups, activeStep),
-    [groups, activeStep],
-  );
-  const sidebarGroupId = currentGroup.id;
+  const currentGroup = getGroupForFlatIndex(groups, activeStep);
 
-  const next = useCallback(() => {
+  function next() {
     setActiveStep((prev) => Math.min(prev + 1, allSteps.length - 1));
-  }, [allSteps.length]);
+  }
 
-  const back = useCallback(() => {
-    setActiveStep((prev) => Math.max(prev - 1, 0));
-  }, []);
+  function back() {
+    setActiveStep((prev) => {
+      const currentId = allSteps[prev]?.id;
 
-  const goToStep = useCallback(
-    (index: number) => {
-      if (index >= 0 && index < allSteps.length) setActiveStep(index);
-    },
-    [allSteps.length],
-  );
+      // Going back from sante_yeux: the forward path may have skipped
+      // steps via goToStepById. Mirror those skips on the way back.
+      if (currentId === "sante_yeux") {
+        // "moi" skipped nousSommes, commenceParQui, dateBirthConjoint
+        if (getSituationField("proteger") === "moi") {
+          return getFlatIndexById(allSteps, "proteger");
+        }
+        // "enfant" on commenceParQui skipped dateBirthConjoint
+        if (getSituationField("commenceParQui") === "enfant") {
+          return getFlatIndexById(allSteps, "commenceParQui");
+        }
+      }
 
-  const goToStepById = useCallback(
-    (id: StepId) => {
-      setActiveStep(getFlatIndexById(allSteps, id));
-    },
-    [allSteps],
-  );
+      // Going back from dateDebutNostrum: "pas_de_mutuelle" skipped
+      // currentInsurance and dateSignatureAncien.
+      if (
+        currentId === "dateDebutNostrum" &&
+        getSituationField("resilierMutuelle") === "pas_de_mutuelle"
+      ) {
+        return getFlatIndexById(allSteps, "resilierMutuelle");
+      }
 
-  const goToGroup = useCallback(
-    (groupId: number) => {
-      setActiveStep(getFirstFlatIndexOfGroup(groups, groupId));
-    },
-    [groups],
-  );
+      return Math.max(prev - 1, 0);
+    });
+  }
 
-  const value = useMemo<StepperContextValue>(
-    () => ({
-      groups,
-      allSteps,
-      activeStep,
-      currentStepDef,
-      currentGroup,
-      sidebarGroupId,
-      isFirstStep: activeStep === 0,
-      isLastStep: activeStep === allSteps.length - 1,
-      devisVariant: variantConfig.id,
-      next,
-      back,
-      goToStep,
-      goToStepById,
-      goToGroup,
-    }),
-    [
-      groups,
-      allSteps,
-      activeStep,
-      currentStepDef,
-      currentGroup,
-      sidebarGroupId,
-      variantConfig.id,
-      next,
-      back,
-      goToStep,
-      goToStepById,
-      goToGroup,
-    ],
-  );
+  function goToStep(index: number) {
+    if (index >= 0 && index < allSteps.length) setActiveStep(index);
+  }
+
+  function goToStepById(id: StepId) {
+    setActiveStep(getFlatIndexById(allSteps, id));
+  }
+
+  function goToGroup(groupId: number) {
+    setActiveStep(getFirstFlatIndexOfGroup(groups, groupId));
+  }
 
   return (
-    <StepperContext.Provider value={value}>{children}</StepperContext.Provider>
+    <StepperContext.Provider
+      value={{
+        groups,
+        allSteps,
+        activeStep,
+        currentStepDef,
+        currentGroup,
+        sidebarGroupId: currentGroup.id,
+        isFirstStep: activeStep === 0,
+        isLastStep: activeStep === allSteps.length - 1,
+        devisVariant: variantConfig.id,
+        next,
+        back,
+        goToStep,
+        goToStepById,
+        goToGroup,
+      }}
+    >
+      {children}
+    </StepperContext.Provider>
   );
 }
 
 export function useStepper() {
-  const context = useContext(StepperContext);
-  if (!context) {
-    throw new Error("useStepper must be used within a StepperProvider");
-  }
-  return context;
+  const ctx = useContext(StepperContext);
+  if (!ctx) throw new Error("useStepper must be used within a StepperProvider");
+  return ctx;
 }

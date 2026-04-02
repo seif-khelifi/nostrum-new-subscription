@@ -66,7 +66,6 @@ export const variantB: VariantConfig = {
         { id: "personalInfo", label: "Informations personnelles" },
         { id: "mail", label: "Adresse e-mail" },
         { id: "phoneNumber", label: "Numéro de téléphone" },
-        { id: "recap", label: "Récapitulatif" },
         { id: "envoiSms", label: "Vérification SMS" },
         { id: "address", label: "Adresse postale" },
         { id: "birthPlace", label: "Lieu de naissance" },

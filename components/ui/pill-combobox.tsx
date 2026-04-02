@@ -32,6 +32,8 @@ interface PillComboboxProps {
   value?: string;
   /** Called when the value changes */
   onValueChange?: (value: string) => void;
+  /** Called when the input text changes (useful for external filtering) */
+  onInputValueChange?: (inputValue: string) => void;
   /** Placeholder text when nothing is selected */
   placeholder?: string;
   /** Additional class for the outer wrapper */
@@ -46,6 +48,7 @@ export function PillCombobox({
   options,
   value,
   onValueChange,
+  onInputValueChange,
   placeholder = "Sélectionner…",
   className,
   inputClassName,
@@ -90,6 +93,7 @@ export function PillCombobox({
     <ComboboxPrimitive.Root
       value={value}
       onValueChange={handleValueChange}
+      onInputValueChange={onInputValueChange ? (v) => onInputValueChange(v) : undefined}
       items={options}
     >
       <div

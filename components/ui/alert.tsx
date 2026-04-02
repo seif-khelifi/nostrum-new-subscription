@@ -20,9 +20,9 @@ const alertVariants = cva(
         destructive: "",
       },
       size: {
-        default: "min-h-[64px]",
+        default: "min-h-[80px]",
         sm: "min-h-[56px] px-3 py-2",
-        lg: "min-h-[72px] px-5 py-4",
+        lg: "min-h-[96px] px-5 py-4",
       },
     },
     defaultVariants: {
@@ -32,7 +32,7 @@ const alertVariants = cva(
   },
 );
 
-const alertTitleVariants = cva("text-sm font-semibold leading-5", {
+const alertTitleVariants = cva("text-base font-bold leading-5", {
   variants: {
     variant: {
       default: "text-[#490076]",
@@ -121,6 +121,23 @@ function AlertVisual({
   imageAlt = "Alert visual",
   className,
 }: AlertVisualProps) {
+  if (imageSrc) {
+    return (
+      <div
+        data-slot="alert-visual"
+        className={cn("shrink-0 flex items-center justify-center", className)}
+      >
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="h-full max-h-24 w-auto object-contain"
+        />
+      </div>
+    );
+  }
+
+  if (!icon) return null;
+
   return (
     <div
       data-slot="alert-visual"
@@ -130,15 +147,7 @@ function AlertVisual({
         className,
       )}
     >
-      {imageSrc ? (
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="size-5 object-contain"
-        />
-      ) : (
-        icon
-      )}
+      {icon}
     </div>
   );
 }

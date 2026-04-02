@@ -2,6 +2,7 @@
 
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
@@ -23,10 +24,21 @@ export function SexeStep() {
   const options = texts?.options ?? DEFAULT_OPTIONS;
   const selected = formData.sexe;
 
+  const selectedLabel = selected
+    ? (options.find((o) => o.value === selected)?.label ?? "")
+    : "";
+
   return (
     <StepScreen
       title={texts?.title ?? "Faisons connaissance"}
-      subtitle={texts?.subtitle ?? "Vous êtes ?"}
+      subtitle={
+        <div className="flex flex-wrap items-center gap-2">
+          <span>{texts?.subtitle ?? "Vous êtes ?"}</span>
+          {selected && (
+            <PillInput readOnly value={selectedLabel} placeholder="" />
+          )}
+        </div>
+      }
       infoCard={
         texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
       }

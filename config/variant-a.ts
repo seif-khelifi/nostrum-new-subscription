@@ -32,8 +32,6 @@ export const variantA: VariantConfig = {
         { id: "nousSommes", label: "Nous sommes" },
         { id: "commenceParQui", label: "On commence par qui" },
         { id: "dateBirthConjoint", label: "Date de naissance conjoint" },
-   
-
       ],
     },
     {
@@ -83,9 +81,19 @@ export const variantA: VariantConfig = {
     // "Seulement moi" → skip family steps, jump to santé
     { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
     // "Mon enfant" → skip dateBirthConjoint, jump to santé
-    { from: "commenceParQui", field: "commenceParQui", value: "enfant", target: "sante_yeux" },
+    {
+      from: "commenceParQui",
+      field: "commenceParQui",
+      value: "enfant",
+      target: "sante_yeux",
+    },
     // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
-    { from: "resilierMutuelle", field: "resilierMutuelle", value: "pas_de_mutuelle", target: "dateDebutNostrum" },
+    {
+      from: "resilierMutuelle",
+      field: "resilierMutuelle",
+      value: "pas_de_mutuelle",
+      target: "dateDebutNostrum",
+    },
   ],
 
   /* ────────────────────────────────────────────────────────────── */
@@ -181,7 +189,8 @@ export const variantA: VariantConfig = {
         title: "On vous répond comme vous préférez.",
         subtitle:
           "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
-        icon: true,
+        imageSrc: "/alertBanner/speaker.svg",
+        imageAlt: "Speaker",
       },
     },
 
@@ -200,7 +209,8 @@ export const variantA: VariantConfig = {
         title: "On vous répond comme vous préférez.",
         subtitle:
           "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
-        icon: true,
+        imageSrc: "/alertBanner/speaker.svg",
+        imageAlt: "Speaker",
       },
     },
 
@@ -223,7 +233,8 @@ export const variantA: VariantConfig = {
           "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
-        icon: true,
+        imageSrc: "/alertBanner/girl.svg",
+        imageAlt: "Girl",
       },
     },
 
@@ -291,6 +302,7 @@ export const variantA: VariantConfig = {
         title: "Nostrum Care rembourse plus de 40 médecines douces :",
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        icon: true,
       },
     },
 
@@ -301,6 +313,8 @@ export const variantA: VariantConfig = {
           "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        imageSrc: "/alertBanner/girl.svg",
+        imageAlt: "Girl",
       },
     },
   },

@@ -1,3 +1,4 @@
+import { tr } from "date-fns/locale";
 import type { VariantConfig } from "./types";
 
 /**
@@ -87,9 +88,19 @@ export const variantB: VariantConfig = {
     // "Seulement moi" → skip family steps, jump to santé
     { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
     // "Mon enfant" → skip dateBirthConjoint, jump to santé
-    { from: "commenceParQui", field: "commenceParQui", value: "enfant", target: "sante_yeux" },
+    {
+      from: "commenceParQui",
+      field: "commenceParQui",
+      value: "enfant",
+      target: "sante_yeux",
+    },
     // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
-    { from: "resilierMutuelle", field: "resilierMutuelle", value: "pas_de_mutuelle", target: "dateDebutNostrum" },
+    {
+      from: "resilierMutuelle",
+      field: "resilierMutuelle",
+      value: "pas_de_mutuelle",
+      target: "dateDebutNostrum",
+    },
   ],
 
   /* ────────────────────────────────────────────────────────────── */
@@ -161,11 +172,10 @@ export const variantB: VariantConfig = {
       title: "On commence par qui ?",
       banner: {
         variant: "info",
-        title:
-          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
-        subtitle:
-          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
-        icon: true,
+        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        subtitle: "...vous contacte par email, téléphone ou watsapp",
+        imageSrc: "/alertBanner/speaker.svg",
+        imageAlt: "Speaker",
       },
     },
 
@@ -186,10 +196,10 @@ export const variantB: VariantConfig = {
       ],
       banner: {
         variant: "info",
-        title: "On vous répond comme vous préférez.",
-        subtitle:
-          "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
-        icon: true,
+        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        subtitle: "...vous contacte par email, téléphone ou watsapp",
+        imageSrc: "/alertBanner/speaker.svg",
+        imageAlt: "Speaker",
       },
     },
 
@@ -205,10 +215,10 @@ export const variantB: VariantConfig = {
       ],
       banner: {
         variant: "info",
-        title: "On vous répond comme vous préférez.",
-        subtitle:
-          "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
-        icon: true,
+        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        subtitle: "...vous contacte par email, téléphone ou watsapp",
+        imageSrc: "/alertBanner/speaker.svg",
+        imageAlt: "Speaker",
       },
     },
 
@@ -228,10 +238,11 @@ export const variantB: VariantConfig = {
       banner: {
         variant: "info",
         title:
-          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+          "On rembourse 10 fois.plus de médecines douces que les autres mutuelles",
         subtitle:
-          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
-        icon: true,
+          "Òstéopathie, Sophrologie, Psychologie, Acupuncture, Naturopathie, Coaching, et bien plus.",
+        imageSrc: "/alertBanner/girl.svg",
+        imageAlt: "Girl",
       },
     },
 
@@ -299,6 +310,7 @@ export const variantB: VariantConfig = {
         title: "Nostrum Care rembourse plus de 40 médecines douces :",
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        icon: true,
       },
     },
 
@@ -309,6 +321,8 @@ export const variantB: VariantConfig = {
           "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        imageSrc: "/alertBanner/girl.svg",
+        imageAlt: "Girl",
       },
     },
   },

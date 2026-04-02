@@ -109,6 +109,12 @@ export const personalInfoSchema = z.object({
 });
 export type PersonalInfoFormValues = z.infer<typeof personalInfoSchema>;
 
+/** dob step — birthDate only (variant B split) */
+export const dobSchema = z.object({
+  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
+});
+export type DobFormValues = z.infer<typeof dobSchema>;
+
 /** dateBirthConjoint step — conjoint's birthDate */
 export const dateBirthConjointSchema = z.object({
   conjointBirthDate: birthDateSchema(CONJOINT_MIN_AGE, CONJOINT_MAX_AGE),

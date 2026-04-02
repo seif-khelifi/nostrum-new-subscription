@@ -1,4 +1,5 @@
 export { ProfilStep } from "./profil-step";
+export { DobStep } from "./dob-step";
 export { SexeStep } from "../souscription/sexe-step";
 export { PersonalInfoStep } from "./personal-info-step";
 export { MailStep } from "./mail-step";

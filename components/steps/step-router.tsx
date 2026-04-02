@@ -6,6 +6,7 @@ import { useVariant } from "@/context/VariantContext";
 import type { StepId } from "@/config";
 import {
   ProfilStep,
+  DobStep,
   SexeStep,
   PersonalInfoStep,
   MailStep,
@@ -84,6 +85,7 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
   onboarding: OnboardingStep,
 
   profil: ProfilStep,
+  dob: DobStep,
   sexe: SexeStep,
   personalInfo: PersonalInfoStep,
   mail: MailStep,

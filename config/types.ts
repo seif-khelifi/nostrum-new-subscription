@@ -7,6 +7,7 @@ import type { ReactNode, ComponentType } from "react";
 export type StepId =
   | "onboarding"
   | "profil"
+  | "dob"
   | "sexe"
   | "personalInfo"
   | "mail"

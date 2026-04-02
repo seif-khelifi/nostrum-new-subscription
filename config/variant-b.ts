@@ -31,9 +31,7 @@ export const variantB: VariantConfig = {
       label: "Situation",
       steps: [
         { id: "profil", label: "Profil" },
-        { id: "personalInfo", label: "Informations personnelles" },
-        { id: "mail", label: "Adresse e-mail" },
-        { id: "phoneNumber", label: "Numéro de téléphone" },
+        { id: "dob", label: "Date de naissance" },
         { id: "proteger", label: "Protection" },
         { id: "nousSommes", label: "Nous sommes" },
         { id: "commenceParQui", label: "On commence par qui" },
@@ -49,11 +47,7 @@ export const variantB: VariantConfig = {
         { id: "sante_bien_etre", label: "Bien-être" },
       ],
     },
-    {
-      id: 4,
-      label: "Transition",
-      steps: [{ id: "transition_offer", label: "Offre de transition" }],
-    },
+
     {
       id: 5,
       label: "Devis",
@@ -69,6 +63,9 @@ export const variantB: VariantConfig = {
       label: "Souscription",
       steps: [
         { id: "sexe", label: "Sexe" },
+        { id: "personalInfo", label: "Informations personnelles" },
+        { id: "mail", label: "Adresse e-mail" },
+        { id: "phoneNumber", label: "Numéro de téléphone" },
         { id: "recap", label: "Récapitulatif" },
         { id: "envoiSms", label: "Vérification SMS" },
         { id: "address", label: "Adresse postale" },
@@ -85,13 +82,13 @@ export const variantB: VariantConfig = {
 
   /* ────────────────────────────────────────────────────────────── */
   /*  Per-step texts                                               */
-  /*  Override only the steps whose text should differ from A.     */
-  /*  Omitted steps will use the component's hardcoded defaults.   */
   /* ────────────────────────────────────────────────────────────── */
 
   texts: {
+    /* ── Situation ── */
+
     profil: {
-      title: "Quel est votre statut professionnel ?",
+      title: "Votre situation pro en ce moment ?",
       options: [
         { value: "salarie", label: "Salarié(e)" },
         { value: "independant_tns", label: "Indépendant(e) /TNS" },
@@ -102,20 +99,205 @@ export const variantB: VariantConfig = {
       ],
     },
 
-    sante_yeux: {
-      title: "Parlons de vos yeux",
+    dob: {
+      title: "Quand êtes-vous né ?",
+    },
+
+    personalInfo: {
+      title: "Dites-nous qui vous êtes ?",
+    },
+
+    mail: {
+      title: "Et pour vous contacter ?",
+    },
+
+    phoneNumber: {
+      title: "Et pour vous contacter ?",
       banner: {
         variant: "info",
-        title: "Nostrum Care rembourse plus de 40 médecines douces",
-        subtitle: "ostéopathie, sophrologie, psychologie...",
+        title:
+          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
         icon: true,
       },
     },
 
-    // Explicitly remove a banner that variant A has:
-    phoneNumber: {
-      title: "Et pour vous contacter ?",
-      banner: null,
+    proteger: {
+      title: "Qui souhaitez-vous protéger ?",
+      options: [
+        { value: "moi", label: "Seulement moi" },
+        { value: "conjoint_et_moi", label: "Mon conjoint(e) et moi" },
+        { value: "enfants_et_moi", label: "Mes enfants et moi" },
+        { value: "famille", label: "Toute ma famille" },
+      ],
+    },
+
+    nousSommes: {
+      title: "Qui souhaitez-vous protéger ?",
+    },
+
+    commenceParQui: {
+      title: "On commence par qui ?",
+      options: [
+        { value: "conjoint", label: "Mon conjoint(e)" },
+        { value: "enfant", label: "Mon enfant" },
+      ],
+    },
+
+    dateBirthConjoint: {
+      title: "On commence par qui ?",
+      banner: {
+        variant: "info",
+        title:
+          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        icon: true,
+      },
+    },
+
+    /* ── Santé ── */
+
+    sante_yeux: {
+      title: "On commence par vos yeux ?",
+      options: [
+        { value: "rien", label: "Je n'ai besoin de rien" },
+        {
+          value: "lunettes_lentilles",
+          label: "Je porte des lunettes ou des lentilles",
+        },
+        {
+          value: "specifique",
+          label: "J'ai besoin de solutions plus spécifiques",
+        },
+      ],
+      banner: {
+        variant: "info",
+        title: "On vous répond comme vous préférez.",
+        subtitle:
+          "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
+        icon: true,
+      },
+    },
+
+    sante_dents: {
+      title: "Et maintenant, côté dentaire ?",
+      options: [
+        { value: "routine", label: "Un suivi de routine me suffit" },
+        { value: "soins_reguliers", label: "J'ai besoin de soins réguliers" },
+        {
+          value: "soins_specifiques",
+          label: "J'ai besoin de soins spécifiques",
+        },
+      ],
+      banner: {
+        variant: "info",
+        title: "On vous répond comme vous préférez.",
+        subtitle:
+          "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
+        icon: true,
+      },
+    },
+
+    sante_bien_etre: {
+      title: "Et pour votre bien-être ?",
+      options: [
+        { value: "classiques", label: "Je me limite aux soins classiques" },
+        {
+          value: "medecines_douces",
+          label: "J'utilise parfois des médecines douces",
+        },
+        {
+          value: "routine_complete",
+          label: "J'ai une routine bien-être complète",
+        },
+      ],
+      banner: {
+        variant: "info",
+        title:
+          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        icon: true,
+      },
+    },
+
+    /* ── Souscription ── */
+
+    sexe: {
+      title: "Faisons connaissance",
+      subtitle: "Vous êtes ?",
+      options: [
+        { value: "homme", label: "Un homme" },
+        { value: "femme", label: "Une femme" },
+        { value: "autre", label: "Aucun des deux" },
+      ],
+    },
+
+    recap: {
+      title: "Je crée mon compte",
+      subtitle: "Je recevrai un SMS pour confirmer mes infos.",
+    },
+
+    envoiSms: {
+      title: "Je confirme mon compte",
+      subtitle: "J'entre le code reçu par SMS.",
+    },
+
+    address: {
+      title: "Mes infos personnelles",
+    },
+
+    birthPlace: {
+      title: "Mes infos personnelles",
+      banner: {
+        variant: "info",
+        title:
+          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+        icon: true,
+      },
+    },
+
+    socialSecurity: {
+      title: "Mes infos d'assurance",
+    },
+
+    resilierMutuelle: {
+      title: "Mes infos d'assurance",
+      options: [
+        {
+          value: "pas_de_mutuelle",
+          label: "Je n'ai pas de mutuelle actuellement",
+        },
+        { value: "mutuelle_a_resilier", label: "J'ai une mutuelle à résilier" },
+      ],
+    },
+
+    currentInsurance: {
+      title: "Mes infos d'assurance",
+      subtitle: "Ma mutuelle actuelle",
+    },
+
+    dateSignatureAncien: {
+      title: "Mes infos d'assurance",
+      banner: {
+        title: "Nostrum Care rembourse plus de 40 médecines douces :",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+      },
+    },
+
+    dateDebutNostrum: {
+      title: "Mes infos d'assurance",
+      banner: {
+        title:
+          "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+      },
     },
   },
 };

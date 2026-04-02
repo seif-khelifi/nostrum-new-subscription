@@ -4,11 +4,13 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import type { ProtegerValue } from "@/types/subscription";
 
-const OPTIONS = [
+const DEFAULT_OPTIONS = [
   { value: "moi", label: "Seulement moi" },
   { value: "conjoint_et_moi", label: "Mon conjoint(e) et moi" },
   { value: "enfants_et_moi", label: "Mes enfants et moi" },
@@ -18,11 +20,13 @@ const OPTIONS = [
 export function ProtegerStep() {
   const { goToStepById } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("proteger");
 
+  const options = texts?.options ?? DEFAULT_OPTIONS;
   const selected = formData.proteger;
 
   const selectedLabel = selected
-    ? (OPTIONS.find((o) => o.value === selected)?.label ?? "")
+    ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
 
   const handleNext = () => {
@@ -44,7 +48,7 @@ export function ProtegerStep() {
 
   return (
     <StepScreen
-      title={<>Qui souhaitez-vous protéger ?</>}
+      title={texts?.title ?? <>Qui souhaitez-vous protéger ?</>}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je souhaite protéger</span>
@@ -58,10 +62,13 @@ export function ProtegerStep() {
           )}
         </div>
       }
+      infoCard={
+        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+      }
       canProceed={selected !== null}
       onNext={handleNext}
     >
-      {OPTIONS.map((opt) => (
+      {options.map((opt) => (
         <Button
           key={opt.value}
           variant="selectOption"

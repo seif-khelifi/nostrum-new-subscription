@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   nousSommesSchema,
@@ -23,6 +25,7 @@ const PROTEGER_LABELS: Record<string, string> = {
 export function NousSommesStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("nousSommes");
 
   const protegerLabel = formData.proteger
     ? (PROTEGER_LABELS[formData.proteger] ?? "")
@@ -50,16 +53,11 @@ export function NousSommesStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Qui souhaitez-vous protéger ?</>}
+        title={texts?.title ?? <>Qui souhaitez-vous protéger ?</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je souhaite protéger</span>
-            <PillInput
-              readOnly
-              value={protegerLabel}
-              placeholder=""
-              inputClassName="min-w-[100px] sm:min-w-[160px]"
-            />
+            <PillInput readOnly value={protegerLabel} placeholder="" />
             <span>, nous sommes</span>
             <PillInput
               type="number"
@@ -67,9 +65,11 @@ export function NousSommesStep() {
               placeholder="2"
               {...register("familyCount", { valueAsNumber: true })}
               hasError={!!errors.familyCount}
-              inputClassName="min-w-[60px] sm:min-w-[80px]"
             />
           </div>
+        }
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

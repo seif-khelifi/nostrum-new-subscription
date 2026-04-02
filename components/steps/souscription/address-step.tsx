@@ -7,8 +7,10 @@ import { ChevronRight } from "lucide-react";
 import { AddressSearchInput } from "@/components/ui/search-input";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   addressSchema,
@@ -23,6 +25,7 @@ import { parseSelectedAddress } from "@/lib/geo";
 export function AddressStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("address");
   const [mode, setMode] = useState<"search" | "manual">("search");
   const [apiError, setApiError] = useState(false);
 
@@ -99,17 +102,22 @@ export function AddressStep() {
     next();
   };
 
+  const bannerNode = texts?.banner ? (
+    <VariantBanner config={texts.banner} />
+  ) : undefined;
+
   /* ═══════════ Search mode ═══════════ */
   if (mode === "search") {
     return (
       <form onSubmit={searchForm.handleSubmit(onSearchSubmit)} noValidate>
         <StepScreen
-          title={<>Mes infos personnelles</>}
+          title={texts?.title ?? <>Mes infos personnelles</>}
           subtitle={
             <div className="flex flex-wrap items-center gap-2">
               <span>J&apos;habite au</span>
             </div>
           }
+          infoCard={bannerNode}
           canProceed={searchForm.formState.isValid}
           onNext={() => searchForm.handleSubmit(onSearchSubmit)()}
           isForm
@@ -144,7 +152,7 @@ export function AddressStep() {
   return (
     <form onSubmit={manualForm.handleSubmit(onManualSubmit)} noValidate>
       <StepScreen
-        title={<>Mes infos personnelles</>}
+        title={texts?.title ?? <>Mes infos personnelles</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>J&apos;habite au</span>
@@ -170,6 +178,7 @@ export function AddressStep() {
             />
           </div>
         }
+        infoCard={bannerNode}
         canProceed={manualForm.formState.isValid}
         onNext={() => manualForm.handleSubmit(onManualSubmit)()}
         isForm

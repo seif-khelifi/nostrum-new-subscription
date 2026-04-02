@@ -4,11 +4,13 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import type { ProfilValue } from "@/types/subscription";
 
-const OPTIONS = [
+const DEFAULT_OPTIONS = [
   { value: "salarie", label: "Salarié(e)" },
   { value: "independant_tns", label: "Indépendant(e) /TNS" },
   { value: "etudiant", label: "Étudiant(e)" },
@@ -20,33 +22,33 @@ const OPTIONS = [
 export function ProfilStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("profil");
 
+  const options = texts?.options ?? DEFAULT_OPTIONS;
   const selected = formData.profil;
 
   const selectedLabel = selected
-    ? (OPTIONS.find((o) => o.value === selected)?.label ?? "")
+    ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
 
   return (
     <StepScreen
-      title="Votre situation pro ?"
+      title={texts?.title}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je suis</span>
           {selected && (
-            <PillInput
-              readOnly
-              value={selectedLabel}
-              placeholder=""
-              inputClassName="min-w-[100px] sm:min-w-[140px]"
-            />
+            <PillInput readOnly value={selectedLabel} placeholder="" />
           )}
         </div>
+      }
+      infoCard={
+        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={next}
     >
-      {OPTIONS.map((opt) => (
+      {options.map((opt) => (
         <Button
           key={opt.value}
           variant="selectOption"

@@ -11,12 +11,15 @@ import {
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { otpSchema, type OtpFormValues } from "@/lib/validations/situation";
 
 export function EnvoiSmsStep() {
   const { next } = useStepper();
+  const texts = useStepTexts("envoiSms");
 
   const {
     control,
@@ -49,8 +52,11 @@ export function EnvoiSmsStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Je confirme mon compte</>}
-        subtitle="J'entre le code reçu par SMS."
+        title={texts?.title ?? <>Je confirme mon compte</>}
+        subtitle={texts?.subtitle ?? "J'entre le code reçu par SMS."}
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
@@ -58,7 +64,7 @@ export function EnvoiSmsStep() {
         customAction={
           isComplete ? (
             <Button type="submit" variant="ctaPurple" size="cta">
-              Suivant
+              {texts?.ctaLabel ?? "Suivant"}
               <ArrowRight className="size-5" />
             </Button>
           ) : (

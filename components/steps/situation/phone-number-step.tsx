@@ -2,12 +2,12 @@
 
 import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { InfoIcon } from "lucide-react";
 import { PhoneInput } from "@/components/ui/phone-input";
-import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   phoneNumberSchema,
@@ -17,6 +17,7 @@ import {
 export function PhoneNumberStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("phoneNumber");
 
   const {
     control,
@@ -37,10 +38,16 @@ export function PhoneNumberStep() {
     next();
   };
 
+  // Banner: use variant config, fall back to nothing if explicitly null
+  const bannerNode =
+    texts?.banner === null ? undefined : texts?.banner ? (
+      <VariantBanner config={texts.banner} />
+    ) : undefined;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Et pour vous contacter ?</>}
+        title={texts?.title ?? <>Et pour vous contacter ?</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Vous pouvez aussi me joindre au</span>
@@ -59,14 +66,7 @@ export function PhoneNumberStep() {
             <span>pour obtenir des précieux conseils.</span>
           </div>
         }
-        infoCard={
-          <AlertBanner
-            variant="info"
-            title="Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone."
-            subtitle="ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus."
-            icon={<InfoIcon className="size-5 text-[#9000E3]" />}
-          />
-        }
+        infoCard={bannerNode}
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

@@ -2,13 +2,13 @@
 
 import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
-import { InfoIcon } from "lucide-react";
 import { PillInput } from "@/components/ui/pill-input";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
-import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   dateBirthConjointSchema,
@@ -26,6 +26,7 @@ const COMMENCE_LABELS: Record<string, string> = {
 export function DateBirthConjointStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("dateBirthConjoint");
 
   const rawBirthDate = formData.conjoint?.birthDate ?? "";
   const commenceLabel = formData.commenceParQui
@@ -56,10 +57,16 @@ export function DateBirthConjointStep() {
     next();
   };
 
+  // Banner: use variant config, fall back to nothing if explicitly null
+  const bannerNode =
+    texts?.banner === null ? undefined : texts?.banner ? (
+      <VariantBanner config={texts.banner} />
+    ) : undefined;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>On commence par qui ?</>}
+        title={texts?.title ?? <>On commence par qui ?</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je veux protéger en premier mon</span>
@@ -90,14 +97,7 @@ export function DateBirthConjointStep() {
             />
           </div>
         }
-        infoCard={
-          <AlertBanner
-            variant="info"
-            title="Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone."
-            subtitle="ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus."
-            icon={<InfoIcon className="size-5 text-[#9000E3]" />}
-          />
-        }
+        infoCard={bannerNode}
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

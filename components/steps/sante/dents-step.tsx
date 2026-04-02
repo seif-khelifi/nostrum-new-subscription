@@ -1,62 +1,58 @@
 "use client";
 
-import { Check, InfoIcon } from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSanteForm } from "@/context/SanteFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import type { DentsValue } from "@/types/subscription";
 
-const OPTIONS = [
-	{ value: "routine", label: "Un suivi de routine me suffit" },
-	{ value: "soins_reguliers", label: "J'ai besoin de soins réguliers" },
-	{ value: "soins_specifiques", label: "J'ai besoin de soins spécifiques" },
+const DEFAULT_OPTIONS = [
+  { value: "routine", label: "Un suivi de routine me suffit" },
+  { value: "soins_reguliers", label: "J'ai besoin de soins réguliers" },
+  { value: "soins_specifiques", label: "J'ai besoin de soins spécifiques" },
 ] as const;
 
 export function DentsStep() {
-	const { next } = useStepper();
-	const { formData, updateFormData } = useSanteForm();
+  const { next } = useStepper();
+  const { formData, updateFormData } = useSanteForm();
+  const texts = useStepTexts("sante_dents");
 
-	const selected = formData.dents;
+  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const selected = formData.dents;
 
-	return (
-		<StepScreen
-			title={
-				<>
-					Et maintenant, côté{" "}
-					<br />
-					dentaire ?
-				</>
-			}
-			canProceed={selected !== null}
-			onNext={next}
-		>
-			{OPTIONS.map((opt) => (
-				<Button
-					key={opt.value}
-					variant="selectOption"
-					size="select"
-					selected={selected === opt.value}
-					onClick={() => updateFormData({ dents: opt.value as DentsValue })}
-					className="justify-between"
-				>
-					<span>{opt.label}</span>
-					{selected === opt.value && (
-						<span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-[#490076] text-white">
-							<Check className="size-3 sm:size-3.5" />
-						</span>
-					)}
-				</Button>
-			))}
+  const bannerNode =
+    texts?.banner === null ? undefined : texts?.banner ? (
+      <VariantBanner config={texts.banner} className="mt-2" />
+    ) : undefined;
 
-			<AlertBanner
-				variant="info"
-				title="On vous répond comme vous préférez."
-				subtitle="Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider."
-				icon={<InfoIcon className="size-5 text-[#9000E3]" />}
-				className="mt-2"
-			/>
-		</StepScreen>
-	);
+  return (
+    <StepScreen
+      title={texts?.title}
+      canProceed={selected !== null}
+      onNext={next}
+    >
+      {options.map((opt) => (
+        <Button
+          key={opt.value}
+          variant="selectOption"
+          size="select"
+          selected={selected === opt.value}
+          onClick={() => updateFormData({ dents: opt.value as DentsValue })}
+          className="justify-between"
+        >
+          <span>{opt.label}</span>
+          {selected === opt.value && (
+            <span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-[#490076] text-white">
+              <Check className="size-3 sm:size-3.5" />
+            </span>
+          )}
+        </Button>
+      ))}
+
+      {bannerNode}
+    </StepScreen>
+  );
 }

@@ -3,10 +3,11 @@
 import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
-import { AlertBanner } from "@/components/ui/alert";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   dateSignatureAncienSchema,
@@ -16,6 +17,7 @@ import {
 export function DateSignatureAncienStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("dateSignatureAncien");
 
   const {
     control,
@@ -40,10 +42,16 @@ export function DateSignatureAncienStep() {
     next();
   };
 
+  // Banner: use variant config, fall back to nothing if explicitly null
+  const bannerNode =
+    texts?.banner === null ? undefined : texts?.banner ? (
+      <VariantBanner config={texts.banner} />
+    ) : undefined;
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Mes infos d&apos;assurance</>}
+        title={texts?.title ?? <>Mes infos d&apos;assurance</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>J&apos;ai signé mon ancien contrat le</span>
@@ -62,12 +70,7 @@ export function DateSignatureAncienStep() {
             />
           </div>
         }
-        infoCard={
-          <AlertBanner
-            title="Nostrum Care rembourse plus de 40 médecines douces :"
-            subtitle="ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus."
-          />
-        }
+        infoCard={bannerNode}
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

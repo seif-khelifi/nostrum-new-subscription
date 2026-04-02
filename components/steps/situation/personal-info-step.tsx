@@ -5,8 +5,10 @@ import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   personalInfoSchema,
@@ -18,6 +20,7 @@ import {
 export function PersonalInfoStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("personalInfo");
 
   const {
     register,
@@ -49,10 +52,12 @@ export function PersonalInfoStep() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
         title={
-          <>
-            Dites-nous <br />
-            qui vous êtes ?{" "}
-          </>
+          texts?.title ?? (
+            <>
+              Dites-nous <br />
+              qui vous êtes ?{" "}
+            </>
+          )
         }
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
@@ -87,6 +92,9 @@ export function PersonalInfoStep() {
               }}
             />
           </div>
+        }
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

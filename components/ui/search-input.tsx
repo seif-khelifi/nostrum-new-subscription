@@ -328,7 +328,7 @@ export function InsuranceSearchInput({
   };
 
   return (
-    <div className={cn("flex flex-col gap-2", wrapperClassName)}>
+    <div className={cn("flex w-full flex-col gap-2", wrapperClassName)}>
       {/* Input bar */}
       <div
         data-slot="search-input"

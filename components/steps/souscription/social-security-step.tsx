@@ -4,8 +4,10 @@ import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   socialSecuritySchema,
@@ -15,6 +17,7 @@ import {
 export function SocialSecurityStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("socialSecurity");
 
   const {
     register,
@@ -40,7 +43,7 @@ export function SocialSecurityStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Mes infos d&apos;assurance</>}
+        title={texts?.title ?? <>Mes infos d&apos;assurance</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Mon numéro de sécurité sociale est</span>
@@ -50,6 +53,9 @@ export function SocialSecurityStep() {
               hasError={!!errors.socialSecurityNumber}
             />
           </div>
+        }
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

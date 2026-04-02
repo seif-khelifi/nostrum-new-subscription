@@ -4,11 +4,13 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import type { CommenceParQuiValue } from "@/types/subscription";
 
-const OPTIONS = [
+const DEFAULT_OPTIONS = [
   { value: "conjoint", label: "Mon conjoint(e)" },
   { value: "enfant", label: "Mon enfant" },
 ] as const;
@@ -16,11 +18,13 @@ const OPTIONS = [
 export function CommenceParQuiStep() {
   const { goToStepById } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("commenceParQui");
 
+  const options = texts?.options ?? DEFAULT_OPTIONS;
   const selected = formData.commenceParQui;
 
   const selectedLabel = selected
-    ? (OPTIONS.find((o) => o.value === selected)?.label ?? "")
+    ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
 
   const handleNext = () => {
@@ -39,7 +43,7 @@ export function CommenceParQuiStep() {
 
   return (
     <StepScreen
-      title={<>On commence par qui ?</>}
+      title={texts?.title ?? <>On commence par qui ?</>}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je veux protéger en premier mon</span>
@@ -53,10 +57,13 @@ export function CommenceParQuiStep() {
           )}
         </div>
       }
+      infoCard={
+        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+      }
       canProceed={selected !== null}
       onNext={handleNext}
     >
-      {OPTIONS.map((opt) => (
+      {options.map((opt) => (
         <Button
           key={opt.value}
           variant="selectOption"

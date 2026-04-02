@@ -6,8 +6,10 @@ import { PillInput } from "@/components/ui/pill-input";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
   recapSchema,
@@ -19,6 +21,7 @@ import {
 export function RecapStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("recap");
 
   const {
     register,
@@ -53,8 +56,13 @@ export function RecapStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Je crée mon compte</>}
-        subtitle="Je recevrai un SMS pour confirmer mes infos."
+        title={texts?.title ?? <>Je crée mon compte</>}
+        subtitle={
+          texts?.subtitle ?? "Je recevrai un SMS pour confirmer mes infos."
+        }
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

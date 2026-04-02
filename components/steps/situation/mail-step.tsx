@@ -4,14 +4,17 @@ import { useForm } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
+import { VariantBanner } from "@/components/steps/variant-banner";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { mailSchema, type MailFormValues } from "@/lib/validations/situation";
 
 export function MailStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
+  const texts = useStepTexts("mail");
 
   const {
     register,
@@ -35,7 +38,7 @@ export function MailStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={<>Et pour vous contacter ?</>}
+        title={texts?.title ?? <>Et pour vous contacter ?</>}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>
@@ -48,6 +51,9 @@ export function MailStep() {
               hasError={!!errors.email}
             />
           </div>
+        }
+        infoCard={
+          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

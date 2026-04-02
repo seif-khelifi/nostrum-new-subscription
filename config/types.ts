@@ -1,0 +1,116 @@
+import type { ReactNode, ComponentType } from "react";
+
+/* ------------------------------------------------------------------ */
+/*  Step & Group definitions (moved from StepperContext)               */
+/* ------------------------------------------------------------------ */
+
+export type StepId =
+  | "onboarding"
+  | "profil"
+  | "sexe"
+  | "personalInfo"
+  | "mail"
+  | "phoneNumber"
+  | "address"
+  | "birthPlace"
+  | "proteger"
+  | "nousSommes"
+  | "commenceParQui"
+  | "dateBirthConjoint"
+  | "recap"
+  | "envoiSms"
+  | "sante_yeux"
+  | "sante_dents"
+  | "sante_bien_etre"
+  | "transition_offer"
+  | "devis_placeholder"
+  | "garanties"
+  | "offre_comparateur"
+  | "options"
+  | "socialSecurity"
+  | "resilierMutuelle"
+  | "currentInsurance"
+  | "dateSignatureAncien"
+  | "dateDebutNostrum"
+  | "souscription_placeholder";
+
+export interface StepDef {
+  id: StepId;
+  label: string;
+}
+
+export interface StepGroup {
+  id: number;
+  label: string;
+  steps: StepDef[];
+}
+
+/* ------------------------------------------------------------------ */
+/*  Banner configuration                                              */
+/* ------------------------------------------------------------------ */
+
+export interface BannerConfig {
+  /** Alert variant — maps to AlertBanner's `variant` prop */
+  variant?: "info" | "default" | "warning" | "success" | "destructive";
+  /** Banner title text */
+  title: ReactNode;
+  /** Banner subtitle / description text */
+  subtitle?: ReactNode;
+  /** Show an icon (rendered via <InfoIcon>) */
+  icon?: boolean;
+  /** Show an image instead of an icon */
+  imageSrc?: string;
+  imageAlt?: string;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Per-step text configuration                                       */
+/* ------------------------------------------------------------------ */
+
+export interface StepTexts {
+  /** Page title (h1) */
+  title?: ReactNode;
+  /** Subtitle / question line — plain string only; complex subtitles stay in the component */
+  subtitle?: ReactNode;
+  /** AlertBanner config — set to `null` to explicitly hide a banner that the default has */
+  banner?: BannerConfig | null;
+  /** Option labels for selection steps (profil, proteger, etc.) */
+  options?: Array<{ value: string; label: string }>;
+  /** Override the default "Suivant" CTA label */
+  ctaLabel?: string;
+  /**
+   * Escape hatch: arbitrary key-value bag for obscure per-step overrides
+   * that don't fit the standard fields above. Components can read from this
+   * via `useStepTexts(id).extra?.someKey`. Easy to remove once stabilized.
+   */
+  extra?: Record<string, unknown>;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant configuration                                             */
+/* ------------------------------------------------------------------ */
+
+export type VariantKey = "a" | "b";
+
+export interface VariantConfig {
+  /** Variant identifier */
+  id: VariantKey;
+
+  /** Step groups and ordering — controls the entire flow */
+  stepGroups: StepGroup[];
+
+  /**
+   * Per-step text overrides.
+   * Only steps that need variant-specific text need an entry here.
+   * Components fall back to their hardcoded defaults when a key is missing.
+   */
+  texts: Partial<Record<StepId, StepTexts>>;
+
+  /**
+   * Per-step component overrides.
+   * Only needed for steps that render entirely different layouts per variant
+   * (e.g. devis pages). Most steps share the same component and just read
+   * different text from `texts`.
+   */
+  components?: Partial<Record<StepId, ComponentType>>;
+}

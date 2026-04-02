@@ -7,7 +7,7 @@ import { ChevronRight } from "lucide-react";
 import { AddressSearchInput } from "@/components/ui/search-input";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -103,7 +103,7 @@ export function AddressStep() {
   };
 
   const bannerNode = texts.banner ? (
-    <VariantBanner config={texts.banner} />
+    <AlertBanner {...texts.banner} />
   ) : undefined;
 
   /* ═══════════ Search mode ═══════════ */

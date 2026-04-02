@@ -4,7 +4,7 @@ import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -44,7 +44,7 @@ export function ProtegerStep() {
         </div>
       }
       infoCard={
-        texts.banner ? <VariantBanner config={texts.banner} /> : undefined
+        texts.banner ? <AlertBanner {...texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={handleNext}

@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PhoneInput } from "@/components/ui/phone-input";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -38,11 +38,6 @@ export function PhoneNumberStep() {
     next();
   };
 
-  const bannerNode =
-    texts.banner === null ? undefined : texts.banner ? (
-      <VariantBanner config={texts.banner} />
-    ) : undefined;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
@@ -65,7 +60,9 @@ export function PhoneNumberStep() {
             <span>pour obtenir des précieux conseils.</span>
           </div>
         }
-        infoCard={bannerNode}
+        infoCard={
+          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
+        }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

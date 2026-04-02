@@ -3,7 +3,7 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -16,11 +16,6 @@ export function DentsStep() {
 
   const options = texts.options!;
   const selected = formData.dents;
-
-  const bannerNode =
-    texts.banner === null ? undefined : texts.banner ? (
-      <VariantBanner config={texts.banner} className="mt-2" />
-    ) : undefined;
 
   return (
     <StepScreen
@@ -46,7 +41,9 @@ export function DentsStep() {
         </Button>
       ))}
 
-      {bannerNode}
+      {texts.banner ? (
+        <AlertBanner {...texts.banner} className="mt-2" />
+      ) : null}
     </StepScreen>
   );
 }

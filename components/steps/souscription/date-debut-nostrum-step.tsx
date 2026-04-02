@@ -4,7 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -42,11 +42,6 @@ export function DateDebutNostrumStep() {
     next();
   };
 
-  const bannerNode =
-    texts.banner === null ? undefined : texts.banner ? (
-      <VariantBanner config={texts.banner} />
-    ) : undefined;
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
@@ -69,7 +64,9 @@ export function DateDebutNostrumStep() {
             />
           </div>
         }
-        infoCard={bannerNode}
+        infoCard={
+          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
+        }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

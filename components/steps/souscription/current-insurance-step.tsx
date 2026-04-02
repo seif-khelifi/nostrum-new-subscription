@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/search-input";
 import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -113,7 +113,7 @@ export function CurrentInsuranceStep() {
       <StepScreen
         title={texts.title}
         subtitle={texts.subtitle}
-        infoCard={texts.banner ? <VariantBanner config={texts.banner} /> : undefined}
+        infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
         canProceed={canProceed}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

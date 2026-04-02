@@ -1,5 +1,6 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
+import { InfoIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -152,11 +153,17 @@ function AlertVisual({
   );
 }
 
-type AlertBannerProps = React.ComponentProps<"div"> &
+/** Default icon rendered when `icon` is `true` */
+const DEFAULT_ALERT_ICON = (
+  <InfoIcon className="size-5 text-[#9000E3]" />
+);
+
+type AlertBannerProps = Omit<React.ComponentProps<"div">, "title"> &
   VariantProps<typeof alertVariants> & {
     title: React.ReactNode;
     subtitle?: React.ReactNode;
-    icon?: React.ReactNode;
+    /** Pass `true` for the default info icon, or a custom ReactNode */
+    icon?: boolean | React.ReactNode;
     imageSrc?: string;
     imageAlt?: string;
     visualClassName?: string;
@@ -176,6 +183,9 @@ function AlertBanner({
   contentClassName,
   ...props
 }: AlertBannerProps) {
+  const resolvedIcon =
+    icon === true ? DEFAULT_ALERT_ICON : icon === false ? undefined : icon;
+
   return (
     <Alert variant={variant} size={size} className={className} {...props}>
       <div className={cn("min-w-0 flex-1", contentClassName)}>
@@ -188,7 +198,7 @@ function AlertBanner({
       </div>
 
       <AlertVisual
-        icon={icon}
+        icon={resolvedIcon}
         imageSrc={imageSrc}
         imageAlt={imageAlt}
         className={visualClassName}

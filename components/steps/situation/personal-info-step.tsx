@@ -5,7 +5,7 @@ import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { PillInput } from "@/components/ui/pill-input";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
@@ -87,7 +87,7 @@ export function PersonalInfoStep() {
           </div>
         }
         infoCard={
-          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/input-otp";
 import { Button } from "@/components/ui/button";
 import { StepScreen } from "@/components/steps/step-screen";
-import { VariantBanner } from "@/components/steps/variant-banner";
+import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
@@ -55,7 +55,7 @@ export function EnvoiSmsStep() {
         title={texts.title}
         subtitle={texts.subtitle}
         infoCard={
-          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

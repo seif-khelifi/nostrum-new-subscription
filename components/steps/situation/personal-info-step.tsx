@@ -51,14 +51,7 @@ export function PersonalInfoStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={
-          texts?.title ?? (
-            <>
-              Dites-nous <br />
-              qui vous êtes ?{" "}
-            </>
-          )
-        }
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je m&apos;appelle</span>
@@ -94,7 +87,7 @@ export function PersonalInfoStep() {
           </div>
         }
         infoCard={
-          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

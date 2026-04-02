@@ -9,32 +9,22 @@ import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { YeuxValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "rien", label: "Je n'ai besoin de rien" },
-  {
-    value: "lunettes_lentilles",
-    label: "Je porte des lunettes ou des lentilles",
-  },
-  { value: "specifique", label: "J'ai besoin de solutions plus spécifiques" },
-] as const;
-
 export function YeuxStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSanteForm();
   const texts = useStepTexts("sante_yeux");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.yeux;
 
-  // Banner: use variant config, fall back to nothing if explicitly null
   const bannerNode =
-    texts?.banner === null ? undefined : texts?.banner ? (
+    texts.banner === null ? undefined : texts.banner ? (
       <VariantBanner config={texts.banner} className="mt-2" />
     ) : undefined;
 
   return (
     <StepScreen
-      title={texts?.title}
+      title={texts.title}
       canProceed={selected !== null}
       onNext={next}
     >

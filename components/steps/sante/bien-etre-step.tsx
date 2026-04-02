@@ -9,31 +9,22 @@ import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { BienEtreValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "classiques", label: "Je me limite aux soins classiques" },
-  {
-    value: "medecines_douces",
-    label: "J'utilise parfois des médecines douces",
-  },
-  { value: "routine_complete", label: "J'ai une routine bien-être complète" },
-] as const;
-
 export function BienEtreStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSanteForm();
   const texts = useStepTexts("sante_bien_etre");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.bienEtre;
 
   const bannerNode =
-    texts?.banner === null ? undefined : texts?.banner ? (
+    texts.banner === null ? undefined : texts.banner ? (
       <VariantBanner config={texts.banner} className="mt-2" />
     ) : undefined;
 
   return (
     <StepScreen
-      title={texts?.title}
+      title={texts.title}
       canProceed={selected !== null}
       onNext={next}
     >

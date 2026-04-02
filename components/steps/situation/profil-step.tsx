@@ -10,21 +10,12 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { ProfilValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "salarie", label: "Salarié(e)" },
-  { value: "independant_tns", label: "Indépendant(e) /TNS" },
-  { value: "etudiant", label: "Étudiant(e)" },
-  { value: "independant", label: "Indépendant(e)" },
-  { value: "retraite", label: "Retraité(e)" },
-  { value: "recherche_emploi", label: "En recherche d'emploi" },
-] as const;
-
 export function ProfilStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("profil");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.profil;
 
   const selectedLabel = selected
@@ -33,7 +24,7 @@ export function ProfilStep() {
 
   return (
     <StepScreen
-      title={texts?.title}
+      title={texts.title}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je suis</span>
@@ -43,7 +34,7 @@ export function ProfilStep() {
         </div>
       }
       infoCard={
-        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        texts.banner ? <VariantBanner config={texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={next}

@@ -42,16 +42,15 @@ export function DateDebutNostrumStep() {
     next();
   };
 
-  // Banner: use variant config, fall back to nothing if explicitly null
   const bannerNode =
-    texts?.banner === null ? undefined : texts?.banner ? (
+    texts.banner === null ? undefined : texts.banner ? (
       <VariantBanner config={texts.banner} />
     ) : undefined;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Mes infos d&apos;assurance</>}
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je veux débuter mon contrat Nostrum Care le</span>

@@ -53,7 +53,7 @@ export function NousSommesStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Qui souhaitez-vous protéger ?</>}
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je souhaite protéger</span>
@@ -69,7 +69,7 @@ export function NousSommesStep() {
           </div>
         }
         infoCard={
-          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

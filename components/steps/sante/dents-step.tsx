@@ -9,28 +9,22 @@ import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { DentsValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "routine", label: "Un suivi de routine me suffit" },
-  { value: "soins_reguliers", label: "J'ai besoin de soins réguliers" },
-  { value: "soins_specifiques", label: "J'ai besoin de soins spécifiques" },
-] as const;
-
 export function DentsStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSanteForm();
   const texts = useStepTexts("sante_dents");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.dents;
 
   const bannerNode =
-    texts?.banner === null ? undefined : texts?.banner ? (
+    texts.banner === null ? undefined : texts.banner ? (
       <VariantBanner config={texts.banner} className="mt-2" />
     ) : undefined;
 
   return (
     <StepScreen
-      title={texts?.title}
+      title={texts.title}
       canProceed={selected !== null}
       onNext={next}
     >

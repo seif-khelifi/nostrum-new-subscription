@@ -10,18 +10,12 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { SexeValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "homme", label: "Un homme" },
-  { value: "femme", label: "Une femme" },
-  { value: "autre", label: "Aucun des deux" },
-] as const;
-
 export function SexeStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("sexe");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.sexe;
 
   const selectedLabel = selected
@@ -30,17 +24,17 @@ export function SexeStep() {
 
   return (
     <StepScreen
-      title={texts?.title ?? "Faisons connaissance"}
+      title={texts.title}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
-          <span>{texts?.subtitle ?? "Vous êtes ?"}</span>
+          <span>{texts.subtitle}</span>
           {selected && (
             <PillInput readOnly value={selectedLabel} placeholder="" />
           )}
         </div>
       }
       infoCard={
-        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        texts.banner ? <VariantBanner config={texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={next}

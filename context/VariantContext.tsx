@@ -21,7 +21,7 @@ function getOrAssignVariant(): VariantKey {
   if (typeof window === "undefined") return "a";
   try {
     const stored = sessionStorage.getItem(VARIANT_STORAGE_KEY);
-    // if (stored === "a" || stored === "b") return stored;
+    if (stored === "a" || stored === "b") return stored;
     const variant: VariantKey = Math.random() < 0.1 ? "a" : "b";
     sessionStorage.setItem(VARIANT_STORAGE_KEY, variant);
     console.log("[variant] Assigned variant:", variant);
@@ -74,11 +74,18 @@ export function useVariant(): VariantConfig {
 }
 
 /**
- * Convenience hook: get the text overrides for a specific step.
- * Returns `undefined` when the active variant has no overrides for that step,
- * so the component can fall back to its hardcoded defaults.
+ * Convenience hook: get the texts for a specific step from the variant config.
+ * Throws if no entry exists — the config is the single source of truth;
+ * step components must never hardcode fallback text.
  */
-export function useStepTexts(stepId: StepId): StepTexts | undefined {
+export function useStepTexts(stepId: StepId): StepTexts {
   const { texts } = useVariant();
-  return texts[stepId];
+  const entry = texts[stepId];
+  if (!entry) {
+    throw new Error(
+      `[useStepTexts] No texts configured for step "${stepId}". ` +
+        `Add an entry in the variant config.`,
+    );
+  }
+  return entry;
 }

@@ -9,17 +9,12 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { ResilierMutuelleValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "pas_de_mutuelle", label: "Je n'ai pas de mutuelle actuellement" },
-  { value: "mutuelle_a_resilier", label: "J'ai une mutuelle à résilier" },
-] as const;
-
 export function ResilierMutuelleStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("resilierMutuelle");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.resilierMutuelle;
 
   const handleNext = () => {
@@ -29,9 +24,9 @@ export function ResilierMutuelleStep() {
 
   return (
     <StepScreen
-      title={texts?.title ?? <>Mes infos d&apos;assurance</>}
+      title={texts.title}
       infoCard={
-        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        texts.banner ? <VariantBanner config={texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={handleNext}

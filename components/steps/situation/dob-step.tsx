@@ -43,14 +43,14 @@ export function DobStep() {
   };
 
   const bannerNode =
-    texts?.banner === null ? undefined : texts?.banner ? (
+    texts.banner === null ? undefined : texts.banner ? (
       <VariantBanner config={texts.banner} />
     ) : undefined;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? "Quand êtes-vous né ?"}
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je suis né le</span>

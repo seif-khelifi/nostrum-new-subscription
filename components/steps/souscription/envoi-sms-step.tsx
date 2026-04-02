@@ -52,10 +52,10 @@ export function EnvoiSmsStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Je confirme mon compte</>}
-        subtitle={texts?.subtitle ?? "J'entre le code reçu par SMS."}
+        title={texts.title}
+        subtitle={texts.subtitle}
         infoCard={
-          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
@@ -64,7 +64,7 @@ export function EnvoiSmsStep() {
         customAction={
           isComplete ? (
             <Button type="submit" variant="ctaPurple" size="cta">
-              {texts?.ctaLabel ?? "Suivant"}
+              {texts.ctaLabel}
               <ArrowRight className="size-5" />
             </Button>
           ) : (

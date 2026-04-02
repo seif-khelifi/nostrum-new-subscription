@@ -43,7 +43,7 @@ export function SocialSecurityStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Mes infos d&apos;assurance</>}
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Mon numéro de sécurité sociale est</span>
@@ -55,7 +55,7 @@ export function SocialSecurityStep() {
           </div>
         }
         infoCard={
-          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

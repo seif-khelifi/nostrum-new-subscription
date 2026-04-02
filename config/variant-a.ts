@@ -3,9 +3,9 @@ import type { VariantConfig } from "./types";
 /**
  * Variant A — the current/default experience.
  *
- * All values here are extracted from the hardcoded strings that were
- * previously inline in each step component. This is the baseline;
- * variant B can override any subset of these.
+ * This config is the single source of truth for all user-facing copy,
+ * step ordering, banners, and options. Step components read directly
+ * from here and must never hardcode fallback text.
  */
 export const variantA: VariantConfig = {
   id: "a",
@@ -258,6 +258,7 @@ export const variantA: VariantConfig = {
     envoiSms: {
       title: "Je confirme mon compte",
       subtitle: "J'entre le code reçu par SMS.",
+      ctaLabel: "Suivant",
     },
 
     address: {

@@ -102,7 +102,7 @@ export function AddressStep() {
     next();
   };
 
-  const bannerNode = texts?.banner ? (
+  const bannerNode = texts.banner ? (
     <VariantBanner config={texts.banner} />
   ) : undefined;
 
@@ -111,7 +111,7 @@ export function AddressStep() {
     return (
       <form onSubmit={searchForm.handleSubmit(onSearchSubmit)} noValidate>
         <StepScreen
-          title={texts?.title ?? <>Mes infos personnelles</>}
+          title={texts.title}
           subtitle={
             <div className="flex flex-wrap items-center gap-2">
               <span>J&apos;habite au</span>
@@ -152,7 +152,7 @@ export function AddressStep() {
   return (
     <form onSubmit={manualForm.handleSubmit(onManualSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Mes infos personnelles</>}
+        title={texts.title}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>J&apos;habite au</span>

@@ -69,15 +69,15 @@ export interface BannerConfig {
 /* ------------------------------------------------------------------ */
 
 export interface StepTexts {
-  /** Page title (h1) */
-  title?: ReactNode;
+  /** Page title (h1) — required: always provided by the variant config */
+  title: ReactNode;
   /** Subtitle / question line — plain string only; complex subtitles stay in the component */
   subtitle?: ReactNode;
   /** AlertBanner config — set to `null` to explicitly hide a banner that the default has */
   banner?: BannerConfig | null;
   /** Option labels for selection steps (profil, proteger, etc.) */
   options?: Array<{ value: string; label: string }>;
-  /** Override the default "Suivant" CTA label */
+  /** CTA button label (defaults to "Suivant" when omitted) */
   ctaLabel?: string;
   /**
    * Escape hatch: arbitrary key-value bag for obscure per-step overrides
@@ -125,9 +125,9 @@ export interface VariantConfig {
   stepGroups: StepGroup[];
 
   /**
-   * Per-step text overrides.
-   * Only steps that need variant-specific text need an entry here.
-   * Components fall back to their hardcoded defaults when a key is missing.
+   * Per-step texts — the single source of truth for all user-facing copy.
+   * Every step that calls `useStepTexts(id)` MUST have a corresponding
+   * entry here; the hook will throw at runtime if one is missing.
    */
   texts: Partial<Record<StepId, StepTexts>>;
 

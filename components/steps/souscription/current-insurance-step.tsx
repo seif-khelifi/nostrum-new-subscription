@@ -111,9 +111,9 @@ export function CurrentInsuranceStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Mes infos d&apos;assurance</>}
-        subtitle={texts?.subtitle ?? <span>Ma mutuelle actuelle</span>}
-        infoCard={texts?.banner ? <VariantBanner config={texts.banner} /> : undefined}
+        title={texts.title}
+        subtitle={texts.subtitle}
+        infoCard={texts.banner ? <VariantBanner config={texts.banner} /> : undefined}
         canProceed={canProceed}
         onNext={() => handleSubmit(onSubmit)()}
         isForm

@@ -10,19 +10,12 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import type { ProtegerValue } from "@/types/subscription";
 
-const DEFAULT_OPTIONS = [
-  { value: "moi", label: "Seulement moi" },
-  { value: "conjoint_et_moi", label: "Mon conjoint(e) et moi" },
-  { value: "enfants_et_moi", label: "Mes enfants et moi" },
-  { value: "famille", label: "Toute ma famille" },
-] as const;
-
 export function ProtegerStep() {
   const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("proteger");
 
-  const options = texts?.options ?? DEFAULT_OPTIONS;
+  const options = texts.options!;
   const selected = formData.proteger;
 
   const selectedLabel = selected
@@ -36,7 +29,7 @@ export function ProtegerStep() {
 
   return (
     <StepScreen
-      title={texts?.title ?? <>Qui souhaitez-vous protéger ?</>}
+      title={texts.title}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je souhaite protéger</span>
@@ -51,7 +44,7 @@ export function ProtegerStep() {
         </div>
       }
       infoCard={
-        texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+        texts.banner ? <VariantBanner config={texts.banner} /> : undefined
       }
       canProceed={selected !== null}
       onNext={handleNext}

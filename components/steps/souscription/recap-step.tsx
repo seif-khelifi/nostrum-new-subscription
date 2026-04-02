@@ -56,12 +56,10 @@ export function RecapStep() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts?.title ?? <>Je crée mon compte</>}
-        subtitle={
-          texts?.subtitle ?? "Je recevrai un SMS pour confirmer mes infos."
-        }
+        title={texts.title}
+        subtitle={texts.subtitle}
         infoCard={
-          texts?.banner ? <VariantBanner config={texts.banner} /> : undefined
+          texts.banner ? <VariantBanner config={texts.banner} /> : undefined
         }
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}

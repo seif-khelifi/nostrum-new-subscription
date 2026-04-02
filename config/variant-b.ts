@@ -1,17 +1,11 @@
-import { tr } from "date-fns/locale";
 import type { VariantConfig } from "./types";
 
 /**
  * Variant B — alternative experience.
  *
- * Start by copying variant A's structure, then override the fields
- * you want to differ. Only the overridden keys will change;
- * components fall back to their hardcoded defaults for anything
- * not specified here.
- *
- * TODO: Customize step groups, texts, and banners for variant B.
- *       For now this is identical to variant A so the app works
- *       out of the box with either variant.
+ * This config is the single source of truth for all user-facing copy,
+ * step ordering, banners, and options. Step components read directly
+ * from here and must never hardcode fallback text.
  */
 export const variantB: VariantConfig = {
   id: "b",
@@ -266,6 +260,7 @@ export const variantB: VariantConfig = {
     envoiSms: {
       title: "Je confirme mon compte",
       subtitle: "J'entre le code reçu par SMS.",
+      ctaLabel: "Suivant",
     },
 
     address: {

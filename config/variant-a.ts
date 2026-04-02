@@ -76,6 +76,19 @@ export const variantA: VariantConfig = {
   ],
 
   /* ────────────────────────────────────────────────────────────── */
+  /*  Skip rules — conditional step routing                        */
+  /* ────────────────────────────────────────────────────────────── */
+
+  skipRules: [
+    // "Seulement moi" → skip family steps, jump to santé
+    { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
+    // "Mon enfant" → skip dateBirthConjoint, jump to santé
+    { from: "commenceParQui", field: "commenceParQui", value: "enfant", target: "sante_yeux" },
+    // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
+    { from: "resilierMutuelle", field: "resilierMutuelle", value: "pas_de_mutuelle", target: "dateDebutNostrum" },
+  ],
+
+  /* ────────────────────────────────────────────────────────────── */
   /*  Per-step texts                                               */
   /* ────────────────────────────────────────────────────────────── */
 

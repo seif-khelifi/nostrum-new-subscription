@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react";
 import { useVariant } from "@/context/VariantContext";
-import type { StepId, StepDef, StepGroup, VariantKey } from "@/config";
+import type { StepId, StepDef, StepGroup, SkipRule, VariantKey } from "@/config";
 
 export type { StepId, StepDef, StepGroup };
 
@@ -67,15 +67,34 @@ function getFlatIndexById(allSteps: StepDef[], id: StepId): number {
 }
 
 /** Read a field from the persisted situation form in sessionStorage. */
-function getSituationField<K extends string>(field: K): string | null {
+function getSituationField(field: string): string | null {
   try {
     const raw = sessionStorage.getItem("subscription_situation");
     if (!raw) return null;
-    const data = JSON.parse(raw);
-    return data[field] ?? null;
+    return JSON.parse(raw)[field] ?? null;
   } catch {
     return null;
   }
+}
+
+/**
+ * Find the first skip rule that matches the current step and form state.
+ *
+ * - `next()` calls this with `direction: "forward"` → matches on `rule.from`
+ * - `back()` calls this with `direction: "backward"` → matches on `rule.target`
+ */
+function findMatchingSkipRule(
+  rules: SkipRule[],
+  currentId: StepId,
+  direction: "forward" | "backward",
+): SkipRule | undefined {
+  return rules.find((rule) => {
+    const stepMatch =
+      direction === "forward"
+        ? rule.from === currentId
+        : rule.target === currentId;
+    return stepMatch && getSituationField(rule.field) === rule.value;
+  });
 }
 
 /* ------------------------------------------------------------------ */
@@ -92,6 +111,7 @@ export function StepperProvider({
   const variantConfig = useVariant();
   const groups = variantConfig.stepGroups;
   const allSteps = groups.flatMap((g) => g.steps);
+  const skipRules = variantConfig.skipRules ?? [];
 
   const safeInitial =
     initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
@@ -101,35 +121,23 @@ export function StepperProvider({
   const currentGroup = getGroupForFlatIndex(groups, activeStep);
 
   function next() {
-    setActiveStep((prev) => Math.min(prev + 1, allSteps.length - 1));
+    setActiveStep((prev) => {
+      const currentId = allSteps[prev]?.id;
+      if (currentId) {
+        const rule = findMatchingSkipRule(skipRules, currentId, "forward");
+        if (rule) return getFlatIndexById(allSteps, rule.target);
+      }
+      return Math.min(prev + 1, allSteps.length - 1);
+    });
   }
 
   function back() {
     setActiveStep((prev) => {
       const currentId = allSteps[prev]?.id;
-
-      // Going back from sante_yeux: the forward path may have skipped
-      // steps via goToStepById. Mirror those skips on the way back.
-      if (currentId === "sante_yeux") {
-        // "moi" skipped nousSommes, commenceParQui, dateBirthConjoint
-        if (getSituationField("proteger") === "moi") {
-          return getFlatIndexById(allSteps, "proteger");
-        }
-        // "enfant" on commenceParQui skipped dateBirthConjoint
-        if (getSituationField("commenceParQui") === "enfant") {
-          return getFlatIndexById(allSteps, "commenceParQui");
-        }
+      if (currentId) {
+        const rule = findMatchingSkipRule(skipRules, currentId, "backward");
+        if (rule) return getFlatIndexById(allSteps, rule.from);
       }
-
-      // Going back from dateDebutNostrum: "pas_de_mutuelle" skipped
-      // currentInsurance and dateSignatureAncien.
-      if (
-        currentId === "dateDebutNostrum" &&
-        getSituationField("resilierMutuelle") === "pas_de_mutuelle"
-      ) {
-        return getFlatIndexById(allSteps, "resilierMutuelle");
-      }
-
       return Math.max(prev - 1, 0);
     });
   }

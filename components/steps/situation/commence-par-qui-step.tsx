@@ -16,7 +16,7 @@ const DEFAULT_OPTIONS = [
 ] as const;
 
 export function CommenceParQuiStep() {
-  const { goToStepById } = useStepper();
+  const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("commenceParQui");
 
@@ -29,16 +29,7 @@ export function CommenceParQuiStep() {
 
   const handleNext = () => {
     if (!selected) return;
-
-    switch (selected) {
-      case "conjoint":
-        goToStepById("dateBirthConjoint");
-        break;
-      case "enfant":
-        // enfant flow not implemented yet — skip to santé
-        goToStepById("sante_yeux");
-        break;
-    }
+    next();
   };
 
   return (

@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = [
 ] as const;
 
 export function ProtegerStep() {
-  const { goToStepById } = useStepper();
+  const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("proteger");
 
@@ -31,19 +31,7 @@ export function ProtegerStep() {
 
   const handleNext = () => {
     if (!selected) return;
-
-    switch (selected) {
-      case "moi":
-        // seulement moi → go to santé
-        goToStepById("sante_yeux");
-        break;
-      case "conjoint_et_moi":
-      case "enfants_et_moi":
-      case "famille":
-        // all others → nous sommes (family count)
-        goToStepById("nousSommes");
-        break;
-    }
+    next();
   };
 
   return (

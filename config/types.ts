@@ -88,6 +88,30 @@ export interface StepTexts {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Skip rules — conditional step routing                             */
+/* ------------------------------------------------------------------ */
+
+/**
+ * A skip rule tells the stepper: "when leaving step `from`, if the
+ * sessionStorage field `field` (inside `subscription_situation`) equals
+ * `value`, jump to `target` instead of the next step in the flat list."
+ *
+ * `next()` checks rules where `from` matches the current step.
+ * `back()` checks rules where `target` matches the current step.
+ * This keeps forward and backward navigation automatically symmetric.
+ */
+export interface SkipRule {
+  /** The step the user is leaving */
+  from: StepId;
+  /** Key in the persisted situation form (`subscription_situation`) */
+  field: string;
+  /** Value that triggers the skip */
+  value: string;
+  /** The step to jump to */
+  target: StepId;
+}
+
+/* ------------------------------------------------------------------ */
 /*  Variant configuration                                             */
 /* ------------------------------------------------------------------ */
 
@@ -114,4 +138,11 @@ export interface VariantConfig {
    * different text from `texts`.
    */
   components?: Partial<Record<StepId, ComponentType>>;
+
+  /**
+   * Conditional skip rules for non-linear step navigation.
+   * Drives both `next()` and `back()` in the stepper so forward/backward
+   * routing stays automatically symmetric.
+   */
+  skipRules?: SkipRule[];
 }

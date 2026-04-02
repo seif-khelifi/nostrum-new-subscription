@@ -15,7 +15,7 @@ const DEFAULT_OPTIONS = [
 ] as const;
 
 export function ResilierMutuelleStep() {
-  const { goToStepById } = useStepper();
+  const { next } = useStepper();
   const { formData, updateFormData } = useSituationForm();
   const texts = useStepTexts("resilierMutuelle");
 
@@ -24,17 +24,7 @@ export function ResilierMutuelleStep() {
 
   const handleNext = () => {
     if (!selected) return;
-
-    switch (selected) {
-      case "pas_de_mutuelle":
-        // Skip directly to date début contrat Nostrum
-        goToStepById("dateDebutNostrum");
-        break;
-      case "mutuelle_a_resilier":
-        // Go through current insurance → date signature ancien → date début Nostrum
-        goToStepById("currentInsurance");
-        break;
-    }
+    next();
   };
 
   return (

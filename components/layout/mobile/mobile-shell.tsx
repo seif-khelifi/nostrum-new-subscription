@@ -35,12 +35,12 @@ export function MobileShell({
   const isOnboarding = currentGroup.id === 1;
 
   return (
-    <div className="flex flex-col h-screen sm:hidden">
+    <div className="flex flex-col h-screen sm:hidden overflow-x-hidden">
       {!isOnboarding && customHeader}
 
       <main
         data-slot="mobile-main"
-        className={`flex-1 overflow-y-auto${isOnboarding ? "" : " p-4"}${navItems && !isOnboarding ? " pb-14" : ""}`}
+        className={`flex-1 overflow-y-auto overflow-x-hidden${isOnboarding ? "" : " p-4"}${navItems && !isOnboarding ? " pb-14" : ""}`}
       >
         {children}
       </main>

@@ -178,7 +178,7 @@ export function ComparateurVariantB() {
   return (
     <>
       {/* ─── Mobile layout (<lg) ─── */}
-      <div className="fixed inset-0 z-50 flex flex-col overflow-y-auto bg-white lg:hidden">
+      <div className="fixed inset-0 z-50 flex flex-col overflow-y-auto overflow-x-hidden bg-white lg:hidden">
         {/* ── Top section ── */}
         <div className="bg-[#25003C] px-4 pt-6 pb-8 sm:px-6">
           <div className="mb-6 mt-2 flex justify-center">

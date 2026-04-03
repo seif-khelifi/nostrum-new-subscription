@@ -40,6 +40,7 @@ export const variantB: VariantConfig = {
         { id: "sante_yeux", label: "Yeux" },
         { id: "sante_dents", label: "Dents" },
         { id: "sante_bien_etre", label: "Bien-être" },
+        { id: "transition_offer", label: "Transition" },
       ],
     },
 

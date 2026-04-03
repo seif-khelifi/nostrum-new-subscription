@@ -26,6 +26,7 @@ import {
   DateDebutNostrumStep,
 } from "./situation";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
+import { TransitionOfferStep } from "./transition";
 import { OnboardingStep } from "./onboarding-step";
 import {
   DevisVariantA,
@@ -109,8 +110,8 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
   sante_dents: DentsStep,
   sante_bien_etre: BienEtreStep,
 
-  // Transition offer — empty for now
-  transition_offer: () => <PlaceholderScreen label="Offre de transition" />,
+  // Transition offer — animated carousel screen between Santé and Devis
+  transition_offer: TransitionOfferStep,
 
   // Devis — renders variant A or B based on session assignment
   devis_placeholder: DevisStep,

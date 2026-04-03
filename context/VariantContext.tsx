@@ -21,8 +21,8 @@ function getOrAssignVariant(): VariantKey {
   if (typeof window === "undefined") return "a";
   try {
     const stored = sessionStorage.getItem(VARIANT_STORAGE_KEY);
-    if (stored === "a" || stored === "b") return stored;
-    const variant: VariantKey = Math.random() < 0.1 ? "a" : "b";
+    // if (stored === "a" || stored === "b") return stored;
+    const variant: VariantKey = Math.random() < 0.9 ? "a" : "b";
     sessionStorage.setItem(VARIANT_STORAGE_KEY, variant);
     console.log("[variant] Assigned variant:", variant);
     return variant;

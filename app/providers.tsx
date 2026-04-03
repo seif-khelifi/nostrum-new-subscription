@@ -10,7 +10,6 @@ import { VariantIndicator } from "@/components/shared/variant-indicator";
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <VariantProvider>
-      <VariantIndicator />
       <StepperProvider>
         <SituationFormProvider>
           <SanteFormProvider>{children}</SanteFormProvider>

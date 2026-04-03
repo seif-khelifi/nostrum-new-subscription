@@ -26,6 +26,7 @@ export type StepId =
   | "transition_offer"
   | "devis_placeholder"
   | "garanties"
+  | "comparateur_welcome"
   | "offre_comparateur"
   | "options"
   | "socialSecurity"

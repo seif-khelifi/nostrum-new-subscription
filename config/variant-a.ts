@@ -51,6 +51,7 @@ export const variantA: VariantConfig = {
       steps: [
         { id: "devis_placeholder", label: "Devis" },
         { id: "garanties", label: "Garanties" },
+        { id: "comparateur_welcome", label: "Comparateur Bienvenue" },
         { id: "offre_comparateur", label: "Offre Comparateur" },
         { id: "options", label: "Options" },
       ],

@@ -35,6 +35,7 @@ import {
   GarantiesVariantB,
   ComparateurVariantA,
   ComparateurVariantB,
+  ComparateurWelcomeVariantA,
   OptionsStep,
 } from "./devis";
 
@@ -58,6 +59,19 @@ function DevisStep() {
 function GarantiesStep() {
   const { devisVariant } = useStepper();
   return devisVariant === "b" ? <GarantiesVariantB /> : <GarantiesVariantA />;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware comparateur welcome step                             */
+/* ------------------------------------------------------------------ */
+
+function ComparateurWelcomeStep() {
+  const { devisVariant } = useStepper();
+  // Variant B doesn't have a separate welcome screen — skip straight to comparateur
+  if (devisVariant === "b") {
+    return <ComparateurVariantB />;
+  }
+  return <ComparateurWelcomeVariantA />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -118,6 +132,9 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 
   // Garanties — navigated to via "En savoir plus" from devis
   garanties: GarantiesStep,
+
+  // Comparateur welcome — onboarding screen before the comparateur
+  comparateur_welcome: ComparateurWelcomeStep,
 
   // Offre comparateur — compare offers side by side
   offre_comparateur: ComparateurStep,

@@ -19,6 +19,8 @@ const alertVariants = cva(
         info: "",
         warning: "",
         destructive: "",
+        comparateurDark:
+          "bg-[#1A002A] bg-none rounded-xl",
       },
       size: {
         default: "min-h-[80px]",
@@ -41,6 +43,7 @@ const alertTitleVariants = cva("text-base font-bold leading-5", {
       info: "text-[#490076]",
       warning: "text-[#490076]",
       destructive: "text-[#490076]",
+      comparateurDark: "text-white",
     },
   },
   defaultVariants: {
@@ -56,6 +59,7 @@ const alertDescriptionVariants = cva("text-sm leading-5", {
       info: "text-[#490076]",
       warning: "text-[#490076]",
       destructive: "text-[#490076]",
+      comparateurDark: "text-white",
     },
   },
   defaultVariants: {

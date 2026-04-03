@@ -1,0 +1,85 @@
+{
+  "welcome": {
+    "title": "Comparez vos remboursements en situations réelles",
+    "subtitle": "Découvrez combien chaque offre vous rembourse sur des cas concrets du quotidien.",
+    "ctaLabel": "Commencer",
+    "logoSrc": "/comparateur/Logo-produit.svg"
+  },
+  "banner": {
+    "savingsAmount": "297€",
+    "subtitleTemplate": "Avec {selectedOffer}, vous économisez {savingsAmount} de plus qu'avec {comparedOffer} sur une seule couronne"
+  },
+  "sections": [
+    {
+      "key": "dentaire",
+      "icon": "/comparateur/dents.svg",
+      "title": "Dentaire",
+      "subtitle": "On regarde ensemble ce que cette formule changerait vraiment pour vous.",
+      "description": "Choisissez l'offre qui répond vraiment à vos besoins santé."
+    },
+    {
+      "key": "optique",
+      "icon": "/comparateur/glasses.svg",
+      "title": "Optique",
+      "subtitle": "On regarde ensemble ce que cette formule changerait vraiment pour vous.",
+      "description": "Choisissez l'offre qui répond vraiment à vos besoins santé."
+    },
+    {
+      "key": "bien-etre",
+      "icon": "/comparateur/well-being.svg",
+      "title": "Bien-être",
+      "subtitle": "On regarde ensemble ce que cette formule changerait vraiment pour vous.",
+      "description": "Choisissez l'offre qui répond vraiment à vos besoins santé."
+    },
+    {
+      "key": "psy",
+      "icon": "/comparateur/psycho.svg",
+      "title": "Psy",
+      "subtitle": "On regarde ensemble ce que cette formule changerait vraiment pour vous.",
+      "description": "Choisissez l'offre qui répond vraiment à vos besoins santé."
+    },
+    {
+      "key": "placeholder",
+      "icon": "/comparateur/diamond.svg",
+      "title": "À venir",
+      "subtitle": "On regarde ensemble ce que cette formule changerait vraiment pour vous.",
+      "description": "Choisissez l'offre qui répond vraiment à vos besoins santé."
+    }
+  ],
+  "compareData": {
+    "decouverte": {
+      "dentaire": { "rembourse": 120, "resteACharge": 380 },
+      "optique": { "rembourse": 80, "resteACharge": 220 },
+      "bien-etre": { "rembourse": 50, "resteACharge": 150 },
+      "psy": { "rembourse": 30, "resteACharge": 170 },
+      "placeholder": { "rembourse": 0, "resteACharge": 0 }
+    },
+    "bronze": {
+      "dentaire": { "rembourse": 203, "resteACharge": 297 },
+      "optique": { "rembourse": 150, "resteACharge": 150 },
+      "bien-etre": { "rembourse": 100, "resteACharge": 100 },
+      "psy": { "rembourse": 60, "resteACharge": 140 },
+      "placeholder": { "rembourse": 0, "resteACharge": 0 }
+    },
+    "silver": {
+      "dentaire": { "rembourse": 500, "resteACharge": 0 },
+      "optique": { "rembourse": 250, "resteACharge": 50 },
+      "bien-etre": { "rembourse": 180, "resteACharge": 20 },
+      "psy": { "rembourse": 120, "resteACharge": 80 },
+      "placeholder": { "rembourse": 0, "resteACharge": 0 }
+    },
+    "gold": {
+      "dentaire": { "rembourse": 500, "resteACharge": 0 },
+      "optique": { "rembourse": 300, "resteACharge": 0 },
+      "bien-etre": { "rembourse": 200, "resteACharge": 0 },
+      "psy": { "rembourse": 200, "resteACharge": 0 },
+      "placeholder": { "rembourse": 0, "resteACharge": 0 }
+    }
+  },
+  "infoCard": {
+    "decouverte": { "rembourse": 120, "resteACharge": 380 },
+    "bronze": { "rembourse": 203, "resteACharge": 297 },
+    "silver": { "rembourse": 500, "resteACharge": 0 },
+    "gold": { "rembourse": 500, "resteACharge": 0 }
+  }
+}

@@ -61,10 +61,10 @@ const offerInnerCardVariants = cva(
 )
 
 /* ------------------------------------------------------------------ */
-/*  Plan type                                                         */
+/*  Plan type (re-exported from single source of truth)                */
 /* ------------------------------------------------------------------ */
 
-type OfferPlan = "decouverte" | "bronze" | "silver" | "gold"
+import type { OfferPlan } from "@/lib/plans"
 
 /* ------------------------------------------------------------------ */
 /*  OfferCard public props                                            */
@@ -283,13 +283,9 @@ function OfferInnerCard({
         {/* CTA button — bulkier on mobile, generous padding on desktop */}
         {!hideCta && ctaLabel && (
           <Button
-            variant="ctaPurple"
+            variant="ctaPurpleDark"
             size="cta"
-            className={cn(
-              "w-full bg-[#5B007F] hover:bg-[#6A0B95] rounded-[20px]",
-              "h-[52px] text-sm font-semibold",
-              "lg:h-12 lg:px-6 lg:text-[0.95rem]"
-            )}
+            className="w-full rounded-[20px] h-[52px] text-sm font-semibold lg:h-12 lg:px-6 lg:text-[0.95rem]"
             onClick={onCtaClick}
           >
             {ctaLabel}
@@ -331,6 +327,8 @@ function OfferInnerCard({
 /* ------------------------------------------------------------------ */
 
 export interface CompareCardProps extends Omit<React.ComponentProps<"div">, "title"> {
+  /** Visual variant: gradient (default) or solid dark */
+  variant?: "gradient" | "dark"
   title: React.ReactNode
   description: React.ReactNode
   ctaLabel: React.ReactNode
@@ -340,6 +338,7 @@ export interface CompareCardProps extends Omit<React.ComponentProps<"div">, "tit
 
 function CompareCard({
   className,
+  variant = "gradient",
   title,
   description,
   ctaLabel,
@@ -347,11 +346,15 @@ function CompareCard({
   buttonClassName,
   ...props
 }: CompareCardProps) {
+  const isDark = variant === "dark"
+
   return (
     <div
       className={cn(
         "w-full overflow-hidden rounded-[24px] p-6",
-        "bg-[radial-gradient(172.35%_94.95%_at_100%_97.29%,#FBF4EA_0%,#FEA8CD_41.57%,#CE99FF_57.09%,#9000E3_80.77%,#490076_97.75%)]",
+        isDark
+          ? "bg-black"
+          : "bg-[radial-gradient(172.35%_94.95%_at_100%_97.29%,#FBF4EA_0%,#FEA8CD_41.57%,#CE99FF_57.09%,#9000E3_80.77%,#490076_97.75%)]",
         className,
       )}
       {...props}
@@ -367,14 +370,15 @@ function CompareCard({
           {description}
         </p>
 
-        {/* White CTA button with purple text */}
+        {/* White CTA button */}
         <Button
           variant="default"
           className={cn(
-            "w-full rounded-[20px] border-0 bg-white text-[#490076]",
+            "w-full rounded-[20px] border-0 bg-white",
             "h-[48px] text-sm font-semibold",
             "shadow-none hover:bg-white/90",
             "lg:h-11",
+            isDark ? "text-black" : "text-[#490076]",
             buttonClassName
           )}
           onClick={onCtaClick}

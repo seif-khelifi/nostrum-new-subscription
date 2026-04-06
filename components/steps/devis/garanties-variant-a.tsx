@@ -6,7 +6,9 @@ import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
-import type { OfferPlan } from "@/components/ui/offer-card";
+import type { OfferPlan } from "@/lib/plans";
+import { PLAN_INDEX } from "@/lib/plans";
+import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { AlertBanner } from "@/components/ui/alert";
 import { GarantieCard, type GarantieCardColorScheme } from "@/components/ui/garantie-card";
@@ -22,15 +24,6 @@ import garantiesData from "@/data/garanties-variant-a.json";
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-const PLAN_INDEX: Record<string, number> = {
-	decouverte: 0,
-	bronze: 1,
-	silver: 2,
-	gold: 3,
-};
 
 const OFFER_BG_COLORS: Record<string, string> = garantiesData.offerColors;
 
@@ -282,8 +275,8 @@ export function GarantiesVariantA() {
 				{/* ── Bottom CTA — #9000E3 bg, ctaPurple variant with override ── */}
 				<div className="pb-8 pt-4">
 					<Button
-						variant="ctaPurple"
-						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold bg-[#9000E3] hover:bg-[#7B00C4]"
+						variant="ctaPurpleAccent"
+						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold"
 						onClick={handleChooseOffer}
 					>
 						{common.ctaTemplate.replace("{offer}", capitalize(planName))}

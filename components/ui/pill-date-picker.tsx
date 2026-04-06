@@ -9,22 +9,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { fr } from "date-fns/locale";
-
-/* ── tiny three-dot icon (vertical) ── */
-function ThreeDotsVertical({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        "flex flex-col items-center justify-center gap-[2px]",
-        className,
-      )}
-    >
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-    </span>
-  );
-}
+import { ThreeDotsVertical } from "@/components/ui/icons";
 
 interface PillDatePickerProps {
   /** Currently selected Date (or undefined) */

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Check } from "lucide-react";
+import { OFFER_OPTIONS } from "@/lib/plans";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
@@ -13,24 +14,7 @@ import {
 	DrawerFooter,
 	DrawerClose,
 } from "@/components/ui/drawer";
-import { Switch } from "@/components/ui/switch";
-import offersData from "@/data/offers.json";
-
-/* ------------------------------------------------------------------ */
-/*  Offer definitions for the 2×2 grid                                 */
-/* ------------------------------------------------------------------ */
-
-type OfferOption = {
-	plan: string;
-	label: string;
-	price: string;
-};
-
-const OFFER_OPTIONS: OfferOption[] = offersData.offers.map((o) => ({
-	plan: o.plan,
-	label: o.plan.charAt(0).toUpperCase() + o.plan.slice(1),
-	price: o.price,
-}));
+import { OfferSwitchGrid } from "@/components/ui/offer-switch-grid";
 
 /* ------------------------------------------------------------------ */
 /*  Props                                                              */
@@ -109,42 +93,8 @@ export function GarantiesCompareDrawer({
 					</p>
 				</div>
 
-				{/* 2×2 offer switch grid */}
-				<div className="grid grid-cols-2 gap-3 px-5 py-4">
-					{OFFER_OPTIONS.map((offer) => {
-						const isChecked = selected.has(offer.plan);
-						return (
-							<label
-								key={offer.plan}
-								className={[
-									"flex cursor-pointer items-center justify-between rounded-2xl p-3 transition-all",
-									isChecked
-										? "border-2 border-[#CE99FF]"
-										: "border border-[#E9E3DD]",
-								].join(" ")}
-							>
-								{/* Offer name + price */}
-								<div className="flex flex-col gap-0.5">
-									<span className="text-sm font-semibold text-[#290E67]">
-										{offer.label}
-									</span>
-									<span className="text-base font-bold text-[#490076]">
-										{offer.price}
-									</span>
-								</div>
-
-								{/* Switch — compact size, squared profile */}
-								<Switch
-									variant="gradient"
-									size="sm"
-									checked={isChecked}
-									onCheckedChange={() => toggle(offer.plan)}
-									className="h-6 w-[48px] rounded-[10px] [&_[data-slot=switch-thumb]]:h-[20px] [&_[data-slot=switch-thumb]]:w-[20px] [&_[data-slot=switch-thumb]]:rounded-[8px] [&_[data-slot=switch-thumb]]:data-[state=checked]:translate-x-6"
-								/>
-							</label>
-						);
-					})}
-				</div>
+			{/* 2×2 offer switch grid */}
+			<OfferSwitchGrid offers={OFFER_OPTIONS} selected={Array.from(selected)} onToggle={toggle} className="px-5 py-4" />
 
 				<DrawerFooter className="px-5 pb-6">
 					<Button

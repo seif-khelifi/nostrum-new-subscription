@@ -1,80 +1,22 @@
 "use client";
 
+import { capitalize } from "@/lib/utils";
+import { type OfferPlan, OFFER_OPTIONS, LEGEND_ITEMS } from "@/lib/plans";
+import type { CategoryMeta, TabBreakdowns, OfferTabs, AllTabs } from "@/types/garanties";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { X, ArrowLeft, Info as InfoIcon } from "lucide-react";
 import { OfferCard } from "@/components/ui/offer-card";
-import type { OfferPlan } from "@/components/ui/offer-card";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { GarantieCompareBreakdownCard } from "@/components/ui/garantie-compare-breakdown-card";
 import type { CompareOfferItem } from "@/components/ui/garantie-compare-breakdown-card";
-import type { BreakdownValues } from "@/components/ui/garantie-breakdown-card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { Switch } from "@/components/ui/switch";
+import { OfferSwitchGrid } from "@/components/ui/offer-switch-grid";
 import { AlertBanner } from "@/components/ui/alert";
 import offersData from "@/data/offers.json";
 import garantiesData from "@/data/garanties-variant-b.json";
-
-/* ------------------------------------------------------------------ */
-/*  Helpers                                                            */
-/* ------------------------------------------------------------------ */
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-/* ------------------------------------------------------------------ */
-/*  Offer definitions for the 2×2 grid                                 */
-/* ------------------------------------------------------------------ */
-
-type OfferOption = {
-  plan: string;
-  label: string;
-  price: string;
-};
-
-const OFFER_OPTIONS: OfferOption[] = offersData.offers.map((o) => ({
-  plan: o.plan,
-  label: o.plan.charAt(0).toUpperCase() + o.plan.slice(1),
-  price: o.price,
-}));
-
-/* ------------------------------------------------------------------ */
-/*  Legend pills                                                        */
-/* ------------------------------------------------------------------ */
-
-const LEGEND_ITEMS = [
-  {
-    label: "Assurance maladie",
-    style: { backgroundColor: "#290E67" },
-  },
-  {
-    label: "Nostrum Care",
-    style: {
-      background:
-        "linear-gradient(86.29deg, #9000E3 1.49%, #CE99FF 45.06%, #FEA8CD 72.53%, #EFFB7D 100%)",
-    },
-  },
-  {
-    label: "Votre reste",
-    style: { backgroundColor: "#CE99FF" },
-  },
-] as const;
-
-/* ------------------------------------------------------------------ */
-/*  Data types for the JSON tab structure                               */
-/* ------------------------------------------------------------------ */
-
-type CategoryMeta = {
-  key: string;
-  icon: string;
-  title: string;
-  subtitle: string;
-};
-
-type TabBreakdowns = Record<string, BreakdownValues>;
-type OfferTabs = { sante: TabBreakdowns; bienetre: TabBreakdowns };
-type AllTabs = Record<string, OfferTabs>;
 
 const categories: CategoryMeta[] = garantiesData.categories as CategoryMeta[];
 const tabsData: AllTabs = garantiesData.tabs as AllTabs;
@@ -290,41 +232,7 @@ export function ComparateurVariantB() {
               </h1>
 
               {/* 2×2 offer switch grid */}
-              <div className="grid grid-cols-2 gap-3 mb-6">
-                {OFFER_OPTIONS.map((offer) => {
-                  const isChecked = compareOffersIds.includes(offer.plan);
-                  return (
-                    <label
-                      key={offer.plan}
-                      className={[
-                        "flex cursor-pointer items-center justify-between rounded-2xl p-3 transition-all",
-                        isChecked
-                          ? "border-2 border-[#CE99FF] bg-[#FAF4FB]"
-                          : "border border-[#E9E3DD] hover:border-[#CE99FF]/50",
-                      ].join(" ")}
-                    >
-                      {/* Offer name + price */}
-                      <div className="flex flex-col gap-0.5">
-                        <span className="text-sm font-semibold text-[#290E67]">
-                          {offer.label}
-                        </span>
-                        <span className="text-base font-bold text-[#490076]">
-                          {offer.price}
-                        </span>
-                      </div>
-
-                      {/* Switch — compact size, squared profile */}
-                      <Switch
-                        variant="gradient"
-                        size="sm"
-                        checked={isChecked}
-                        onCheckedChange={() => toggleOffer(offer.plan)}
-                        className="h-6 w-[48px] rounded-[10px] [&_[data-slot=switch-thumb]]:h-[20px] [&_[data-slot=switch-thumb]]:w-[20px] [&_[data-slot=switch-thumb]]:rounded-[8px] [&_[data-slot=switch-thumb]]:data-[state=checked]:translate-x-6"
-                      />
-                    </label>
-                  );
-                })}
-              </div>
+              <OfferSwitchGrid offers={OFFER_OPTIONS} selected={compareOffersIds} onToggle={toggleOffer} className="mb-6" />
 
               <div className="flex flex-col gap-4 mb-8">
                 {selectedOffers.map((offer) => (

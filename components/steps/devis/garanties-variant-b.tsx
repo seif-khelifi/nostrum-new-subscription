@@ -1,14 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { ArrowRight, ChevronRight, Check } from "lucide-react";
+import { Card } from "@/components/ui/card";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
 import { GarantiesCompareDrawer } from "./drawers";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
-import type { OfferPlan } from "@/components/ui/offer-card";
+import type { OfferPlan } from "@/lib/plans";
+import { PLAN_INDEX, LEGEND_ITEMS } from "@/lib/plans";
+import { capitalize } from "@/lib/utils";
+import type { CategoryMeta, TabBreakdowns, OfferTabs, AllTabs } from "@/types/garanties";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { GarantieBreakdownCard } from "@/components/ui/garantie-breakdown-card";
 import type { BreakdownValues } from "@/components/ui/garantie-breakdown-card";
@@ -25,53 +28,7 @@ import garantiesData from "@/data/garanties-variant-b.json";
 /*  Helpers                                                            */
 /* ------------------------------------------------------------------ */
 
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-const PLAN_INDEX: Record<string, number> = {
-	decouverte: 0,
-	bronze: 1,
-	silver: 2,
-	gold: 3,
-};
-
 const OFFER_BG_COLORS: Record<string, string> = garantiesData.offerColors;
-
-/* ------------------------------------------------------------------ */
-/*  Legend pills                                                        */
-/* ------------------------------------------------------------------ */
-
-const LEGEND_ITEMS = [
-	{
-		label: "Assurance maladie",
-		style: { backgroundColor: "#290E67" },
-	},
-	{
-		label: "Nostrum Care",
-		style: {
-			background:
-				"linear-gradient(86.29deg, #9000E3 1.49%, #CE99FF 45.06%, #FEA8CD 72.53%, #EFFB7D 100%)",
-		},
-	},
-	{
-		label: "Votre reste",
-		style: { backgroundColor: "#CE99FF" },
-	},
-] as const;
-
-/* ------------------------------------------------------------------ */
-/*  Data types for the JSON tab structure                               */
-/* ------------------------------------------------------------------ */
-
-type CategoryMeta = {
-	key: string;
-	icon: string;
-	title: string;
-	subtitle: string;
-};
-
-type TabBreakdowns = Record<string, BreakdownValues>;
-type OfferTabs = { sante: TabBreakdowns; bienetre: TabBreakdowns };
-type AllTabs = Record<string, OfferTabs>;
 
 const categories: CategoryMeta[] = garantiesData.categories as CategoryMeta[];
 const tabsData: AllTabs = garantiesData.tabs as AllTabs;
@@ -257,8 +214,8 @@ export function GarantiesVariantB() {
 				{/* ── Bottom CTA ── */}
 				<div className="pb-8 pt-4">
 					<Button
-						variant="ctaPurple"
-						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold bg-[#9000E3] hover:bg-[#7B00C4]"
+						variant="ctaPurpleAccent"
+						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold"
 						onClick={handleChooseOffer}
 					>
 						{common.ctaTemplate.replace("{offer}", offerLabel)}
@@ -273,35 +230,23 @@ export function GarantiesVariantB() {
 					{/* ── Left Column ── */}
 				<div className="lg:col-span-4 flex flex-col gap-6">
 					{/* "Votre offre" card */}
-					<div className="bg-white rounded-[24px] overflow-hidden flex flex-col pt-6 px-6 pb-6 shadow-sm border border-[#E9E3DD]">
+					<Card variant="comparateurOutline" className="flex flex-col">
 						<h1 className="font-bold text-black mb-6">Votre offre</h1>
-						<div className="flex items-start justify-between gap-3 mb-6">
-							<div className="min-w-0">
-								<p className="capitalize font-bold text-black text-[1.5rem] leading-none mb-2">
-									{planName}
-								</p>
-								<div className="mt-1 flex items-end gap-0.5">
-									<span className="font-bold tracking-tight text-black text-[2rem] leading-none">
-										{offer?.price ?? ""}
-									</span>
-									<span className="font-semibold text-black text-sm mb-0.5">
-										/mois
-									</span>
-								</div>
-							</div>
-							<div className="shrink-0">
-								<Image src="/garanties/Logo-produit.svg" alt="Product logo" width={48} height={48} />
-							</div>
-						</div>
+						<OfferCard
+							plan={planName as OfferPlan}
+							tone="default"
+							size="default"
+							price={offer?.price ?? ""}
+							period={offer?.period}
+							descriptionTitle={offer?.descriptionTitle ?? ""}
+							description={offer?.description ?? ""}
+							hideCta
+							logo={<PlanLogo plan={planName} />}
+						/>
 
-						<p className="text-[#1D1B20] text-[0.95rem] leading-relaxed mb-8">
-							Remboursement renforcé sur les soins courants Couverture médecine douce incluse Tarifs ajustés selon votre profil Flexibilité si vos besoins évoluent
-						</p>
-
-						<div className="mt-auto flex flex-col gap-3">
+						<div className="mt-8 flex flex-col gap-3">
 							<Button
-								variant="ghost"
-								className="w-full h-[52px] rounded-[24px] bg-[#1D1B201A] text-black text-sm font-semibold hover:bg-[#1D1B202A] transition-colors"
+								variant="revenirOffres"
 							>
 								Voir le tableau de garantie
 							</Button>
@@ -314,37 +259,28 @@ export function GarantiesVariantB() {
 								<Check className="ml-2 h-5 w-5" />
 							</Button>
 						</div>
-					</div>
+					</Card>
 
 					{/* "Comparer nos offres" card */}
 					<div className="mt-2 text-left">
-						<div className="bg-black w-full overflow-hidden rounded-[24px] p-6 flex flex-col gap-4">
-							<h3 className="text-xl font-bold leading-tight text-white">
-								Comparer nos offres
-							</h3>
-							<p className="text-sm leading-snug text-white/90">
-								Découvrez en un clin d'œil l'offre Nostrum qui optimise le mieux vos remboursements.
-							</p>
-							<Button
-								variant="default"
-								className="w-full rounded-[20px] border-0 bg-white text-black h-[48px] text-sm font-semibold shadow-none hover:bg-white/90 lg:h-11"
-								onClick={() => setDrawerOpen(true)}
-							>
-								Je compare
-								<ArrowRight className="ml-2 h-4 w-4" />
-							</Button>
-						</div>
+						<CompareCard
+							variant="dark"
+							title="Comparer nos offres"
+							description="Découvrez en un clin d'œil l'offre Nostrum qui optimise le mieux vos remboursements."
+							ctaLabel="Je compare"
+							onCtaClick={() => setDrawerOpen(true)}
+						/>
 					</div>
 				</div>
 
 				{/* ── Right Column ── */}
 				<div className="lg:col-span-8 flex flex-col gap-6">
-					{/* "Vos remboursements" card */}
-					<div className="bg-black rounded-[24px] p-6 text-white flex flex-col justify-start min-h-[140px]">
+					{/* "Vos Garanties" card */}
+					<Card variant="dark" className="flex flex-col justify-start min-h-[140px]">
 						<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight">
 							Vos Garanties
 						</h1>
-					</div>
+					</Card>
 
 					{/* Tabs area */}
 					<div className="w-full mt-2">

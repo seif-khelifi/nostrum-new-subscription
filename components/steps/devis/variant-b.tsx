@@ -11,18 +11,11 @@ import {
 	OfferCardMoreFooter,
 	OfferCardHoverGroup,
 } from "@/components/ui/offer-card";
-import type { OfferPlan } from "@/components/ui/offer-card";
+import type { OfferPlan } from "@/lib/plans";
+import { PLAN_INDEX } from "@/lib/plans";
+import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import offersData from "@/data/offers.json";
-
-const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
-
-const PLAN_INDEX: Record<string, number> = {
-	decouverte: 0,
-	bronze: 1,
-	silver: 2,
-	gold: 3,
-};
 
 /**
  * Devis Variant B — offer comparison layout.

@@ -4,22 +4,7 @@ import * as React from "react";
 import { Combobox as ComboboxPrimitive } from "@base-ui/react";
 import { cn } from "@/lib/utils";
 import { CheckIcon } from "lucide-react";
-
-/* ── tiny three-dot icon (vertical) ── */
-function ThreeDotsVertical({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        "flex flex-col items-center justify-center gap-[2px]",
-        className,
-      )}
-    >
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-    </span>
-  );
-}
+import { ThreeDotsVertical } from "@/components/ui/icons";
 
 const INPUT_LEFT_PADDING = 14; // px
 const INPUT_RIGHT_PADDING = 10; // px

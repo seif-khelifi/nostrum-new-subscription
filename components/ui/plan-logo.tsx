@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export type OfferPlan = "decouverte" | "bronze" | "silver" | "gold";
+export type { OfferPlan } from "@/lib/plans";
 
 interface PlanLogoProps {
 	plan: string;

@@ -110,6 +110,24 @@ const buttonVariants = cva(
           "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
         ].join(" "),
 
+        ctaPurpleAccent: [
+          "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+          "bg-[#9000E3] text-white text-sm sm:text-base font-semibold",
+          "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
+          "hover:bg-[#7B00C4]",
+          "active:translate-y-[1px]",
+          "disabled:bg-[#9000E3]/40",
+        ].join(" "),
+
+        ctaPurpleDark: [
+          "h-10 sm:h-12 rounded-full px-5 sm:px-6 border-transparent",
+          "bg-[#5B007F] text-white text-sm sm:text-base font-semibold",
+          "shadow-[0_1px_2px_rgba(0,0,0,0.08)]",
+          "hover:bg-[#6A0B95]",
+          "active:translate-y-[1px]",
+          "disabled:bg-[#5B007F]/40",
+        ].join(" "),
+
         ghostCircle: [
           "inline-flex items-center justify-center rounded-full transition-colors",
           "bg-black/5 hover:bg-black/10",

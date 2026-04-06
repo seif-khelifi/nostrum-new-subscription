@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { ThreeDotsVertical } from "@/components/ui/icons";
 
 type PillInputProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
@@ -12,21 +13,6 @@ type PillInputProps = Omit<
   onAccessoryClick?: () => void;
   hasError?: boolean;
 };
-
-function ThreeDotsVertical({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        "flex flex-col items-center justify-center gap-[2px]",
-        className,
-      )}
-    >
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-      <span className="size-[2.5px] rounded-full bg-current" />
-    </span>
-  );
-}
 
 const INPUT_LEFT_PADDING = 14; // px
 const INPUT_RIGHT_PADDING = 10; // px

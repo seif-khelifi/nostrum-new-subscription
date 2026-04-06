@@ -72,6 +72,12 @@ export interface BannerConfig {
 export interface StepTexts {
   /** Page title (h1) — required: always provided by the variant config */
   title: ReactNode;
+  /**
+   * When set, the desktop navbar displays this as an h1 title (replacing the
+   * progress bar), and the step's inner `title` is hidden to avoid duplication.
+   * Steps check `navbarTitle` to decide whether to render their own heading.
+   */
+  navbarTitle?: string;
   /** Subtitle / question line — plain string only; complex subtitles stay in the component */
   subtitle?: ReactNode;
   /** AlertBanner config — set to `null` to explicitly hide a banner that the default has */

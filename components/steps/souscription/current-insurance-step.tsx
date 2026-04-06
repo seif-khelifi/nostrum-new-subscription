@@ -112,6 +112,7 @@ export function CurrentInsuranceStep() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
         title={texts.title}
+        hideTitle={!!texts.navbarTitle}
         subtitle={texts.subtitle}
         infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
         canProceed={canProceed}

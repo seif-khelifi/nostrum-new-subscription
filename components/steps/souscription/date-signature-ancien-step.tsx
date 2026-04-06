@@ -46,6 +46,7 @@ export function DateSignatureAncienStep() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
         title={texts.title}
+        hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>J&apos;ai signé mon ancien contrat le</span>

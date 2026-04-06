@@ -20,6 +20,7 @@ export function DentsStep() {
   return (
     <StepScreen
       title={texts.title}
+      hideTitle={!!texts.navbarTitle}
       canProceed={selected !== null}
       onNext={next}
     >

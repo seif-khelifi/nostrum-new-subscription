@@ -1,79 +1,27 @@
 "use client"
 
-import { ArrowLeft, Phone } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { Progress } from "@/components/ui/progress"
-import { Button } from "@/components/ui/button"
-import { useStepper } from "@/context/StepperContext"
 import { useVariant } from "@/context/VariantContext"
+import { StepNavbarVariantA } from "./step-navbar-variant-a"
+import { StepNavbarVariantB } from "./step-navbar-variant-b"
 
 export interface StepNavbarProps {
 	className?: string
 }
 
 /**
- * Desktop step-flow navbar with back navigation, progress bar, and CTA.
+ * Desktop step-flow navbar — variant router.
  *
- * Reads progress from StepperContext automatically.
- * Placed in `components/steps/` because it's tightly coupled to the
- * step flow (back navigation + progress calculation from stepper state).
+ * Picks the correct navbar implementation based on the active variant:
+ * - Variant A: back button + group title (from navbarTitle config)
+ * - Variant B: back button + progress bar + CTA
  *
- * Features are driven by the variant's `layout.navbar` config:
- * - showProgressBar: renders the step progress bar
- * - showCta: renders the "Parler à un conseiller" CTA pill
+ * When you stabilize on one variant, replace this with the winning
+ * component directly and delete the other file.
  */
 export function StepNavbar({ className }: StepNavbarProps) {
-	const { activeStep, allSteps, isFirstStep, back } = useStepper()
-	const { layout } = useVariant()
+	const { id: variantId } = useVariant()
 
-	const { showProgressBar, showCta } = layout.navbar
-
-	/** Progress percentage based on completed steps (0–100) */
-	const progress =
-		allSteps.length > 1
-			? Math.round((activeStep / (allSteps.length - 1)) * 100)
-			: 0
-
-	return (
-		<header
-			className={cn(
-				"flex items-center gap-4 bg-background px-12 pt-6 pb-3 h-auto",
-				className,
-			)}
-		>
-			{/* Back button — slightly oval, bigger */}
-			<Button
-				variant="ghostCircle"
-				aria-label="Retour"
-				disabled={isFirstStep}
-				onClick={back}
-				className="h-10 w-12 disabled:opacity-40 disabled:pointer-events-none"
-			>
-				<ArrowLeft className="h-4 w-4 text-[#1D1B20]" />
-			</Button>
-
-			{/* Progress bar + CTA — driven by layout config */}
-			{showProgressBar && (
-				<div className="flex-1 px-8">
-					<Progress value={progress} />
-				</div>
-			)}
-
-			{showCta && (
-				<Button variant="callToAdvisor" asChild>
-					<a href="tel:+33000000000">
-						<span>Parler à un conseiller</span>
-						<span
-							className={cn(
-								"inline-flex h-8 w-8 items-center justify-center rounded-full",
-								"bg-[#CE99FF]",
-							)}
-						>
-							<Phone className="h-3.5 w-3.5 text-[#490076]" />
-						</span>
-					</a>
-				</Button>
-			)}
-		</header>
-	)
+	return variantId === "a"
+		? <StepNavbarVariantA className={className} />
+		: <StepNavbarVariantB className={className} />
 }

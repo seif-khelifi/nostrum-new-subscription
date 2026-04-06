@@ -3,11 +3,18 @@
 import { type ReactNode } from "react";
 import { ArrowRight } from "lucide-react";
 import { type FieldErrors } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 export interface StepScreenProps {
   /** Section title (e.g. "Votre situation pro ?") */
   title: ReactNode;
+  /**
+   * When true, the title h1 is hidden on desktop (sm+).
+   * Used when the navbar already displays the group title via `navbarTitle`.
+   * The title still renders on mobile where the navbar doesn't show it.
+   */
+  hideTitle?: boolean;
   /** Subtitle / question for this step (optional — can be text or a ReactNode with PillInput) */
   subtitle?: ReactNode;
   /** Optional info card (AlertBanner) displayed between heading and content */
@@ -38,6 +45,7 @@ export interface StepScreenProps {
  */
 export function StepScreen({
   title,
+  hideTitle,
   subtitle,
   infoCard,
   onNext,
@@ -50,7 +58,10 @@ export function StepScreen({
     <div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0">
       {/* Heading block */}
       <div className="flex flex-col gap-2">
-        <h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4">
+        <h1 className={cn(
+          "font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4",
+          hideTitle && "sm:hidden",
+        )}>
           {title}
         </h1>
         {errors && Object.keys(errors).length > 0 && (

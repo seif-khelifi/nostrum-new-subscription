@@ -112,6 +112,7 @@ export function AddressStep() {
       <form onSubmit={searchForm.handleSubmit(onSearchSubmit)} noValidate>
         <StepScreen
           title={texts.title}
+          hideTitle={!!texts.navbarTitle}
           subtitle={
             <div className="flex flex-wrap items-center gap-2">
               <span>J&apos;habite au</span>
@@ -153,6 +154,7 @@ export function AddressStep() {
     <form onSubmit={manualForm.handleSubmit(onManualSubmit)} noValidate>
       <StepScreen
         title={texts.title}
+        hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>J&apos;habite au</span>

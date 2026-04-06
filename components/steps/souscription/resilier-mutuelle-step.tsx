@@ -25,6 +25,7 @@ export function ResilierMutuelleStep() {
   return (
     <StepScreen
       title={texts.title}
+      hideTitle={!!texts.navbarTitle}
       infoCard={
         texts.banner ? <AlertBanner {...texts.banner} /> : undefined
       }

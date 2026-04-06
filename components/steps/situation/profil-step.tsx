@@ -25,6 +25,7 @@ export function ProfilStep() {
   return (
     <StepScreen
       title={texts.title}
+      hideTitle={!!texts.navbarTitle}
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je suis</span>

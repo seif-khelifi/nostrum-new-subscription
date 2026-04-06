@@ -42,6 +42,7 @@ export function PhoneNumberStep() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
         title={texts.title}
+        hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Vous pouvez aussi me joindre au</span>

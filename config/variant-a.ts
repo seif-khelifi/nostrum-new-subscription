@@ -116,6 +116,7 @@ export const variantA: VariantConfig = {
 
     profil: {
       title: "Votre situation pro ?",
+      navbarTitle: "Situation",
       options: [
         { value: "salarie", label: "Salarié(e)" },
         { value: "independant_tns", label: "Indépendant(e) /TNS" },
@@ -128,14 +129,17 @@ export const variantA: VariantConfig = {
 
     personalInfo: {
       title: "Dites-nous qui vous êtes ?",
+      navbarTitle: "Situation",
     },
 
     mail: {
       title: "Et pour vous contacter ?",
+      navbarTitle: "Situation",
     },
 
     phoneNumber: {
       title: "Et pour vous contacter ?",
+      navbarTitle: "Situation",
       banner: {
         variant: "info",
         title:
@@ -148,6 +152,7 @@ export const variantA: VariantConfig = {
 
     proteger: {
       title: "Qui souhaitez-vous protéger ?",
+      navbarTitle: "Situation",
       options: [
         { value: "moi", label: "Seulement moi" },
         { value: "conjoint_et_moi", label: "Mon conjoint(e) et moi" },
@@ -158,10 +163,12 @@ export const variantA: VariantConfig = {
 
     nousSommes: {
       title: "Qui souhaitez-vous protéger ?",
+      navbarTitle: "Situation",
     },
 
     commenceParQui: {
       title: "On commence par qui ?",
+      navbarTitle: "Situation",
       options: [
         { value: "conjoint", label: "Mon conjoint(e)" },
         { value: "enfant", label: "Mon enfant" },
@@ -170,6 +177,7 @@ export const variantA: VariantConfig = {
 
     dateBirthConjoint: {
       title: "On commence par qui ?",
+      navbarTitle: "Situation",
       banner: {
         variant: "info",
         title:
@@ -184,6 +192,7 @@ export const variantA: VariantConfig = {
 
     sante_yeux: {
       title: "On commence par vos yeux ?",
+      navbarTitle: "Santé",
       options: [
         { value: "rien", label: "Je n'ai besoin de rien" },
         {
@@ -207,6 +216,7 @@ export const variantA: VariantConfig = {
 
     sante_dents: {
       title: "Et maintenant, côté dentaire ?",
+      navbarTitle: "Santé",
       options: [
         { value: "routine", label: "Un suivi de routine me suffit" },
         { value: "soins_reguliers", label: "J'ai besoin de soins réguliers" },
@@ -227,6 +237,7 @@ export const variantA: VariantConfig = {
 
     sante_bien_etre: {
       title: "Et pour votre bien-être ?",
+      navbarTitle: "Santé",
       options: [
         { value: "classiques", label: "Je me limite aux soins classiques" },
         {
@@ -253,6 +264,7 @@ export const variantA: VariantConfig = {
 
     sexe: {
       title: "Faisons connaissance",
+      navbarTitle: "Souscription",
       subtitle: "Vous êtes ?",
       options: [
         { value: "homme", label: "Un homme" },
@@ -263,21 +275,25 @@ export const variantA: VariantConfig = {
 
     recap: {
       title: "Je crée mon compte",
+      navbarTitle: "Souscription",
       subtitle: "Je recevrai un SMS pour confirmer mes infos.",
     },
 
     envoiSms: {
       title: "Je confirme mon compte",
+      navbarTitle: "Souscription",
       subtitle: "J'entre le code reçu par SMS.",
       ctaLabel: "Suivant",
     },
 
     address: {
       title: "Mes infos personnelles",
+      navbarTitle: "Souscription",
     },
 
     birthPlace: {
       title: "Mes infos personnelles",
+      navbarTitle: "Souscription",
       banner: {
         variant: "info",
         title:
@@ -290,10 +306,12 @@ export const variantA: VariantConfig = {
 
     socialSecurity: {
       title: "Mes infos d'assurance",
+      navbarTitle: "Souscription",
     },
 
     resilierMutuelle: {
       title: "Mes infos d'assurance",
+      navbarTitle: "Souscription",
       options: [
         {
           value: "pas_de_mutuelle",
@@ -305,11 +323,13 @@ export const variantA: VariantConfig = {
 
     currentInsurance: {
       title: "Mes infos d'assurance",
+      navbarTitle: "Souscription",
       subtitle: "Ma mutuelle actuelle",
     },
 
     dateSignatureAncien: {
       title: "Mes infos d'assurance",
+      navbarTitle: "Souscription",
       banner: {
         title: "Nostrum Care rembourse plus de 40 médecines douces :",
         subtitle:
@@ -320,6 +340,7 @@ export const variantA: VariantConfig = {
 
     dateDebutNostrum: {
       title: "Mes infos d'assurance",
+      navbarTitle: "Souscription",
       banner: {
         title:
           "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",

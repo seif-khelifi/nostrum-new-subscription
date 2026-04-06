@@ -61,6 +61,7 @@ export function DateBirthConjointStep() {
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
         title={texts.title}
+        hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je veux protéger en premier mon</span>

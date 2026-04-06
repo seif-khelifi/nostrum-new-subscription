@@ -132,6 +132,7 @@ function AlertVisual({
         data-slot="alert-visual"
         className={cn("shrink-0 flex items-center justify-center", className)}
       >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={imageSrc}
           alt={imageAlt}

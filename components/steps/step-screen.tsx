@@ -40,7 +40,6 @@ export function StepScreen({
   title,
   subtitle,
   infoCard,
-  canProceed,
   onNext,
   children,
   isForm,

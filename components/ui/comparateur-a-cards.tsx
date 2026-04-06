@@ -10,6 +10,7 @@ import {
 	CarouselContent,
 	CarouselItem,
 	useCarousel,
+	type CarouselApi,
 } from "@/components/ui/carousel";
 
 /* ------------------------------------------------------------------ */
@@ -309,7 +310,7 @@ export function SectionCarousel({
 	sections: SectionMeta[];
 	activeIndex: number;
 	onIndexChange: (index: number) => void;
-	setApi: (api: any) => void;
+	setApi: (api: CarouselApi) => void;
 }) {
 	return (
 		<Carousel

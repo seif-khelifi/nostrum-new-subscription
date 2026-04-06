@@ -202,7 +202,7 @@ export function GarantiesVariantA() {
 													onClick={() => {}}
 												>
 													{section.detailCard.ctaLabel}
-				2									<ArrowRight className="ml-2 h-4 w-4" />
+													<ArrowRight className="ml-2 h-4 w-4" />
 												</Button>
 											</div>
 

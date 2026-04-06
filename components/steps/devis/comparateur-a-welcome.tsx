@@ -1,9 +1,9 @@
 "use client";
 
 import Image from "next/image";
+import { X } from "lucide-react";
 import { useStepper } from "@/context/StepperContext";
 import { Button } from "@/components/ui/button";
-import { CloseButton } from "./comparateur-a";
 import comparateurData from "@/data/comparateur-variant-a.json";
 
 const WELCOME_BG =
@@ -27,7 +27,12 @@ export function ComparateurWelcome() {
 			{/* ── Mobile ── */}
 			<div className="flex flex-col h-full lg:hidden">
 				<div className="flex justify-center pt-10 pb-2 shrink-0">
-					<CloseButton onClick={close} />
+					<Button variant="closeComparateur" onClick={close}>
+						Fermer le comparateur d{"'"}offres
+						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
+							<X className="h-4 w-4 text-[#F3E5FA]" />
+						</span>
+					</Button>
 				</div>
 
 				<div className="flex-1 flex items-center justify-center px-8 min-h-0">
@@ -60,7 +65,12 @@ export function ComparateurWelcome() {
 			{/* ── Desktop ── */}
 			<div className="hidden lg:flex flex-col h-full">
 				<div className="flex justify-center pt-12 pb-4 shrink-0">
-					<CloseButton onClick={close} />
+					<Button variant="closeComparateur" onClick={close}>
+						Fermer le comparateur d{"'"}offres
+						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
+							<X className="h-4 w-4 text-[#F3E5FA]" />
+						</span>
+					</Button>
 				</div>
 
 				<div className="flex-1 flex items-center justify-center px-12 min-h-0">

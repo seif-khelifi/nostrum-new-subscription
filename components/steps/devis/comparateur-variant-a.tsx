@@ -1,29 +1,335 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import { X } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
+import { Button } from "@/components/ui/button";
+import { AlertBanner } from "@/components/ui/alert";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
+	useCarousel,
 	type CarouselApi,
 } from "@/components/ui/carousel";
 import offersData from "@/data/offers.json";
-import {
-	type OfferPlan,
-	ALL_PLANS,
-	RECOMMENDED_OFFER,
-	sections,
-	CloseButton,
-	ComparateurBanner,
-	ComparateurCompareCard,
-	InfoDisplayCard,
-	OfferSelectionTabs,
-	SectionDots,
-	CarouselDotSync,
-} from "./comparateur-a";
+import comparateurData from "@/data/comparateur-variant-a.json";
+
+/* ------------------------------------------------------------------ */
+/*  Types                                                              */
+/* ------------------------------------------------------------------ */
+
+type OfferPlan = "decouverte" | "bronze" | "silver" | "gold";
+
+type CompareValues = {
+	rembourse: number;
+	resteACharge: number;
+};
+
+type SectionMeta = {
+	key: string;
+	icon: string;
+	title: string;
+	subtitle: string;
+	description: string;
+};
+
+/* ------------------------------------------------------------------ */
+/*  Constants & Data                                                   */
+/* ------------------------------------------------------------------ */
+
+const ALL_PLANS: OfferPlan[] = ["decouverte", "bronze", "silver", "gold"];
+
+const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
+
+const RECOMMENDED_OFFER: OfferPlan =
+	(offersData.offers.find((o) => o.tone === "recommended")
+		?.plan as OfferPlan) ?? "silver";
+
+const sections: SectionMeta[] = comparateurData.sections as SectionMeta[];
+
+const compareData = comparateurData.compareData as Record<
+	string,
+	Record<string, CompareValues>
+>;
+
+const infoCardData = comparateurData.infoCard as Record<
+	string,
+	CompareValues
+>;
+
+/* ------------------------------------------------------------------ */
+/*  VerticalProgressBar                                                */
+/* ------------------------------------------------------------------ */
+
+function VerticalProgressBar({
+	percentage,
+	height = 56,
+}: {
+	percentage: number;
+	height?: number;
+}) {
+	return (
+		<div className="flex flex-col items-center gap-0.5">
+			<span className="text-[10px] font-bold text-[#CE99FF]">
+				{Math.round(percentage)}%
+			</span>
+			<div
+				className="relative w-2.5 rounded-full overflow-hidden bg-[#25013D]"
+				style={{ height }}
+			>
+				<div
+					className="absolute bottom-0 left-0 w-full rounded-full bg-[#CE99FF] transition-all duration-300"
+					style={{ height: `${percentage}%` }}
+				/>
+			</div>
+		</div>
+	);
+}
+
+/* ------------------------------------------------------------------ */
+/*  ComparateurCompareCard                                             */
+/* ------------------------------------------------------------------ */
+
+function ComparateurCompareCard({
+	plan,
+	sectionKey,
+	isRecommended = false,
+	isSelected = false,
+}: {
+	plan: OfferPlan;
+	sectionKey: string;
+	isRecommended?: boolean;
+	isSelected?: boolean;
+}) {
+	const planData = compareData[plan]?.[sectionKey] ?? {
+		rembourse: 0,
+		resteACharge: 0,
+	};
+	const total = planData.rembourse + planData.resteACharge;
+	const percentage = total > 0 ? (planData.rembourse / total) * 100 : 0;
+
+	return (
+		<div
+			className={cn(
+				"rounded-2xl px-5 py-4 w-full lg:px-6 lg:py-5",
+				isRecommended ? "bg-[#490076]" : "bg-[#490076]/50",
+			)}
+		>
+			{/* Title row */}
+			<div className="flex items-baseline gap-2 mb-3">
+				<p className="text-white font-bold text-lg leading-none lg:text-xl">
+					{capitalize(plan)}
+				</p>
+				{isRecommended && (
+					<span className="text-[11px] italic text-[#CE99FF]">
+						Recommandé pour vous
+					</span>
+				)}
+			</div>
+
+			{/* Content row: image | texts | progress */}
+			<div className="flex items-center gap-4">
+				<div className="shrink-0">
+					<Image
+						src={
+							isSelected
+								? "/comparateur/comp-selected.svg"
+								: "/comparateur/comp-not-selected.svg"
+						}
+						alt={isSelected ? "Sélectionné" : "Non sélectionné"}
+						width={48}
+						height={48}
+						className="w-12 h-12"
+					/>
+				</div>
+
+				<div className="flex-1 min-w-0 flex flex-col gap-1.5">
+					<div className="flex items-baseline justify-between">
+						<span className="text-sm font-bold text-white">
+							Remboursé
+						</span>
+						<span className="text-base font-bold text-[#CE99FF]">
+							{planData.rembourse}€
+						</span>
+					</div>
+					<div className="flex items-baseline justify-between">
+						<span className="text-xs text-white/70">
+							Reste à charge
+						</span>
+						<span className="text-xs text-white font-medium">
+							{planData.resteACharge}€
+						</span>
+					</div>
+				</div>
+
+				<div className="shrink-0">
+					<VerticalProgressBar percentage={percentage} height={64} />
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* ------------------------------------------------------------------ */
+/*  InfoDisplayCard                                                     */
+/* ------------------------------------------------------------------ */
+
+function InfoDisplayCard({ plan }: { plan: OfferPlan }) {
+	const data = infoCardData[plan] ?? { rembourse: 0, resteACharge: 0 };
+
+	return (
+		<div className="rounded-2xl border-2 border-[#490076] bg-[#25003C] px-5 py-4 w-full lg:px-6 lg:py-5 lg:flex lg:items-center">
+			<div className="flex items-center gap-4 w-full">
+				<div className="shrink-0">
+					<Image
+						src="/comparateur/folder.svg"
+						alt="Dossier"
+						width={44}
+						height={44}
+						className="w-11 h-11"
+					/>
+				</div>
+				<div className="flex-1 min-w-0 flex flex-col gap-1.5">
+					<div className="flex items-baseline justify-between">
+						<span className="text-sm text-[#CE99FF]">
+							Remboursé
+						</span>
+						<span className="text-base font-bold text-[#CE99FF]">
+							{data.rembourse}€
+						</span>
+					</div>
+					<div className="flex items-baseline justify-between">
+						<span className="text-xs text-[#CE99FF]">
+							Reste à charge
+						</span>
+						<span className="text-sm font-bold text-white">
+							{data.resteACharge}€
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+}
+
+/* ------------------------------------------------------------------ */
+/*  OfferSelectionTabs                                                 */
+/* ------------------------------------------------------------------ */
+
+function OfferSelectionTabs({
+	comparedOffer,
+	onComparedOfferChange,
+}: {
+	comparedOffer: OfferPlan;
+	onComparedOfferChange: (plan: OfferPlan) => void;
+}) {
+	const otherOffers = ALL_PLANS.filter((p) => p !== RECOMMENDED_OFFER);
+
+	return (
+		<Tabs
+			value={comparedOffer}
+			onValueChange={(val) => onComparedOfferChange(val as OfferPlan)}
+			className="w-full lg:max-w-2xl lg:mx-auto"
+		>
+			<TabsList
+				variant="essential"
+				className="bg-[#CE99FF] p-1 gap-1"
+			>
+				{otherOffers.map((plan) => (
+					<TabsTrigger
+						key={plan}
+						value={plan}
+						variant="essential"
+						className={cn(
+							"text-sm font-semibold lg:text-base lg:py-2.5",
+							"text-[#F3E5FA] hover:bg-[#F3E5FA]/20",
+							"data-active:bg-[#F3E5FA] data-active:text-[#490076]",
+						)}
+					>
+						{capitalize(plan)}
+					</TabsTrigger>
+				))}
+			</TabsList>
+		</Tabs>
+	);
+}
+
+/* ------------------------------------------------------------------ */
+/*  SectionDots                                                        */
+/* ------------------------------------------------------------------ */
+
+function SectionDots({
+	activeIndex,
+	total,
+	onDotClick,
+}: {
+	activeIndex: number;
+	total: number;
+	onDotClick: (index: number) => void;
+}) {
+	return (
+		<div className="flex items-center justify-center gap-3 py-2">
+			{Array.from({ length: total }).map((_, i) => (
+				<button
+					key={i}
+					type="button"
+					onClick={() => onDotClick(i)}
+					className={cn(
+						"transition-all duration-200",
+						i === activeIndex
+							? "w-5 h-5"
+							: "w-2 h-2 rounded-full bg-[#CE99FF]/40 hover:bg-[#CE99FF]/60",
+					)}
+				>
+					{i === activeIndex ? (
+						<Image
+							src="/comparateur/diamond.svg"
+							alt="Section active"
+							width={20}
+							height={20}
+						/>
+					) : null}
+				</button>
+			))}
+		</div>
+	);
+}
+
+/* ------------------------------------------------------------------ */
+/*  CarouselDotSync                                                    */
+/* ------------------------------------------------------------------ */
+
+function CarouselDotSync({
+	activeIndex,
+	onIndexChange,
+}: {
+	activeIndex: number;
+	onIndexChange: (index: number) => void;
+}) {
+	const { api } = useCarousel();
+
+	useEffect(() => {
+		if (!api) return;
+		const onSelect = () => onIndexChange(api.selectedScrollSnap());
+		api.on("select", onSelect);
+		return () => {
+			api.off("select", onSelect);
+		};
+	}, [api, onIndexChange]);
+
+	useEffect(() => {
+		if (!api) return;
+		api.scrollTo(activeIndex);
+	}, [api, activeIndex]);
+
+	return null;
+}
+
 /* ================================================================== */
 /*  COMPARATEUR CONTENT                                                */
 /*                                                                     */
@@ -72,6 +378,7 @@ export function ComparateurVariantA() {
 
 	const sectionKey = sections[activeSection]?.key ?? "dentaire";
 	const close = () => goToStepById("garanties");
+	const savingsAmount = comparateurData.banner.savingsAmount;
 
 	/* Shared slider content */
 	const renderSlider = () => (
@@ -127,14 +434,36 @@ export function ComparateurVariantA() {
 			{/* ─────────────────────────────────────────────────────── */}
 			<div className="lg:hidden flex flex-col h-full overflow-y-auto overflow-x-hidden">
 				<div className="flex justify-center pt-10 pb-3 bg-[#25003C] shrink-0">
-					<CloseButton onClick={close} />
+					<Button variant="closeComparateur" onClick={close}>
+						Fermer le comparateur d{"'"}offres
+						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
+							<X className="h-4 w-4 text-[#F3E5FA]" />
+						</span>
+					</Button>
 				</div>
 
 				{/* Scrollable cards area */}
 				<div className="flex-1 bg-[#25003C] px-4 pb-12 flex flex-col gap-3">
-					<ComparateurBanner
-						selectedOffer={RECOMMENDED_OFFER}
-						comparedOffer={comparedOffer}
+					<AlertBanner
+						variant="comparateurDark"
+						size="default"
+						className="px-5 py-4 lg:px-6 lg:py-5"
+						title={
+							<span className="text-sm font-normal leading-relaxed text-white">
+								Avec{" "}
+								<span className="font-bold text-[#CE99FF]">
+									{capitalize(RECOMMENDED_OFFER)}
+								</span>
+								, vous économisez{" "}
+								<span className="font-bold text-[#CE99FF]">
+									{savingsAmount}
+								</span>{" "}
+								de plus qu{"'"}avec {capitalize(comparedOffer)} sur une seule
+								couronne
+							</span>
+						}
+						imageSrc="/garanties/illustration=Alert14.svg"
+						imageAlt="Comparateur info"
 					/>
 					<InfoDisplayCard plan={RECOMMENDED_OFFER} />
 					<ComparateurCompareCard
@@ -174,16 +503,38 @@ export function ComparateurVariantA() {
 			<div className="hidden lg:flex flex-col h-screen">
 				{/* Top: close */}
 				<div className="flex justify-center pt-8 pb-2 bg-[#25003C] shrink-0">
-					<CloseButton onClick={close} />
+					<Button variant="closeComparateur" onClick={close}>
+						Fermer le comparateur d{"'"}offres
+						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
+							<X className="h-4 w-4 text-[#F3E5FA]" />
+						</span>
+					</Button>
 				</div>
 
 				{/* Middle: cards area — grows to fill, centers content */}
 				<div className="flex-1 bg-[#25003C] px-8 flex items-center justify-center min-h-0">
 					<div className="w-full max-w-5xl grid grid-cols-2 gap-x-6 gap-y-3">
 						{/* Row 1 left: banner */}
-						<ComparateurBanner
-							selectedOffer={RECOMMENDED_OFFER}
-							comparedOffer={comparedOffer}
+						<AlertBanner
+							variant="comparateurDark"
+							size="default"
+							className="px-5 py-4 lg:px-6 lg:py-5"
+							title={
+								<span className="text-sm font-normal leading-relaxed text-white">
+									Avec{" "}
+									<span className="font-bold text-[#CE99FF]">
+										{capitalize(RECOMMENDED_OFFER)}
+									</span>
+									, vous économisez{" "}
+									<span className="font-bold text-[#CE99FF]">
+										{savingsAmount}
+									</span>{" "}
+									de plus qu{"'"}avec {capitalize(comparedOffer)} sur une seule
+									couronne
+								</span>
+							}
+							imageSrc="/garanties/illustration=Alert14.svg"
+							imageAlt="Comparateur info"
 						/>
 						{/* Row 1 right: recommended card */}
 						<ComparateurCompareCard
@@ -221,5 +572,3 @@ export function ComparateurVariantA() {
 		</div>
 	);
 }
-
-

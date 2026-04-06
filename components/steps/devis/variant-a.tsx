@@ -27,7 +27,7 @@ import offersData from "@/data/offers.json";
  *                  and a CompareCard at the bottom.
  */
 export function DevisVariantA() {
-  const { next, goToStepById } = useStepper();
+  const { goToStepById } = useStepper();
   const { setValue: setSelectedOffer } = useSessionStorage<number | null>(
     "selectedOffer",
     null,

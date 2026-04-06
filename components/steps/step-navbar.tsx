@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { useStepper } from "@/context/StepperContext"
+import { useVariant } from "@/context/VariantContext"
 
 export interface StepNavbarProps {
 	className?: string
@@ -16,9 +17,16 @@ export interface StepNavbarProps {
  * Reads progress from StepperContext automatically.
  * Placed in `components/steps/` because it's tightly coupled to the
  * step flow (back navigation + progress calculation from stepper state).
+ *
+ * Features are driven by the variant's `layout.navbar` config:
+ * - showProgressBar: renders the step progress bar
+ * - showCta: renders the "Parler à un conseiller" CTA pill
  */
 export function StepNavbar({ className }: StepNavbarProps) {
 	const { activeStep, allSteps, isFirstStep, back } = useStepper()
+	const { layout } = useVariant()
+
+	const { showProgressBar, showCta } = layout.navbar
 
 	/** Progress percentage based on completed steps (0–100) */
 	const progress =
@@ -44,25 +52,28 @@ export function StepNavbar({ className }: StepNavbarProps) {
 				<ArrowLeft className="h-4 w-4 text-[#1D1B20]" />
 			</Button>
 
-			{/* Progress bar — stretches to fill remaining space with padding for CTA */}
+			{/* Progress bar + CTA — driven by layout config */}
+			{showProgressBar && (
 				<div className="flex-1 px-8">
-				<Progress value={progress} />
-			</div>
+					<Progress value={progress} />
+				</div>
+			)}
 
-			{/* CTA: "Parler à un conseiller" */}
-			<Button variant="callToAdvisor" asChild>
-				<a href="tel:+33000000000">
-					<span>Parler à un conseiller</span>
-					<span
-						className={cn(
-							"inline-flex h-8 w-8 items-center justify-center rounded-full",
-							"bg-[#CE99FF]",
-						)}
-					>
-						<Phone className="h-3.5 w-3.5 text-[#490076]" />
-					</span>
-				</a>
-			</Button>
+			{showCta && (
+				<Button variant="callToAdvisor" asChild>
+					<a href="tel:+33000000000">
+						<span>Parler à un conseiller</span>
+						<span
+							className={cn(
+								"inline-flex h-8 w-8 items-center justify-center rounded-full",
+								"bg-[#CE99FF]",
+							)}
+						>
+							<Phone className="h-3.5 w-3.5 text-[#490076]" />
+						</span>
+					</a>
+				</Button>
+			)}
 		</header>
 	)
 }

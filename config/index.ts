@@ -1,6 +1,7 @@
 export type {
   VariantConfig,
   VariantKey,
+  VariantLayoutConfig,
   StepTexts,
   BannerConfig,
   StepId,

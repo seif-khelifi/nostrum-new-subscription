@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 const alertVariants = cva(
   [
     "relative w-full rounded-2xl border-0 px-4 py-3",
-    "flex items-center justify-between gap-3",
     "bg-[linear-gradient(180deg,#F3E5FA_0%,#FBF4EA_100%)]",
     "shadow-none",
   ].join(" "),
@@ -21,16 +20,29 @@ const alertVariants = cva(
         destructive: "",
         comparateurDark:
           "bg-[#1A002A] bg-none rounded-xl",
+        sidebarDark:
+          "bg-[#490076] bg-none rounded-xl",
       },
       size: {
         default: "min-h-[80px]",
         sm: "min-h-[56px] px-3 py-2",
         lg: "min-h-[96px] px-5 py-4",
       },
+      layout: {
+        /** Default: text + image side by side */
+        inline: "flex items-center justify-between gap-3",
+        /**
+         * Responsive: side-by-side when container is wide enough,
+         * stacks image below text when squeezed.
+         * Uses a CSS container query via @container.
+         */
+        responsive: "flex flex-col gap-3",
+      },
     },
     defaultVariants: {
       variant: "default",
       size: "default",
+      layout: "inline",
     },
   },
 );
@@ -44,6 +56,7 @@ const alertTitleVariants = cva("text-base font-bold leading-5", {
       warning: "text-[#490076]",
       destructive: "text-[#490076]",
       comparateurDark: "text-white",
+      sidebarDark: "text-white",
     },
   },
   defaultVariants: {
@@ -60,6 +73,7 @@ const alertDescriptionVariants = cva("text-sm leading-5", {
       warning: "text-[#490076]",
       destructive: "text-[#490076]",
       comparateurDark: "text-white",
+      sidebarDark: "text-white/80",
     },
   },
   defaultVariants: {
@@ -71,13 +85,14 @@ function Alert({
   className,
   variant,
   size,
+  layout,
   ...props
 }: React.ComponentProps<"div"> & VariantProps<typeof alertVariants>) {
   return (
     <div
       data-slot="alert"
       role="alert"
-      className={cn(alertVariants({ variant, size }), className)}
+      className={cn(alertVariants({ variant, size, layout }), className)}
       {...props}
     />
   );
@@ -117,6 +132,8 @@ type AlertVisualProps = {
   icon?: React.ReactNode;
   imageSrc?: string;
   imageAlt?: string;
+  /** When true, image fills its container with small edge margins */
+  fill?: boolean;
   className?: string;
 };
 
@@ -124,9 +141,30 @@ function AlertVisual({
   icon,
   imageSrc,
   imageAlt = "Alert visual",
+  fill,
   className,
 }: AlertVisualProps) {
   if (imageSrc) {
+    if (fill) {
+      return (
+        <div
+          data-slot="alert-visual"
+          className={cn(
+            "relative overflow-hidden rounded-lg",
+            "mx-1 mb-1",
+            className,
+          )}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            className="w-full h-full object-contain"
+          />
+        </div>
+      );
+    }
+
     return (
       <div
         data-slot="alert-visual"
@@ -171,6 +209,8 @@ type AlertBannerProps = Omit<React.ComponentProps<"div">, "title"> &
     icon?: boolean | React.ReactNode;
     imageSrc?: string;
     imageAlt?: string;
+    /** When true, the image fills its container (used in sidebar cards) */
+    imageFill?: boolean;
     visualClassName?: string;
     contentClassName?: string;
   };
@@ -181,8 +221,10 @@ function AlertBanner({
   icon,
   imageSrc,
   imageAlt,
+  imageFill,
   variant,
   size,
+  layout,
   className,
   visualClassName,
   contentClassName,
@@ -192,7 +234,7 @@ function AlertBanner({
     icon === true ? DEFAULT_ALERT_ICON : icon === false ? undefined : icon;
 
   return (
-    <Alert variant={variant} size={size} className={className} {...props}>
+    <Alert variant={variant} size={size} layout={layout} className={className} {...props}>
       <div className={cn("min-w-0 flex-1", contentClassName)}>
         <AlertTitle variant={variant}>{title}</AlertTitle>
         {subtitle ? (
@@ -206,6 +248,7 @@ function AlertBanner({
         icon={resolvedIcon}
         imageSrc={imageSrc}
         imageAlt={imageAlt}
+        fill={imageFill}
         className={visualClassName}
       />
     </Alert>

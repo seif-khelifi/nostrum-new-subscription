@@ -113,6 +113,25 @@ export interface SkipRule {
 }
 
 /* ------------------------------------------------------------------ */
+/*  Layout configuration — declarative shell/sidebar/navbar behavior  */
+/* ------------------------------------------------------------------ */
+
+export interface VariantLayoutConfig {
+  sidebar: {
+    /** Stepper color theme applied to the left sidebar */
+    theme: "default" | "purple";
+    /** Whether to show the right sidebar (AlertBanner cards) */
+    showRightSidebar: boolean;
+  };
+  navbar: {
+    /** Show a progress bar in the desktop navbar */
+    showProgressBar: boolean;
+    /** Show the "Parler à un conseiller" CTA pill in the desktop navbar */
+    showCta: boolean;
+  };
+}
+
+/* ------------------------------------------------------------------ */
 /*  Variant configuration                                             */
 /* ------------------------------------------------------------------ */
 
@@ -146,4 +165,11 @@ export interface VariantConfig {
    * routing stays automatically symmetric.
    */
   skipRules?: SkipRule[];
+
+  /**
+   * Declarative layout configuration — controls sidebar theme,
+   * right sidebar visibility, and navbar features.
+   * Shell components read from this instead of checking variant IDs.
+   */
+  layout: VariantLayoutConfig;
 }

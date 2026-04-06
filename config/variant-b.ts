@@ -11,6 +11,15 @@ export const variantB: VariantConfig = {
   id: "b",
 
   /* ────────────────────────────────────────────────────────────── */
+  /*  Layout — sidebar, navbar, shell behavior                     */
+  /* ────────────────────────────────────────────────────────────── */
+
+  layout: {
+    sidebar: { theme: "default", showRightSidebar: false },
+    navbar: { showProgressBar: true, showCta: true },
+  },
+
+  /* ────────────────────────────────────────────────────────────── */
   /*  Step groups & ordering                                       */
   /*  Override this to reorder, add, or remove steps in variant B  */
   /* ────────────────────────────────────────────────────────────── */

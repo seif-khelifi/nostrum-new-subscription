@@ -6,7 +6,7 @@ export function VariantIndicator() {
   const { id } = useVariant();
 
   return (
-    <div className="sticky top-0 z-[9999] flex items-center justify-center gap-2 bg-neutral-900 px-4 py-1.5 text-xs font-medium text-white">
+    <div className="fixed top-0 left-0 right-0 z-[9999] flex items-center justify-center gap-2 bg-neutral-900 px-4 py-1.5 text-xs font-medium text-white pointer-events-none">
       <span className="opacity-60">Variant served:</span>
       <span className="rounded bg-white/20 px-2 py-0.5 font-bold uppercase tracking-wider">
         {id}

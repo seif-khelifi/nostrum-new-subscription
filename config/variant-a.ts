@@ -11,6 +11,15 @@ export const variantA: VariantConfig = {
   id: "a",
 
   /* ────────────────────────────────────────────────────────────── */
+  /*  Layout — sidebar, navbar, shell behavior                     */
+  /* ────────────────────────────────────────────────────────────── */
+
+  layout: {
+    sidebar: { theme: "purple", showRightSidebar: true },
+    navbar: { showProgressBar: false, showCta: false },
+  },
+
+  /* ────────────────────────────────────────────────────────────── */
   /*  Step groups & ordering                                       */
   /* ────────────────────────────────────────────────────────────── */
 

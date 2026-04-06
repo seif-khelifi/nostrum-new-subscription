@@ -77,8 +77,12 @@ export function StepScreen({
         )}
       </div>
 
-      {/* Info card */}
-      {infoCard}
+      {/* Info card — hidden on desktop when navbar shows the title (variant A moves it to right sidebar) */}
+      {infoCard && (
+        <div className={cn(hideTitle && "sm:hidden")}>
+          {infoCard}
+        </div>
+      )}
 
       {/* Mobile-only inline error — shows below form fields, hidden on sm+ where toasts are used */}
 

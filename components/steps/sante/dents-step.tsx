@@ -43,7 +43,9 @@ export function DentsStep() {
       ))}
 
       {texts.banner ? (
-        <AlertBanner {...texts.banner} className="mt-2" />
+        <div className={texts.navbarTitle ? "sm:hidden" : undefined}>
+          <AlertBanner {...texts.banner} className="mt-2" />
+        </div>
       ) : null}
     </StepScreen>
   );

@@ -2,62 +2,71 @@
 
 import { cn } from "@/lib/utils";
 import { AlertBanner } from "@/components/ui/alert";
+import { useStepper } from "@/context/StepperContext";
+import { useVariant } from "@/context/VariantContext";
 
 export interface DesktopSidebarRightProps {
-	className?: string;
+  className?: string;
 }
 
 /**
  * Right sidebar for variant A desktop layout.
  *
- * Contains two stacked AlertBanner cards:
+ * Fixed cards:
  * 1. Call card — dark (#490076) with call.svg image
- * 2. Santé card — default gradient with girl.svg image
  *
- * Both cards use a responsive layout: when the sidebar is narrow,
- * images stack below the text content instead of sitting beside it.
+ * Dynamic card:
+ * 2. Current step's banner (from variant config) — rendered when the
+ *    step has a `banner` entry. Replaces the static "médecines douces"
+ *    card with contextual info for each step.
  *
  * Visibility is controlled by the parent DesktopShell — the right sidebar
  * is hidden when the left sidebar collapses (below lg breakpoint).
  */
 export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
-	return (
-		<aside
-			className={cn(
-				/* base */
-				"fixed top-0 right-0 bottom-0 z-40 overflow-y-auto overflow-x-hidden bg-background border-l border-[#E9E6DF]",
-				/* width + opacity transition */
-				"transition-[width,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
-				/* responsive visibility & width */
-				"hidden lg:flex lg:flex-col lg:w-72 xl:w-80",
-				/* cards close to the top */
-				"gap-4 px-4 pt-4",
-				className,
-			)}
-		>
-			{/* Call card (dark variant) */}
-			<AlertBanner
-				variant="sidebarDark"
-				layout="responsive"
-				title="Parler à un conseiller"
-				subtitle="On vous rappelle dans la journée"
-				imageSrc="/alertBanner/call.svg"
-				imageAlt="Appeler un conseiller"
-				imageFill
-				visualClassName="h-[64px]"
-			/>
+  const { currentStepDef } = useStepper();
+  const { texts } = useVariant();
 
-			{/* Santé card (default gradient) */}
-			<AlertBanner
-				variant="default"
-				layout="responsive"
-				title="On rembourse 10 fois plus de médecines douces que les autres mutuelles"
-				subtitle="Ostéopathie, Sophrologie, Psychologie, Acupuncture, Naturopathie, Coaching, et bien plus."
-				imageSrc="/alertBanner/girl.svg"
-				imageAlt="Santé"
-				imageFill
-				visualClassName="h-[80px]"
-			/>
-		</aside>
-	);
+  const stepBanner = texts[currentStepDef.id]?.banner;
+
+  return (
+    <aside
+      className={cn(
+        /* base */
+        "fixed top-0 right-0 bottom-0 z-40 overflow-y-auto overflow-x-hidden bg-background border-l border-[#E9E6DF]",
+        /* width + opacity transition */
+        "transition-[width,opacity] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
+        /* responsive visibility & width */
+        "hidden lg:flex lg:flex-col lg:w-72 xl:w-80",
+        /* cards close to the top */
+        "gap-4 px-8 pt-4",
+        className,
+      )}
+    >
+      {/* Call card (always visible) */}
+      <AlertBanner
+        variant="sidebarDark"
+        layout="responsive"
+        title="Parler à un conseiller"
+        subtitle="On vous rappelle dans la journée"
+        imageSrc="/alertBanner/call.svg"
+        imageAlt="Appeler un conseiller"
+        imageFill
+      />
+
+      {/* Step banner — dynamic, from variant config */}
+      {stepBanner && (
+        <AlertBanner
+          variant="default"
+          layout="responsive"
+          title={stepBanner.title}
+          subtitle={stepBanner.subtitle}
+          icon={stepBanner.icon}
+          imageSrc={stepBanner.imageSrc}
+          imageAlt={stepBanner.imageAlt}
+          imageFill={!!stepBanner.imageSrc}
+        />
+      )}
+    </aside>
+  );
 }

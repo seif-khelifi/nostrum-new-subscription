@@ -7,6 +7,7 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
+import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { YeuxValue } from "@/types/subscription";
 
 export function YeuxStep() {
@@ -16,13 +17,20 @@ export function YeuxStep() {
 
   const options = texts.options!;
   const selected = formData.yeux;
+  const { error, validate } = useSelectionValidation(selected);
+
+  const handleNext = () => {
+    if (!validate()) return;
+    next();
+  };
 
   return (
     <StepScreen
       title={texts.title}
       hideTitle={!!texts.navbarTitle}
       canProceed={selected !== null}
-      onNext={next}
+      onNext={handleNext}
+      selectionError={error}
     >
       {options.map((opt) => (
         <Button

@@ -31,6 +31,8 @@ export interface StepScreenProps {
   customAction?: ReactNode;
   /** Optional form errors to display right before the action button */
   errors?: FieldErrors;
+  /** Optional inline error for button-selection steps (shown on mobile only, desktop uses toast) */
+  selectionError?: string | null;
 }
 
 /**
@@ -53,6 +55,7 @@ export function StepScreen({
   isForm,
   customAction,
   errors,
+  selectionError,
 }: StepScreenProps) {
   return (
     <div className="flex flex-col gap-5 sm:gap-8 px-2 sm:pl-12 sm:pr-0">
@@ -68,6 +71,11 @@ export function StepScreen({
           <p className="sm:hidden text-sm font-medium text-red-500">
             {(Object.values(errors)[0]?.message as string | undefined) ??
               "Veuillez corriger les erreurs."}
+          </p>
+        )}
+        {selectionError && (
+          <p className="sm:hidden text-sm font-medium text-red-500">
+            {selectionError}
           </p>
         )}
         {subtitle && (

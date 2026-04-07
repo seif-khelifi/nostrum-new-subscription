@@ -8,6 +8,7 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
+import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { CommenceParQuiValue } from "@/types/subscription";
 
 export function CommenceParQuiStep() {
@@ -17,13 +18,14 @@ export function CommenceParQuiStep() {
 
   const options = texts.options!;
   const selected = formData.commenceParQui;
+  const { error, validate } = useSelectionValidation(selected);
 
   const selectedLabel = selected
     ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
 
   const handleNext = () => {
-    if (!selected) return;
+    if (!validate()) return;
     next();
   };
 
@@ -49,6 +51,7 @@ export function CommenceParQuiStep() {
       }
       canProceed={selected !== null}
       onNext={handleNext}
+      selectionError={error}
     >
       {options.map((opt) => (
         <Button

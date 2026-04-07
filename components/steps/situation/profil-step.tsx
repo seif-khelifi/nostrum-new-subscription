@@ -8,6 +8,7 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
+import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ProfilValue } from "@/types/subscription";
 
 export function ProfilStep() {
@@ -17,10 +18,16 @@ export function ProfilStep() {
 
   const options = texts.options!;
   const selected = formData.profil;
+  const { error, validate } = useSelectionValidation(selected);
 
   const selectedLabel = selected
     ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
+
+  const handleNext = () => {
+    if (!validate()) return;
+    next();
+  };
 
   return (
     <StepScreen
@@ -38,7 +45,8 @@ export function ProfilStep() {
         texts.banner ? <AlertBanner {...texts.banner} /> : undefined
       }
       canProceed={selected !== null}
-      onNext={next}
+      onNext={handleNext}
+      selectionError={error}
     >
       {options.map((opt) => (
         <Button

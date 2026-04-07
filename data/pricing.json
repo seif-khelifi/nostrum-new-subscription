@@ -1,0 +1,464 @@
+{
+  "19": {
+    "Découverte": 32.27,
+    "Bronze": 46.82,
+    "Silver": 58.17,
+    "Gold": 71.46
+  },
+  "20": {
+    "Découverte": 33.45,
+    "Bronze": 48.8,
+    "Silver": 60.17,
+    "Gold": 73.88
+  },
+  "21": {
+    "Découverte": 33.79,
+    "Bronze": 49.44,
+    "Silver": 60.59,
+    "Gold": 75.57
+  },
+  "22": {
+    "Découverte": 34.11,
+    "Bronze": 50.47,
+    "Silver": 62.98,
+    "Gold": 78.75
+  },
+  "23": {
+    "Découverte": 34.59,
+    "Bronze": 51.18,
+    "Silver": 64.85,
+    "Gold": 81.33
+  },
+  "24": {
+    "Découverte": 34.8,
+    "Bronze": 51.93,
+    "Silver": 66.74,
+    "Gold": 83.76
+  },
+  "25": {
+    "Découverte": 35.11,
+    "Bronze": 52.54,
+    "Silver": 68.59,
+    "Gold": 86.25
+  },
+  "26": {
+    "Découverte": 35.33,
+    "Bronze": 53.2,
+    "Silver": 70.43,
+    "Gold": 88.72
+  },
+  "27": {
+    "Découverte": 36.17,
+    "Bronze": 53.81,
+    "Silver": 72.25,
+    "Gold": 91.15
+  },
+  "28": {
+    "Découverte": 37.08,
+    "Bronze": 55.27,
+    "Silver": 74.18,
+    "Gold": 93.6
+  },
+  "29": {
+    "Découverte": 37.91,
+    "Bronze": 56.59,
+    "Silver": 76.01,
+    "Gold": 96.01
+  },
+  "30": {
+    "Découverte": 38.73,
+    "Bronze": 58.04,
+    "Silver": 77.88,
+    "Gold": 98.5
+  },
+  "31": {
+    "Découverte": 39.63,
+    "Bronze": 59.54,
+    "Silver": 79.99,
+    "Gold": 101.13
+  },
+  "32": {
+    "Découverte": 40.56,
+    "Bronze": 60.94,
+    "Silver": 81.9,
+    "Gold": 103.52
+  },
+  "33": {
+    "Découverte": 41.51,
+    "Bronze": 62.51,
+    "Silver": 83.76,
+    "Gold": 105.96
+  },
+  "34": {
+    "Découverte": 42.34,
+    "Bronze": 63.93,
+    "Silver": 85.81,
+    "Gold": 108.44
+  },
+  "35": {
+    "Découverte": 43.32,
+    "Bronze": 65.47,
+    "Silver": 87.75,
+    "Gold": 110.89
+  },
+  "36": {
+    "Découverte": 44.24,
+    "Bronze": 66.99,
+    "Silver": 89.74,
+    "Gold": 113.38
+  },
+  "37": {
+    "Découverte": 45.28,
+    "Bronze": 68.61,
+    "Silver": 91.78,
+    "Gold": 115.84
+  },
+  "38": {
+    "Découverte": 46.21,
+    "Bronze": 70.17,
+    "Silver": 93.84,
+    "Gold": 118.39
+  },
+  "39": {
+    "Découverte": 47.24,
+    "Bronze": 71.75,
+    "Silver": 95.87,
+    "Gold": 120.78
+  },
+  "40": {
+    "Découverte": 48.27,
+    "Bronze": 73.48,
+    "Silver": 97.99,
+    "Gold": 123.32
+  },
+  "41": {
+    "Découverte": 50.32,
+    "Bronze": 76.56,
+    "Silver": 101.97,
+    "Gold": 128.14
+  },
+  "42": {
+    "Découverte": 51.4,
+    "Bronze": 78.28,
+    "Silver": 104.12,
+    "Gold": 130.7
+  },
+  "43": {
+    "Découverte": 52.51,
+    "Bronze": 80.04,
+    "Silver": 106.3,
+    "Gold": 133.21
+  },
+  "44": {
+    "Découverte": 53.63,
+    "Bronze": 81.85,
+    "Silver": 108.57,
+    "Gold": 135.82
+  },
+  "45": {
+    "Découverte": 54.79,
+    "Bronze": 83.68,
+    "Silver": 110.82,
+    "Gold": 138.39
+  },
+  "46": {
+    "Découverte": 55.96,
+    "Bronze": 85.61,
+    "Silver": 113.12,
+    "Gold": 140.99
+  },
+  "47": {
+    "Découverte": 57.24,
+    "Bronze": 87.49,
+    "Silver": 115.41,
+    "Gold": 143.58
+  },
+  "48": {
+    "Découverte": 58.5,
+    "Bronze": 89.47,
+    "Silver": 117.86,
+    "Gold": 146.3
+  },
+  "49": {
+    "Découverte": 59.7,
+    "Bronze": 91.45,
+    "Silver": 120.16,
+    "Gold": 148.89
+  },
+  "50": {
+    "Découverte": 61.06,
+    "Bronze": 93.38,
+    "Silver": 122.56,
+    "Gold": 151.54
+  },
+  "51": {
+    "Découverte": 62.39,
+    "Bronze": 95.46,
+    "Silver": 125.06,
+    "Gold": 154.25
+  },
+  "52": {
+    "Découverte": 63.71,
+    "Bronze": 97.6,
+    "Silver": 127.51,
+    "Gold": 156.94
+  },
+  "53": {
+    "Découverte": 65.11,
+    "Bronze": 99.74,
+    "Silver": 130.14,
+    "Gold": 159.73
+  },
+  "54": {
+    "Découverte": 66.5,
+    "Bronze": 101.91,
+    "Silver": 132.7,
+    "Gold": 162.46
+  },
+  "55": {
+    "Découverte": 67.99,
+    "Bronze": 104.19,
+    "Silver": 135.3,
+    "Gold": 165.21
+  },
+  "56": {
+    "Découverte": 69.48,
+    "Bronze": 106.48,
+    "Silver": 137.99,
+    "Gold": 168.03
+  },
+  "57": {
+    "Découverte": 71.01,
+    "Bronze": 108.8,
+    "Silver": 140.7,
+    "Gold": 170.58
+  },
+  "58": {
+    "Découverte": 72.57,
+    "Bronze": 111.21,
+    "Silver": 143.49,
+    "Gold": 173.73
+  },
+  "59": {
+    "Découverte": 74.22,
+    "Bronze": 113.65,
+    "Silver": 146.34,
+    "Gold": 176.6
+  },
+  "60": {
+    "Découverte": 75.84,
+    "Bronze": 116.08,
+    "Silver": 149.18,
+    "Gold": 179.53
+  },
+  "61": {
+    "Découverte": 77.53,
+    "Bronze": 118.64,
+    "Silver": 152.15,
+    "Gold": 182.52
+  },
+  "62": {
+    "Découverte": 79.24,
+    "Bronze": 121.27,
+    "Silver": 155.1,
+    "Gold": 185.47
+  },
+  "63": {
+    "Découverte": 80.98,
+    "Bronze": 123.92,
+    "Silver": 158.16,
+    "Gold": 188.53
+  },
+  "64": {
+    "Découverte": 82.86,
+    "Bronze": 126.64,
+    "Silver": 161.23,
+    "Gold": 191.58
+  },
+  "65": {
+    "Découverte": 84.66,
+    "Bronze": 129.46,
+    "Silver": 164.43,
+    "Gold": 194.71
+  },
+  "66": {
+    "Découverte": 86.54,
+    "Bronze": 132.28,
+    "Silver": 167.7,
+    "Gold": 197.93
+  },
+  "67": {
+    "Découverte": 88.49,
+    "Bronze": 135.27,
+    "Silver": 171.04,
+    "Gold": 201.12
+  },
+  "68": {
+    "Découverte": 90.47,
+    "Bronze": 138.2,
+    "Silver": 174.48,
+    "Gold": 204.4
+  },
+  "69": {
+    "Découverte": 92.54,
+    "Bronze": 141.28,
+    "Silver": 178.01,
+    "Gold": 207.83
+  },
+  "70": {
+    "Découverte": 94.62,
+    "Bronze": 144.42,
+    "Silver": 181.58,
+    "Gold": 211.53
+  },
+  "71": {
+    "Découverte": 96.74,
+    "Bronze": 147.7,
+    "Silver": 185.31,
+    "Gold": 215.41
+  },
+  "72": {
+    "Découverte": 98.93,
+    "Bronze": 151.01,
+    "Silver": 189.07,
+    "Gold": 219.35
+  },
+  "73": {
+    "Découverte": 101.26,
+    "Bronze": 154.33,
+    "Silver": 193.0,
+    "Gold": 223.38
+  },
+  "74": {
+    "Découverte": 103.54,
+    "Bronze": 157.79,
+    "Silver": 196.98,
+    "Gold": 227.65
+  },
+  "75": {
+    "Découverte": 105.91,
+    "Bronze": 161.34,
+    "Silver": 201.1,
+    "Gold": 231.89
+  },
+  "76": {
+    "Découverte": 108.36,
+    "Bronze": 165.04,
+    "Silver": 205.87,
+    "Gold": 236.87
+  },
+  "77": {
+    "Découverte": 110.9,
+    "Bronze": 168.81,
+    "Silver": 209.67,
+    "Gold": 240.85
+  },
+  "78": {
+    "Découverte": 113.42,
+    "Bronze": 172.61,
+    "Silver": 214.21,
+    "Gold": 245.45
+  },
+  "79": {
+    "Découverte": 116.1,
+    "Bronze": 176.53,
+    "Silver": 218.79,
+    "Gold": 250.28
+  },
+  "80": {
+    "Découverte": 118.83,
+    "Bronze": 180.6,
+    "Silver": 223.49,
+    "Gold": 255.17
+  },
+  "81": {
+    "Découverte": 121.57,
+    "Bronze": 184.71,
+    "Silver": 228.32,
+    "Gold": 260.22
+  },
+  "82": {
+    "Découverte": 124.42,
+    "Bronze": 189.02,
+    "Silver": 233.3,
+    "Gold": 265.47
+  },
+  "83": {
+    "Découverte": 127.44,
+    "Bronze": 193.38,
+    "Silver": 238.45,
+    "Gold": 270.8
+  },
+  "84": {
+    "Découverte": 130.52,
+    "Bronze": 197.9,
+    "Silver": 243.77,
+    "Gold": 276.32
+  },
+  "85": {
+    "Découverte": 133.65,
+    "Bronze": 202.55,
+    "Silver": 249.19,
+    "Gold": 281.97
+  },
+  "86": {
+    "Découverte": 136.87,
+    "Bronze": 207.32,
+    "Silver": 254.76,
+    "Gold": 287.77
+  },
+  "87": {
+    "Découverte": 140.18,
+    "Bronze": 212.22,
+    "Silver": 260.48,
+    "Gold": 293.74
+  },
+  "88": {
+    "Découverte": 143.58,
+    "Bronze": 217.26,
+    "Silver": 266.36,
+    "Gold": 299.86
+  },
+  "89": {
+    "Découverte": 147.07,
+    "Bronze": 222.44,
+    "Silver": 272.4,
+    "Gold": 306.15
+  },
+  "90": {
+    "Découverte": 150.65,
+    "Bronze": 227.75,
+    "Silver": 278.59,
+    "Gold": 312.61
+  },
+  "91": {
+    "Découverte": 154.33,
+    "Bronze": 233.21,
+    "Silver": 284.96,
+    "Gold": 319.25
+  },
+  "92": {
+    "Découverte": 158.11,
+    "Bronze": 238.82,
+    "Silver": 291.49,
+    "Gold": 326.06
+  },
+  "93": {
+    "Découverte": 161.99,
+    "Bronze": 244.58,
+    "Silver": 298.2,
+    "Gold": 333.05
+  },
+  "94": {
+    "Découverte": 165.98,
+    "Bronze": 250.5,
+    "Silver": 305.09,
+    "Gold": 340.23
+  },
+  "95": {
+    "Découverte": 170.07,
+    "Bronze": 256.58,
+    "Silver": 312.17,
+    "Gold": 347.6
+  }
+}

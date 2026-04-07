@@ -7,6 +7,7 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
+import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ResilierMutuelleValue } from "@/types/subscription";
 
 export function ResilierMutuelleStep() {
@@ -16,9 +17,10 @@ export function ResilierMutuelleStep() {
 
   const options = texts.options!;
   const selected = formData.resilierMutuelle;
+  const { error, validate } = useSelectionValidation(selected);
 
   const handleNext = () => {
-    if (!selected) return;
+    if (!validate()) return;
     next();
   };
 
@@ -31,6 +33,7 @@ export function ResilierMutuelleStep() {
       }
       canProceed={selected !== null}
       onNext={handleNext}
+      selectionError={error}
     >
       {options.map((opt) => (
         <Button

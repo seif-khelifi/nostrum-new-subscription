@@ -33,6 +33,8 @@ const tabsListVariants = cva(
         line: "w-fit gap-1 rounded-none bg-transparent p-0",
         essential:
           "w-full flex rounded-full bg-[#FBF4EA] p-1 gap-1",
+        devis:
+          "w-full flex rounded-full bg-[#CE99FF] p-1 gap-1",
       },
     },
     defaultVariants: {
@@ -75,6 +77,14 @@ const tabsTriggerVariants = cva(
           "bg-transparent",
           "hover:bg-white/70",
           "data-active:bg-white data-active:text-[#9000E3]",
+          "data-active:shadow-none",
+        ].join(" "),
+        devis: [
+          "flex-1 min-h-[36px] gap-1.5 rounded-full border border-transparent px-3 py-1.5",
+          "text-xs font-semibold text-[#490076]",
+          "bg-transparent",
+          "hover:bg-white/70",
+          "data-active:bg-white data-active:text-[#1D1B20]",
           "data-active:shadow-none",
         ].join(" "),
       },

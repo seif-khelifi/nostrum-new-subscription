@@ -90,6 +90,8 @@ export interface OfferCardProps
   onMoreClick?: () => void
   /** Hide the CTA button — use for summary/preview mode */
   hideCta?: boolean
+  /** Optional extra content rendered inside the white card, below the description */
+  footer?: React.ReactNode
 }
 
 /* ------------------------------------------------------------------ */
@@ -114,6 +116,7 @@ function OfferCard({
   moreLabel = "En savoir plus",
   onMoreClick,
   hideCta = false,
+  footer,
   ...props
 }: OfferCardProps) {
   const isRecommended = tone === "recommended"
@@ -134,6 +137,7 @@ function OfferCard({
     ctaLabel,
     onCtaClick,
     hideCta,
+    footer,
   }
 
   return (
@@ -208,6 +212,8 @@ type OfferInnerCardProps = {
   onCtaClick?: () => void
   /** Hide the CTA button — use for summary/preview mode */
   hideCta?: boolean
+  /** Optional extra content rendered below the description */
+  footer?: React.ReactNode
 }
 
 function OfferInnerCard({
@@ -222,6 +228,7 @@ function OfferInnerCard({
   ctaLabel,
   onCtaClick,
   hideCta = false,
+  footer,
 }: OfferInnerCardProps) {
   const isSm = size === "sm"
 
@@ -316,6 +323,9 @@ function OfferInnerCard({
             {description}
           </p>
         </div>
+
+        {/* Optional footer content (e.g. advantages accordion) */}
+        {footer}
       </CardContent>
     </Card>
   )
@@ -329,6 +339,8 @@ function OfferInnerCard({
 export interface CompareCardProps extends Omit<React.ComponentProps<"div">, "title"> {
   /** Visual variant: gradient (default) or solid dark */
   variant?: "gradient" | "dark"
+  /** Layout: stacked (default) or inline (text + button side by side) */
+  layout?: "stacked" | "inline"
   title: React.ReactNode
   description: React.ReactNode
   ctaLabel: React.ReactNode
@@ -339,6 +351,7 @@ export interface CompareCardProps extends Omit<React.ComponentProps<"div">, "tit
 function CompareCard({
   className,
   variant = "gradient",
+  layout = "stacked",
   title,
   description,
   ctaLabel,
@@ -347,6 +360,7 @@ function CompareCard({
   ...props
 }: CompareCardProps) {
   const isDark = variant === "dark"
+  const isInline = layout === "inline"
 
   return (
     <div
@@ -359,26 +373,42 @@ function CompareCard({
       )}
       {...props}
     >
-      <div className="flex flex-col gap-4">
-        {/* Title */}
-        <h3 className="text-xl font-bold leading-tight text-white">
-          {title}
-        </h3>
+      <div
+        className={cn(
+          isInline
+            ? "flex items-center gap-6"
+            : "flex flex-col gap-4",
+        )}
+      >
+        {/* Text block — Inter font explicitly */}
+        <div className={cn("font-sans", isInline ? "min-w-0 flex-1" : "contents")}>
+          {/* Title */}
+          <p className={cn(
+            "font-bold leading-tight text-white",
+            isInline ? "text-2xl" : "text-xl",
+          )}>
+            {title}
+          </p>
 
-        {/* Description */}
-        <p className="text-sm leading-snug text-white/90">
-          {description}
-        </p>
+          {/* Description */}
+          <p className={cn(
+            "leading-snug text-white/90",
+            isInline ? "mt-1.5 text-sm" : "text-sm",
+          )}>
+            {description}
+          </p>
+        </div>
 
         {/* White CTA button */}
         <Button
           variant="default"
           className={cn(
-            "w-full rounded-[20px] border-0 bg-white",
-            "h-[48px] text-sm font-semibold",
+            "rounded-[20px] border-0 bg-white",
+            "h-[48px] text-sm font-semibold whitespace-nowrap",
             "shadow-none hover:bg-white/90",
             "lg:h-11",
             isDark ? "text-black" : "text-[#490076]",
+            isInline ? "shrink-0 px-6" : "w-full",
             buttonClassName
           )}
           onClick={onCtaClick}

@@ -6,8 +6,25 @@
       "price": "32,10€",
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
-      "descriptionTitle": "🌱 Le premier pas",
-      "description": "L'essentiel pour commencer. Couverture de base à petit prix, idéale pour les jeunes actifs."
+      "descriptionTitle": "🌿 Pour démarrer tranquille",
+      "description": "Petit prix et vraie mutuelle. Juste ce qu'il faut pour se lancer sans se serrer la ceinture.",
+      "advantages": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
     },
     {
       "plan": "bronze",
@@ -16,7 +33,24 @@
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
       "descriptionTitle": "🥉 L'essentiel sans superflu",
-      "description": "Simple, efficace et pas chère. Tes yeux te remercient déjà."
+      "description": "Simple, efficace et pas cher. Tes lunettes et ton médecin te remercient déjà.",
+      "advantages": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
     },
     {
       "plan": "silver",
@@ -26,7 +60,24 @@
       "badgeTitle": "Recommandé pour vous",
       "ctaLabel": "Choisir cette offre",
       "descriptionTitle": "🩶 L'équilibre parfait",
-      "description": "Bien couvert sans se ruiner. Couronne remboursée à 90 %, rentabilisée en un clin d'œil."
+      "description": "Bien couvert sans se ruiner. Couronne remboursée à 90 %, rentabilisée en un clin d'œil.",
+      "advantages": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
     },
     {
       "plan": "gold",
@@ -34,8 +85,25 @@
       "price": "72,80€",
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
-      "descriptionTitle": "👑 La tranquillité absolue",
-      "description": "Le meilleur remboursement du marché. Zéro reste à charge sur l'essentiel."
+      "descriptionTitle": "🥇 Le confort premium",
+      "description": "Zéro stress, tout est pris en charge. Du kiné aux lunettes, ton dos et tes yeux adorent.",
+      "advantages": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
     }
   ],
   "compareCard": {

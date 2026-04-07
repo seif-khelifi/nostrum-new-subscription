@@ -33,7 +33,7 @@ export function StepNavbarVariantA({ className }: StepNavbarVariantAProps) {
 	return (
 		<header
 			className={cn(
-				"flex items-center gap-4 bg-background px-12 pt-6 pb-3 h-auto",
+				"flex items-center gap-4 bg-transparent px-12 pt-6 pb-3 h-auto",
 				className,
 			)}
 		>
@@ -45,7 +45,7 @@ export function StepNavbarVariantA({ className }: StepNavbarVariantAProps) {
 				onClick={back}
 				className="h-10 w-12 disabled:opacity-40 disabled:pointer-events-none"
 			>
-				<ArrowLeft className="h-4 w-4 text-[#1D1B20]" />
+				<ArrowLeft className="h-4 w-4 text-white" />
 			</Button>
 
 			{/* Step title — same font & size as the inner h1 */}

@@ -66,7 +66,7 @@ function OfferGarantiesCard({
       {/* Content — grows to fill remaining height, pushes buttons to bottom */}
       <div className="flex flex-1 flex-col px-6 pt-5 pb-6">
         {/* Title — bricolage-grotesque, large */}
-        <h2 className="font-[family-name:var(--font-bricolage-grotesque)] text-[1.75rem] font-bold leading-tight text-[#36276A]">
+        <h2 className="font-[family-name:var(--font-bricolage-grotesque)] text-[2.25rem] font-bold leading-tight text-[#36276A]">
           {title}
         </h2>
 

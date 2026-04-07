@@ -47,7 +47,7 @@ function OfferAdvantagesAccordion({
       <AccordionItem value={value} className="border-b-0">
         <AccordionTrigger className="py-4 hover:no-underline">
           {/* Inter, bold — matches garanties-variant-a trigger style */}
-          <span className="text-xl font-bold text-[#9000E3]">
+          <span className="text-xl  text-[#9000E3]">
             {triggerLabel}
           </span>
         </AccordionTrigger>

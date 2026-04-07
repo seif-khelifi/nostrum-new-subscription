@@ -13,20 +13,16 @@ import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { nousSommesSchema, type NousSommesFormValues } from "@/lib/validations/situation";
 import type { SecondaryBeneficiary } from "@/types/subscription";
 
-const PROTEGER_LABELS: Record<string, string> = {
-  moi: "Seulement moi",
-  conjoint_et_moi: "Mon conjoint(e) et moi",
-  enfants_et_moi: "Mes enfants et moi",
-  famille: "Toute ma famille",
-};
-
 export function NousSommesStep() {
   const { next } = useStepper();
   const { session, setBeneficiaries } = useSituationForm();
   const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("nousSommes");
+  const protegerTexts = useStepTexts("proteger");
 
-  const protegerLabel = uiData.proteger ? (PROTEGER_LABELS[uiData.proteger] ?? "") : "";
+  const protegerLabel = uiData.proteger
+    ? (protegerTexts.options?.find((o) => o.value === uiData.proteger)?.label ?? "")
+    : "";
 
   const {
     register, handleSubmit, formState: { errors, isValid, submitCount },

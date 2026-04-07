@@ -45,7 +45,7 @@ export function StepNavbarVariantA({ className }: StepNavbarVariantAProps) {
 				onClick={back}
 				className="h-10 w-12 disabled:opacity-40 disabled:pointer-events-none"
 			>
-				<ArrowLeft className="h-4 w-4 text-white" />
+				<ArrowLeft className="h-4 w-4 text-black" />
 			</Button>
 
 			{/* Step title — same font & size as the inner h1 */}

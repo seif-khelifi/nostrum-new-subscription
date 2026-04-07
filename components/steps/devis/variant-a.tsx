@@ -47,10 +47,11 @@ export function DevisVariantA() {
     "moreOffer",
     null,
   );
-  const { value: session } = useSessionStorage<VitaSessionStorage>(
-    "session",
-    { beneficiaries: [], plans: null, selectedPlan: null },
-  );
+  const { value: session } = useSessionStorage<VitaSessionStorage>("session", {
+    beneficiaries: [],
+    plans: null,
+    selectedPlan: null,
+  });
 
   /** Calculated prices based on beneficiaries in session storage. */
   const prices = useMemo(
@@ -228,7 +229,13 @@ export function DevisVariantA() {
                     className="h-full"
                     imageSrc="/offerLogos/avantages-variant-a.svg"
                     imageAlt="Avantages de votre formule"
-                    title={garantiesCommon.title}
+                    title={
+                      <>
+                        Et concrètement,
+                        <br />
+                        les avantages pour vous ?
+                      </>
+                    }
                     subtitle={garantiesCommon.subtitleTemplate.replace(
                       "{offer}",
                       capitalize(recommended?.plan ?? "silver"),
@@ -288,9 +295,9 @@ export function DevisVariantA() {
                 </div>
 
                 {/* Content — above the background */}
-                <div className="relative z-10 px-8 pt-8 pb-40 lg:px-12">
-                  {/* 3-column grid of offer cards with hover footer + accordion inside */}
-                  <div className="grid grid-cols-3 gap-5">
+                <div className="relative z-10 px-4 pt-8 pb-40 xl:px-12">
+                  {/* Responsive grid: 2 cols at lg, 3 cols at xl+ */}
+                  <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
                     {others.map((offer) => (
                       <OfferCardHoverGroup
                         key={offer.plan}
@@ -311,6 +318,7 @@ export function DevisVariantA() {
                           footer={
                             offer.advantages ? (
                               <OfferAdvantagesAccordion
+                                triggerLabel="Ce qui est inclu"
                                 value={offer.plan}
                                 lines={offer.advantages as AdvantageLineItem[]}
                               />

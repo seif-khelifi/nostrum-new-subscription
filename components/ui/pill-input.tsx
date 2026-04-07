@@ -172,6 +172,11 @@ const PillInput = React.forwardRef<HTMLInputElement, PillInputProps>(
             "[&:-webkit-autofill:focus]:[box-shadow:0_0_0_1000px_#490076_inset]",
             "[&:-webkit-autofill]:[transition:background-color_9999s_ease-out_0s]",
 
+            /* hide number-input spinner arrows (Chrome/Safari/Edge & Firefox) */
+            "[appearance:textfield]",
+            "[&::-webkit-outer-spin-button]:appearance-none [&::-webkit-outer-spin-button]:m-0",
+            "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-inner-spin-button]:m-0",
+
             inputClassName,
           )}
           {...props}

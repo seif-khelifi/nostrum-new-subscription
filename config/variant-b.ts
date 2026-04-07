@@ -184,9 +184,10 @@ export const variantB: VariantConfig = {
       title: "On commence par qui ?",
       banner: {
         variant: "info",
-        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        title: "C'est vous qui choisissez comment poursuivre l'échange.",
         subtitle: "...vous contacte par email, téléphone ou watsapp",
         imageSrc: "/alertBanner/speaker.svg",
+        imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
         imageAlt: "Speaker",
       },
     },
@@ -208,9 +209,10 @@ export const variantB: VariantConfig = {
       ],
       banner: {
         variant: "info",
-        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        title: "C'est vous qui choisissez comment poursuivre l'échange.",
         subtitle: "...vous contacte par email, téléphone ou watsapp",
         imageSrc: "/alertBanner/speaker.svg",
+        imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
         imageAlt: "Speaker",
       },
     },
@@ -227,10 +229,11 @@ export const variantB: VariantConfig = {
       ],
       banner: {
         variant: "info",
-        title: "C’est vous qui choisissez comment poursuivre l’échange.",
+        title: "C'est vous qui choisissez comment poursuivre l'échange.",
         subtitle: "...vous contacte par email, téléphone ou watsapp",
         imageSrc: "/alertBanner/speaker.svg",
-        imageAlt: "Speaker",
+        imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
+      imageAlt: "Speaker",
       },
     },
 
@@ -254,6 +257,7 @@ export const variantB: VariantConfig = {
         subtitle:
           "Òstéopathie, Sophrologie, Psychologie, Acupuncture, Naturopathie, Coaching, et bien plus.",
         imageSrc: "/alertBanner/girl.svg",
+        imageSrcHorizontal: "/alertBanner/girl-hor.svg",
         imageAlt: "Girl",
       },
     },
@@ -335,6 +339,7 @@ export const variantB: VariantConfig = {
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
         imageSrc: "/alertBanner/girl.svg",
+        imageSrcHorizontal: "/alertBanner/girl-hor.svg",
         imageAlt: "Girl",
       },
     },

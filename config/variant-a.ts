@@ -217,6 +217,7 @@ export const variantA: VariantConfig = {
         subtitle:
           "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
         imageSrc: "/alertBanner/speaker.svg",
+        imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
         imageAlt: "Speaker",
       },
     },
@@ -238,6 +239,7 @@ export const variantA: VariantConfig = {
         subtitle:
           "Un conseiller reprend votre demande et vous contacte dans le canal choisi pour vous guider.",
         imageSrc: "/alertBanner/speaker.svg",
+        imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
         imageAlt: "Speaker",
       },
     },
@@ -263,6 +265,7 @@ export const variantA: VariantConfig = {
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
         imageSrc: "/alertBanner/girl.svg",
+        imageSrcHorizontal: "/alertBanner/girl-hor.svg",
         imageAlt: "Girl",
       },
     },
@@ -354,6 +357,7 @@ export const variantA: VariantConfig = {
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
         imageSrc: "/alertBanner/girl.svg",
+        imageSrcHorizontal: "/alertBanner/girl-hor.svg",
         imageAlt: "Girl",
       },
     },

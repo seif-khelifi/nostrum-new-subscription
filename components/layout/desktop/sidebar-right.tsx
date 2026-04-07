@@ -62,9 +62,9 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
           title={stepBanner.title}
           subtitle={stepBanner.subtitle}
           icon={stepBanner.icon}
-          imageSrc={stepBanner.imageSrc}
+          imageSrc={stepBanner.imageSrcHorizontal ?? stepBanner.imageSrc}
           imageAlt={stepBanner.imageAlt}
-          imageFill={!!stepBanner.imageSrc}
+          imageFill={!!(stepBanner.imageSrcHorizontal ?? stepBanner.imageSrc)}
         />
       )}
     </aside>

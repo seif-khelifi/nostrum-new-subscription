@@ -62,6 +62,12 @@ export interface BannerConfig {
   icon?: boolean;
   /** Show an image instead of an icon */
   imageSrc?: string;
+  /**
+   * Horizontal variant of the image — used when the banner is rendered
+   * in a sidebar card (wider aspect ratio). Falls back to `imageSrc`
+   * when not provided.
+   */
+  imageSrcHorizontal?: string;
   imageAlt?: string;
 }
 

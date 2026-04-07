@@ -1,6 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchJSON } from "@/lib/http";
+import { fetchJSON, type ErrorMap } from "@/lib/http";
 import type { GeoPFResponse } from "@/lib/geo";
+
+const GEOPF_ERRORS: ErrorMap = {
+  400: "Invalid search query (missing text or bad type parameter)",
+  403: "GeoPF access denied (referer blocked or service restricted)",
+  404: "GeoPF endpoint not found (bad URL)",
+  429: "GeoPF rate limited (exceeded 10 req/s)",
+  500: "GeoPF server error",
+  503: "GeoPF unavailable (maintenance)",
+};
 
 /**
  * The GeoPF server uses a Certigna root CA that is missing from many
@@ -29,9 +38,16 @@ export async function GET(req: NextRequest) {
     params.set("terr", postalMatch[0]);
   }
 
-  const data = await fetchJSON<GeoPFResponse>(
-    `${GEOPF_URL}?${params.toString()}`,
-  );
+  try {
+    const data = await fetchJSON<GeoPFResponse>(
+      `${GEOPF_URL}?${params.toString()}`,
+      {},
+      GEOPF_ERRORS,
+    );
 
-  return NextResponse.json({ results: data.results ?? [] });
+    return NextResponse.json({ results: data.results ?? [] });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown error";
+    return NextResponse.json({ error: message }, { status: 502 });
+  }
 }

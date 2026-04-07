@@ -12,24 +12,21 @@ import type { DentsValue } from "@/types/subscription";
 
 export function DentsStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSanteForm();
+  const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("sante_dents");
 
   const options = texts.options!;
-  const selected = formData.dents;
+  const selected = uiData.dents;
   const { error, validate } = useSelectionValidation(selected);
-
-  const handleNext = () => {
-    if (!validate()) return;
-    next();
-  };
 
   return (
     <StepScreen
       title={texts.title}
       hideTitle={!!texts.navbarTitle}
       canProceed={selected !== null}
-      onNext={handleNext}
+      onNext={() => {
+        if (validate()) next();
+      }}
       selectionError={error}
     >
       {options.map((opt) => (
@@ -38,7 +35,7 @@ export function DentsStep() {
           variant="selectOption"
           size="select"
           selected={selected === opt.value}
-          onClick={() => updateFormData({ dents: opt.value as DentsValue })}
+          onClick={() => updateUI({ dents: opt.value as DentsValue })}
           className="justify-between"
         >
           <span>{opt.label}</span>
@@ -49,7 +46,6 @@ export function DentsStep() {
           )}
         </Button>
       ))}
-
       {texts.banner ? (
         <div className={texts.navbarTitle ? "sm:hidden" : undefined}>
           <AlertBanner {...texts.banner} className="mt-2" />

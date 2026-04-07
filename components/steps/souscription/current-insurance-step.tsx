@@ -12,6 +12,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -39,7 +40,8 @@ function resolveInitialSelection(name?: string): InsuranceSearchResult {
 
 export function CurrentInsuranceStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("currentInsurance");
 
   /* ── Address form ── */
@@ -51,11 +53,11 @@ export function CurrentInsuranceStep() {
   } = useForm<CurrentInsuranceFormValues>({
     resolver: standardSchemaResolver(currentInsuranceSchema),
     defaultValues: {
-      insuranceName: formData.currentInsuranceName,
-      street: formData.currentInsuranceStreet,
-      complement: formData.currentInsuranceComplement,
-      postalCode: formData.currentInsurancePostalCode,
-      city: formData.currentInsuranceCity,
+      insuranceName: p?.previousHealthMutualName ?? "",
+      street: p?.previousHealthMutualAddress ?? "",
+      complement: "",
+      postalCode: "",
+      city: "",
     },
     mode: "onTouched",
   });
@@ -64,7 +66,7 @@ export function CurrentInsuranceStep() {
 
   /* ── Search state ── */
   const [searchResult, setSearchResult] = useState<InsuranceSearchResult>(() =>
-    resolveInitialSelection(formData.currentInsuranceName),
+    resolveInitialSelection(p?.previousHealthMutualName ?? ""),
   );
 
   const hasInsurance =
@@ -93,15 +95,12 @@ export function CurrentInsuranceStep() {
   };
 
   const onSubmit = (data: CurrentInsuranceFormValues) => {
-    updateFormData({
-      currentInsuranceName:
+    updatePrimary({
+      previousHealthMutualName:
         searchResult.item?.name ??
         searchResult.customName ??
         data.insuranceName,
-      currentInsuranceStreet: data.street,
-      currentInsuranceComplement: data.complement ?? "",
-      currentInsurancePostalCode: data.postalCode,
-      currentInsuranceCity: data.city,
+      previousHealthMutualAddress: [data.street, data.complement, data.postalCode, data.city].filter(Boolean).join(", "),
     });
     next();
   };

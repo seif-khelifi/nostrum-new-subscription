@@ -7,6 +7,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -16,7 +17,8 @@ import {
 
 export function DateDebutNostrumStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("dateDebutNostrum");
 
   const {
@@ -26,8 +28,8 @@ export function DateDebutNostrumStep() {
   } = useForm<DateDebutNostrumFormValues>({
     resolver: standardSchemaResolver(dateDebutNostrumSchema),
     defaultValues: {
-      dateDebut: formData.dateDebutContratNostrum
-        ? new Date(formData.dateDebutContratNostrum)
+      dateDebut: p?.startDate
+        ? new Date(p.startDate)
         : undefined,
     },
     mode: "onTouched",
@@ -36,8 +38,8 @@ export function DateDebutNostrumStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateDebutNostrumFormValues) => {
-    updateFormData({
-      dateDebutContratNostrum: data.dateDebut.toISOString(),
+    updatePrimary({
+      startDate: data.dateDebut.toISOString(),
     });
     next();
   };

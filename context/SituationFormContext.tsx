@@ -2,47 +2,81 @@
 
 import { createContext, useContext, useCallback, type ReactNode } from "react";
 import { useSessionStorage } from "@/hooks/use-session-storage";
-import { type SituationFormData, INITIAL_SITUATION } from "@/types/subscription";
+import {
+	type VitaSessionStorage,
+	type VitaBeneficiary,
+	type PrimaryBeneficiary,
+	INITIAL_VITA_SESSION,
+} from "@/types/subscription";
 
 interface SituationFormContextValue {
-	/** The full form data object */
-	formData: SituationFormData;
-	/** Whether sessionStorage has been hydrated */
+	session: VitaSessionStorage;
 	isReady: boolean;
-	/** Merge a partial update into the form data */
-	updateFormData: (patch: Partial<SituationFormData>) => void;
-	/** Reset form to initial state and clear storage */
-	resetFormData: () => void;
+	/** Merge fields onto beneficiaries[0]. Creates it if missing. */
+	updatePrimary: (patch: Partial<PrimaryBeneficiary>) => void;
+	/** Update a specific beneficiary by index. */
+	updateBeneficiary: (index: number, patch: Partial<VitaBeneficiary>) => void;
+	/** Replace entire beneficiaries array. */
+	setBeneficiaries: (beneficiaries: VitaBeneficiary[]) => void;
+	/** Merge top-level session fields (plans, selectedPlan, etc.) */
+	updateSession: (patch: Partial<VitaSessionStorage>) => void;
+	/** Reset everything. */
+	resetSession: () => void;
 }
 
-const SituationFormContext = createContext<SituationFormContextValue | null>(null);
+const Ctx = createContext<SituationFormContextValue | null>(null);
 
 export function SituationFormProvider({ children }: { children: ReactNode }) {
 	const {
-		value: formData,
-		setValue: setFormData,
-		removeValue: resetFormData,
+		value: session,
+		setValue: setSession,
+		removeValue: resetSession,
 		isReady,
-	} = useSessionStorage<SituationFormData>("subscription_situation", INITIAL_SITUATION);
+	} = useSessionStorage<VitaSessionStorage>("session", INITIAL_VITA_SESSION);
 
-	const updateFormData = useCallback(
-		(patch: Partial<SituationFormData>) => {
-			setFormData({ ...formData, ...patch });
+	const updatePrimary = useCallback(
+		(patch: Partial<PrimaryBeneficiary>) => {
+			const bens = [...session.beneficiaries];
+			const cur = (bens[0] ?? { relationship: "PRIMARY_SUBSCRIBER" as const }) as Partial<PrimaryBeneficiary>;
+			bens[0] = { ...cur, ...patch } as PrimaryBeneficiary;
+			setSession({ ...session, beneficiaries: bens });
 		},
-		[formData, setFormData],
+		[session, setSession],
+	);
+
+	const updateBeneficiary = useCallback(
+		(index: number, patch: Partial<VitaBeneficiary>) => {
+			const bens = [...session.beneficiaries];
+			if (!bens[index]) return;
+			bens[index] = { ...bens[index], ...patch } as VitaBeneficiary;
+			setSession({ ...session, beneficiaries: bens });
+		},
+		[session, setSession],
+	);
+
+	const setBeneficiaries = useCallback(
+		(beneficiaries: VitaBeneficiary[]) => {
+			setSession({ ...session, beneficiaries });
+		},
+		[session, setSession],
+	);
+
+	const updateSession = useCallback(
+		(patch: Partial<VitaSessionStorage>) => {
+			setSession({ ...session, ...patch });
+		},
+		[session, setSession],
 	);
 
 	return (
-		<SituationFormContext.Provider value={{ formData, isReady, updateFormData, resetFormData }}>
+		<Ctx.Provider value={{ session, isReady, updatePrimary, updateBeneficiary, setBeneficiaries, updateSession, resetSession }}>
 			{children}
-		</SituationFormContext.Provider>
+		</Ctx.Provider>
 	);
 }
 
 export function useSituationForm() {
-	const ctx = useContext(SituationFormContext);
-	if (!ctx) {
-		throw new Error("useSituationForm must be used within a SituationFormProvider");
-	}
+	const ctx = useContext(Ctx);
+	if (!ctx) throw new Error("useSituationForm must be used within SituationFormProvider");
 	return ctx;
 }

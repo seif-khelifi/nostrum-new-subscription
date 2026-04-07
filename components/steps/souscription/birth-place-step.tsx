@@ -9,6 +9,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -42,7 +43,8 @@ function isFrance(country: string | undefined): boolean {
 
 export function BirthPlaceStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("birthPlace");
 
   const [citySearch, setCitySearch] = useState("");
@@ -64,8 +66,8 @@ export function BirthPlaceStep() {
   } = useForm<BirthPlaceFormValues>({
     resolver: standardSchemaResolver(birthPlaceSchema),
     defaultValues: {
-      birthCountry: formData.birthCountry,
-      birthCity: formData.birthCity,
+      birthCountry: p?.birth_country ?? "",
+      birthCity: p?.birth_place ?? "",
     },
     mode: "onTouched",
   });
@@ -75,9 +77,9 @@ export function BirthPlaceStep() {
   const country = watch("birthCountry");
 
   const onSubmit = (data: BirthPlaceFormValues) => {
-    updateFormData({
-      birthCountry: data.birthCountry,
-      birthCity: data.birthCity,
+    updatePrimary({
+      birth_country: data.birthCountry,
+      birth_place: data.birthCity,
     });
     next();
   };

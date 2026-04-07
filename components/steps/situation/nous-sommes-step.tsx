@@ -7,14 +7,12 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
-import {
-  nousSommesSchema,
-  type NousSommesFormValues,
-} from "@/lib/validations/situation";
+import { nousSommesSchema, type NousSommesFormValues } from "@/lib/validations/situation";
+import type { SecondaryBeneficiary } from "@/types/subscription";
 
-/** Labels matching the proteger step options */
 const PROTEGER_LABELS: Record<string, string> = {
   moi: "Seulement moi",
   conjoint_et_moi: "Mon conjoint(e) et moi",
@@ -24,62 +22,63 @@ const PROTEGER_LABELS: Record<string, string> = {
 
 export function NousSommesStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, setBeneficiaries } = useSituationForm();
+  const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("nousSommes");
 
-  const protegerLabel = formData.proteger
-    ? (PROTEGER_LABELS[formData.proteger] ?? "")
-    : "";
+  const protegerLabel = uiData.proteger ? (PROTEGER_LABELS[uiData.proteger] ?? "") : "";
 
   const {
-    register,
-    handleSubmit,
-    formState: { errors, isValid, submitCount },
+    register, handleSubmit, formState: { errors, isValid, submitCount },
   } = useForm<NousSommesFormValues>({
     resolver: standardSchemaResolver(nousSommesSchema),
-    defaultValues: {
-      familyCount: formData.familyCount ?? (undefined as unknown as number),
-    },
+    defaultValues: { familyCount: uiData.familyCount ?? (undefined as unknown as number) },
     mode: "onTouched",
   });
 
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: NousSommesFormValues) => {
-    updateFormData({ familyCount: data.familyCount });
+    updateUI({ familyCount: data.familyCount });
+
+    const primary = session.beneficiaries[0];
+    const existing = session.beneficiaries.slice(1);
+    const count = data.familyCount - 1; // minus primary
+    const result: SecondaryBeneficiary[] = [];
+
+    if (uiData.proteger === "famille") {
+      const married = existing.find((b) => b.relationship === "MARRIED") as SecondaryBeneficiary | undefined;
+      result.push(married ?? { relationship: "MARRIED", birthdate: "" } as SecondaryBeneficiary);
+      const children = existing.filter((b) => b.relationship === "CHILDREN");
+      for (let i = 0; i < count - 1; i++) {
+        result.push((children[i] as SecondaryBeneficiary) ?? { relationship: "CHILDREN", birthdate: "" } as SecondaryBeneficiary);
+      }
+    } else {
+      const children = existing.filter((b) => b.relationship === "CHILDREN");
+      for (let i = 0; i < count; i++) {
+        result.push((children[i] as SecondaryBeneficiary) ?? { relationship: "CHILDREN", birthdate: "" } as SecondaryBeneficiary);
+      }
+    }
+
+    setBeneficiaries(primary ? [primary, ...result] : [...result]);
     next();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts.title}
-        hideTitle={!!texts.navbarTitle}
+        title={texts.title} hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je souhaite protéger</span>
             <PillInput readOnly value={protegerLabel} placeholder="" />
             <span>, nous sommes</span>
-            <PillInput
-              type="number"
-              min={2}
-              placeholder="2"
-              {...register("familyCount", { valueAsNumber: true })}
-              hasError={!!errors.familyCount}
-            />
+            <PillInput type="number" min={2} placeholder="2" {...register("familyCount", { valueAsNumber: true })} hasError={!!errors.familyCount} />
           </div>
         }
-        infoCard={
-          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
-        }
-        canProceed={isValid}
-        onNext={() => handleSubmit(onSubmit)()}
-        isForm
-        errors={errors}
-      >
-        {/* No additional children — form is in subtitle */}
-        <></>
-      </StepScreen>
+        infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
+        canProceed={isValid} onNext={() => handleSubmit(onSubmit)()} isForm errors={errors}
+      ><></></StepScreen>
     </form>
   );
 }

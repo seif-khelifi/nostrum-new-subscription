@@ -10,6 +10,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -24,7 +25,8 @@ import { parseSelectedAddress } from "@/lib/geo";
 
 export function AddressStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("address");
   const [mode, setMode] = useState<"search" | "manual">("search");
   const [apiError, setApiError] = useState(false);
@@ -65,11 +67,11 @@ export function AddressStep() {
     const parsed = parseSelectedAddress(data.fulltext);
     if (!parsed) return;
 
-    updateFormData({
-      addressStreet: parsed.street,
-      addressComplement: "",
-      addressPostalCode: parsed.zipcode,
-      addressCity: parsed.city,
+    updatePrimary({
+      address_street_name: parsed.street,
+      address_additionnal: "",
+      address_zip: parsed.zipcode,
+      address_city: parsed.city,
     });
     next();
   };
@@ -78,10 +80,10 @@ export function AddressStep() {
   const manualForm = useForm<AddressFormValues>({
     resolver: standardSchemaResolver(addressSchema),
     defaultValues: {
-      street: formData.addressStreet,
-      complement: formData.addressComplement,
-      postalCode: formData.addressPostalCode,
-      city: formData.addressCity,
+      street: p?.address_street_name ?? "",
+      complement: p?.address_additionnal ?? "",
+      postalCode: p?.address_zip ?? "",
+      city: p?.address_city ?? "",
     },
     mode: "onTouched",
   });
@@ -93,11 +95,11 @@ export function AddressStep() {
   );
 
   const onManualSubmit = (data: AddressFormValues) => {
-    updateFormData({
-      addressStreet: data.street,
-      addressComplement: data.complement ?? "",
-      addressPostalCode: data.postalCode,
-      addressCity: data.city,
+    updatePrimary({
+      address_street_name: data.street,
+      address_additionnal: data.complement ?? "",
+      address_zip: data.postalCode,
+      address_city: data.city,
     });
     next();
   };

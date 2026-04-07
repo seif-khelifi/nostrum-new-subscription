@@ -100,8 +100,8 @@ export interface StepTexts {
 
 /**
  * A skip rule tells the stepper: "when leaving step `from`, if the
- * sessionStorage field `field` (inside `subscription_situation`) equals
- * `value`, jump to `target` instead of the next step in the flat list."
+ * field `field` on `session.beneficiaries[0]` equals `value`, jump to
+ * `target` instead of the next step in the flat list."
  *
  * `next()` checks rules where `from` matches the current step.
  * `back()` checks rules where `target` matches the current step.
@@ -110,7 +110,7 @@ export interface StepTexts {
 export interface SkipRule {
   /** The step the user is leaving */
   from: StepId;
-  /** Key in the persisted situation form (`subscription_situation`) */
+  /** Key on `session.beneficiaries[0]` to check */
   field: string;
   /** Value that triggers the skip */
   value: string;

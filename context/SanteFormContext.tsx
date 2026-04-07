@@ -2,47 +2,41 @@
 
 import { createContext, useContext, useCallback, type ReactNode } from "react";
 import { useSessionStorage } from "@/hooks/use-session-storage";
-import { type SanteFormData, INITIAL_SANTE } from "@/types/subscription";
+import { type SubscriptionUIData, INITIAL_UI } from "@/types/subscription";
 
 interface SanteFormContextValue {
-	/** The full santé form data object */
-	formData: SanteFormData;
-	/** Whether sessionStorage has been hydrated */
+	uiData: SubscriptionUIData;
 	isReady: boolean;
-	/** Merge a partial update into the form data */
-	updateFormData: (patch: Partial<SanteFormData>) => void;
-	/** Reset form to initial state and clear storage */
-	resetFormData: () => void;
+	updateUI: (patch: Partial<SubscriptionUIData>) => void;
+	resetUI: () => void;
 }
 
-const SanteFormContext = createContext<SanteFormContextValue | null>(null);
+const Ctx = createContext<SanteFormContextValue | null>(null);
 
 export function SanteFormProvider({ children }: { children: ReactNode }) {
 	const {
-		value: formData,
-		setValue: setFormData,
-		removeValue: resetFormData,
+		value: uiData,
+		setValue: setUiData,
+		removeValue: resetUI,
 		isReady,
-	} = useSessionStorage<SanteFormData>("subscription_sante", INITIAL_SANTE);
+	} = useSessionStorage<SubscriptionUIData>("subscription_ui", INITIAL_UI);
 
-	const updateFormData = useCallback(
-		(patch: Partial<SanteFormData>) => {
-			setFormData({ ...formData, ...patch });
+	const updateUI = useCallback(
+		(patch: Partial<SubscriptionUIData>) => {
+			setUiData({ ...uiData, ...patch });
 		},
-		[formData, setFormData],
+		[uiData, setUiData],
 	);
 
 	return (
-		<SanteFormContext.Provider value={{ formData, isReady, updateFormData, resetFormData }}>
+		<Ctx.Provider value={{ uiData, isReady, updateUI, resetUI }}>
 			{children}
-		</SanteFormContext.Provider>
+		</Ctx.Provider>
 	);
 }
 
 export function useSanteForm() {
-	const ctx = useContext(SanteFormContext);
-	if (!ctx) {
-		throw new Error("useSanteForm must be used within a SanteFormProvider");
-	}
+	const ctx = useContext(Ctx);
+	if (!ctx) throw new Error("useSanteForm must be used within SanteFormProvider");
 	return ctx;
 }

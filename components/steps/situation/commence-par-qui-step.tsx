@@ -6,28 +6,23 @@ import { PillInput } from "@/components/ui/pill-input";
 import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
-import { useSituationForm } from "@/context/SituationFormContext";
+import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { CommenceParQuiValue } from "@/types/subscription";
 
 export function CommenceParQuiStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("commenceParQui");
 
   const options = texts.options!;
-  const selected = formData.commenceParQui;
+  const selected = uiData.commenceParQui;
   const { error, validate } = useSelectionValidation(selected);
 
   const selectedLabel = selected
     ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
-
-  const handleNext = () => {
-    if (!validate()) return;
-    next();
-  };
 
   return (
     <StepScreen
@@ -46,11 +41,11 @@ export function CommenceParQuiStep() {
           )}
         </div>
       }
-      infoCard={
-        texts.banner ? <AlertBanner {...texts.banner} /> : undefined
-      }
+      infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
       canProceed={selected !== null}
-      onNext={handleNext}
+      onNext={() => {
+        if (validate()) next();
+      }}
       selectionError={error}
     >
       {options.map((opt) => (
@@ -60,7 +55,7 @@ export function CommenceParQuiStep() {
           size="select"
           selected={selected === opt.value}
           onClick={() =>
-            updateFormData({ commenceParQui: opt.value as CommenceParQuiValue })
+            updateUI({ commenceParQui: opt.value as CommenceParQuiValue })
           }
           className="justify-between"
         >

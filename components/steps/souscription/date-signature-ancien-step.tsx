@@ -7,6 +7,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -16,7 +17,8 @@ import {
 
 export function DateSignatureAncienStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("dateSignatureAncien");
 
   const {
@@ -26,8 +28,8 @@ export function DateSignatureAncienStep() {
   } = useForm<DateSignatureAncienFormValues>({
     resolver: standardSchemaResolver(dateSignatureAncienSchema),
     defaultValues: {
-      dateSignature: formData.dateSignatureAncienContrat
-        ? new Date(formData.dateSignatureAncienContrat)
+      dateSignature: p?.previousContractStartDate
+        ? new Date(p.previousContractStartDate)
         : undefined,
     },
     mode: "onTouched",
@@ -36,8 +38,8 @@ export function DateSignatureAncienStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateSignatureAncienFormValues) => {
-    updateFormData({
-      dateSignatureAncienContrat: data.dateSignature.toISOString(),
+    updatePrimary({
+      previousContractStartDate: data.dateSignature.toISOString(),
     });
     next();
   };

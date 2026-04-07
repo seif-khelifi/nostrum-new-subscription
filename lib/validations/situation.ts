@@ -101,17 +101,17 @@ export const CONJOINT_MAX_AGE = 95;
 /*  Situation step schemas                                            */
 /* ═══════════════════════════════════════════════════════════════════ */
 
-/** personalInfo step — firstName, lastName, birthDate */
+/** personalInfo step — firstname, lastname, birthdate */
 export const personalInfoSchema = z.object({
-  firstName: firstNameField,
-  lastName: lastNameField,
-  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
+  firstname: firstNameField,
+  lastname: lastNameField,
+  birthdate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
 });
 export type PersonalInfoFormValues = z.infer<typeof personalInfoSchema>;
 
-/** dob step — birthDate only (variant B split) */
+/** dob step — birthdate only (variant B split) */
 export const dobSchema = z.object({
-  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
+  birthdate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
 });
 export type DobFormValues = z.infer<typeof dobSchema>;
 
@@ -150,9 +150,9 @@ export type MailFormValues = z.infer<typeof mailSchema>;
 
 /** recap step — confirm all personal info (phone editable) */
 export const recapSchema = z.object({
-  firstName: firstNameField,
-  lastName: lastNameField,
-  birthDate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
+  firstname: firstNameField,
+  lastname: lastNameField,
+  birthdate: birthDateSchema(ADHERENT_MIN_AGE, ADHERENT_MAX_AGE),
   email: emailField,
   phone: phoneField,
 });

@@ -7,17 +7,19 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { SexeValue } from "@/types/subscription";
 
 export function SexeStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("sexe");
 
   const options = texts.options!;
-  const selected = formData.sexe;
+  const selected = p?.sexe ?? null;
   const { error, validate } = useSelectionValidation(selected);
 
   const selectedLabel = selected
@@ -54,7 +56,7 @@ export function SexeStep() {
           variant="selectOption"
           size="select"
           selected={selected === opt.value}
-          onClick={() => updateFormData({ sexe: opt.value as SexeValue })}
+          onClick={() => updatePrimary({ sexe: opt.value as SexeValue })}
           className="justify-between"
         >
           <span>{opt.label}</span>

@@ -19,8 +19,9 @@ import {
 
 export function PersonalInfoStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
   const texts = useStepTexts("personalInfo");
+  const p = session.beneficiaries[0];
 
   const {
     register,
@@ -30,9 +31,9 @@ export function PersonalInfoStep() {
   } = useForm<PersonalInfoFormValues>({
     resolver: standardSchemaResolver(personalInfoSchema),
     defaultValues: {
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      birthDate: formData.birthDate ? new Date(formData.birthDate) : undefined,
+      firstname: p?.firstname ?? "",
+      lastname: p?.lastname ?? "",
+      birthdate: p?.birthdate ? new Date(p.birthdate) : undefined,
     },
     mode: "onTouched",
   });
@@ -40,10 +41,10 @@ export function PersonalInfoStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: PersonalInfoFormValues) => {
-    updateFormData({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      birthDate: data.birthDate.toISOString(),
+    updatePrimary({
+      firstname: data.firstname,
+      lastname: data.lastname,
+      birthdate: data.birthdate.toISOString(),
     });
     next();
   };
@@ -56,19 +57,11 @@ export function PersonalInfoStep() {
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je m&apos;appelle</span>
-            <PillInput
-              placeholder="Prénom"
-              {...register("firstName")}
-              hasError={!!errors.firstName}
-            />
-            <PillInput
-              placeholder="Nom"
-              {...register("lastName")}
-              hasError={!!errors.lastName}
-            />
+            <PillInput placeholder="Prénom" {...register("firstname")} hasError={!!errors.firstname} />
+            <PillInput placeholder="Nom" {...register("lastname")} hasError={!!errors.lastname} />
             <span>, née le</span>
             <Controller
-              name="birthDate"
+              name="birthdate"
               control={control}
               render={({ field }) => {
                 const now = new Date();
@@ -77,7 +70,7 @@ export function PersonalInfoStep() {
                     value={field.value}
                     onChange={field.onChange}
                     placeholder="JJ/MM/AAAA"
-                    hasError={!!errors.birthDate}
+                    hasError={!!errors.birthdate}
                     inputClassName="min-w-[120px] sm:min-w-[160px]"
                     fromYear={now.getFullYear() - ADHERENT_MAX_AGE}
                     toYear={now.getFullYear() - ADHERENT_MIN_AGE}
@@ -87,15 +80,12 @@ export function PersonalInfoStep() {
             />
           </div>
         }
-        infoCard={
-          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
-        }
+        infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
         errors={errors}
       >
-        {/* No additional children — form is in subtitle */}
         <></>
       </StepScreen>
     </form>

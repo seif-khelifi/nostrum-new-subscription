@@ -9,6 +9,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -20,7 +21,8 @@ import {
 
 export function RecapStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("recap");
 
   const {
@@ -31,11 +33,11 @@ export function RecapStep() {
   } = useForm<RecapFormValues>({
     resolver: standardSchemaResolver(recapSchema),
     defaultValues: {
-      firstName: formData.firstName || "",
-      lastName: formData.lastName || "",
-      birthDate: formData.birthDate ? new Date(formData.birthDate) : undefined,
-      email: formData.email || "",
-      phone: formData.phone || "",
+      firstname: p?.firstname ?? "",
+      lastname: p?.lastname ?? "",
+      birthdate: p?.birthdate ? new Date(p.birthdate) : undefined,
+      email: p?.email ?? "",
+      phone: p?.phone ?? "",
     },
     mode: "onTouched",
   });
@@ -43,10 +45,10 @@ export function RecapStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: RecapFormValues) => {
-    updateFormData({
-      firstName: data.firstName,
-      lastName: data.lastName,
-      birthDate: data.birthDate.toISOString(),
+    updatePrimary({
+      firstname: data.firstname,
+      lastname: data.lastname,
+      birthdate: data.birthdate.toISOString(),
       email: data.email,
       phone: data.phone,
     });
@@ -73,16 +75,16 @@ export function RecapStep() {
           <br />
           <PillInput
             placeholder="Prénom"
-            {...register("firstName")}
-            hasError={!!errors.firstName}
+            {...register("firstname")}
+            hasError={!!errors.firstname}
           />
           <PillInput
             placeholder="Nom"
-            {...register("lastName")}
-            hasError={!!errors.lastName}
+            {...register("lastname")}
+            hasError={!!errors.lastname}
           />
           <Controller
-            name="birthDate"
+            name="birthdate"
             control={control}
             render={({ field }) => {
               const now = new Date();
@@ -91,7 +93,7 @@ export function RecapStep() {
                   value={field.value}
                   onChange={field.onChange}
                   placeholder="JJ/MM/AAAA"
-                  hasError={!!errors.birthDate}
+                  hasError={!!errors.birthdate}
                   fromYear={now.getFullYear() - ADHERENT_MAX_AGE}
                   toYear={now.getFullYear() - ADHERENT_MIN_AGE}
                 />

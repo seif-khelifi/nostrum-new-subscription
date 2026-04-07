@@ -7,6 +7,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -16,7 +17,8 @@ import {
 
 export function SocialSecurityStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
+  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("socialSecurity");
 
   const {
@@ -26,7 +28,7 @@ export function SocialSecurityStep() {
   } = useForm<SocialSecurityFormValues>({
     resolver: standardSchemaResolver(socialSecuritySchema),
     defaultValues: {
-      socialSecurityNumber: formData.socialSecurityNumber,
+      socialSecurityNumber: p?.socialWelfareNumber ?? "",
     },
     mode: "onTouched",
   });
@@ -34,8 +36,8 @@ export function SocialSecurityStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: SocialSecurityFormValues) => {
-    updateFormData({
-      socialSecurityNumber: data.socialSecurityNumber,
+    updatePrimary({
+      socialWelfareNumber: data.socialSecurityNumber,
     });
     next();
   };

@@ -5,18 +5,18 @@ import { Button } from "@/components/ui/button";
 import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
-import { useSituationForm } from "@/context/SituationFormContext";
+import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ResilierMutuelleValue } from "@/types/subscription";
 
 export function ResilierMutuelleStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("resilierMutuelle");
 
   const options = texts.options!;
-  const selected = formData.resilierMutuelle;
+  const selected = uiData.resilierMutuelle;
   const { error, validate } = useSelectionValidation(selected);
 
   const handleNext = () => {
@@ -42,7 +42,7 @@ export function ResilierMutuelleStep() {
           size="select"
           selected={selected === opt.value}
           onClick={() =>
-            updateFormData({
+            updateUI({
               resilierMutuelle: opt.value as ResilierMutuelleValue,
             })
           }

@@ -12,24 +12,21 @@ import type { BienEtreValue } from "@/types/subscription";
 
 export function BienEtreStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSanteForm();
+  const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("sante_bien_etre");
 
   const options = texts.options!;
-  const selected = formData.bienEtre;
+  const selected = uiData.bienEtre;
   const { error, validate } = useSelectionValidation(selected);
-
-  const handleNext = () => {
-    if (!validate()) return;
-    next();
-  };
 
   return (
     <StepScreen
       title={texts.title}
       hideTitle={!!texts.navbarTitle}
       canProceed={selected !== null}
-      onNext={handleNext}
+      onNext={() => {
+        if (validate()) next();
+      }}
       selectionError={error}
     >
       {options.map((opt) => (
@@ -38,9 +35,7 @@ export function BienEtreStep() {
           variant="selectOption"
           size="select"
           selected={selected === opt.value}
-          onClick={() =>
-            updateFormData({ bienEtre: opt.value as BienEtreValue })
-          }
+          onClick={() => updateUI({ bienEtre: opt.value as BienEtreValue })}
           className="justify-between"
         >
           <span>{opt.label}</span>
@@ -51,7 +46,6 @@ export function BienEtreStep() {
           )}
         </Button>
       ))}
-
       {texts.banner ? (
         <div className={texts.navbarTitle ? "sm:hidden" : undefined}>
           <AlertBanner {...texts.banner} className="mt-2" />

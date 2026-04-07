@@ -9,25 +9,22 @@ import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
-import type { ProfilValue } from "@/types/subscription";
+import type { ProfileType } from "@/types/subscription";
 
 export function ProfilStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updatePrimary } = useSituationForm();
   const texts = useStepTexts("profil");
 
+  const primary = session.beneficiaries[0] as unknown as Record<string, unknown> | undefined;
+  const selected = (primary?.quel_est_votre_profil_ as ProfileType) ?? null;
+
   const options = texts.options!;
-  const selected = formData.profil;
   const { error, validate } = useSelectionValidation(selected);
 
   const selectedLabel = selected
     ? (options.find((o) => o.value === selected)?.label ?? "")
     : "";
-
-  const handleNext = () => {
-    if (!validate()) return;
-    next();
-  };
 
   return (
     <StepScreen
@@ -36,16 +33,12 @@ export function ProfilStep() {
       subtitle={
         <div className="flex flex-wrap items-center gap-2">
           <span>Je suis</span>
-          {selected && (
-            <PillInput readOnly value={selectedLabel} placeholder="" />
-          )}
+          {selected && <PillInput readOnly value={selectedLabel} placeholder="" />}
         </div>
       }
-      infoCard={
-        texts.banner ? <AlertBanner {...texts.banner} /> : undefined
-      }
+      infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
       canProceed={selected !== null}
-      onNext={handleNext}
+      onNext={() => { if (validate()) next(); }}
       selectionError={error}
     >
       {options.map((opt) => (
@@ -54,7 +47,7 @@ export function ProfilStep() {
           variant="selectOption"
           size="select"
           selected={selected === opt.value}
-          onClick={() => updateFormData({ profil: opt.value as ProfilValue })}
+          onClick={() => updatePrimary({ quel_est_votre_profil_: opt.value as ProfileType })}
           className="justify-between"
         >
           <span>{opt.label}</span>

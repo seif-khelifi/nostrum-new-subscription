@@ -8,101 +8,57 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
-import {
-  dateBirthConjointSchema,
-  type DateBirthConjointFormValues,
-  CONJOINT_MIN_AGE,
-  CONJOINT_MAX_AGE,
-} from "@/lib/validations/situation";
+import { dateBirthConjointSchema, type DateBirthConjointFormValues, CONJOINT_MIN_AGE, CONJOINT_MAX_AGE } from "@/lib/validations/situation";
 
-/** Labels matching the commenceParQui step options */
-const COMMENCE_LABELS: Record<string, string> = {
-  conjoint: "Mon conjoint(e)",
-  enfant: "Mon enfant",
-};
+const COMMENCE_LABELS: Record<string, string> = { conjoint: "Mon conjoint(e)", enfant: "Mon enfant" };
 
 export function DateBirthConjointStep() {
   const { next } = useStepper();
-  const { formData, updateFormData } = useSituationForm();
+  const { session, updateBeneficiary } = useSituationForm();
+  const { uiData } = useSanteForm();
   const texts = useStepTexts("dateBirthConjoint");
 
-  const rawBirthDate = formData.conjoint?.birthDate ?? "";
-  const commenceLabel = formData.commenceParQui
-    ? (COMMENCE_LABELS[formData.commenceParQui] ?? "")
-    : "";
+  const marriedIdx = session.beneficiaries.findIndex((b) => b.relationship === "MARRIED");
+  const married = marriedIdx >= 0 ? session.beneficiaries[marriedIdx] : null;
+  const rawBirthDate = married?.birthdate ?? "";
+  const commenceLabel = uiData.commenceParQui ? (COMMENCE_LABELS[uiData.commenceParQui] ?? "") : "";
 
   const {
-    control,
-    handleSubmit,
-    formState: { errors, isValid, submitCount },
+    control, handleSubmit, formState: { errors, isValid, submitCount },
   } = useForm<DateBirthConjointFormValues>({
     resolver: standardSchemaResolver(dateBirthConjointSchema),
-    defaultValues: {
-      conjointBirthDate: rawBirthDate ? new Date(rawBirthDate) : undefined,
-    },
+    defaultValues: { conjointBirthDate: rawBirthDate ? new Date(rawBirthDate) : undefined },
     mode: "onTouched",
   });
 
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateBirthConjointFormValues) => {
-    updateFormData({
-      conjoint: {
-        ...formData.conjoint,
-        birthDate: data.conjointBirthDate.toISOString(),
-      },
-    });
+    if (marriedIdx >= 0) updateBeneficiary(marriedIdx, { birthdate: data.conjointBirthDate.toISOString() });
     next();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <StepScreen
-        title={texts.title}
-        hideTitle={!!texts.navbarTitle}
+        title={texts.title} hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je veux protéger en premier mon</span>
-            <PillInput
-              readOnly
-              value={commenceLabel}
-              placeholder=""
-              inputClassName="min-w-[100px] sm:min-w-[140px]"
-            />
+            <PillInput readOnly value={commenceLabel} placeholder="" inputClassName="min-w-[100px] sm:min-w-[140px]" />
             <span>et il est né(e) le</span>
-            <Controller
-              name="conjointBirthDate"
-              control={control}
-              render={({ field }) => {
-                const now = new Date();
-                return (
-                  <PillDatePicker
-                    value={field.value}
-                    onChange={field.onChange}
-                    placeholder="JJ/MM/AAAA"
-                    hasError={!!errors.conjointBirthDate}
-                    inputClassName="min-w-[120px] sm:min-w-[160px]"
-                    fromYear={now.getFullYear() - CONJOINT_MAX_AGE}
-                    toYear={now.getFullYear() - CONJOINT_MIN_AGE}
-                  />
-                );
-              }}
-            />
+            <Controller name="conjointBirthDate" control={control} render={({ field }) => {
+              const now = new Date();
+              return (<PillDatePicker value={field.value} onChange={field.onChange} placeholder="JJ/MM/AAAA" hasError={!!errors.conjointBirthDate} inputClassName="min-w-[120px] sm:min-w-[160px]" fromYear={now.getFullYear() - CONJOINT_MAX_AGE} toYear={now.getFullYear() - CONJOINT_MIN_AGE} />);
+            }} />
           </div>
         }
-        infoCard={
-          texts.banner ? <AlertBanner {...texts.banner} /> : undefined
-        }
-        canProceed={isValid}
-        onNext={() => handleSubmit(onSubmit)()}
-        isForm
-        errors={errors}
-      >
-        {/* No additional children — form is in subtitle */}
-        <></>
-      </StepScreen>
+        infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
+        canProceed={isValid} onNext={() => handleSubmit(onSubmit)()} isForm errors={errors}
+      ><></></StepScreen>
     </form>
   );
 }

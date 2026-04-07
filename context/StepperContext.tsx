@@ -66,12 +66,25 @@ function getFlatIndexById(allSteps: StepDef[], id: StepId): number {
   return idx >= 0 ? idx : 0;
 }
 
-/** Read a field from the persisted situation form in sessionStorage. */
+/** UI-only fields stored in subscription_ui, not in beneficiaries[0]. */
+const UI_FIELDS = new Set(["proteger", "familyCount", "commenceParQui", "resilierMutuelle"]);
+
+/**
+ * Read a field used by skip rules.
+ * UI-only navigation fields live in `subscription_ui`;
+ * everything else lives in `session.beneficiaries[0]`.
+ */
 function getSituationField(field: string): string | null {
   try {
-    const raw = sessionStorage.getItem("subscription_situation");
+    if (UI_FIELDS.has(field)) {
+      const raw = sessionStorage.getItem("subscription_ui");
+      if (!raw) return null;
+      return JSON.parse(raw)[field] ?? null;
+    }
+    const raw = sessionStorage.getItem("session");
     if (!raw) return null;
-    return JSON.parse(raw)[field] ?? null;
+    const session = JSON.parse(raw);
+    return session?.beneficiaries?.[0]?.[field] ?? null;
   } catch {
     return null;
   }

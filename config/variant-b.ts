@@ -92,6 +92,8 @@ export const variantB: VariantConfig = {
   skipRules: [
     // "Seulement moi" → skip family steps, jump to santé
     { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
+    // "Mon conjoint(e) et moi" → skip nousSommes (familyCount is hard-set to 2), jump to commenceParQui
+    { from: "proteger", field: "proteger", value: "conjoint_et_moi", target: "commenceParQui" },
     // "Mon enfant" → skip dateBirthConjoint, jump to santé
     {
       from: "commenceParQui",
@@ -118,12 +120,17 @@ export const variantB: VariantConfig = {
     profil: {
       title: "Votre situation pro en ce moment ?",
       options: [
-        { value: "salarie", label: "Salarié(e)" },
-        { value: "independant_tns", label: "Indépendant(e) /TNS" },
-        { value: "etudiant", label: "Étudiant(e)" },
-        { value: "independant", label: "Indépendant(e)" },
-        { value: "retraite", label: "Retraité(e)" },
-        { value: "recherche_emploi", label: "En recherche d'emploi" },
+        { value: "EMPLOYEE", label: "Salarié(e)" },
+        { value: "SELF_EMPLOYED", label: "Indépendant(e)" },
+        { value: "STUDENT", label: "Étudiant(e)" },
+        { value: "PARENT_AT_HOME", label: "Parent au foyer" },
+        { value: "FONCTIONARY", label: "Fonctionnaire" },
+        { value: "INTERIM_WORKER", label: "Intérimaire" },
+        { value: "RETIRED", label: "Retraité(e)" },
+        { value: "PRACTITIONER", label: "Praticien(ne)" },
+        { value: "BUSINESS_OWNER", label: "Chef d'entreprise" },
+        { value: "JOB_SEEKER", label: "Chercheur d'emploi" },
+        { value: "OTHER", label: "Autre" },
       ],
     },
 

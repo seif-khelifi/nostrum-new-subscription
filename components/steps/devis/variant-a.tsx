@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import {
@@ -19,6 +19,8 @@ import type { OfferPlan } from "@/lib/plans";
 import { PLAN_INDEX } from "@/lib/plans";
 import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
+import { getPricing, priceForPlan } from "@/lib/pricing";
+import type { VitaSessionStorage } from "@/types/subscription";
 import offersData from "@/data/offers.json";
 import garantiesData from "@/data/garanties-variant-a.json";
 
@@ -44,6 +46,22 @@ export function DevisVariantA() {
   const { setValue: setMoreOffer } = useSessionStorage<number | null>(
     "moreOffer",
     null,
+  );
+  const { value: session } = useSessionStorage<VitaSessionStorage>(
+    "session",
+    { beneficiaries: [], plans: null, selectedPlan: null },
+  );
+
+  /** Calculated prices based on beneficiaries in session storage. */
+  const prices = useMemo(
+    () => getPricing(session.beneficiaries),
+    [session.beneficiaries],
+  );
+
+  /** Resolve the display price for a given plan id (e.g. "silver" → "60,26€"). */
+  const offerPrice = useCallback(
+    (planId: string) => priceForPlan(prices, planId),
+    [prices],
   );
 
   const selectOffer = useCallback(
@@ -97,7 +115,7 @@ export function DevisVariantA() {
                 plan={recommended.plan as OfferPlan}
                 tone="recommended"
                 size="default"
-                price={recommended.price}
+                price={offerPrice(recommended.plan)}
                 period={recommended.period}
                 badgeTitle={recommended.badgeTitle ?? undefined}
                 ctaLabel={`Je choisis la formule ${capitalize(recommended.plan)}`}
@@ -131,7 +149,7 @@ export function DevisVariantA() {
                 plan={offer.plan as OfferPlan}
                 tone="default"
                 size="default"
-                price={offer.price}
+                price={offerPrice(offer.plan)}
                 period={offer.period}
                 ctaLabel={`Je choisis la formule ${capitalize(offer.plan)}`}
                 descriptionTitle={offer.descriptionTitle}
@@ -181,7 +199,7 @@ export function DevisVariantA() {
                       plan={recommended.plan as OfferPlan}
                       tone="recommended"
                       size="default"
-                      price={recommended.price}
+                      price={offerPrice(recommended.plan)}
                       period={recommended.period}
                       badgeTitle={recommended.badgeTitle ?? undefined}
                       ctaLabel={`Je choisis la formule ${capitalize(recommended.plan)}`}
@@ -283,7 +301,7 @@ export function DevisVariantA() {
                           plan={offer.plan as OfferPlan}
                           tone="default"
                           size="default"
-                          price={offer.price}
+                          price={offerPrice(offer.plan)}
                           period={offer.period}
                           ctaLabel={`Je choisis la formule ${capitalize(offer.plan)}`}
                           descriptionTitle={offer.descriptionTitle}

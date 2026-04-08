@@ -11,6 +11,7 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import { dateBirthConjointSchema, type DateBirthConjointFormValues, CONJOINT_MIN_AGE, CONJOINT_MAX_AGE } from "@/lib/validations/situation";
 
 const COMMENCE_LABELS: Record<string, string> = { conjoint: "Mon conjoint(e)", enfant: "Mon enfant" };
@@ -30,14 +31,14 @@ export function DateBirthConjointStep() {
     control, handleSubmit, formState: { errors, isValid, submitCount },
   } = useForm<DateBirthConjointFormValues>({
     resolver: standardSchemaResolver(dateBirthConjointSchema),
-    defaultValues: { conjointBirthDate: rawBirthDate ? new Date(rawBirthDate) : undefined },
+    defaultValues: { conjointBirthDate: rawBirthDate ? parseBirthdate(rawBirthDate) : undefined },
     mode: "onTouched",
   });
 
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateBirthConjointFormValues) => {
-    if (marriedIdx >= 0) updateBeneficiary(marriedIdx, { birthdate: data.conjointBirthDate.toISOString() });
+    if (marriedIdx >= 0) updateBeneficiary(marriedIdx, { birthdate: formatBirthdate(data.conjointBirthDate) });
     next();
   };
 

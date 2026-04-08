@@ -54,21 +54,8 @@ export function AddressSearchInput({
         const res = await fetch(`/api/searchBAN?${params}`, {
           signal: controller.signal,
         });
-        if (!res.ok) {
-          if (!controller.signal.aborted) {
-            setSuggestions([]);
-            onError?.();
-          }
-          return;
-        }
         const data = await res.json();
-        if (data.error) {
-          if (!controller.signal.aborted) {
-            setSuggestions([]);
-            onError?.();
-          }
-          return;
-        }
+        if (data.error) throw new Error(data.error);
         setSuggestions(data.results ?? []);
       } catch {
         if (!controller.signal.aborted) {

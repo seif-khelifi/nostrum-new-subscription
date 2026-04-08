@@ -9,6 +9,7 @@ import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import { dobSchema, type DobFormValues, ADHERENT_MIN_AGE, ADHERENT_MAX_AGE } from "@/lib/validations/situation";
 
 export function DobStep() {
@@ -21,14 +22,14 @@ export function DobStep() {
     control, handleSubmit, formState: { errors, isValid, submitCount },
   } = useForm<DobFormValues>({
     resolver: standardSchemaResolver(dobSchema),
-    defaultValues: { birthdate: p?.birthdate ? new Date(p.birthdate) : undefined },
+    defaultValues: { birthdate: p?.birthdate ? parseBirthdate(p.birthdate) : undefined },
     mode: "onTouched",
   });
 
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DobFormValues) => {
-    updatePrimary({ birthdate: data.birthdate.toISOString() });
+    updatePrimary({ birthdate: formatBirthdate(data.birthdate) });
     next();
   };
 

@@ -10,6 +10,7 @@ import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import {
   personalInfoSchema,
   type PersonalInfoFormValues,
@@ -33,7 +34,7 @@ export function PersonalInfoStep() {
     defaultValues: {
       firstname: p?.firstname ?? "",
       lastname: p?.lastname ?? "",
-      birthdate: p?.birthdate ? new Date(p.birthdate) : undefined,
+      birthdate: p?.birthdate ? parseBirthdate(p.birthdate) : undefined,
     },
     mode: "onTouched",
   });
@@ -44,7 +45,7 @@ export function PersonalInfoStep() {
     updatePrimary({
       firstname: data.firstname,
       lastname: data.lastname,
-      birthdate: data.birthdate.toISOString(),
+      birthdate: formatBirthdate(data.birthdate),
     });
     next();
   };

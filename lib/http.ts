@@ -31,19 +31,28 @@ export async function fetchJSON<T>(
       ...init,
       headers: { Accept: "application/json", ...(init.headers ?? {}) },
     });
-  } catch {
-    throw new Error("Network error");
+  } catch (err) {
+    throw new Error(err instanceof Error ? err.message : "Network error");
   }
 
   if (res.status !== 200) {
+    // Try to read the upstream error message from the response body
+    let message = "";
+    try {
+      const body = await res.json();
+      message = body?.message || body?.error || "";
+    } catch {
+      // body wasn't JSON — ignore
+    }
+
     if (errors) {
       throw new ApiError(
         res.status,
-        errors[res.status] ?? `Unexpected error (${res.status})`,
+        message || errors[res.status] || `Unexpected error (${res.status})`,
       );
     }
 
-    throw new Error(`Request failed (${res.status})`);
+    throw new Error(message || `Request failed (${res.status})`);
   }
 
   return (await res.json()) as T;

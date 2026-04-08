@@ -1,4 +1,5 @@
-import type { PlanPrices } from "@/types/subscription";
+import type { PlanPrices, VitaBeneficiary, VitaSessionStorage } from "@/types/subscription";
+import { parseBirthdate } from "@/lib/utils";
 import pricingTable from "@/data/pricing.json";
 
 /* ------------------------------------------------------------------ */
@@ -21,9 +22,9 @@ const pricing = pricingTable as Record<string, Record<string, number>>;
  * to match the original pricing engine behaviour.
  */
 function calculateAge(birthdate: string): number {
-	const birth = new Date(birthdate);
-	const today = new Date();
-	return today.getFullYear() - birth.getFullYear();
+	const birth = parseBirthdate(birthdate);
+	if (!birth) return 0;
+	return new Date().getFullYear() - birth.getFullYear();
 }
 
 /** Clamp an age to the range available in the pricing table (19–95). */
@@ -125,4 +126,85 @@ export function priceForPlan(prices: PlanPrices, planId: string): string {
 /** Format a number as a French price string (e.g. "38,06€"). */
 function formatPrice(n: number): string {
 	return n.toFixed(2).replace(".", ",") + "€";
+}
+
+/* ------------------------------------------------------------------ */
+/*  Product pricing V3 (API)                                           */
+/* ------------------------------------------------------------------ */
+
+/** Shape returned by the product-pricing-v3 proxy. */
+export interface ProductPricingResult {
+	price: string;
+	success: string;
+	id: string;
+	total_price_by_period: string[];
+}
+
+/** Format today's date as DD/MM/YYYY for the pricing API. */
+function formatStartDate(): string {
+	const d = new Date();
+	const dd = String(d.getDate()).padStart(2, "0");
+	const mm = String(d.getMonth() + 1).padStart(2, "0");
+	const yyyy = d.getFullYear();
+	return `${dd}/${mm}/${yyyy}`;
+}
+
+/**
+ * Extract the prorated price from the total_price_by_period array.
+ * The array is 12 entries (one per month, 0-indexed from January).
+ * The prorated price is the value at the current month's index,
+ * converted from European comma format ("123,45") to a JS number.
+ */
+export function getProratedPrice(totalPriceByPeriod: string[]): number {
+	const currentMonth = new Date().getMonth();
+	const raw = String(totalPriceByPeriod[currentMonth] ?? "0");
+	return Number(raw.replace(",", "."));
+}
+
+/**
+ * Call the product-pricing-v3 API for a given plan and return the
+ * session patch (plans, TV3price, prorated_price, selectedPlan,
+ * and beneficiaries with productId assigned).
+ */
+export async function fetchProductPricing(
+	beneficiaries: VitaBeneficiary[],
+	selectedPlan: number,
+	plans: PlanPrices,
+): Promise<Partial<VitaSessionStorage>> {
+	const res = await fetch("/api/pricing", {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify({
+			beneficiaries: beneficiaries.map(({ birthdate, relationship }) => ({
+				birthdate,
+				relationship,
+			})),
+			startDate: formatStartDate(),
+			selectedPlan,
+		}),
+	});
+
+	const data = await res.json();
+	if (data.error) throw new Error(data.error);
+
+	const result = (data as ProductPricingResult[])[0];
+
+	// Parse the TV3 price from European format → dot notation (e.g. "92,04" → "92.04")
+	const tv3Price = result.price.replace(",", ".");
+
+	const proratedPrice = getProratedPrice(result.total_price_by_period);
+
+	// Assign productId to all beneficiaries
+	const updatedBeneficiaries = beneficiaries.map((b) => ({
+		...b,
+		productId: result.id,
+	}));
+
+	return {
+		beneficiaries: updatedBeneficiaries,
+		plans,
+		TV3price: tv3Price,
+		prorated_price: proratedPrice,
+		selectedPlan,
+	};
 }

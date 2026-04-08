@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { LayoutGrid } from "lucide-react";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
@@ -15,7 +15,7 @@ import type { OfferPlan } from "@/lib/plans";
 import { PLAN_INDEX } from "@/lib/plans";
 import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
-import { getPricing, priceForPlan } from "@/lib/pricing";
+import { getPricing, priceForPlan, fetchProductPricing } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
 import offersData from "@/data/offers.json";
 
@@ -38,10 +38,14 @@ export function DevisVariantB() {
     "moreOffer",
     null,
   );
-  const { value: session } = useSessionStorage<VitaSessionStorage>(
-    "session",
-    { beneficiaries: [], plans: null, selectedPlan: null },
-  );
+  const { value: session, setValue: setSession } =
+    useSessionStorage<VitaSessionStorage>("session", {
+      beneficiaries: [],
+      plans: null,
+      selectedPlan: null,
+    });
+
+  const [isLoading, setIsLoading] = useState(false);
 
   /** Calculated prices based on beneficiaries in session storage. */
   const prices = useMemo(
@@ -55,12 +59,37 @@ export function DevisVariantB() {
     [prices],
   );
 
+  /**
+   * Call the pricing API, persist the result in session storage,
+   * then navigate to the garanties step.
+   */
   const selectOffer = useCallback(
-    (plan: string) => {
-      setSelectedOffer(PLAN_INDEX[plan] ?? 0);
+    async (plan: string) => {
+      const planIndex = PLAN_INDEX[plan] ?? 0;
+      setSelectedOffer(planIndex);
+
+      if (session.beneficiaries.length === 0) {
+        goToStepById("garanties");
+        return;
+      }
+
+      setIsLoading(true);
+      try {
+        const patch = await fetchProductPricing(
+          session.beneficiaries,
+          planIndex,
+          prices,
+        );
+        setSession({ ...session, ...patch });
+      } catch (err) {
+        console.error("[devis] pricing fetch failed", err);
+      } finally {
+        setIsLoading(false);
+      }
+
       goToStepById("garanties");
     },
-    [setSelectedOffer, goToStepById],
+    [setSelectedOffer, goToStepById, session, prices, setSession],
   );
 
   const showGaranties = useCallback(

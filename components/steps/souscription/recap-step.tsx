@@ -12,6 +12,7 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import {
   recapSchema,
   type RecapFormValues,
@@ -35,7 +36,7 @@ export function RecapStep() {
     defaultValues: {
       firstname: p?.firstname ?? "",
       lastname: p?.lastname ?? "",
-      birthdate: p?.birthdate ? new Date(p.birthdate) : undefined,
+      birthdate: p?.birthdate ? parseBirthdate(p.birthdate) : undefined,
       email: p?.email ?? "",
       phone: p?.phone ?? "",
     },
@@ -48,7 +49,7 @@ export function RecapStep() {
     updatePrimary({
       firstname: data.firstname,
       lastname: data.lastname,
-      birthdate: data.birthdate.toISOString(),
+      birthdate: formatBirthdate(data.birthdate),
       email: data.email,
       phone: data.phone,
     });

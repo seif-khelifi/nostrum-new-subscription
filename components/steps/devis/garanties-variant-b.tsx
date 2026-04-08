@@ -10,7 +10,9 @@ import { GarantiesCompareDrawer } from "./drawers";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/lib/plans";
 import { PLAN_INDEX, LEGEND_ITEMS } from "@/lib/plans";
-import { capitalize } from "@/lib/utils";
+import { capitalize, formatPriceLabel } from "@/lib/utils";
+import { priceForPlan } from "@/lib/pricing";
+import type { VitaSessionStorage } from "@/types/subscription";
 import type {
   CategoryMeta,
   TabBreakdowns,
@@ -48,12 +50,26 @@ export function GarantiesVariantB() {
     null,
   );
 
-  const offerIndex = moreOfferIndex ?? selectedOfferIndex ?? 2;
+  const { value: session } = useSessionStorage<VitaSessionStorage>("session", {
+    beneficiaries: [],
+    plans: null,
+    selectedPlan: null,
+  });
+
+  // Determine which offer to show: "moreOffer" (from en savoir plus),
+  // then the standalone "selectedOffer" key, then session.selectedPlan
+  // (set by the pricing API), and finally default to silver (index 2).
+  const offerIndex = moreOfferIndex ?? selectedOfferIndex ?? session.selectedPlan ?? 2;
   const offer = offersData.offers[offerIndex];
   const planName = offer?.plan ?? "silver";
   const bgColor = OFFER_BG_COLORS[planName] ?? "#F4F3FA";
   const compare = offersData.compareCard;
   const common = garantiesData.common;
+
+  // Read price from session storage (set by the pricing API on the devis page).
+  // session.plans values are in dot notation (e.g. "101.52"); convert to display format.
+  const sessionPrice = session.plans ? priceForPlan(session.plans, planName) : null;
+  const displayPrice = sessionPrice ? formatPriceLabel(parseFloat(sessionPrice)) : (offer?.price ?? "");
 
   // Also persist price in session storage
   const { setValue: setSelectedOffer } = useSessionStorage<number | null>(
@@ -71,7 +87,7 @@ export function GarantiesVariantB() {
 
   const handleChooseOffer = () => {
     setSelectedOffer(PLAN_INDEX[planName] ?? 0);
-    setSelectedPrice(offer?.price ?? null);
+    setSelectedPrice(displayPrice || null);
     goToStepById("options");
   };
 
@@ -147,7 +163,7 @@ export function GarantiesVariantB() {
               plan={planName as OfferPlan}
               tone="default"
               size="default"
-              price={offer?.price ?? ""}
+              price={displayPrice}
               period={offer?.period}
               descriptionTitle={offer?.descriptionTitle ?? ""}
               description={offer?.description ?? ""}
@@ -261,7 +277,7 @@ export function GarantiesVariantB() {
                 plan={planName as OfferPlan}
                 tone="default"
                 size="default"
-                price={offer?.price ?? ""}
+                price={displayPrice}
                 period={offer?.period}
                 descriptionTitle={offer?.descriptionTitle ?? ""}
                 description={offer?.description ?? ""}

@@ -8,7 +8,9 @@ import { Button } from "@/components/ui/button";
 import { OfferCard, CompareCard } from "@/components/ui/offer-card";
 import type { OfferPlan } from "@/lib/plans";
 import { PLAN_INDEX } from "@/lib/plans";
-import { capitalize } from "@/lib/utils";
+import { capitalize, formatPriceLabel } from "@/lib/utils";
+import { priceForPlan } from "@/lib/pricing";
+import type { VitaSessionStorage } from "@/types/subscription";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { AlertBanner } from "@/components/ui/alert";
 import { GarantieCard, type GarantieCardColorScheme } from "@/components/ui/garantie-card";
@@ -51,14 +53,26 @@ export function GarantiesVariantA() {
 	const { goToStepById } = useStepper();
 	const { value: selectedOfferIndex } = useSessionStorage<number | null>("selectedOffer", null);
 	const { value: moreOfferIndex } = useSessionStorage<number | null>("moreOffer", null);
+	const { value: session } = useSessionStorage<VitaSessionStorage>("session", {
+		beneficiaries: [],
+		plans: null,
+		selectedPlan: null,
+	});
 
-	// Determine which offer to show: "moreOffer" (from en savoir plus) or "selectedOffer"
-	const offerIndex = moreOfferIndex ?? selectedOfferIndex ?? 2; // default to silver
+	// Determine which offer to show: "moreOffer" (from en savoir plus),
+	// then the standalone "selectedOffer" key, then session.selectedPlan
+	// (set by the pricing API), and finally default to silver (index 2).
+	const offerIndex = moreOfferIndex ?? selectedOfferIndex ?? session.selectedPlan ?? 2;
 	const offer = offersData.offers[offerIndex];
 	const planName = offer?.plan ?? "silver";
 	const bgColor = OFFER_BG_COLORS[planName] ?? "#F4F3FA";
 	const compare = offersData.compareCard;
 	const common = garantiesData.common;
+
+	// Read price from session storage (set by the pricing API on the devis page).
+	// session.plans values are in dot notation (e.g. "101.52"); convert to display format.
+	const sessionPrice = session.plans ? priceForPlan(session.plans, planName) : null;
+	const displayPrice = sessionPrice ? formatPriceLabel(parseFloat(sessionPrice)) : (offer?.price ?? "");
 
 	// Get offer-specific accordion sections
 	const accordionData = garantiesData.accordion as Record<string, AccordionSection[]>;
@@ -89,17 +103,17 @@ export function GarantiesVariantA() {
 
 					{/* Offer summary card — reuses OfferCard with hideCta */}
 					<div className="mt-6">
-						<OfferCard
-							plan={planName as OfferPlan}
-							tone="default"
-							size="default"
-							price={offer?.price ?? ""}
-							period={offer?.period}
-							descriptionTitle={offer?.descriptionTitle ?? ""}
-							description={offer?.description ?? ""}
-							hideCta
-							logo={<PlanLogo plan={planName} />}
-						/>
+					<OfferCard
+						plan={planName as OfferPlan}
+						tone="default"
+						size="default"
+						price={displayPrice}
+						period={offer?.period}
+						descriptionTitle={offer?.descriptionTitle ?? ""}
+						description={offer?.description ?? ""}
+						hideCta
+						logo={<PlanLogo plan={planName} />}
+					/>
 					</div>
 
 					{/* "Voir le tableau de garanties" link — uses linkChevron variant */}

@@ -190,10 +190,10 @@ export async function fetchProductPricing(
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({
-			beneficiaries: beneficiaries.map(({ birthdate, relationship }) => ({
-				birthdate,
-				relationship,
-			})),
+		beneficiaries: beneficiaries.map(({ birthdate, relationship }) => ({
+			birthdate: birthdate || "01/01/2023",
+			relationship,
+		})),
 			startDate: formatStartDate(),
 			selectedPlan,
 		}),

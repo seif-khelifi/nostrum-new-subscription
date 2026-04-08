@@ -35,7 +35,7 @@ export function DevisVariantB() {
     "selectedOffer",
     null,
   );
-  const { setValue: setMoreOffer } = useSessionStorage<number | null>(
+  const { setValue: setMoreOffer, removeValue: clearMoreOffer } = useSessionStorage<number | null>(
     "moreOffer",
     null,
   );
@@ -62,6 +62,7 @@ export function DevisVariantB() {
   async function selectOffer(plan: string) {
     const planIndex = PLAN_INDEX[plan] ?? 0;
     setSelectedOffer(planIndex);
+    clearMoreOffer(); // clear stale "en savoir plus" so garanties shows the chosen plan
 
     setLoadingPlan(plan);
     try {

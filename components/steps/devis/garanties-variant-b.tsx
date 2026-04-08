@@ -72,7 +72,7 @@ export function GarantiesVariantB() {
   const handleChooseOffer = () => {
     setSelectedOffer(PLAN_INDEX[planName] ?? 0);
     setSelectedPrice(offer?.price ?? null);
-    goToStepById("sexe");
+    goToStepById("options");
   };
 
   /** Render all 5 category sections for a given tab key */

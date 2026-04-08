@@ -68,7 +68,7 @@ export function GarantiesVariantA() {
 
 	const handleChooseOffer = () => {
 		setSelectedOffer(PLAN_INDEX[planName] ?? 0);
-		goToStepById("sexe");
+		goToStepById("options");
 	};
 
 	return (

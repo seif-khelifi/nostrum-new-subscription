@@ -58,7 +58,7 @@ export function DevisVariantB() {
   const selectOffer = useCallback(
     (plan: string) => {
       setSelectedOffer(PLAN_INDEX[plan] ?? 0);
-      goToStepById("sexe");
+      goToStepById("garanties");
     },
     [setSelectedOffer, goToStepById],
   );

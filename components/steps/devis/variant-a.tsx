@@ -23,7 +23,6 @@ import { getPricing, priceForPlan, fetchProductPricing } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
 import { PricingErrorDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
-import garantiesData from "@/data/garanties-variant-a.json";
 
 /**
  * Devis Variant A — offer comparison layout.
@@ -99,7 +98,6 @@ export function DevisVariantA() {
   const recommended = offersData.offers.find((o) => o.tone === "recommended");
   const others = offersData.offers.filter((o) => o.tone !== "recommended");
   const compare = offersData.compareCard;
-  const garantiesCommon = garantiesData.common;
 
   return (
     <>
@@ -254,11 +252,8 @@ export function DevisVariantA() {
                         les avantages pour vous ?
                       </>
                     }
-                    subtitle={garantiesCommon.subtitleTemplate.replace(
-                      "{offer}",
-                      capitalize(recommended?.plan ?? "silver"),
-                    )}
-                    primaryLabel={garantiesCommon.seeGuaranteesLabel}
+                    subtitle={`Découvrez pourquoi ${capitalize(recommended?.plan ?? "silver")} est faite pour vous, en prenant soin de ce que les autres oublient.`}
+                    primaryLabel="Voir le tableau de garanties"
                     onPrimaryClick={() =>
                       showGaranties(recommended?.plan ?? "silver")
                     }

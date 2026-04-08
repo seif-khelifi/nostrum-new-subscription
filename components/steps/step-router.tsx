@@ -32,7 +32,6 @@ import {
   DevisVariantA,
   DevisVariantB,
   GarantiesVariantA,
-  GarantiesVariantB,
   ComparateurVariantA,
   ComparateurVariantB,
   ComparateurWelcomeVariantA,
@@ -53,12 +52,11 @@ function DevisStep() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Variant-aware garanties step                                      */
+/*  Garanties step — single component, variant-driven via useStepTexts */
 /* ------------------------------------------------------------------ */
 
 function GarantiesStep() {
-  const { devisVariant } = useStepper();
-  return devisVariant === "b" ? <GarantiesVariantB /> : <GarantiesVariantA />;
+  return <GarantiesVariantA />;
 }
 
 /* ------------------------------------------------------------------ */

@@ -128,7 +128,11 @@ export const nousSommesSchema = z.object({
   familyCount: z.coerce
     .number({ error: "Veuillez entrer un nombre" })
     .int("Veuillez entrer un nombre entier")
-    .min(2, "Le nombre minimum est de 2 personnes"),
+    .min(2, "Le nombre minimum est de 2 personnes")
+    .max(
+      6,
+      "Notre couverture s'étend jusqu'à un maximum de 6 ( toi, ton conjoint et 4 enfants )",
+    ),
 });
 export type NousSommesFormValues = z.infer<typeof nousSommesSchema>;
 

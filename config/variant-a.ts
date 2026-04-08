@@ -92,7 +92,12 @@ export const variantA: VariantConfig = {
     // "Seulement moi" → skip family steps, jump to santé
     { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
     // "Mon conjoint(e) et moi" → skip nousSommes (familyCount is hard-set to 2), jump to commenceParQui
-    { from: "proteger", field: "proteger", value: "conjoint_et_moi", target: "commenceParQui" },
+    {
+      from: "proteger",
+      field: "proteger",
+      value: "conjoint_et_moi",
+      target: "commenceParQui",
+    },
     // "Mon enfant" → skip dateBirthConjoint, jump to santé
     {
       from: "commenceParQui",
@@ -359,6 +364,101 @@ export const variantA: VariantConfig = {
         imageSrc: "/alertBanner/girl.svg",
         imageSrcHorizontal: "/alertBanner/girl-hor.svg",
         imageAlt: "Girl",
+      },
+    },
+
+    /* ── Garanties ── */
+
+    garanties: {
+      title: "Et concrètement, les avantages pour vous ?",
+      extra: {
+        subtitleTemplate:
+          "Découvrez pourquoi {offer} est faite pour vous, en prenant soin de ce que les autres oublient.",
+        seeGuaranteesLabel: "Voir le tableau de garanties",
+        ctaTemplate: "Je choisis la formule {offer}",
+        offerColors: {
+          decouverte: "#F3E5FA",
+          bronze: "#FFF7E8",
+          silver: "#F4F3FA",
+          gold: "#FEFFF4",
+        },
+        accordion: [
+          {
+            value: "soins-courants",
+            title: "Ils prennent soin de vous",
+            description:
+              "Ostéo, médecines douces, compléments alimentaires. Ce que le Silver offre en plus :",
+            colorScheme: "purple",
+            cards: [
+              { title: "Téléconsulta tion médecin", description: "6/ an" },
+              {
+                title: "Chat médical psy",
+                description: "7j/7 de 8h à 22h",
+              },
+            ],
+            detailCard: {
+              highlightText:
+                "<b>1 consultation psy offerte </b> pour 3 consultations réalisées ",
+              ctaLabel: "Mes remboursements bien-être",
+              infoTitle:
+                "Vous choisirez ensuite si vous préférez échanger par email, WhatsApp ou téléphone.",
+              infoText:
+                "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+              rightCard: {
+                title: "Psy",
+                description: "5 séances/an pour 30€",
+              },
+            },
+          },
+          {
+            value: "dentaire-optique",
+            title: "Ils couvrent vos imprévus santé",
+            description:
+              "Meilleur remboursement des frais d'optique, dentaires et médicaux:",
+            colorScheme: "warm",
+            cards: [
+              { title: "Optique", description: "100 %" },
+              { title: "Dentaire", description: "100 %" },
+              {
+                title: "Médecins & téléconsultations",
+                description: "100 %",
+              },
+              {
+                title: "Hospitalisation",
+                description: "Remboursement total",
+              },
+            ],
+            ctaLabel: "Voir les détails dentaire & optique",
+          },
+          {
+            value: "hospitalisation",
+            title: "Des avantages ",
+            description: "Pro",
+            colorScheme: "blue",
+            cards: [
+              {
+                title: "Club Avantages",
+                description:
+                  "-10% à -50% (vacances, ciné, sport, shopping et bien plus)",
+              },
+              {
+                title: "Téléconsulta tion",
+                description:
+                  "En visio ou par téléphone, assurée par un médecin, disponible 24h/24h et 7j/7 partout dans le monde.",
+              },
+              {
+                title: "Soins à l'étranger",
+                description:
+                  "Vos frais médicaux à l'étranger sont pris en charge pendant un séjour temporaire de moins 3 mois.",
+              },
+              {
+                title: "Visible patient",
+                description:
+                  "La modélisation des organes en 3D à partir d'un Scanner ou d'une IRM inclus dans la formule",
+              },
+            ],
+          },
+        ],
       },
     },
   },

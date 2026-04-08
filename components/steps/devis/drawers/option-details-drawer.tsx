@@ -83,7 +83,7 @@ export function OptionDetailsDrawer({
 				<DrawerFooter className="px-5 pb-6 pt-4">
 					<Button
 						variant={isSelected ? "outline" : "ctaPurple"}
-						className={`w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold ${isSelected ? 'border-[#490076] text-[#490076]' : ''}`}
+						className={`w-full rounded-[24px] min-h-[52px] h-auto py-3 px-6 text-sm font-semibold ${isSelected ? 'border-[#490076] text-[#490076]' : ''}`}
 						onClick={handleAddOrRemove}
 					>
 						{isSelected ? "Retirer cette protection" : "Ajouter cette protection"}
@@ -92,7 +92,7 @@ export function OptionDetailsDrawer({
 					<DrawerClose asChild>
 						<Button
 							variant="ghost"
-							className="w-full rounded-[24px] h-[48px] text-[#490076]"
+							className="w-full rounded-[24px] min-h-[48px] h-auto py-3 text-[#490076]"
 						>
 							Annuler
 						</Button>

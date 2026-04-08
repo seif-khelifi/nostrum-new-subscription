@@ -6,6 +6,7 @@ import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { useStepper } from "@/context/StepperContext"
 
+
 export interface StepNavbarVariantBProps {
 	className?: string
 }
@@ -30,7 +31,7 @@ export function StepNavbarVariantB({ className }: StepNavbarVariantBProps) {
 	return (
 		<header
 			className={cn(
-				"flex items-center gap-4 bg-background px-12 pt-6 pb-3 h-auto",
+				"flex items-center gap-6 bg-background px-12 pt-6 pb-3 h-auto",
 				className,
 			)}
 		>
@@ -40,27 +41,22 @@ export function StepNavbarVariantB({ className }: StepNavbarVariantBProps) {
 				aria-label="Retour"
 				disabled={isFirstStep}
 				onClick={back}
-				className="h-10 w-12 disabled:opacity-40 disabled:pointer-events-none"
+				className="h-10 w-12 shrink-0 disabled:opacity-40 disabled:pointer-events-none"
 			>
 				<ArrowLeft className="h-4 w-4 text-[#1D1B20]" />
 			</Button>
 
 			{/* Progress bar */}
-			<div className="flex-1 px-8">
+			<div className="min-w-0 flex-1 px-4">
 				<Progress value={progress} />
 			</div>
 
 			{/* CTA: "Parler à un conseiller" */}
-			<Button variant="callToAdvisor" asChild>
+			<Button variant="callToAdvisor" size="none" asChild>
 				<a href="tel:+33000000000">
 					<span>Parler à un conseiller</span>
-					<span
-						className={cn(
-							"inline-flex h-8 w-8 items-center justify-center rounded-full",
-							"bg-[#CE99FF]",
-						)}
-					>
-						<Phone className="h-3.5 w-3.5 text-[#490076]" />
+					<span className="inline-flex h-8 items-center justify-center rounded-full bg-[#CE99FF] px-3">
+						<Phone className="size-3.5 text-white" />
 					</span>
 				</a>
 			</Button>

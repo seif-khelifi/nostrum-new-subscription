@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useState } from "react";
 import { LayoutGrid } from "lucide-react";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
@@ -47,58 +47,42 @@ export function DevisVariantB() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  /** Calculated prices based on beneficiaries in session storage. */
-  const prices = useMemo(
-    () => getPricing(session.beneficiaries),
-    [session.beneficiaries],
-  );
-
-  /** Resolve the display price for a given plan id (e.g. "silver" → "60,26€"). */
-  const offerPrice = useCallback(
-    (planId: string) => priceForPlan(prices, planId),
-    [prices],
-  );
+  // Local pricing calculated from the beneficiaries in session (display only).
+  const prices = getPricing(session.beneficiaries);
 
   /**
-   * Call the pricing API, persist the result in session storage,
-   * then navigate to the garanties step.
+   * User chose an offer ("Je choisis la formule X").
+   * 1. Save selected plan index to sessionStorage.
+   * 2. Call the pricing API to get the product id + prorated price.
+   * 3. Persist the full pricing result into the main session.
+   * 4. Navigate to the garanties step.
    */
-  const selectOffer = useCallback(
-    async (plan: string) => {
-      const planIndex = PLAN_INDEX[plan] ?? 0;
-      setSelectedOffer(planIndex);
+  async function selectOffer(plan: string) {
+    const planIndex = PLAN_INDEX[plan] ?? 0;
+    setSelectedOffer(planIndex);
 
-      if (session.beneficiaries.length === 0) {
-        goToStepById("garanties");
-        return;
-      }
+    setIsLoading(true);
+    try {
+      const patch = await fetchProductPricing(
+        session.beneficiaries,
+        planIndex,
+        prices,
+      );
+      setSession({ ...session, ...patch });
+    } catch (err) {
+      console.error("[devis] pricing fetch failed", err);
+    } finally {
+      setIsLoading(false);
+    }
 
-      setIsLoading(true);
-      try {
-        const patch = await fetchProductPricing(
-          session.beneficiaries,
-          planIndex,
-          prices,
-        );
-        setSession({ ...session, ...patch });
-      } catch (err) {
-        console.error("[devis] pricing fetch failed", err);
-      } finally {
-        setIsLoading(false);
-      }
+    goToStepById("garanties");
+  }
 
-      goToStepById("garanties");
-    },
-    [setSelectedOffer, goToStepById, session, prices, setSession],
-  );
-
-  const showGaranties = useCallback(
-    (plan: string) => {
-      setMoreOffer(PLAN_INDEX[plan] ?? 0);
-      goToStepById("garanties");
-    },
-    [setMoreOffer, goToStepById],
-  );
+  /** Navigate to garanties to browse details — no API call, no session write. */
+  function showGaranties(plan: string) {
+    setMoreOffer(PLAN_INDEX[plan] ?? 0);
+    goToStepById("garanties");
+  }
 
   const recommended = offersData.offers.find((o) => o.tone === "recommended");
   const others = offersData.offers.filter((o) => o.tone !== "recommended");
@@ -134,7 +118,7 @@ export function DevisVariantB() {
                 plan={recommended.plan as OfferPlan}
                 tone="recommended"
                 size="default"
-                price={offerPrice(recommended.plan)}
+                price={priceForPlan(prices, recommended.plan)}
                 period={recommended.period}
                 badgeTitle={recommended.badgeTitle ?? undefined}
                 ctaLabel={`Je choisis la formule ${capitalize(recommended.plan)}`}
@@ -168,7 +152,7 @@ export function DevisVariantB() {
                 plan={offer.plan as OfferPlan}
                 tone="default"
                 size="default"
-                price={offerPrice(offer.plan)}
+                price={priceForPlan(prices, offer.plan)}
                 period={offer.period}
                 ctaLabel={`Je choisis la formule ${capitalize(offer.plan)}`}
                 descriptionTitle={offer.descriptionTitle}
@@ -206,7 +190,7 @@ export function DevisVariantB() {
                 plan={recommended.plan as OfferPlan}
                 tone="recommended"
                 size="sm"
-                price={offerPrice(recommended.plan)}
+                price={priceForPlan(prices, recommended.plan)}
                 period={recommended.period}
                 badgeTitle={recommended.badgeTitle ?? undefined}
                 ctaLabel="Choisir cette offre"
@@ -249,7 +233,7 @@ export function DevisVariantB() {
                     plan={offer.plan as OfferPlan}
                     tone="default"
                     size="default"
-                    price={offerPrice(offer.plan)}
+                    price={priceForPlan(prices, offer.plan)}
                     period={offer.period}
                     ctaLabel={`Je choisis la formule ${capitalize(offer.plan)}`}
                     descriptionTitle={offer.descriptionTitle}

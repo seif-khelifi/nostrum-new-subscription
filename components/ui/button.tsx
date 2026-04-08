@@ -1,12 +1,13 @@
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { Slot } from "radix-ui";
+import { Spinner } from "@/components/ui/spinner";
 
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   [
-    "group/button inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap",
+    "group/button inline-flex items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium",
     "transition-all duration-200 ease-out outline-none select-none",
     "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
     "active:translate-y-px",
@@ -18,16 +19,16 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default: "whitespace-nowrap shrink-0 bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         outline:
-          "border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
+          "whitespace-nowrap shrink-0 border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+          "whitespace-nowrap shrink-0 bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
         ghost:
-          "hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
+          "whitespace-nowrap shrink-0 hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:hover:bg-muted/50",
         destructive:
-          "bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
-        link: "text-primary underline-offset-4 hover:underline",
+          "whitespace-nowrap shrink-0 bg-destructive/10 text-destructive hover:bg-destructive/20 focus-visible:border-destructive/40 focus-visible:ring-destructive/20 dark:bg-destructive/20 dark:hover:bg-destructive/30 dark:focus-visible:ring-destructive/40",
+        link: "whitespace-nowrap shrink-0 text-primary underline-offset-4 hover:underline",
 
         linkChevron: [
           "h-auto px-0 py-0 border-transparent bg-transparent shadow-none",
@@ -97,9 +98,10 @@ const buttonVariants = cva(
         ].join(" "),
 
         callToAdvisor: [
-          "inline-flex items-center gap-2 rounded-full",
-          "bg-[#490076] px-4 py-2.5",
-          "text-sm font-medium text-white whitespace-nowrap",
+          "h-12 shrink-0 gap-3 rounded-full",
+          "bg-[#490076] pl-6 pr-1.5",
+          "text-sm font-semibold text-white whitespace-nowrap",
+          "shadow-none border-transparent",
           "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
         ].join(" "),
 
@@ -134,7 +136,7 @@ const buttonVariants = cva(
         ].join(" "),
 
         revenirOffres: [
-          "h-[52px] w-full rounded-[24px]",
+          "min-h-[52px] h-auto py-3 w-full rounded-[24px]",
           "bg-[#1D1B201A] text-black text-sm font-semibold",
           "hover:bg-[#1D1B202A] transition-colors",
           "flex items-center justify-center gap-2",
@@ -155,6 +157,7 @@ const buttonVariants = cva(
         "icon-lg": "size-9",
         cta: "h-10 sm:h-12 gap-2 px-5 sm:px-6",
         select: "h-10 sm:h-12 gap-2 px-4 sm:px-5",
+        none: "",
       },
 
       selected: {
@@ -199,11 +202,15 @@ function Button({
   variant = "default",
   size = "default",
   selected = false,
+  loading = false,
   asChild = false,
+  disabled,
+  children,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
     asChild?: boolean;
+    loading?: boolean;
   }) {
   const Comp = asChild ? Slot.Root : "button";
 
@@ -212,9 +219,19 @@ function Button({
       data-slot="button"
       data-variant={variant}
       data-size={size}
+      disabled={disabled || loading}
       className={cn(buttonVariants({ variant, size, selected, className }))}
       {...props}
-    />
+    >
+      {loading ? (
+        <>
+          <Spinner />
+          <span className="sr-only">Loading</span>
+        </>
+      ) : (
+        children
+      )}
+    </Comp>
   );
 }
 

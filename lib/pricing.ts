@@ -1,5 +1,5 @@
 import type { PlanPrices, VitaBeneficiary, VitaSessionStorage } from "@/types/subscription";
-import { parseBirthdate } from "@/lib/utils";
+import { parseBirthdate, parsePrice } from "@/lib/utils";
 import pricingTable from "@/data/pricing.json";
 
 /* ------------------------------------------------------------------ */
@@ -161,6 +161,21 @@ export function getProratedPrice(totalPriceByPeriod: string[]): number {
 	return Number(raw.replace(",", "."));
 }
 
+/** The PlanPrices keys in plan-index order (0=Découverte … 3=Gold). */
+const PLAN_KEYS: (keyof PlanPrices)[] = ["Découverte", "Bronze", "Silver", "Gold"];
+
+/**
+ * Convert PlanPrices from display format ("54,23€") to session format ("54.23").
+ */
+function toSessionPlans(prices: PlanPrices): PlanPrices {
+	return {
+		"Découverte": String(parsePrice(prices["Découverte"])),
+		Bronze: String(parsePrice(prices.Bronze)),
+		Silver: String(parsePrice(prices.Silver)),
+		Gold: String(parsePrice(prices.Gold)),
+	};
+}
+
 /**
  * Call the product-pricing-v3 API for a given plan and return the
  * session patch (plans, TV3price, prorated_price, selectedPlan,
@@ -189,10 +204,13 @@ export async function fetchProductPricing(
 
 	const result = (data as ProductPricingResult[])[0];
 
-	// Parse the TV3 price from European format → dot notation (e.g. "92,04" → "92.04")
-	const tv3Price = result.price.replace(",", ".");
-
 	const proratedPrice = getProratedPrice(result.total_price_by_period);
+
+	// Convert plans from display format ("54,23€") to session format ("54.23")
+	const sessionPlans = toSessionPlans(plans);
+
+	// TV3price = the selected plan's price in dot notation
+	const tv3Price = sessionPlans[PLAN_KEYS[selectedPlan]];
 
 	// Assign productId to all beneficiaries
 	const updatedBeneficiaries = beneficiaries.map((b) => ({
@@ -202,7 +220,7 @@ export async function fetchProductPricing(
 
 	return {
 		beneficiaries: updatedBeneficiaries,
-		plans,
+		plans: sessionPlans,
 		TV3price: tv3Price,
 		prorated_price: proratedPrice,
 		selectedPlan,

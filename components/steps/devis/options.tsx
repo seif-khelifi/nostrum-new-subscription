@@ -124,7 +124,7 @@ export function OptionsStep() {
 			<Button
 				variant="ctaPurpleDark"
 				size="cta"
-				className="w-full rounded-[20px] h-[52px] text-sm font-semibold lg:h-12 lg:px-6 lg:text-[0.95rem]"
+				className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-[clamp(0.8rem,2.5vw,0.95rem)] font-semibold lg:min-h-12 lg:px-6"
 				onClick={next}
 			>
 				Continuer

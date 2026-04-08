@@ -99,7 +99,7 @@ export function GarantiesCompareDrawer({
 				<DrawerFooter className="px-5 pb-6">
 					<Button
 						variant="ctaPurple"
-						className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold"
+						className="w-full rounded-[24px] min-h-[52px] h-auto py-3 px-6 text-sm font-semibold"
 						disabled={!hasSelection}
 						onClick={handleValidate}
 					>
@@ -109,7 +109,7 @@ export function GarantiesCompareDrawer({
 					<DrawerClose asChild>
 						<Button
 							variant="outline"
-							className="w-full rounded-[24px] h-[48px]"
+							className="w-full rounded-[24px] min-h-[48px] h-auto py-3"
 						>
 							Annuler
 						</Button>

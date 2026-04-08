@@ -292,7 +292,7 @@ function OfferInnerCard({
           <Button
             variant="ctaPurpleDark"
             size="cta"
-            className="w-full rounded-[20px] h-[52px] text-sm font-semibold lg:h-12 lg:px-6 lg:text-[0.95rem]"
+            className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-[clamp(0.8rem,2.5vw,0.95rem)] font-semibold text-center leading-snug lg:min-h-12 lg:py-2.5 lg:px-4 lg:text-[clamp(0.75rem,1.1vw,0.9rem)]"
             onClick={onCtaClick}
           >
             {ctaLabel}
@@ -404,9 +404,9 @@ function CompareCard({
           variant="default"
           className={cn(
             "rounded-[20px] border-0 bg-white",
-            "h-[48px] text-sm font-semibold whitespace-nowrap",
+            "min-h-[48px] h-auto py-3 text-sm font-semibold",
             "shadow-none hover:bg-white/90",
-            "lg:h-11",
+            "lg:min-h-11",
             isDark ? "text-black" : "text-[#490076]",
             isInline ? "shrink-0 px-6" : "w-full",
             buttonClassName

@@ -240,7 +240,7 @@ export function GarantiesVariantB() {
         <div className="pb-8 pt-4">
           <Button
             variant="ctaPurpleAccent"
-            className="w-full rounded-[24px] h-[52px] px-6 text-sm font-semibold"
+            className="w-full rounded-[24px] min-h-[52px] h-auto py-3 px-6 text-sm font-semibold"
             onClick={handleChooseOffer}
           >
             {common.ctaTemplate.replace("{offer}", offerLabel)}
@@ -275,7 +275,7 @@ export function GarantiesVariantB() {
                 </Button>
                 <Button
                   variant="ctaPurple"
-                  className="w-full h-[52px] rounded-[24px] px-6 text-sm font-semibold"
+                  className="w-full min-h-[52px] h-auto py-3 rounded-[24px] px-6 text-sm font-semibold"
                   onClick={handleChooseOffer}
                 >
                   Choisir cette offre

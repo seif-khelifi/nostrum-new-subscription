@@ -5,33 +5,6 @@ import type { VariantConfig, VariantKey, StepTexts, StepId } from "@/config";
 import { resolveVariant } from "@/config";
 
 /* ------------------------------------------------------------------ */
-/*  Variant assignment (session-sticky)                               */
-/* ------------------------------------------------------------------ */
-
-const VARIANT_STORAGE_KEY = "nostrum_variant";
-
-/**
- * Get or assign a random variant for this session.
- * Once assigned, the same variant is returned for the entire session.
- *
- * This replaces the old `getOrAssignVariant` in StepperContext —
- * one variant now controls everything (pages, texts, banners, step order).
- */
-function getOrAssignVariant(): VariantKey {
-  if (typeof window === "undefined") return "a";
-  try {
-    const stored = sessionStorage.getItem(VARIANT_STORAGE_KEY);
-    // if (stored === "a" || stored === "b") return stored;
-    const variant: VariantKey = Math.random() < 0.9 ? "a" : "b";
-    sessionStorage.setItem(VARIANT_STORAGE_KEY, variant);
-    console.log("[variant] Assigned variant:", variant);
-    return variant;
-  } catch {
-    return "a";
-  }
-}
-
-/* ------------------------------------------------------------------ */
 /*  Context                                                           */
 /* ------------------------------------------------------------------ */
 
@@ -43,16 +16,22 @@ const VariantContext = createContext<VariantConfig | null>(null);
 
 interface VariantProviderProps {
   children: ReactNode;
+  /**
+   * The variant key resolved from the cookie (set by middleware).
+   * Both server and client receive the same value, preventing hydration mismatches.
+   */
+  variant?: VariantKey;
   /** Force a specific variant (useful for testing / Storybook). */
   forceVariant?: VariantKey;
 }
 
 export function VariantProvider({
   children,
+  variant,
   forceVariant,
 }: VariantProviderProps) {
   const [config] = useState<VariantConfig>(() =>
-    resolveVariant(forceVariant ?? getOrAssignVariant()),
+    resolveVariant(forceVariant ?? variant ?? "a"),
   );
 
   return (

@@ -5,10 +5,16 @@ import { VariantProvider } from "@/context/VariantContext";
 import { StepperProvider } from "@/context/StepperContext";
 import { SituationFormProvider } from "@/context/SituationFormContext";
 import { SanteFormProvider } from "@/context/SanteFormContext";
+import type { VariantKey } from "@/config";
 
-export function Providers({ children }: { children: ReactNode }) {
+interface ProvidersProps {
+  children: ReactNode;
+  variant?: VariantKey;
+}
+
+export function Providers({ children, variant }: ProvidersProps) {
   return (
-    <VariantProvider>
+    <VariantProvider variant={variant}>
       <StepperProvider>
         <SituationFormProvider>
           <SanteFormProvider>{children}</SanteFormProvider>

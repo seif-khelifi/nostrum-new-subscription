@@ -228,8 +228,10 @@ function AlertBanner({
   className,
   visualClassName,
   contentClassName,
+  // Destructure non-DOM props from BannerConfig so they don't leak to the DOM
+  imageSrcHorizontal: _imageSrcHorizontal,
   ...props
-}: AlertBannerProps) {
+}: AlertBannerProps & { imageSrcHorizontal?: string }) {
   const resolvedIcon =
     icon === true ? DEFAULT_ALERT_ICON : icon === false ? undefined : icon;
 

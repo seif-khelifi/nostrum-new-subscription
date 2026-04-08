@@ -3,7 +3,6 @@
     {
       "plan": "decouverte",
       "tone": "default",
-      "price": "32,10€",
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
       "descriptionTitle": "🌿 Pour démarrer tranquille",
@@ -29,7 +28,6 @@
     {
       "plan": "bronze",
       "tone": "default",
-      "price": "42,50€",
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
       "descriptionTitle": "🥉 L'essentiel sans superflu",
@@ -55,7 +53,6 @@
     {
       "plan": "silver",
       "tone": "recommended",
-      "price": "54,23€",
       "period": "/mois",
       "badgeTitle": "Recommandé pour vous",
       "ctaLabel": "Choisir cette offre",
@@ -82,7 +79,6 @@
     {
       "plan": "gold",
       "tone": "default",
-      "price": "72,80€",
       "period": "/mois",
       "ctaLabel": "Choisir cette offre",
       "descriptionTitle": "🥇 Le confort premium",

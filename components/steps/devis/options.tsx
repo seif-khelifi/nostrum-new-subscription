@@ -10,7 +10,7 @@ import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-drawer";
 
-const optionsData = optionsJson as Record<string, OptionDetails[]>;
+const optionsData = optionsJson as OptionDetails[];
 
 /* ------------------------------------------------------------------ */
 /*  Options Page Component                                           */
@@ -36,9 +36,7 @@ export function OptionsStep() {
 		return offersData.offers[idx] || offersData.offers[0];
 	}, [selectedOfferIndex]);
 
-	const availableOptions = useMemo(() => {
-		return optionsData[baseOffer.plan] || [];
-	}, [baseOffer]);
+	const availableOptions = optionsData;
 
 	// Compute total price
 	const totalPrice = useMemo(() => {
@@ -137,7 +135,7 @@ export function OptionsStep() {
 			{/* ─── Mobile layout (<lg) ─── */}
 			<div className="flex flex-col h-full lg:hidden">
 				{/* Mobile hero section bg extension similar to DevisVariantA */}
-				<div className="-mx-4 -mt-4 bg-[#F3E5FA] px-4 pt-6 pb-6 sm:-mx-6 sm:-mt-6 sm:px-6">
+				<div className="-mx-4 -mt-4  px-4 pt-6 pb-6 sm:-mx-6 sm:-mt-6 sm:px-6">
 					<h1 className="text-4xl font-bold leading-tight text-[#290E67]">
 						Renforcez votre couverture
 					</h1>

@@ -16,7 +16,7 @@ export interface OptionDetails {
 	title: string;
 	price: string;
 	description: string;
-	detailedDescription: string;
+	detailedDescription?: string;
 }
 
 interface OptionDetailsDrawerProps {

@@ -21,6 +21,7 @@ import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { getPricing, priceForPlan, fetchProductPricing } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
+import { PricingErrorDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
 import garantiesData from "@/data/garanties-variant-a.json";
 
@@ -54,7 +55,8 @@ export function DevisVariantA() {
       selectedPlan: null,
     });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [errorOpen, setErrorOpen] = useState(false);
 
   // Local pricing calculated from the beneficiaries in session (display only).
   const prices = getPricing(session.beneficiaries);
@@ -64,13 +66,13 @@ export function DevisVariantA() {
    * 1. Save selected plan index to sessionStorage.
    * 2. Call the pricing API to get the product id + prorated price.
    * 3. Persist the full pricing result into the main session.
-   * 4. Navigate to the garanties step.
+   * 4. Navigate to the garanties step only on success.
    */
   async function selectOffer(plan: string) {
     const planIndex = PLAN_INDEX[plan] ?? 0;
     setSelectedOffer(planIndex);
 
-    setIsLoading(true);
+    setLoadingPlan(plan);
     try {
       const patch = await fetchProductPricing(
         session.beneficiaries,
@@ -78,13 +80,13 @@ export function DevisVariantA() {
         prices,
       );
       setSession({ ...session, ...patch });
+      goToStepById("garanties");
     } catch (err) {
       console.error("[devis] pricing fetch failed", err);
+      setErrorOpen(true);
     } finally {
-      setIsLoading(false);
+      setLoadingPlan(null);
     }
-
-    goToStepById("garanties");
   }
 
   /** Navigate to garanties to browse details — no API call, no session write. */
@@ -137,6 +139,7 @@ export function DevisVariantA() {
                 moreLabel={`En savoir plus sur ma formule ${capitalize(recommended.plan)}`}
                 onMoreClick={() => showGaranties(recommended.plan)}
                 onCtaClick={() => selectOffer(recommended.plan)}
+                loading={loadingPlan === recommended.plan}
                 logo={<PlanLogo plan={recommended.plan} />}
               />
             </div>
@@ -168,6 +171,7 @@ export function DevisVariantA() {
                 descriptionTitle={offer.descriptionTitle}
                 description={offer.description}
                 onCtaClick={() => selectOffer(offer.plan)}
+                loading={loadingPlan === offer.plan}
                 logo={<PlanLogo plan={offer.plan} />}
               />
             </OfferCardMoreFooter>
@@ -221,6 +225,7 @@ export function DevisVariantA() {
                       moreLabel={`En savoir plus sur ma formule ${capitalize(recommended.plan)}`}
                       onMoreClick={() => showGaranties(recommended.plan)}
                       onCtaClick={() => selectOffer(recommended.plan)}
+                      loading={loadingPlan === recommended.plan}
                       logo={<PlanLogo plan={recommended.plan} />}
                     />
                   )}
@@ -326,6 +331,7 @@ export function DevisVariantA() {
                           descriptionTitle={offer.descriptionTitle}
                           description={offer.description}
                           onCtaClick={() => selectOffer(offer.plan)}
+                          loading={loadingPlan === offer.plan}
                           logo={<PlanLogo plan={offer.plan} />}
                           footer={
                             offer.advantages ? (
@@ -346,6 +352,8 @@ export function DevisVariantA() {
           </TabsContent>
         </Tabs>
       </div>
+
+      <PricingErrorDrawer open={errorOpen} onOpenChange={setErrorOpen} />
     </>
   );
 }

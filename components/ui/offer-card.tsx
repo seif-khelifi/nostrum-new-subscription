@@ -90,6 +90,8 @@ export interface OfferCardProps
   onMoreClick?: () => void
   /** Hide the CTA button — use for summary/preview mode */
   hideCta?: boolean
+  /** Show a loading spinner on the CTA button and disable it */
+  loading?: boolean
   /** Optional extra content rendered inside the white card, below the description */
   footer?: React.ReactNode
 }
@@ -116,6 +118,7 @@ function OfferCard({
   moreLabel = "En savoir plus",
   onMoreClick,
   hideCta = false,
+  loading = false,
   footer,
   ...props
 }: OfferCardProps) {
@@ -137,6 +140,7 @@ function OfferCard({
     ctaLabel,
     onCtaClick,
     hideCta,
+    loading,
     footer,
   }
 
@@ -212,6 +216,8 @@ type OfferInnerCardProps = {
   onCtaClick?: () => void
   /** Hide the CTA button — use for summary/preview mode */
   hideCta?: boolean
+  /** Show a loading spinner on the CTA button and disable it */
+  loading?: boolean
   /** Optional extra content rendered below the description */
   footer?: React.ReactNode
 }
@@ -228,6 +234,7 @@ function OfferInnerCard({
   ctaLabel,
   onCtaClick,
   hideCta = false,
+  loading = false,
   footer,
 }: OfferInnerCardProps) {
   const isSm = size === "sm"
@@ -294,6 +301,7 @@ function OfferInnerCard({
             size="cta"
             className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-[clamp(0.8rem,2.5vw,0.95rem)] font-semibold text-center leading-snug lg:min-h-12 lg:py-2.5 lg:px-4 lg:text-[clamp(0.75rem,1.1vw,0.9rem)]"
             onClick={onCtaClick}
+            loading={loading}
           >
             {ctaLabel}
           </Button>

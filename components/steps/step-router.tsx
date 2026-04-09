@@ -35,7 +35,8 @@ import {
   ComparateurVariantA,
   ComparateurVariantB,
   ComparateurWelcomeVariantA,
-  OptionsStep,
+  OptionsVariantA,
+  OptionsVariantB,
 } from "./devis";
 
 /* ------------------------------------------------------------------ */
@@ -83,6 +84,15 @@ function ComparateurStep() {
   ) : (
     <ComparateurVariantA />
   );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware options step                                         */
+/* ------------------------------------------------------------------ */
+
+function OptionsStep() {
+  const { devisVariant } = useStepper();
+  return devisVariant === "b" ? <OptionsVariantB /> : <OptionsVariantA />;
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,9 +1,15 @@
 "use client";
 
+import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useVariant } from "@/context/VariantContext";
+import { useSessionStorage } from "@/hooks/use-session-storage";
+import { parsePrice, formatPriceLabel } from "@/lib/utils";
+import { TotalSummary } from "@/components/ui/total-summary";
+import offersData from "@/data/offers.json";
+import optionsJson from "@/data/options.json";
 
 export interface DesktopSidebarRightProps {
   className?: string;
@@ -24,10 +30,11 @@ export interface DesktopSidebarRightProps {
  * is hidden when the left sidebar collapses (below lg breakpoint).
  */
 export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
-  const { currentStepDef } = useStepper();
+  const { currentStepDef, next } = useStepper();
   const { texts } = useVariant();
 
   const stepBanner = texts[currentStepDef.id]?.banner;
+  const isOptionsStep = currentStepDef.id === "options";
 
   return (
     <aside
@@ -67,6 +74,49 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
           imageFill={!!(stepBanner.imageSrcHorizontal ?? stepBanner.imageSrc)}
         />
       )}
+
+      {/* Options step — total summary card */}
+      {isOptionsStep && <OptionsTotalSummaryCard onContinue={next} />}
     </aside>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Options total summary — reads from session, renders in sidebar    */
+/* ------------------------------------------------------------------ */
+
+function OptionsTotalSummaryCard({ onContinue }: { onContinue: () => void }) {
+  const { value: selectedOfferIndex } = useSessionStorage<number | null>(
+    "selectedOffer",
+    0,
+  );
+  const { value: selectedOptions = [] } = useSessionStorage<string[]>(
+    "selectedOptions",
+    [],
+  );
+
+  const baseOffer = useMemo(() => {
+    const idx = selectedOfferIndex ?? 0;
+    return offersData.offers[idx] || offersData.offers[0];
+  }, [selectedOfferIndex]);
+
+  const totalPrice = useMemo(() => {
+    let total = parsePrice(baseOffer.price);
+    (optionsJson as Array<{ id: string; price: string }>).forEach((opt) => {
+      if (selectedOptions.includes(opt.id)) {
+        total += parsePrice(opt.price);
+      }
+    });
+    return formatPriceLabel(total);
+  }, [baseOffer.price, selectedOptions]);
+
+  return (
+    <TotalSummary
+      card={false}
+      planName={baseOffer.plan}
+      totalPrice={totalPrice}
+      optionCount={selectedOptions.length}
+      onContinue={onContinue}
+    />
   );
 }

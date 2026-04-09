@@ -4,8 +4,8 @@ import { useMemo, useState } from "react";
 import { parsePrice, formatPriceLabel } from "@/lib/utils";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
-import { Button } from "@/components/ui/button";
 import { OptionCard } from "@/components/ui/option-card";
+import { TotalSummary } from "@/components/ui/total-summary";
 import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-drawer";
@@ -13,10 +13,10 @@ import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-dra
 const optionsData = optionsJson as OptionDetails[];
 
 /* ------------------------------------------------------------------ */
-/*  Options Page Component                                           */
+/*  Options Page – Variant B                                         */
 /* ------------------------------------------------------------------ */
 
-export function OptionsStep() {
+export function OptionsVariantB() {
 	const { next } = useStepper();
 	const { value: selectedOfferIndex } = useSessionStorage<number | null>(
 		"selectedOffer",
@@ -89,47 +89,6 @@ export function OptionsStep() {
 		</>
 	);
 
-	const renderTotalSummary = (isDesktop: boolean = false) => (
-		<div className={isDesktop ? "w-full" : "max-w-lg mx-auto w-full"}>
-			{/* Plan info replicating offer-card */}
-			<div className="flex items-start justify-between gap-3 mb-4">
-				<div className="min-w-0">
-					<div className="capitalize font-bold text-[#490076] text-[1.1rem] leading-none">
-						{baseOffer.plan}
-					</div>
-					<div className="mt-1 flex items-center gap-2">
-						<div className="flex items-end gap-0.5">
-							<span className="font-bold tracking-tight text-[#9000E3] text-[2rem] leading-none">
-								{totalPrice}
-							</span>
-							<span className="font-semibold text-[#490076] mb-0.5 text-sm">
-								/mois
-							</span>
-						</div>
-						{/* Pill for options */}
-						{selectedOptions.length > 0 && (
-							<div className="ml-2 flex items-center gap-1 bg-[#FBF4EA] px-3 py-1 rounded-full ring-1 ring-[#EADFF1]">
-								<span className="text-[#490076] text-sm font-semibold">
-									Options + {selectedOptions.length}
-								</span>
-							</div>
-						)}
-					</div>
-				</div>
-			</div>
-
-			{/* CTA Button matching OfferCard exact styling */}
-			<Button
-				variant="ctaPurpleDark"
-				size="cta"
-				className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-[clamp(0.8rem,2.5vw,0.95rem)] font-semibold lg:min-h-12 lg:px-6"
-				onClick={next}
-			>
-				Continuer
-			</Button>
-		</div>
-	);
-
 	return (
 		<>
 			{/* ─── Mobile layout (<lg) ─── */}
@@ -145,9 +104,16 @@ export function OptionsStep() {
 					{renderOptionCards()}
 				</div>
 
-				{/* Bottom Bar: Matches exact offer card layout */}
+				{/* Bottom Bar */}
 				<div className="fixed bottom-0 left-0 right-0 p-4 bg-white ring-1 ring-[#EADFF1] z-10">
-					{renderTotalSummary(false)}
+					<TotalSummary
+						planName={baseOffer.plan}
+						totalPrice={totalPrice}
+						optionCount={selectedOptions.length}
+						onContinue={next}
+						ctaLabel="Continuer"
+						className="max-w-lg mx-auto"
+					/>
 				</div>
 			</div>
 
@@ -155,28 +121,35 @@ export function OptionsStep() {
 			<div className="hidden lg:flex w-full bg-[#F6F4F0] min-h-screen">
 				<div className="grid grid-cols-12 gap-8 max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
 					{/* ── Left Column ── */}
-				<div className="lg:col-span-4 flex flex-col gap-6">
-					<div className="bg-[#F6F4F0] border-4 border-white rounded-[24px] overflow-hidden flex flex-col min-h-[500px]">
-						<div className="p-6 pt-8 flex-1">
-							<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight text-black mb-4">
-								Renforcez votre<br/>couverture
-							</h1>
-							<p className="text-[#1D1B20] text-[0.95rem] leading-relaxed mb-8">
-								Ajoutez des garanties de prévoyance ou une surcomplémentaire santé pour une protection plus complète.
-							</p>
-						</div>
+					<div className="lg:col-span-4 flex flex-col gap-6">
+						<div className="bg-[#F6F4F0] border-4 border-white rounded-[24px] overflow-hidden flex flex-col min-h-[500px]">
+							<div className="p-6 pt-8 flex-1">
+								<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight text-black mb-4">
+									Renforcez votre<br/>couverture
+								</h1>
+								<p className="text-[#1D1B20] text-[0.95rem] leading-relaxed mb-8">
+									Ajoutez des garanties de prévoyance ou une surcomplémentaire santé pour une protection plus complète.
+								</p>
+							</div>
 
-						<div className="mt-auto bg-white rounded-[24px] p-6 ring-1 ring-[#EADFF1]">
-							{renderTotalSummary(true)}
+							<div className="mt-auto">
+								<TotalSummary
+									card
+									planName={baseOffer.plan}
+									totalPrice={totalPrice}
+									optionCount={selectedOptions.length}
+									onContinue={next}
+									ctaLabel="Continuer"
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				{/* ── Right Column ── */}
-				<div className="lg:col-span-8 flex flex-col gap-5 pb-10">
-					{renderOptionCards()}
+					{/* ── Right Column ── */}
+					<div className="lg:col-span-8 flex flex-col gap-5 pb-10">
+						{renderOptionCards()}
+					</div>
 				</div>
-			</div>
 			</div>
 
 			<OptionDetailsDrawer 

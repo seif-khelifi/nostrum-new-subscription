@@ -344,6 +344,12 @@ export const variantB: VariantConfig = {
       },
     },
 
+    /* ── Options ── */
+
+    options: {
+      title: "Renforcez votre couverture",
+    },
+
     /* ── Garanties ── */
 
     garanties: {

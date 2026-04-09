@@ -367,6 +367,13 @@ export const variantA: VariantConfig = {
       },
     },
 
+    /* ── Options ── */
+
+    options: {
+      title: "Renforcez votre couverture",
+      navbarTitle: "Devis",
+    },
+
     /* ── Garanties ── */
 
     garanties: {

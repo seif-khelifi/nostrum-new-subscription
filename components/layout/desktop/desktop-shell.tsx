@@ -44,11 +44,12 @@ export function DesktopShell({
 	customNavbar,
 	children,
 }: DesktopShellProps) {
-	const { currentGroup } = useStepper();
+	const { currentGroup, currentStepDef } = useStepper();
 	const { id: variantId, layout } = useVariant();
 
-	/* Hide sidebar on the Devis step (group 5) */
-	const hideSidebar = currentGroup.id === 5;
+	/* Hide sidebar on the Devis step (group 5), except for "options" which
+	   uses the standard layout with sidebars visible. */
+	const hideSidebar = currentGroup.id === 5 && currentStepDef.id !== "options";
 
 	/* Right sidebar — driven by layout config */
 	const showRightSidebar = layout.sidebar.showRightSidebar && !hideSidebar;

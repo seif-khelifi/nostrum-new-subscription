@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
+import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 import { MinusIcon } from "lucide-react"
@@ -40,13 +41,46 @@ function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   )
 }
 
+const inputOtpSlotVariants = cva(
+  [
+    "relative flex items-center justify-center border-y border-r outline-none transition-all",
+    "first:rounded-l-lg first:border-l last:rounded-r-lg",
+    "aria-invalid:border-destructive",
+    "data-[active=true]:z-10",
+    "data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20",
+    "dark:data-[active=true]:aria-invalid:ring-destructive/40",
+  ].join(" "),
+  {
+    variants: {
+      variant: {
+        default: [
+          "size-8 border-input text-sm",
+          "dark:bg-input/30",
+          "data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50",
+        ].join(" "),
+        otp: [
+          "size-8 sm:size-10 text-base sm:text-lg font-semibold transition-colors duration-200",
+          "data-[filled=false]:border-[#E9E3DD] data-[filled=false]:bg-[#F3E5FA] data-[filled=false]:text-[#490076]",
+          "data-[filled=true]:border-[#490076] data-[filled=true]:bg-[#490076] data-[filled=true]:text-white",
+          "data-[active=true]:border-[#C86FFE] data-[active=true]:ring-2 data-[active=true]:ring-[#C86FFE]/40",
+        ].join(" "),
+      },
+    },
+    defaultVariants: {
+      variant: "default",
+    },
+  },
+)
+
 function InputOTPSlot({
   index,
+  variant,
   className,
   ...props
-}: React.ComponentProps<"div"> & {
-  index: number
-}) {
+}: React.ComponentProps<"div"> &
+  VariantProps<typeof inputOtpSlotVariants> & {
+    index: number
+  }) {
   const inputOTPContext = React.useContext(OTPInputContext)
   const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}
 
@@ -54,10 +88,8 @@ function InputOTPSlot({
     <div
       data-slot="input-otp-slot"
       data-active={isActive}
-      className={cn(
-        "relative flex size-8 items-center justify-center border-y border-r border-input text-sm transition-all outline-none first:rounded-l-lg first:border-l last:rounded-r-lg aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40",
-        className
-      )}
+      data-filled={!!char}
+      className={cn(inputOtpSlotVariants({ variant }), className)}
       {...props}
     >
       {char}

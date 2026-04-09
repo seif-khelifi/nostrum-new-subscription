@@ -34,6 +34,14 @@ export async function fetchJSON<T>(
   } catch (err) {
     throw new Error(err instanceof Error ? err.message : "Network error");
   }
+  // ==========================================
+  // DEBUG LOG START
+  // ==========================================
+  console.log("====================================================");
+  console.log("URL:", url);
+  console.log("STATUS:", res.status);
+
+  // ==========================================
 
   if (res.status !== 200) {
     // Try to read the upstream error message from the response body
@@ -55,5 +63,15 @@ export async function fetchJSON<T>(
     throw new Error(message || `Request failed (${res.status})`);
   }
 
-  return (await res.json()) as T;
+  const text = await res.text();
+  console.log("==================== BODY ==========================");
+  console.log(text || "EMPTY RESPONSE BODY");
+  console.log("====================================================");
+  if (!text) throw new Error("Empty response body");
+
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    throw new Error("Invalid JSON response");
+  }
 }

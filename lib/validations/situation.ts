@@ -162,12 +162,10 @@ export const recapSchema = z.object({
 });
 export type RecapFormValues = z.infer<typeof recapSchema>;
 
-/** envoiSms step — OTP code (6 digits) */
+
+/** envoiSms step — OTP code (6 digits, validated by InputOTP) */
 export const otpSchema = z.object({
-  otp: z
-    .string()
-    .length(6, "Le code doit contenir 6 chiffres")
-    .regex(/^\d{6}$/, "Le code ne doit contenir que des chiffres"),
+  otp: z.string().length(6, "Le code doit contenir 6 chiffres"),
 });
 export type OtpFormValues = z.infer<typeof otpSchema>;
 

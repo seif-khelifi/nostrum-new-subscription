@@ -17,7 +17,7 @@ import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { getPricing, priceForPlan, fetchProductPricing } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
-import { PricingErrorDrawer } from "@/components/steps/devis/drawers";
+import { GeneralErrorDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
 
 /**
@@ -255,7 +255,12 @@ export function DevisVariantB() {
         </div>
       </div>
 
-      <PricingErrorDrawer open={errorOpen} onOpenChange={setErrorOpen} />
+      <GeneralErrorDrawer
+        open={errorOpen}
+        onOpenChange={setErrorOpen}
+        title="Oops ! Une erreur s'est produite"
+        message="Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité."
+      />
     </>
   );
 }

@@ -190,15 +190,14 @@ export async function fetchProductPricing(
 		method: "POST",
 		headers: { "Content-Type": "application/json" },
 		body: JSON.stringify({
-		beneficiaries: beneficiaries.map(({ birthdate, relationship }) => ({
-			birthdate: birthdate || "01/01/2023",
-			relationship,
-		})),
+			beneficiaries: beneficiaries.map(({ birthdate, relationship }) => ({
+				birthdate: birthdate || "01/01/2023",
+				relationship,
+			})),
 			startDate: formatStartDate(),
 			selectedPlan,
 		}),
 	});
-
 	const data = await res.json();
 	if (data.error) throw new Error(data.error);
 

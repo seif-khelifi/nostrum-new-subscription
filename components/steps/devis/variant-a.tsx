@@ -39,7 +39,7 @@ import offersData from "@/data/offers.json";
  */
 export function DevisVariantA() {
   const { goToStepById } = useStepper();
-  const { setValue: setSelectedOffer } = useSessionStorage<number | null>(
+  const { setValue: setSelectedOffer, removeValue: clearSelectedOffer } = useSessionStorage<number | null>(
     "selectedOffer",
     null,
   );
@@ -93,6 +93,13 @@ export function DevisVariantA() {
   function showGaranties(plan: string) {
     setMoreOffer(PLAN_INDEX[plan] ?? 0);
     goToStepById("garanties");
+  }
+
+  /** Navigate to comparateur — clear selectedOffer so it defaults to discovery mode. */
+  function openComparateur() {
+    clearSelectedOffer();
+    sessionStorage.setItem("comparateurOrigin", JSON.stringify("devis_placeholder"));
+    goToStepById("offre_comparateur");
   }
 
   const recommended = offersData.offers.find((o) => o.tone === "recommended");
@@ -183,7 +190,7 @@ export function DevisVariantA() {
             title={compare.title}
             description={compare.description}
             ctaLabel={compare.ctaLabel}
-            onCtaClick={() => goToStepById("offre_comparateur")}
+            onCtaClick={openComparateur}
           />
         </div>
       </div>
@@ -272,7 +279,7 @@ export function DevisVariantA() {
                 title={compare.title}
                 description={compare.description}
                 ctaLabel={compare.ctaLabel}
-                onCtaClick={() => goToStepById("offre_comparateur")}
+                onCtaClick={openComparateur}
               />
             </div>
           </TabsContent>

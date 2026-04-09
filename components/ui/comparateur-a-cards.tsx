@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
+import { Check } from "lucide-react";
 import { cn, capitalize } from "@/lib/utils";
 import { type OfferPlan, ALL_PLANS, RECOMMENDED_OFFER } from "@/lib/plans";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,6 +10,8 @@ import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
+	CarouselPrevious,
+	CarouselNext,
 	useCarousel,
 	type CarouselApi,
 } from "@/components/ui/carousel";
@@ -216,12 +219,26 @@ export function OfferSelectionTabs({
 						value={plan}
 						variant="essential"
 						className={cn(
-							"text-sm font-semibold lg:text-base lg:py-2.5",
+							"gap-2 text-sm font-semibold lg:text-base lg:py-2.5",
 							"text-[#F3E5FA] hover:bg-[#F3E5FA]/20",
 							"data-active:bg-[#F3E5FA] data-active:text-[#490076]",
 						)}
 					>
-						{capitalize(plan)}
+						<span className="inline-flex items-center gap-2">
+							{capitalize(plan)}
+							<span
+								className={cn(
+									"inline-flex items-center justify-center size-5 rounded-full shrink-0 transition-colors",
+									comparedOffer === plan
+										? "bg-[#9000E3]"
+										: "bg-[#290E67]/20",
+								)}
+							>
+								{comparedOffer === plan && (
+									<Check className="size-3 text-white" strokeWidth={3} />
+								)}
+							</span>
+						</span>
 					</TabsTrigger>
 				))}
 			</TabsList>
@@ -306,16 +323,19 @@ export function SectionCarousel({
 	activeIndex,
 	onIndexChange,
 	setApi,
+	showArrows = false,
 }: {
 	sections: SectionMeta[];
 	activeIndex: number;
 	onIndexChange: (index: number) => void;
 	setApi: (api: CarouselApi) => void;
+	showArrows?: boolean;
 }) {
 	return (
 		<Carousel
 			opts={{ loop: false, align: "center" }}
 			setApi={setApi}
+			className="relative"
 		>
 			<CarouselContent>
 				{sections.map((section) => (
@@ -342,6 +362,18 @@ export function SectionCarousel({
 					</CarouselItem>
 				))}
 			</CarouselContent>
+			{showArrows && (
+				<>
+					<CarouselPrevious
+						variant="ghost"
+						className="left-0 border-0 bg-white/10 text-white hover:bg-white/20 hover:text-white disabled:opacity-30"
+					/>
+					<CarouselNext
+						variant="ghost"
+						className="right-0 border-0 bg-white/10 text-white hover:bg-white/20 hover:text-white disabled:opacity-30"
+					/>
+				</>
+			)}
 			<CarouselDotSync
 				activeIndex={activeIndex}
 				onIndexChange={onIndexChange}

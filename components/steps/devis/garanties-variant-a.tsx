@@ -322,7 +322,10 @@ export function GarantiesVariantA() {
             title={compare.title}
             description={compare.description}
             ctaLabel={compare.ctaLabel}
-            onCtaClick={() => goToStepById("offre_comparateur")}
+            onCtaClick={() => {
+              sessionStorage.setItem("comparateurOrigin", JSON.stringify("garanties"));
+              goToStepById("offre_comparateur");
+            }}
           />
         </div>
 

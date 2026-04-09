@@ -4,6 +4,7 @@ import { useCallback, useState } from "react";
 import { X } from "lucide-react";
 import { capitalize } from "@/lib/utils";
 import { type OfferPlan, ALL_PLANS, RECOMMENDED_OFFER } from "@/lib/plans";
+import type { StepId } from "@/config";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
@@ -36,21 +37,39 @@ const infoCardData = comparateurData.infoCard as Record<string, CompareValues>;
 export function ComparateurVariantA() {
 	const { goToStepById } = useStepper();
 
-	const { value: selectedOfferIndex } = useSessionStorage<number | null>(
+	const { value: selectedOfferIndex, isReady } = useSessionStorage<number | null>(
 		"selectedOffer",
 		null,
 	);
+	const { value: comparateurOrigin } = useSessionStorage<StepId>(
+		"comparateurOrigin",
+		"garanties",
+	);
 
-	const userSelectedPlan: OfferPlan =
-		selectedOfferIndex !== null
-			? ((offersData.offers[selectedOfferIndex]?.plan as OfferPlan) ?? "bronze")
-			: "bronze";
+	// Plans available in the tab selector (everything except the recommended offer)
+	const otherPlans = ALL_PLANS.filter((p) => p !== RECOMMENDED_OFFER);
 
-	const [comparedOffer, setComparedOffer] = useState<OfferPlan>(() => {
-		if (userSelectedPlan !== RECOMMENDED_OFFER) return userSelectedPlan;
-		const others = ALL_PLANS.filter((p) => p !== RECOMMENDED_OFFER);
-		return others[0] ?? "bronze";
-	});
+	const [comparedOffer, setComparedOffer] = useState<OfferPlan>(otherPlans[0]);
+	const [initialized, setInitialized] = useState(false);
+
+	// Once session storage is ready, derive the initial compared offer:
+	// - From garanties (selectedOfferIndex set): use the user's selected plan,
+	//   unless it matches the recommended offer → fall back to first other plan.
+	// - From devis (selectedOfferIndex null): always default to first other plan.
+	if (isReady && !initialized) {
+		const userPlan =
+			selectedOfferIndex !== null
+				? (offersData.offers[selectedOfferIndex]?.plan as OfferPlan | undefined)
+				: null;
+
+		const initial =
+			userPlan && userPlan !== RECOMMENDED_OFFER && otherPlans.includes(userPlan)
+				? userPlan
+				: otherPlans[0];
+
+		setComparedOffer(initial);
+		setInitialized(true);
+	}
 
 	const [activeSection, setActiveSection] = useState(0);
 	const [carouselApi, setCarouselApi] = useState<CarouselApi>();
@@ -68,7 +87,7 @@ export function ComparateurVariantA() {
 	}, []);
 
 	const sectionKey = sections[activeSection]?.key ?? "dentaire";
-	const close = () => goToStepById("garanties");
+	const close = () => goToStepById(comparateurOrigin);
 	const savingsAmount = comparateurData.banner.savingsAmount;
 
 	// Resolve data for current section
@@ -92,14 +111,15 @@ export function ComparateurVariantA() {
 		</span>
 	);
 
-	// Shared slider section
-	const sliderSection = (
+	// Slider section helper
+	const sliderSection = (withArrows = false) => (
 		<>
 			<SectionCarousel
 				sections={sections}
 				activeIndex={activeSection}
 				onIndexChange={handleCarouselSelect}
 				setApi={setCarouselApi}
+				showArrows={withArrows}
 			/>
 			<SectionDots
 				activeIndex={activeSection}
@@ -164,7 +184,7 @@ export function ComparateurVariantA() {
 						/>
 					</div>
 					<div className="bg-[#490076] px-4 pt-8 pb-8 overflow-hidden">
-						<div className="mt-2">{sliderSection}</div>
+						<div className="mt-2">{sliderSection()}</div>
 					</div>
 				</div>
 			</div>
@@ -216,7 +236,7 @@ export function ComparateurVariantA() {
 					</div>
 					<div className="bg-[#490076] px-8 pt-10 pb-10">
 						<div className="max-w-5xl mx-auto">
-							<div className="mt-2">{sliderSection}</div>
+							<div className="mt-2">{sliderSection(true)}</div>
 						</div>
 					</div>
 				</div>

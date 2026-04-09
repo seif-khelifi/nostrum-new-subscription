@@ -19,7 +19,8 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "whitespace-nowrap shrink-0 bg-primary text-primary-foreground [a]:hover:bg-primary/80",
+        default:
+          "whitespace-nowrap shrink-0 bg-primary text-primary-foreground [a]:hover:bg-primary/80",
         outline:
           "whitespace-nowrap shrink-0 border-border bg-background hover:bg-muted hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground dark:border-input dark:bg-input/30 dark:hover:bg-input/50",
         secondary:
@@ -107,7 +108,7 @@ const buttonVariants = cva(
 
         closeComparateur: [
           "inline-flex items-center gap-2 rounded-full",
-          "bg-[#490076] py-1.5 pl-4 pr-1.5",
+          "bg-[#490076] py-[3px] pl-4",
           "text-sm font-medium text-[#F3E5FA] whitespace-nowrap",
           "transition-colors hover:bg-[#5a0a8f] active:translate-y-px",
         ].join(" "),

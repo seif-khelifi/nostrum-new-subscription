@@ -6,6 +6,7 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSanteForm } from "@/context/SanteFormContext";
+import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ResilierMutuelleValue } from "@/types/subscription";
@@ -13,6 +14,7 @@ import type { ResilierMutuelleValue } from "@/types/subscription";
 export function ResilierMutuelleStep() {
   const { next } = useStepper();
   const { uiData, updateUI } = useSanteForm();
+  const { updatePrimary } = useSituationForm();
   const texts = useStepTexts("resilierMutuelle");
 
   const options = texts.options!;
@@ -21,6 +23,19 @@ export function ResilierMutuelleStep() {
 
   const handleNext = () => {
     if (!validate()) return;
+
+    // When user says they have no insurance, clear any previously set insurance data
+    if (selected === "pas_de_mutuelle") {
+      updatePrimary({
+        previousMutualTermination: false,
+        previousHealthMutualName: undefined,
+        previousHealthMutualAddress: "",
+        previousContractStartDate: undefined,
+        previousContractEndDate: undefined,
+        previousContractEndDateAsked: undefined,
+      });
+    }
+
     next();
   };
 

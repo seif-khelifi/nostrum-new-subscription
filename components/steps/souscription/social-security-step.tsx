@@ -38,6 +38,7 @@ export function SocialSecurityStep() {
   const onSubmit = (data: SocialSecurityFormValues) => {
     updatePrimary({
       socialWelfareNumber: data.socialSecurityNumber,
+      regimeType: "AS",
     });
     next();
   };

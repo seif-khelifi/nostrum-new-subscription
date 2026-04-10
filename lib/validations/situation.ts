@@ -233,9 +233,13 @@ export const currentInsuranceSchema = z.object({
 });
 export type CurrentInsuranceFormValues = z.infer<typeof currentInsuranceSchema>;
 
-/** dateSignatureAncien step — date of old contract signature */
+/** dateSignatureAncien step — date of old contract signature (must be in the past) */
 export const dateSignatureAncienSchema = z.object({
-  dateSignature: z.date({ error: "Veuillez sélectionner une date" }),
+  dateSignature: z
+    .date({ error: "Veuillez sélectionner une date" })
+    .refine((d) => d < new Date(), {
+      message: "La date de signature doit être dans le passé",
+    }),
 });
 export type DateSignatureAncienFormValues = z.infer<
   typeof dateSignatureAncienSchema

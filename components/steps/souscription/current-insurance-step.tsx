@@ -97,6 +97,7 @@ export function CurrentInsuranceStep() {
         searchResult.customName ??
         data.insuranceName,
       previousHealthMutualAddress: [data.street, data.complement, data.postalCode, data.city].filter(Boolean).join(", "),
+      previousMutualTermination: true,
     });
     next();
   };

@@ -10,6 +10,7 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import {
   dateSignatureAncienSchema,
   type DateSignatureAncienFormValues,
@@ -21,6 +22,8 @@ export function DateSignatureAncienStep() {
   const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("dateSignatureAncien");
 
+  const now = new Date();
+
   const {
     control,
     handleSubmit,
@@ -29,7 +32,7 @@ export function DateSignatureAncienStep() {
     resolver: standardSchemaResolver(dateSignatureAncienSchema),
     defaultValues: {
       dateSignature: p?.previousContractStartDate
-        ? new Date(p.previousContractStartDate)
+        ? parseBirthdate(p.previousContractStartDate)
         : undefined,
     },
     mode: "onTouched",
@@ -39,7 +42,7 @@ export function DateSignatureAncienStep() {
 
   const onSubmit = (data: DateSignatureAncienFormValues) => {
     updatePrimary({
-      previousContractStartDate: data.dateSignature.toISOString(),
+      previousContractStartDate: formatBirthdate(data.dateSignature),
     });
     next();
   };
@@ -62,6 +65,8 @@ export function DateSignatureAncienStep() {
                   placeholder="JJ/MM/AAAA"
                   hasError={!!errors.dateSignature}
                   inputClassName="min-w-[120px] sm:min-w-[160px]"
+                  fromYear={now.getFullYear() - 30}
+                  toYear={now.getFullYear()}
                 />
               )}
             />

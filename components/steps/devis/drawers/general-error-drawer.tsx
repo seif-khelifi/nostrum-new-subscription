@@ -18,6 +18,12 @@ interface GeneralErrorDrawerProps {
 	message?: string;
 	/** When false the phone call button is hidden. Defaults to true. */
 	showCallButton?: boolean;
+	/** Optional custom primary action — replaces the phone call button when provided. */
+	onAction?: () => void;
+	/** Label for the custom primary action button. Defaults to "Continuer". */
+	actionLabel?: string;
+	/** Label for the dismiss button. Defaults to "Fermer". */
+	dismissLabel?: string;
 }
 
 export function GeneralErrorDrawer({
@@ -26,6 +32,9 @@ export function GeneralErrorDrawer({
 	title = "Oops ! Une erreur s\u0027est produite",
 	message,
 	showCallButton = true,
+	onAction,
+	actionLabel = "Continuer",
+	dismissLabel = "Fermer",
 }: GeneralErrorDrawerProps) {
 	const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -49,7 +58,15 @@ export function GeneralErrorDrawer({
 				</div>
 
 				<DrawerFooter className="px-6 pb-8 pt-2">
-					{showCallButton && (
+					{onAction ? (
+						<Button
+							variant="ctaPurple"
+							className="w-full rounded-[24px] min-h-[52px] h-auto py-3 px-6 text-sm font-semibold"
+							onClick={onAction}
+						>
+							{actionLabel}
+						</Button>
+					) : showCallButton ? (
 						<Button
 							variant="ctaPurple"
 							className="w-full rounded-[24px] min-h-[52px] h-auto py-3 px-6 text-sm font-semibold gap-2"
@@ -60,13 +77,13 @@ export function GeneralErrorDrawer({
 								Appeler le 01 62 45 01 05
 							</a>
 						</Button>
-					)}
+					) : null}
 					<DrawerClose asChild>
 						<Button
 							variant="ghost"
 							className="w-full rounded-[24px] min-h-[48px] h-auto py-3 text-[#490076]"
 						>
-							Fermer
+							{dismissLabel}
 						</Button>
 					</DrawerClose>
 				</DrawerFooter>

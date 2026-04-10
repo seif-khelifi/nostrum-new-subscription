@@ -10,7 +10,6 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
-import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import {
@@ -19,21 +18,19 @@ import {
   type AddressFormValues,
   type AddressSearchFormValues,
 } from "@/lib/validations/situation";
-import { parseSelectedAddress } from "@/lib/geo";
+import { parseSelectedAddress, splitStreetNumber } from "@/lib/geo";
 
 /* ─── Component ─── */
 
 export function AddressStep() {
   const { next } = useStepper();
-  const { session, updatePrimary } = useSituationForm();
-  const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
+  const { session, updatePrimary, updateSession } = useSituationForm();
+  const user = session.user;
   const texts = useStepTexts("address");
   const [mode, setMode] = useState<"search" | "manual">("search");
   const [apiError, setApiError] = useState(false);
 
-  const handleApiError = useCallback(() => {
-    setApiError(true);
-  }, []);
+  const handleApiError = useCallback(() => setApiError(true), []);
 
   /* ── Search form ── */
   const searchForm = useForm<AddressSearchFormValues>({
@@ -67,23 +64,32 @@ export function AddressStep() {
     const parsed = parseSelectedAddress(data.fulltext);
     if (!parsed) return;
 
-    updatePrimary({
+    const patch = {
+      address_number: parsed.number,
       address_street_name: parsed.street,
       address_additionnal: "",
       address_zip: parsed.zipcode,
       address_city: parsed.city,
-    });
+      address_country: "FR",
+    };
+
+    updatePrimary(patch);
+    if (user) updateSession({ user: { ...user, ...patch } });
     next();
   };
 
   /* ── Manual form ── */
+  const savedStreet = [user?.address_number, user?.address_street_name]
+    .filter(Boolean)
+    .join(" ");
+
   const manualForm = useForm<AddressFormValues>({
     resolver: standardSchemaResolver(addressSchema),
     defaultValues: {
-      street: p?.address_street_name ?? "",
-      complement: p?.address_additionnal ?? "",
-      postalCode: p?.address_zip ?? "",
-      city: p?.address_city ?? "",
+      street: savedStreet,
+      complement: user?.address_additionnal ?? "",
+      postalCode: user?.address_zip ?? "",
+      city: user?.address_city ?? "",
     },
     mode: "onTouched",
   });
@@ -95,12 +101,19 @@ export function AddressStep() {
   );
 
   const onManualSubmit = (data: AddressFormValues) => {
-    updatePrimary({
-      address_street_name: data.street,
+    const { number, street } = splitStreetNumber(data.street);
+
+    const patch = {
+      address_number: number,
+      address_street_name: street,
       address_additionnal: data.complement ?? "",
       address_zip: data.postalCode,
       address_city: data.city,
-    });
+      address_country: "FR",
+    };
+
+    updatePrimary(patch);
+    if (user) updateSession({ user: { ...user, ...patch } });
     next();
   };
 

@@ -58,8 +58,11 @@ export async function verifyPhone(
   const contractData = await contractRes.json();
   if (contractData.error) throw new Error(contractData.error);
 
-  const hasVitaContract: boolean = contractData.hasVitaContract ?? false;
-  const hasTinderContract: boolean = contractData.hasTinderContract ?? false;
+  // const hasVitaContract: boolean = contractData.hasVitaContract ?? false;
+  // const hasTinderContract: boolean = contractData.hasTinderContract ?? false;
+
+  const hasVitaContract: boolean = false;
+  const hasTinderContract: boolean = false;
 
   /* 3. If existing contract → return early, no need to fetch user */
   if (hasVitaContract || hasTinderContract) {

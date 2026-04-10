@@ -19,10 +19,16 @@ export class ApiError extends Error {
   }
 }
 
+export interface FetchJSONOptions {
+  /** If true, return `null` instead of throwing when the body is empty (status 200). */
+  allowEmpty?: boolean;
+}
+
 export async function fetchJSON<T>(
   url: string,
   init: RequestInit = {},
   errors?: ErrorMap,
+  options?: FetchJSONOptions,
 ): Promise<T> {
   let res: Response;
 
@@ -67,7 +73,10 @@ export async function fetchJSON<T>(
   console.log("==================== BODY ==========================");
   console.log(text || "EMPTY RESPONSE BODY");
   console.log("====================================================");
-  if (!text) throw new Error("Empty response body");
+  if (!text) {
+    if (options?.allowEmpty) return null as T;
+    throw new Error("Empty response body");
+  }
 
   try {
     return JSON.parse(text) as T;

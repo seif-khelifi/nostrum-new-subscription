@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { fetchJSON } from "@/lib/http";
+import { fetchJSON, type FetchJSONOptions } from "@/lib/http";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -27,16 +27,21 @@ export async function POST(req: NextRequest) {
   const token = cookieStore.get("accessToken")?.value ?? "";
 
   try {
-    const data = await fetchJSON<RemoveUserResponse>(REMOVE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+    const data = await fetchJSON<RemoveUserResponse | null>(
+      REMOVE_URL,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ id: body.id }),
       },
-      body: JSON.stringify({ id: body.id }),
-    });
+      undefined,          // no custom error map
+      { allowEmpty: true }, // backend may return 200 with empty body
+    );
 
-    return NextResponse.json(data);
+    return NextResponse.json(data ?? { message: "Successful request.", data: "" });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     console.error("[remove-user]", message);

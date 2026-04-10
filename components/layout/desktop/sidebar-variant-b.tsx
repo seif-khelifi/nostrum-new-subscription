@@ -103,14 +103,14 @@ export function SidebarVariantB({ className }: { className?: string }) {
 					/>
 				</span>
 
-				{/* Collapsed logo – visible only at sm → lg */}
-				<span className="hidden sm:inline-flex lg:hidden">
+			{/* Collapsed logo – visible only at sm → lg */}
+			<span className="hidden sm:inline-flex lg:hidden">
 					<Image
 						src="/navbarMobile/nostrum-logo.svg"
 						alt="Nostrum"
-						width={40}
-						height={40}
-						className="h-10 w-auto object-contain"
+						width={28}
+						height={28}
+						className="h-7 w-auto object-contain"
 						unoptimized
 					/>
 				</span>

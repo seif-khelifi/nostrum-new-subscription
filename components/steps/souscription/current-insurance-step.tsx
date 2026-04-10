@@ -19,22 +19,13 @@ import {
   currentInsuranceSchema,
   type CurrentInsuranceFormValues,
 } from "@/lib/validations/situation";
+import { resolveInitialSelection } from "@/lib/utils";
 import insurancesData from "@/data/insurances.json";
 import { useState } from "react";
 
 /* ─── Data ─── */
 
 const INSURANCE_LIST: InsuranceItem[] = insurancesData.insurances;
-
-/* ─── Helpers ─── */
-
-function resolveInitialSelection(name?: string): InsuranceSearchResult {
-  if (!name) return { item: null, customName: null };
-  const found = INSURANCE_LIST.find((m) => m.name === name) ?? null;
-  return found
-    ? { item: found, customName: null }
-    : { item: null, customName: name };
-}
 
 /* ─── Component ─── */
 
@@ -43,6 +34,12 @@ export function CurrentInsuranceStep() {
   const { session, updatePrimary } = useSituationForm();
   const p = session.beneficiaries[0] as PrimaryBeneficiary | undefined;
   const texts = useStepTexts("currentInsurance");
+
+  /* ── Resolve initial insurance (if returning to this step) ── */
+  const initialSelection = resolveInitialSelection(
+    p?.previousHealthMutualName ?? "",
+    INSURANCE_LIST,
+  );
 
   /* ── Address form ── */
   const {
@@ -54,10 +51,10 @@ export function CurrentInsuranceStep() {
     resolver: standardSchemaResolver(currentInsuranceSchema),
     defaultValues: {
       insuranceName: p?.previousHealthMutualName ?? "",
-      street: p?.previousHealthMutualAddress ?? "",
+      street: initialSelection.item?.street ?? p?.previousHealthMutualAddress ?? "",
       complement: "",
-      postalCode: "",
-      city: "",
+      postalCode: initialSelection.item?.postal ?? "",
+      city: initialSelection.item?.city ?? "",
     },
     mode: "onTouched",
   });
@@ -65,9 +62,8 @@ export function CurrentInsuranceStep() {
   useFormErrorToast(errors, errorKey(errors), submitCount);
 
   /* ── Search state ── */
-  const [searchResult, setSearchResult] = useState<InsuranceSearchResult>(() =>
-    resolveInitialSelection(p?.previousHealthMutualName ?? ""),
-  );
+  const [searchResult, setSearchResult] =
+    useState<InsuranceSearchResult>(initialSelection);
 
   const hasInsurance =
     searchResult.item !== null || searchResult.customName !== null;

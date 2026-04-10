@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
+import type { InsuranceItem, InsuranceSearchResult } from "@/components/ui/search-input"
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -36,4 +37,16 @@ export function parseBirthdate(value: string): Date | undefined {
   // ISO or any other format Date can parse
   const d = new Date(value)
   return isNaN(d.getTime()) ? undefined : d
+}
+
+/** Resolve an insurance name to a known item or a custom name. */
+export function resolveInitialSelection(
+  name: string | undefined,
+  list: InsuranceItem[],
+): InsuranceSearchResult {
+  if (!name) return { item: null, customName: null }
+  const found = list.find((m) => m.name === name) ?? null
+  return found
+    ? { item: found, customName: null }
+    : { item: null, customName: name }
 }

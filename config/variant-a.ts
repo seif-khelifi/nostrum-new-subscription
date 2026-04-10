@@ -282,9 +282,9 @@ export const variantA: VariantConfig = {
       navbarTitle: "Souscription",
       subtitle: "Vous êtes ?",
       options: [
-        { value: "homme", label: "Un homme" },
-        { value: "femme", label: "Une femme" },
-        { value: "autre", label: "Aucun des deux" },
+        { value: "M", label: "Un homme" },
+        { value: "F", label: "Une femme" },
+        { value: "O", label: "Aucun des deux" },
       ],
     },
 

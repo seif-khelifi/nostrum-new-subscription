@@ -77,9 +77,24 @@ export function BirthPlaceStep() {
   const country = watch("birthCountry");
 
   const onSubmit = (data: BirthPlaceFormValues) => {
+    const countryUpper = data.birthCountry.trim().toUpperCase();
+    let departmentNumber = "00";
+
+    if (isFrance(data.birthCountry)) {
+      const match = citiesData.cities.find(
+        (c) =>
+          c.nom_de_la_commune.toLowerCase() ===
+          data.birthCity.trim().toLowerCase(),
+      );
+      if (match) {
+        departmentNumber = match.code_postal.slice(0, 2);
+      }
+    }
+
     updatePrimary({
-      birth_country: data.birthCountry,
-      birth_place: data.birthCity,
+      birth_country: countryUpper,
+      birth_department_number: departmentNumber,
+      birth_place: data.birthCity.trim().toUpperCase(),
     });
     next();
   };

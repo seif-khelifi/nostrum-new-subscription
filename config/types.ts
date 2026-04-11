@@ -34,6 +34,7 @@ export type StepId =
   | "currentInsurance"
   | "dateSignatureAncien"
   | "dateDebutNostrum"
+  | "payment"
   | "souscription_placeholder";
 
 export interface StepDef {

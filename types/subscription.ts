@@ -224,7 +224,7 @@ export interface SessionUser {
   tv3_adherent_id: string;
   created_at: string;
   updated_at: string;
-  psp_customer_id: string;
+  psp_customer_id: string | null;
   pin_code: string | null;
   psp_payment_method_id: string | null;
   list_contracts_id: string[];

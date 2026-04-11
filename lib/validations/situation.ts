@@ -250,3 +250,7 @@ export const dateDebutNostrumSchema = z.object({
   dateDebut: z.date({ error: "Veuillez sélectionner une date" }),
 });
 export type DateDebutNostrumFormValues = z.infer<typeof dateDebutNostrumSchema>;
+
+/** payment step — Stripe validates the Payment Element; schema is a no-op for RHF wiring */
+export const paymentStepSchema = z.object({});
+export type PaymentStepFormValues = z.infer<typeof paymentStepSchema>;

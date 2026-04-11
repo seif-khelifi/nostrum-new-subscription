@@ -74,7 +74,18 @@ export function AddressStep() {
     };
 
     updatePrimary(patch);
-    if (user) updateSession({ user: { ...user, ...patch } });
+    if (user) {
+      const primary = session.beneficiaries[0];
+      updateSession({
+        user: {
+          ...user,
+          ...patch,
+          email: primary?.email ?? user.email,
+          firstname: primary?.firstname ?? user.firstname,
+          lastname: primary?.lastname ?? user.lastname,
+        },
+      });
+    }
     next();
   };
 
@@ -113,7 +124,18 @@ export function AddressStep() {
     };
 
     updatePrimary(patch);
-    if (user) updateSession({ user: { ...user, ...patch } });
+    if (user) {
+      const primary = session.beneficiaries[0];
+      updateSession({
+        user: {
+          ...user,
+          ...patch,
+          email: primary?.email ?? user.email,
+          firstname: primary?.firstname ?? user.firstname,
+          lastname: primary?.lastname ?? user.lastname,
+        },
+      });
+    }
     next();
   };
 

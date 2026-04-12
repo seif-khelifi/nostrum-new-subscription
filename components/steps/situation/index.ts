@@ -17,3 +17,4 @@ export { ResilierMutuelleStep } from "../souscription/resilier-mutuelle-step";
 export { CurrentInsuranceStep } from "../souscription/current-insurance-step";
 export { DateSignatureAncienStep } from "../souscription/date-signature-ancien-step";
 export { DateDebutNostrumStep } from "../souscription/date-debut-nostrum-step";
+export { BankDetailsStep } from "../souscription/bank-details-step";

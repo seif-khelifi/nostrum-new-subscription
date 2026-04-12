@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { isValidPhoneNumber } from "react-phone-number-input";
+import IBAN from "iban";
 
 /* ═══════════════════════════════════════════════════════════════════ */
 /*  Helpers                                                           */
@@ -254,3 +255,33 @@ export type DateDebutNostrumFormValues = z.infer<typeof dateDebutNostrumSchema>;
 /** payment step — Stripe validates the Payment Element; schema is a no-op for RHF wiring */
 export const paymentStepSchema = z.object({});
 export type PaymentStepFormValues = z.infer<typeof paymentStepSchema>;
+
+/** bankDetails step — name, IBAN (ISO 13616 via iban package), BIC (SWIFT 8 or 11 chars) */
+export const bankDetailsSchema = z.object({
+  accountName: z
+    .string()
+    .trim()
+    .min(1, "Le nom du titulaire est requis")
+    .min(2, "Le nom doit contenir au moins 2 caractères"),
+  iban: z
+    .string()
+    .trim()
+    .min(1, "L'IBAN est requis")
+    .transform((val) => val.replace(/\s/g, ""))
+    .pipe(
+      z
+        .string()
+        .refine((val) => IBAN.isValid(val), {
+          message: "L'IBAN saisi est invalide",
+        }),
+    ),
+  bic: z
+    .string()
+    .trim()
+    .min(1, "Le BIC est requis")
+    .regex(
+      /^[A-Za-z]{6}[A-Za-z0-9]{2}([A-Za-z0-9]{3})?$/,
+      "Le BIC doit être au format SWIFT (8 ou 11 caractères)",
+    ),
+});
+export type BankDetailsFormValues = z.infer<typeof bankDetailsSchema>;

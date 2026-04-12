@@ -81,6 +81,7 @@ export const variantA: VariantConfig = {
         { id: "dateDebutNostrum", label: "Date début contrat Nostrum" },
         { id: "payment", label: "Paiement" },
         { id: "coupon", label: "Code promo" },
+        { id: "bankDetails", label: "Mes remboursements" },
         { id: "souscription_placeholder", label: "Souscription" },
       ],
     },
@@ -388,6 +389,12 @@ export const variantA: VariantConfig = {
         subtitle:
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
       },
+    },
+
+    bankDetails: {
+      title: "Mes remboursements",
+      navbarTitle: "Souscription",
+      subtitle: "On me remboursera sur ce compte",
     },
 
     /* ── Options ── */

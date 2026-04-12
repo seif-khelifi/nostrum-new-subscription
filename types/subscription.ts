@@ -261,6 +261,7 @@ export interface VitaSessionStorage {
   user?: SessionUser;
   paymentMethodId?: string;
   paymentMethodType?: "card" | "sepa_debit";
+  coupon?: { code: string; id: string };
   contract?: {
     rk_OneSpanContractURL: string;
     id: string;

@@ -26,6 +26,7 @@ import {
   DateDebutNostrumStep,
 } from "./situation";
 import { PaymentStep } from "./souscription/payment-step";
+import { CouponStep } from "./souscription/coupon-step";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { TransitionOfferStep } from "./transition";
 import { OnboardingStep } from "./onboarding-step";
@@ -128,6 +129,7 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
   dateSignatureAncien: DateSignatureAncienStep,
   dateDebutNostrum: DateDebutNostrumStep,
   payment: PaymentStep,
+  coupon: CouponStep,
 
   // Santé group
   sante_yeux: YeuxStep,

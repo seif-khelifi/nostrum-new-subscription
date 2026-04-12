@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { ApiError, fetchJSON, type ErrorMap } from "@/lib/http";
+import { fetchJSON, type ErrorMap } from "@/lib/http";
 
-/* ------------------------------------------------------------------ */
-/*  Error map                                                          */
-/* ------------------------------------------------------------------ */
+interface StripeSetupIntent {
+  client_secret: string;
+}
 
 const SETUP_INTENT_ERRORS: ErrorMap = {
   400: "Requête de paiement invalide. Veuillez réessayer.",
@@ -13,10 +13,6 @@ const SETUP_INTENT_ERRORS: ErrorMap = {
   500: "Une erreur est survenue. Veuillez réessayer plus tard.",
   503: "Service temporairement indisponible. Veuillez réessayer plus tard.",
 };
-
-/* ------------------------------------------------------------------ */
-/*  Route handler                                                      */
-/* ------------------------------------------------------------------ */
 
 const SETUP_INTENT_URL = `${process.env.NOSTRUM_API_V3_BASE_URL}/proxy?route=stripe/setup-intent`;
 
@@ -34,7 +30,7 @@ export async function POST(req: NextRequest) {
   const body: unknown = await req.json();
 
   try {
-    const data = await fetchJSON<unknown>(
+    const data = await fetchJSON<StripeSetupIntent[]>(
       SETUP_INTENT_URL,
       {
         method: "POST",
@@ -48,17 +44,20 @@ export async function POST(req: NextRequest) {
       SETUP_INTENT_ERRORS,
     );
 
-    return NextResponse.json({
-      message: "Successful request.",
-      data,
-    });
+    const clientSecret = data[0]?.client_secret;
+    if (!clientSecret) {
+      return NextResponse.json(
+        { error: "Réponse invalide pour l'intention de configuration du paiement." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ clientSecret });
   } catch (err) {
     const message =
-      err instanceof ApiError
+      err instanceof Error
         ? err.message
-        : err instanceof Error
-          ? err.message
-          : "Une erreur est survenue. Veuillez réessayer plus tard.";
+        : "Une erreur est survenue. Veuillez réessayer plus tard.";
     console.error("[setup-intent]", message);
     return NextResponse.json({ error: message }, { status: 502 });
   }

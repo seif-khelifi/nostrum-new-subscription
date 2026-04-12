@@ -5,7 +5,6 @@ import { useForm, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import { REGEXP_ONLY_DIGITS } from "input-otp";
-import { toast } from "sonner";
 import {
   InputOTP,
   InputOTPGroup,
@@ -18,6 +17,7 @@ import { useStepper } from "@/context/StepperContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { useApiError } from "@/hooks/use-api-error";
 import { otpSchema, type OtpFormValues } from "@/lib/validations/situation";
 import { requestOtp, verifyPhone } from "@/lib/sign-in";
 import { GeneralErrorDrawer } from "@/components/steps/devis/drawers/general-error-drawer";
@@ -27,7 +27,7 @@ export function EnvoiSmsStep() {
   const texts = useStepTexts("envoiSms");
   const { session, updateSession } = useSituationForm();
 
-  const [apiError, setApiError] = useState<string | null>(null);
+  const { error: apiError, showError, clearError } = useApiError();
   const [contractDrawerOpen, setContractDrawerOpen] = useState(false);
   const [contractDrawerMessage, setContractDrawerMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -53,13 +53,11 @@ export function EnvoiSmsStep() {
 
   async function sendOtp() {
     if (!phone) return;
-    setApiError(null);
+    clearError();
     try {
       await requestOtp(phone);
     } catch (err) {
-      const message = (err as Error).message;
-      setApiError(message);
-      toast.error(message);
+      showError((err as Error).message);
     }
   }
 
@@ -72,7 +70,7 @@ export function EnvoiSmsStep() {
 
   async function onSubmit(data: OtpFormValues) {
     if (!phone) return;
-    setApiError(null);
+    clearError();
     setSubmitting(true);
     try {
       const { user, hasTinderContract, hasVitaContract } = await verifyPhone(
@@ -91,9 +89,7 @@ export function EnvoiSmsStep() {
       updateSession({ user: user! });
       next();
     } catch (err) {
-      const message = (err as Error).message;
-      setApiError(message);
-      toast.error(message);
+      showError((err as Error).message);
     } finally {
       setSubmitting(false);
     }
@@ -143,7 +139,7 @@ export function EnvoiSmsStep() {
                 value={field.value}
                 onChange={(value) => {
                   field.onChange(value);
-                  setApiError(null);
+                  clearError();
                 }}
               >
                 <InputOTPGroup>

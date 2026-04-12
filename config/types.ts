@@ -35,6 +35,7 @@ export type StepId =
   | "dateSignatureAncien"
   | "dateDebutNostrum"
   | "payment"
+  | "coupon"
   | "souscription_placeholder";
 
 export interface StepDef {

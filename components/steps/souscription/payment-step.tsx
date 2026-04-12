@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
-import { toast } from "sonner";
 import {
   Elements,
   ExpressCheckoutElement,
@@ -16,46 +15,19 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
-import {
-  extractStripeCustomerId,
-  postCreateStripeCustomer,
-  postSetupIntent,
-} from "@/lib/payment-api";
+import { useApiError } from "@/hooks/use-api-error";
+import { postCreateStripeCustomer, postSetupIntent } from "@/lib/payment-api";
 import { getStripePromise } from "@/lib/stripe-client";
+import {
+  elementsOptions,
+  paymentElementOptions,
+  expressCheckoutOptions,
+} from "@/config/stripe";
 
-const elementsOptions = {
-  mode: "setup" as const,
-  currency: "eur",
-  locale: "fr" as const,
-  paymentMethodTypes: ["card", "sepa_debit"],
-  setupFutureUsage: "off_session" as const,
-};
-
-const paymentElementOptions = {
-  layout: "tabs" as const,
-  paymentMethodOrder: ["card", "sepa_debit"],
-  wallets: { applePay: "never" as const, googlePay: "never" as const },
-  fields: {
-    billingDetails: {
-      address: {
-        line1: "never" as const,
-        line2: "never" as const,
-        city: "never" as const,
-        state: "never" as const,
-        postalCode: "never" as const,
-        country: "never" as const,
-      },
-    },
-  },
-};
-
-const expressCheckoutOptions = {
-  buttonType: {
-    applePay: "plain" as const,
-    googlePay: "plain" as const,
-  },
-};
-
+/**
+ * Inner form — must be rendered inside <Elements> so useStripe/useElements work.
+ * This is a Stripe SDK constraint, not a design choice.
+ */
 function PaymentForm() {
   const { next } = useStepper();
   const { session, updateSession } = useSituationForm();
@@ -63,12 +35,12 @@ function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [error, setError] = useState<string | null>(null);
+  const { error, showError, clearError } = useApiError();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setError(null);
+    clearError();
     if (!stripe || !elements) return;
 
     setLoading(true);
@@ -76,23 +48,18 @@ function PaymentForm() {
       // 1. Validate form fields
       const { error: submitError } = await elements.submit();
       if (submitError) {
-        setError(submitError.message ?? "Vérifiez vos informations bancaires.");
-        toast.error(
-          submitError.message ?? "Vérifiez vos informations bancaires.",
-        );
+        showError(submitError.message ?? "Vérifiez vos informations bancaires.");
         return;
       }
 
       // 2. Resolve Stripe customer ID
       const user = session.user;
-      if (!user?.id)
-        throw new Error(
-          "Votre session est incomplète. Reprenez la souscription depuis le début.",
-        );
+      if (!user?.id) {
+        showError("Votre session est incomplète. Reprenez la souscription depuis le début.");
+        return;
+      }
 
-      const customerId = extractStripeCustomerId(
-        (await postCreateStripeCustomer(session)).data,
-      );
+      const customerId = await postCreateStripeCustomer(session);
 
       // 3. Create SetupIntent on the backend
       const clientSecret = await postSetupIntent(customerId, user.id);
@@ -120,61 +87,43 @@ function PaymentForm() {
       });
 
       if (confirmError) {
-        setError(confirmError.message ?? "Le paiement a échoué.");
-        toast.error(confirmError.message ?? "Le paiement a échoué.");
+        showError(confirmError.message ?? "Le paiement a échoué.");
         return;
       }
 
+      // 5. Persist to session and advance
       if (setupIntent) {
-        const pmId =
-          typeof setupIntent.payment_method === "string"
-            ? setupIntent.payment_method
-            : setupIntent.payment_method?.id;
-
+        const pmId = setupIntent.payment_method as string;
         const pmType = setupIntent.payment_method_types?.[0];
 
         updateSession({
           paymentMethodId: pmId,
-          ...(pmType === "card" || pmType === "sepa_debit"
-            ? { paymentMethodType: pmType }
-            : {}),
-          user: {
-            ...user,
-            psp_customer_id: customerId,
-            psp_payment_method_id: pmId ?? null,
-          },
+          ...(pmType === "card" || pmType === "sepa_debit" ? { paymentMethodType: pmType } : {}),
+          user: { ...user, psp_customer_id: customerId, psp_payment_method_id: pmId },
         });
-
         next();
       }
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Une erreur est survenue.";
-      setError(message);
-      toast.error(message);
+      showError(err instanceof Error ? err.message : "Une erreur est survenue.");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleExpressCheckoutConfirm = async (
-    event: StripeExpressCheckoutElementConfirmEvent,
-  ) => {
+  const handleExpressCheckoutConfirm = async (event: StripeExpressCheckoutElementConfirmEvent) => {
     if (!stripe || !elements) return;
 
-    setError(null);
+    clearError();
     setLoading(true);
     try {
       // 1. Resolve Stripe customer ID
       const user = session.user;
-      if (!user?.id)
-        throw new Error(
-          "Votre session est incomplète. Reprenez la souscription depuis le début.",
-        );
+      if (!user?.id) {
+        showError("Votre session est incomplète. Reprenez la souscription depuis le début.");
+        return;
+      }
 
-      const customerId =
-        user.psp_customer_id?.trim() ||
-        extractStripeCustomerId((await postCreateStripeCustomer(session)).data);
+      const customerId = await postCreateStripeCustomer(session);
 
       // 2. Create SetupIntent on the backend
       const clientSecret = await postSetupIntent(customerId, user.id);
@@ -211,42 +160,27 @@ function PaymentForm() {
       });
 
       if (confirmError) {
-        event.paymentFailed({
-          message: confirmError.message ?? "Le paiement a échoué.",
-        });
-        setError(confirmError.message ?? "Le paiement a échoué.");
-        toast.error(confirmError.message ?? "Le paiement a échoué.");
+        event.paymentFailed({ message: confirmError.message ?? "Le paiement a échoué." });
+        showError(confirmError.message ?? "Le paiement a échoué.");
         return;
       }
 
+      // 5. Persist to session and advance
       if (setupIntent) {
-        const pmId =
-          typeof setupIntent.payment_method === "string"
-            ? setupIntent.payment_method
-            : setupIntent.payment_method?.id;
-
+        const pmId = setupIntent.payment_method as string;
         const pmType = setupIntent.payment_method_types?.[0];
 
         updateSession({
           paymentMethodId: pmId,
-          ...(pmType === "card" || pmType === "sepa_debit"
-            ? { paymentMethodType: pmType }
-            : {}),
-          user: {
-            ...user,
-            psp_customer_id: customerId,
-            psp_payment_method_id: pmId ?? null,
-          },
+          ...(pmType === "card" || pmType === "sepa_debit" ? { paymentMethodType: pmType } : {}),
+          user: { ...user, psp_customer_id: customerId, psp_payment_method_id: pmId },
         });
-
         next();
       }
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Une erreur est survenue.";
+      const message = err instanceof Error ? err.message : "Une erreur est survenue.";
       event.paymentFailed({ message });
-      setError(message);
-      toast.error(message);
+      showError(message);
     } finally {
       setLoading(false);
     }
@@ -263,12 +197,7 @@ function PaymentForm() {
         isForm
         selectionError={error}
         customAction={
-          <Button
-            type="submit"
-            variant="ctaPurple"
-            size="cta"
-            loading={loading}
-          >
+          <Button type="submit" variant="ctaPurple" size="cta" loading={loading}>
             {texts.ctaLabel ?? "Continuer"}
             <ArrowRight className="size-5" />
           </Button>
@@ -281,7 +210,15 @@ function PaymentForm() {
               onConfirm={handleExpressCheckoutConfirm}
             />
           </div>
-          <div className="w-full rounded-xl border border-[#E9E6DF] bg-white p-3 sm:p-4">
+
+          {/* Divider */}
+          <div className="flex items-center gap-3">
+            <div className="h-px flex-1 bg-[#E9E3DD]" />
+            <span className="text-sm font-medium text-[#8E7A9E]">ou</span>
+            <div className="h-px flex-1 bg-[#E9E3DD]" />
+          </div>
+
+          <div className="w-full">
             <PaymentElement options={paymentElementOptions} />
           </div>
         </div>
@@ -290,25 +227,10 @@ function PaymentForm() {
   );
 }
 
+/** Wraps PaymentForm in Stripe's Elements provider — useStripe()/useElements() require this. */
 export function PaymentStep() {
-  const stripeP = getStripePromise();
-
-  if (!stripeP) {
-    return (
-      <div className="mx-auto flex w-full max-w-lg flex-col gap-4 py-8 px-2 sm:pl-12">
-        <h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold text-[#1D1B20]">
-          Paiement indisponible
-        </h1>
-        <p className="text-[#444444]">
-          La clé publique Stripe est manquante
-          (NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY).
-        </p>
-      </div>
-    );
-  }
-
   return (
-    <Elements stripe={stripeP} options={elementsOptions}>
+    <Elements stripe={getStripePromise()!} options={elementsOptions}>
       <PaymentForm />
     </Elements>
   );

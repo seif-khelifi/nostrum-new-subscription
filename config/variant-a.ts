@@ -80,6 +80,7 @@ export const variantA: VariantConfig = {
         { id: "dateSignatureAncien", label: "Date signature ancien contrat" },
         { id: "dateDebutNostrum", label: "Date début contrat Nostrum" },
         { id: "payment", label: "Paiement" },
+        { id: "coupon", label: "Code promo" },
         { id: "souscription_placeholder", label: "Souscription" },
       ],
     },
@@ -374,6 +375,19 @@ export const variantA: VariantConfig = {
       subtitle:
         "J'entre mes infos bancaires pour finaliser ma souscription.",
       ctaLabel: "Continuer",
+    },
+
+    coupon: {
+      title: "Mon moyen de paiement",
+      navbarTitle: "Souscription",
+      subtitle:
+        "J'entre mes infos bancaires pour finaliser ma souscription.",
+      banner: {
+        icon: true,
+        title: "Nostrum Care rembourse plus de 40 médecines douces :",
+        subtitle:
+          "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
+      },
     },
 
     /* ── Options ── */

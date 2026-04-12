@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-import { ApiError, fetchJSON, type ErrorMap } from "@/lib/http";
+import { fetchJSON, type ErrorMap } from "@/lib/http";
 
-/* ------------------------------------------------------------------ */
-/*  Error map                                                          */
-/* ------------------------------------------------------------------ */
+interface StripeCustomer {
+  id: string;
+}
 
 const CREATE_STRIPE_CUSTOMER_ERRORS: ErrorMap = {
   400: "Données invalides. Vérifiez vos informations.",
@@ -13,17 +13,13 @@ const CREATE_STRIPE_CUSTOMER_ERRORS: ErrorMap = {
   503: "Service temporairement indisponible. Veuillez réessayer plus tard.",
 };
 
-/* ------------------------------------------------------------------ */
-/*  Route handler                                                      */
-/* ------------------------------------------------------------------ */
-
 const CREATE_CUSTOMER_URL = `${process.env.NOSTRUM_API_V3_BASE_URL}/proxy?route=stripe/create-customer`;
 
 export async function POST(req: NextRequest) {
   const body: unknown = await req.json();
 
   try {
-    const data = await fetchJSON<unknown>(
+    const data = await fetchJSON<StripeCustomer[]>(
       CREATE_CUSTOMER_URL,
       {
         method: "POST",
@@ -37,17 +33,20 @@ export async function POST(req: NextRequest) {
       CREATE_STRIPE_CUSTOMER_ERRORS,
     );
 
-    return NextResponse.json({
-      message: "Successful request.",
-      data,
-    });
+    const customerId = data[0]?.id;
+    if (!customerId) {
+      return NextResponse.json(
+        { error: "Réponse invalide lors de la création du client de paiement." },
+        { status: 502 },
+      );
+    }
+
+    return NextResponse.json({ customerId });
   } catch (err) {
     const message =
-      err instanceof ApiError
+      err instanceof Error
         ? err.message
-        : err instanceof Error
-          ? err.message
-          : "Une erreur est survenue. Veuillez réessayer plus tard.";
+        : "Une erreur est survenue. Veuillez réessayer plus tard.";
     console.error("[create-stripe-customer]", message);
     return NextResponse.json({ error: message }, { status: 502 });
   }

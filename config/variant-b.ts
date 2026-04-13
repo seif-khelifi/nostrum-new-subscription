@@ -40,6 +40,7 @@ export const variantB: VariantConfig = {
         { id: "nousSommes", label: "Nous sommes" },
         { id: "commenceParQui", label: "On commence par qui" },
         { id: "dateBirthConjoint", label: "Date de naissance conjoint" },
+        { id: "dateBirthChildren", label: "Date de naissance enfants" },
       ],
     },
     {
@@ -97,11 +98,18 @@ export const variantB: VariantConfig = {
     { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
     // "Mon conjoint(e) et moi" → skip nousSommes (familyCount is hard-set to 2), jump to commenceParQui
     { from: "proteger", field: "proteger", value: "conjoint_et_moi", target: "commenceParQui" },
-    // "Mon enfant" → skip dateBirthConjoint, jump to santé
+    // "Mon enfant" → skip dateBirthConjoint, jump to children DOBs
     {
       from: "commenceParQui",
       field: "commenceParQui",
       value: "enfant",
+      target: "dateBirthChildren",
+    },
+    // "Conjoint et moi" has no children → skip dateBirthChildren after conjoint DOB
+    {
+      from: "dateBirthConjoint",
+      field: "proteger",
+      value: "conjoint_et_moi",
       target: "sante_yeux",
     },
     // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
@@ -193,6 +201,10 @@ export const variantB: VariantConfig = {
         imageSrcHorizontal: "/alertBanner/speaker-hor.svg",
         imageAlt: "Speaker",
       },
+    },
+
+    dateBirthChildren: {
+      title: "Et vos enfants ?",
     },
 
     /* ── Santé ── */

@@ -41,6 +41,7 @@ export const variantA: VariantConfig = {
         { id: "nousSommes", label: "Nous sommes" },
         { id: "commenceParQui", label: "On commence par qui" },
         { id: "dateBirthConjoint", label: "Date de naissance conjoint" },
+        { id: "dateBirthChildren", label: "Date de naissance enfants" },
       ],
     },
     {
@@ -101,11 +102,18 @@ export const variantA: VariantConfig = {
       value: "conjoint_et_moi",
       target: "commenceParQui",
     },
-    // "Mon enfant" → skip dateBirthConjoint, jump to santé
+    // "Mon enfant" → skip dateBirthConjoint, jump to children DOBs
     {
       from: "commenceParQui",
       field: "commenceParQui",
       value: "enfant",
+      target: "dateBirthChildren",
+    },
+    // "Conjoint et moi" has no children → skip dateBirthChildren after conjoint DOB
+    {
+      from: "dateBirthConjoint",
+      field: "proteger",
+      value: "conjoint_et_moi",
       target: "sante_yeux",
     },
     // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
@@ -201,6 +209,11 @@ export const variantA: VariantConfig = {
           "ostéopathie, sophrologie, psychologie, acupuncture, naturopathie, coaching, et bien plus.",
         icon: true,
       },
+    },
+
+    dateBirthChildren: {
+      title: "Et vos enfants ?",
+      navbarTitle: "Situation",
     },
 
     /* ── Santé ── */

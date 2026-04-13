@@ -18,6 +18,7 @@ export type StepId =
   | "nousSommes"
   | "commenceParQui"
   | "dateBirthConjoint"
+  | "dateBirthChildren"
   | "recap"
   | "envoiSms"
   | "sante_yeux"

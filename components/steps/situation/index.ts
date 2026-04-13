@@ -10,6 +10,7 @@ export { ProtegerStep } from "./proteger-step";
 export { NousSommesStep } from "./nous-sommes-step";
 export { CommenceParQuiStep } from "./commence-par-qui-step";
 export { DateBirthConjointStep } from "./date-birth-conjoint-step";
+export { DateBirthChildrenStep } from "./date-birth-children-step";
 export { RecapStep } from "../souscription/recap-step";
 export { EnvoiSmsStep } from "../souscription/envoi-sms-step";
 export { SocialSecurityStep } from "../souscription/social-security-step";

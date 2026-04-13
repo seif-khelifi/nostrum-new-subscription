@@ -70,7 +70,7 @@ export async function fetchJSON<T>(
   }
 
   const text = await res.text();
-  console.log("==================== BODY ==========================");
+  console.log("==================== RESPONSE BODY ==========================");
   console.log(text || "EMPTY RESPONSE BODY");
   console.log("====================================================");
   if (!text) {

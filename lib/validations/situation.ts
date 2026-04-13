@@ -98,6 +98,10 @@ export const ADHERENT_MAX_AGE = 95;
 export const CONJOINT_MIN_AGE = 18;
 export const CONJOINT_MAX_AGE = 95;
 
+/** Enfant à charge: minimum 0 years old, maximum 25 years old. */
+export const ENFANT_MIN_AGE = 0;
+export const ENFANT_MAX_AGE = 25;
+
 /* ═══════════════════════════════════════════════════════════════════ */
 /*  Situation step schemas                                            */
 /* ═══════════════════════════════════════════════════════════════════ */
@@ -122,6 +126,18 @@ export const dateBirthConjointSchema = z.object({
 });
 export type DateBirthConjointFormValues = z.infer<
   typeof dateBirthConjointSchema
+>;
+
+/** dateBirthChildren step — each child's birthDate (dynamic array) */
+export const dateBirthChildrenSchema = z.object({
+  children: z.array(
+    z.object({
+      birthdate: birthDateSchema(ENFANT_MIN_AGE, ENFANT_MAX_AGE),
+    }),
+  ),
+});
+export type DateBirthChildrenFormValues = z.infer<
+  typeof dateBirthChildrenSchema
 >;
 
 /** nousSommes step — family member count (minimum 2) */

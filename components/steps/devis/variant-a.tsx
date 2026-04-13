@@ -38,7 +38,7 @@ import offersData from "@/data/offers.json";
  *                  and a CompareCard at the bottom.
  */
 export function DevisVariantA() {
-  const { goToStepById } = useStepper();
+  const { goToStepById, launchSubFlow } = useStepper();
   const { setValue: setSelectedOffer, removeValue: clearSelectedOffer } = useSessionStorage<number | null>(
     "selectedOffer",
     null,
@@ -98,8 +98,7 @@ export function DevisVariantA() {
   /** Navigate to comparateur — clear selectedOffer so it defaults to discovery mode. */
   function openComparateur() {
     clearSelectedOffer();
-    sessionStorage.setItem("comparateurOrigin", JSON.stringify("devis_placeholder"));
-    goToStepById("offre_comparateur");
+    launchSubFlow(["comparateur_welcome", "offre_comparateur"], "devis_placeholder");
   }
 
   const recommended = offersData.offers.find((o) => o.tone === "recommended");

@@ -2,9 +2,7 @@
 
 import Image from "next/image";
 import { X } from "lucide-react";
-import type { StepId } from "@/config";
 import { useStepper } from "@/context/StepperContext";
-import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
 import comparateurData from "@/data/comparateur-variant-a.json";
 
@@ -17,12 +15,8 @@ const WELCOME_BG =
  * Fills the viewport exactly — no scroll.
  */
 export function ComparateurWelcome() {
-	const { goToStepById, next } = useStepper();
-	const { value: comparateurOrigin } = useSessionStorage<StepId>(
-		"comparateurOrigin",
-		"garanties",
-	);
-	const close = () => goToStepById(comparateurOrigin);
+	const { dismissSubFlow, next } = useStepper();
+	const close = () => dismissSubFlow();
 	const start = () => next();
 
 	return (

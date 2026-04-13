@@ -30,7 +30,7 @@ import offersData from "@/data/offers.json";
  *                  and a CompareCard at the bottom.
  */
 export function DevisVariantB() {
-  const { goToStepById } = useStepper();
+  const { goToStepById, launchSubFlow } = useStepper();
   const { setValue: setSelectedOffer } = useSessionStorage<number | null>(
     "selectedOffer",
     null,
@@ -175,7 +175,7 @@ export function DevisVariantB() {
             title={compare.title}
             description={compare.description}
             ctaLabel={compare.ctaLabel}
-            onCtaClick={() => goToStepById("offre_comparateur")}
+            onCtaClick={() => launchSubFlow(["offre_comparateur"], "devis_placeholder")}
           />
         </div>
       </div>

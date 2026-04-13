@@ -51,7 +51,7 @@ type AccordionSection = {
 /* ------------------------------------------------------------------ */
 
 export function GarantiesVariantA() {
-  const { goToStepById } = useStepper();
+  const { goToStepById, launchSubFlow } = useStepper();
   const texts = useStepTexts("garanties");
   const extra = (texts.extra ?? {}) as {
     subtitleTemplate: string;
@@ -323,8 +323,7 @@ export function GarantiesVariantA() {
             description={compare.description}
             ctaLabel={compare.ctaLabel}
             onCtaClick={() => {
-              sessionStorage.setItem("comparateurOrigin", JSON.stringify("garanties"));
-              goToStepById("offre_comparateur");
+              launchSubFlow(["offre_comparateur"], "garanties");
             }}
           />
         </div>

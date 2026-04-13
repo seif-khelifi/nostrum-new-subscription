@@ -26,7 +26,7 @@ const tabsData: AllTabs = garantiesData.tabs as AllTabs;
 /* ------------------------------------------------------------------ */
 
 export function ComparateurVariantB() {
-  const { goToStepById } = useStepper();
+  const { dismissSubFlow } = useStepper();
   const { value: storedCompareOffers, setValue: setStoredCompareOffers } =
     useSessionStorage<string[]>("compareOffers", []);
 
@@ -126,8 +126,8 @@ export function ComparateurVariantB() {
           <div className="mb-6 mt-2 flex justify-center">
             <Button
               variant="closeComparateur"
-              onClick={() => goToStepById("garanties")}
-            >
+              onClick={() => dismissSubFlow()}
+>
               Fermer le comparateur d{"'"}offres
               <span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
                 <X className="h-4 w-4 text-[#F3E5FA]" />
@@ -255,7 +255,7 @@ export function ComparateurVariantB() {
               <div className="mt-auto">
                 <Button
                   variant="revenirOffres"
-                  onClick={() => goToStepById("garanties")}
+                  onClick={() => dismissSubFlow()}
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Revenir aux offres

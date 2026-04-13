@@ -10,9 +10,19 @@ import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { CommenceParQuiValue } from "@/types/subscription";
+import type { StepId } from "@/config";
+
+/** Sub-flow step order when conjoint is picked first */
+const FAMILLE_CONJOINT_FIRST: StepId[] = [
+  "nousSommes", "commenceParQui", "dateBirthConjoint", "dateBirthChildren",
+];
+/** Sub-flow step order when enfant is picked first */
+const FAMILLE_ENFANT_FIRST: StepId[] = [
+  "nousSommes", "commenceParQui", "dateBirthChildren", "dateBirthConjoint",
+];
 
 export function CommenceParQuiStep() {
-  const { next } = useStepper();
+  const { next, updateSubFlow } = useStepper();
   const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("commenceParQui");
 
@@ -44,7 +54,14 @@ export function CommenceParQuiStep() {
       infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
       canProceed={selected !== null}
       onNext={() => {
-        if (validate()) next();
+        if (!validate()) return;
+        // Append the DOB steps to the sub-flow in the correct order
+        updateSubFlow(
+          selected === "conjoint"
+            ? FAMILLE_CONJOINT_FIRST
+            : FAMILLE_ENFANT_FIRST,
+        );
+        next();
       }}
       selectionError={error}
     >

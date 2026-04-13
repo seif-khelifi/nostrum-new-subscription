@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import { X } from "lucide-react";
 import { capitalize } from "@/lib/utils";
 import { type OfferPlan, ALL_PLANS, RECOMMENDED_OFFER } from "@/lib/plans";
-import type { StepId } from "@/config";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { Button } from "@/components/ui/button";
@@ -35,15 +34,11 @@ const infoCardData = comparateurData.infoCard as Record<string, CompareValues>;
 /* ------------------------------------------------------------------ */
 
 export function ComparateurVariantA() {
-	const { goToStepById } = useStepper();
+	const { dismissSubFlow } = useStepper();
 
 	const { value: selectedOfferIndex, isReady } = useSessionStorage<number | null>(
 		"selectedOffer",
 		null,
-	);
-	const { value: comparateurOrigin } = useSessionStorage<StepId>(
-		"comparateurOrigin",
-		"garanties",
 	);
 
 	// Plans available in the tab selector (everything except the recommended offer)
@@ -87,7 +82,7 @@ export function ComparateurVariantA() {
 	}, []);
 
 	const sectionKey = sections[activeSection]?.key ?? "dentaire";
-	const close = () => goToStepById(comparateurOrigin);
+	const close = () => dismissSubFlow();
 	const savingsAmount = comparateurData.banner.savingsAmount;
 
 	// Resolve data for current section

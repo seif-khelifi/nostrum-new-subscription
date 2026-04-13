@@ -179,9 +179,9 @@ function PlaceholderScreen({ label }: { label: string }) {
  * then falls back to the default component map.
  */
 export function StepRouter() {
-  const { currentStepDef, activeStep } = useStepper();
+  const { currentStepDef, activeStep, subFlow } = useStepper();
   const { components: variantComponents } = useVariant();
-  const prevStepRef = useRef(activeStep);
+  const prevStepIdRef = useRef(currentStepDef.id);
 
   // Variant-specific component override, or fall back to default map
   const Component =
@@ -189,9 +189,11 @@ export function StepRouter() {
     DEFAULT_STEP_COMPONENTS[currentStepDef.id];
 
   // Scroll all scrollable containers to top on step change
+  // Track by step id (works for both main-flow and sub-flow transitions)
+  const currentId = currentStepDef.id;
   useEffect(() => {
-    if (prevStepRef.current !== activeStep) {
-      prevStepRef.current = activeStep;
+    if (prevStepIdRef.current !== currentId) {
+      prevStepIdRef.current = currentId;
       // Mobile shell <main> — the overflow-y-auto scroll container
       const mobileMain = document.querySelector('[data-slot="mobile-main"]');
       if (mobileMain) {
@@ -205,7 +207,7 @@ export function StepRouter() {
       // Fallback: window scroll
       window.scrollTo(0, 0);
     }
-  }, [activeStep]);
+  }, [currentId]);
 
   if (!Component) {
     return (

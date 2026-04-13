@@ -128,13 +128,15 @@ export type DateBirthConjointFormValues = z.infer<
   typeof dateBirthConjointSchema
 >;
 
-/** dateBirthChildren step — each child's birthDate (dynamic array) */
+/** dateBirthChildren step — each child's birthDate (dynamic array, at least 1) */
 export const dateBirthChildrenSchema = z.object({
-  children: z.array(
-    z.object({
-      birthdate: birthDateSchema(ENFANT_MIN_AGE, ENFANT_MAX_AGE),
-    }),
-  ),
+  children: z
+    .array(
+      z.object({
+        birthdate: birthDateSchema(ENFANT_MIN_AGE, ENFANT_MAX_AGE),
+      }),
+    )
+    .min(1, "Au moins un enfant est requis"),
 });
 export type DateBirthChildrenFormValues = z.infer<
   typeof dateBirthChildrenSchema

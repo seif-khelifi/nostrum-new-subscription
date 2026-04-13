@@ -7,7 +7,6 @@ export type {
   StepId,
   StepDef,
   StepGroup,
-  SkipRule,
 } from "./types";
 export { variantA } from "./variant-a";
 export { variantB } from "./variant-b";

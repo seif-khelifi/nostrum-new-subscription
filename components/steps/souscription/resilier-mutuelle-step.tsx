@@ -12,7 +12,7 @@ import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ResilierMutuelleValue } from "@/types/subscription";
 
 export function ResilierMutuelleStep() {
-  const { next } = useStepper();
+  const { next, launchSubFlow } = useStepper();
   const { uiData, updateUI } = useSanteForm();
   const { updatePrimary } = useSituationForm();
   const texts = useStepTexts("resilierMutuelle");
@@ -24,8 +24,8 @@ export function ResilierMutuelleStep() {
   const handleNext = () => {
     if (!validate()) return;
 
-    // When user says they have no insurance, clear any previously set insurance data
     if (selected === "pas_de_mutuelle") {
+      // No existing insurance — clear any stale data and go directly to dateDebutNostrum
       updatePrimary({
         previousMutualTermination: false,
         previousHealthMutualName: undefined,
@@ -34,9 +34,11 @@ export function ResilierMutuelleStep() {
         previousContractEndDate: undefined,
         previousContractEndDateAsked: undefined,
       });
+      next(); // natural next → dateDebutNostrum (currentInsurance/dateSignatureAncien not in main flow)
+    } else {
+      // Has existing insurance — launch sub-flow for insurance details
+      launchSubFlow(["currentInsurance", "dateSignatureAncien"], "dateDebutNostrum");
     }
-
-    next();
   };
 
   return (

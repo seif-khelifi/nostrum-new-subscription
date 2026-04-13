@@ -85,6 +85,11 @@ export function calculateDatesOfContractsSwap(now: Date = new Date()): SwapDates
   }
 }
 
+/** French ordinal label: 1 → "1er", 2 → "2ème", etc. */
+export function frenchOrdinal(n: number): string {
+  return n === 1 ? "1er" : `${n}ème`
+}
+
 /** Resolve an insurance name to a known item or a custom name. */
 export function resolveInitialSelection(
   name: string | undefined,

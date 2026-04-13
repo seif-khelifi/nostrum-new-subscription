@@ -105,30 +105,6 @@ export interface StepTexts {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Skip rules — conditional step routing                             */
-/* ------------------------------------------------------------------ */
-
-/**
- * A skip rule tells the stepper: "when leaving step `from`, if the
- * field `field` on `session.beneficiaries[0]` equals `value`, jump to
- * `target` instead of the next step in the flat list."
- *
- * `next()` checks rules where `from` matches the current step.
- * `back()` checks rules where `target` matches the current step.
- * This keeps forward and backward navigation automatically symmetric.
- */
-export interface SkipRule {
-  /** The step the user is leaving */
-  from: StepId;
-  /** Key on `session.beneficiaries[0]` to check */
-  field: string;
-  /** Value that triggers the skip */
-  value: string;
-  /** The step to jump to */
-  target: StepId;
-}
-
-/* ------------------------------------------------------------------ */
 /*  Layout configuration — declarative shell/sidebar/navbar behavior  */
 /* ------------------------------------------------------------------ */
 
@@ -174,13 +150,6 @@ export interface VariantConfig {
    * different text from `texts`.
    */
   components?: Partial<Record<StepId, ComponentType>>;
-
-  /**
-   * Conditional skip rules for non-linear step navigation.
-   * Drives both `next()` and `back()` in the stepper so forward/backward
-   * routing stays automatically symmetric.
-   */
-  skipRules?: SkipRule[];
 
   /**
    * Declarative layout configuration — controls sidebar theme,

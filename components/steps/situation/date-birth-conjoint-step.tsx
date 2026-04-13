@@ -8,24 +8,20 @@ import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
-import { useSanteForm } from "@/context/SanteFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import { dateBirthConjointSchema, type DateBirthConjointFormValues, CONJOINT_MIN_AGE, CONJOINT_MAX_AGE } from "@/lib/validations/situation";
 
-const COMMENCE_LABELS: Record<string, string> = { conjoint: "Mon conjoint(e)", enfant: "Mon enfant" };
-
 export function DateBirthConjointStep() {
   const { next } = useStepper();
   const { session, updateBeneficiary } = useSituationForm();
-  const { uiData } = useSanteForm();
   const texts = useStepTexts("dateBirthConjoint");
 
   const marriedIdx = session.beneficiaries.findIndex((b) => b.relationship === "MARRIED");
   const married = marriedIdx >= 0 ? session.beneficiaries[marriedIdx] : null;
   const rawBirthDate = married?.birthdate ?? "";
-  const commenceLabel = uiData.commenceParQui ? (COMMENCE_LABELS[uiData.commenceParQui] ?? "") : "";
+  const commenceLabel = "Mon conjoint(e)";
 
   const {
     control, handleSubmit, formState: { errors, isValid, submitCount },

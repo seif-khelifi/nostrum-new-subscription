@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { standardSchemaResolver } from "@hookform/resolvers/standard-schema";
+import { PillInput } from "@/components/ui/pill-input";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
 import { StepScreen } from "@/components/steps/step-screen";
 import { AlertBanner } from "@/components/ui/alert";
@@ -10,7 +11,7 @@ import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
-import { formatBirthdate, parseBirthdate } from "@/lib/utils";
+import { formatBirthdate, parseBirthdate, frenchOrdinal } from "@/lib/utils";
 import {
   dateBirthChildrenSchema,
   type DateBirthChildrenFormValues,
@@ -18,21 +19,12 @@ import {
   ENFANT_MAX_AGE,
 } from "@/lib/validations/situation";
 
-/* ── French ordinal labels ── */
-
-const ORDINALS: Record<number, string> = {
-  1: "1er",
-  2: "2ème",
-  3: "3ème",
-  4: "4ème",
-};
-
 export function DateBirthChildrenStep() {
   const { next } = useStepper();
-  const { session, updateBeneficiary } = useSituationForm();
+  const { session, setBeneficiaries } = useSituationForm();
   const texts = useStepTexts("dateBirthChildren");
 
-  /* ── Find all CHILDREN beneficiaries ── */
+  /* ── Find all CHILDREN beneficiary indices ── */
   const childrenIndices = session.beneficiaries
     .map((b, i) => (b.relationship === "CHILDREN" ? i : -1))
     .filter((i) => i >= 0);
@@ -60,27 +52,28 @@ export function DateBirthChildrenStep() {
 
   const { fields } = useFieldArray({ control, name: "children" });
 
-  useFormErrorToast(
-    errors,
-    errorKey(errors),
-    submitCount,
-  );
+  useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateBirthChildrenFormValues) => {
+    /* Bulk-update all beneficiaries at once to avoid stale-closure overwrites */
+    const bens = [...session.beneficiaries];
     data.children.forEach((child, i) => {
       const sessionIdx = childrenIndices[i];
-      if (sessionIdx !== undefined) {
-        updateBeneficiary(sessionIdx, {
+      if (sessionIdx !== undefined && bens[sessionIdx]) {
+        bens[sessionIdx] = {
+          ...bens[sessionIdx],
           birthdate: formatBirthdate(child.birthdate),
-        });
+        };
       }
     });
+    setBeneficiaries(bens);
     next();
   };
 
   if (childrenIndices.length === 0) return null;
 
   const now = new Date();
+  const isSingle = fields.length === 1;
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
@@ -89,18 +82,27 @@ export function DateBirthChildrenStep() {
         hideTitle={!!texts.navbarTitle}
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
+            <span>Je veux protéger en premier</span>
+            <PillInput
+              readOnly
+              value="Mon enfant"
+              placeholder=""
+              inputClassName="min-w-[100px] sm:min-w-[140px]"
+            />
+            {isSingle ? (
+              <span>et il est né(e) le</span>
+            ) : (
+              <span>,</span>
+            )}
             {fields.map((field, i) => {
-              const ordinal = ORDINALS[i + 1] ?? `${i + 1}ème`;
-              const isLast = i === fields.length - 1;
               const fieldErrors = errors.children?.[i]?.birthdate;
+              const isLast = i === fields.length - 1;
 
               return (
                 <span key={field.id} className="contents">
-                  {fields.length === 1 ? (
-                    <span>Mon enfant est né(e) le</span>
-                  ) : (
+                  {!isSingle && (
                     <span>
-                      {i === 0 ? "Mon" : "mon"} {ordinal} enfant est né(e) le
+                      mon {frenchOrdinal(i + 1)} enfant est né(e) le
                     </span>
                   )}
                   <Controller
@@ -118,11 +120,8 @@ export function DateBirthChildrenStep() {
                       />
                     )}
                   />
-                  {!isLast && fields.length > 2 && <span>,</span>}
-                  {!isLast && fields.length === 2 && <span>et</span>}
-                  {!isLast && fields.length > 2 && i === fields.length - 2 && (
-                    <span>et</span>
-                  )}
+                  {!isLast && i < fields.length - 2 && <span>,</span>}
+                  {!isLast && i === fields.length - 2 && <span>et</span>}
                 </span>
               );
             })}

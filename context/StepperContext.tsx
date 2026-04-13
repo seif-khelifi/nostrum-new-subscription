@@ -1,13 +1,38 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
 import { useVariant } from "@/context/VariantContext";
-import type { StepId, StepDef, StepGroup, SkipRule, VariantKey } from "@/config";
+import type { StepId, StepDef, StepGroup, VariantKey } from "@/config";
 
 export type { StepId, StepDef, StepGroup };
 
 /** @deprecated Use `VariantKey` from `@/config/variants` instead. */
 export type DevisVariant = VariantKey;
+
+/* ------------------------------------------------------------------ */
+/*  Sub-flow — floating step sequence overlay                         */
+/* ------------------------------------------------------------------ */
+
+export interface SubFlow {
+  /** Ordered list of floating step ids */
+  steps: StepId[];
+  /** Current position within the sub-flow */
+  index: number;
+  /** Step to navigate to when the sub-flow completes (last next()) */
+  returnStepId: StepId;
+  /** Main-flow flat index of the step that launched this sub-flow (for back from first step) */
+  parentIndex: number;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Combined state — single object so functional updaters always see  */
+/*  the latest values (avoids stale-closure bugs with batched calls)  */
+/* ------------------------------------------------------------------ */
+
+interface StepperState {
+  activeStep: number;
+  subFlow: SubFlow | null;
+}
 
 /* ------------------------------------------------------------------ */
 /*  Context value                                                     */
@@ -24,11 +49,23 @@ interface StepperContextValue {
   isLastStep: boolean;
   /** @deprecated Read from `useVariant().id` instead. */
   devisVariant: VariantKey;
+
+  /* ── Main navigation ── */
   next: () => void;
   back: () => void;
   goToStep: (index: number) => void;
   goToStepById: (id: StepId) => void;
   goToGroup: (groupId: number) => void;
+
+  /* ── Sub-flow navigation ── */
+  /** Active sub-flow, or null when navigating the main flow */
+  subFlow: SubFlow | null;
+  /** Launch a floating step sequence. Renders the first step immediately. */
+  launchSubFlow: (steps: StepId[], returnStepId: StepId) => void;
+  /** Replace the sub-flow steps array (keeps current index). Used mid-flow to reorder remaining steps. */
+  updateSubFlow: (steps: StepId[]) => void;
+  /** Dismiss the sub-flow and return to the step that launched it. */
+  dismissSubFlow: () => void;
 }
 
 const StepperContext = createContext<StepperContextValue | null>(null);
@@ -66,50 +103,6 @@ function getFlatIndexById(allSteps: StepDef[], id: StepId): number {
   return idx >= 0 ? idx : 0;
 }
 
-/** UI-only fields stored in subscription_ui, not in beneficiaries[0]. */
-const UI_FIELDS = new Set(["proteger", "familyCount", "commenceParQui", "resilierMutuelle"]);
-
-/**
- * Read a field used by skip rules.
- * UI-only navigation fields live in `subscription_ui`;
- * everything else lives in `session.beneficiaries[0]`.
- */
-function getSituationField(field: string): string | null {
-  try {
-    if (UI_FIELDS.has(field)) {
-      const raw = sessionStorage.getItem("subscription_ui");
-      if (!raw) return null;
-      return JSON.parse(raw)[field] ?? null;
-    }
-    const raw = sessionStorage.getItem("session");
-    if (!raw) return null;
-    const session = JSON.parse(raw);
-    return session?.beneficiaries?.[0]?.[field] ?? null;
-  } catch {
-    return null;
-  }
-}
-
-/**
- * Find the first skip rule that matches the current step and form state.
- *
- * - `next()` calls this with `direction: "forward"` → matches on `rule.from`
- * - `back()` calls this with `direction: "backward"` → matches on `rule.target`
- */
-function findMatchingSkipRule(
-  rules: SkipRule[],
-  currentId: StepId,
-  direction: "forward" | "backward",
-): SkipRule | undefined {
-  return rules.find((rule) => {
-    const stepMatch =
-      direction === "forward"
-        ? rule.from === currentId
-        : rule.target === currentId;
-    return stepMatch && getSituationField(rule.field) === rule.value;
-  });
-}
-
 /* ------------------------------------------------------------------ */
 /*  Provider                                                          */
 /* ------------------------------------------------------------------ */
@@ -124,48 +117,125 @@ export function StepperProvider({
   const variantConfig = useVariant();
   const groups = variantConfig.stepGroups;
   const allSteps = groups.flatMap((g) => g.steps);
-  const skipRules = variantConfig.skipRules ?? [];
 
   const safeInitial =
     initialStep >= 0 && initialStep < allSteps.length ? initialStep : 0;
-  const [activeStep, setActiveStep] = useState(safeInitial);
 
-  const currentStepDef = allSteps[activeStep];
-  const currentGroup = getGroupForFlatIndex(groups, activeStep);
+  // Single combined state so functional updaters always see latest values
+  const [state, setState] = useState<StepperState>({
+    activeStep: safeInitial,
+    subFlow: null,
+  });
 
-  function next() {
-    setActiveStep((prev) => {
-      const currentId = allSteps[prev]?.id;
-      if (currentId) {
-        const rule = findMatchingSkipRule(skipRules, currentId, "forward");
-        if (rule) return getFlatIndexById(allSteps, rule.target);
+  const { activeStep, subFlow } = state;
+
+  /* ── Derived state ── */
+
+  const currentStepDef: StepDef = subFlow
+    ? { id: subFlow.steps[subFlow.index], label: subFlow.steps[subFlow.index] }
+    : allSteps[activeStep];
+
+  // When in a sub-flow, report the group of the parent step (so sidebar/progress stay correct)
+  const currentGroup = subFlow
+    ? getGroupForFlatIndex(groups, subFlow.parentIndex)
+    : getGroupForFlatIndex(groups, activeStep);
+
+  const isFirstStep = !subFlow && activeStep === 0;
+  const isLastStep = !subFlow && activeStep === allSteps.length - 1;
+
+  /* ── Navigation (all use functional updater to read latest state) ── */
+
+  const next = useCallback(() => {
+    setState((prev) => {
+      if (prev.subFlow) {
+        const sf = prev.subFlow;
+        if (sf.index < sf.steps.length - 1) {
+          // Advance within the sub-flow
+          return { ...prev, subFlow: { ...sf, index: sf.index + 1 } };
+        }
+        // Sub-flow complete — return to main flow at the return step
+        return {
+          activeStep: getFlatIndexById(allSteps, sf.returnStepId),
+          subFlow: null,
+        };
       }
-      return Math.min(prev + 1, allSteps.length - 1);
+      return { ...prev, activeStep: Math.min(prev.activeStep + 1, allSteps.length - 1) };
     });
-  }
+  }, [allSteps]);
 
-  function back() {
-    setActiveStep((prev) => {
-      const currentId = allSteps[prev]?.id;
-      if (currentId) {
-        const rule = findMatchingSkipRule(skipRules, currentId, "backward");
-        if (rule) return getFlatIndexById(allSteps, rule.from);
+  const back = useCallback(() => {
+    setState((prev) => {
+      if (prev.subFlow) {
+        const sf = prev.subFlow;
+        if (sf.index > 0) {
+          // Go to previous step in the sub-flow
+          return { ...prev, subFlow: { ...sf, index: sf.index - 1 } };
+        }
+        // Back from first sub-flow step — return to parent
+        return { activeStep: sf.parentIndex, subFlow: null };
       }
-      return Math.max(prev - 1, 0);
+      return { ...prev, activeStep: Math.max(prev.activeStep - 1, 0) };
     });
-  }
+  }, []);
 
-  function goToStep(index: number) {
-    if (index >= 0 && index < allSteps.length) setActiveStep(index);
-  }
+  const goToStep = useCallback(
+    (index: number) => {
+      if (index >= 0 && index < allSteps.length) {
+        setState({ activeStep: index, subFlow: null });
+      }
+    },
+    [allSteps.length],
+  );
 
-  function goToStepById(id: StepId) {
-    setActiveStep(getFlatIndexById(allSteps, id));
-  }
+  const goToStepById = useCallback(
+    (id: StepId) => {
+      setState({ activeStep: getFlatIndexById(allSteps, id), subFlow: null });
+    },
+    [allSteps],
+  );
 
-  function goToGroup(groupId: number) {
-    setActiveStep(getFirstFlatIndexOfGroup(groups, groupId));
-  }
+  const goToGroup = useCallback(
+    (groupId: number) => {
+      setState({ activeStep: getFirstFlatIndexOfGroup(groups, groupId), subFlow: null });
+    },
+    [groups],
+  );
+
+  /* ── Sub-flow management ── */
+
+  const launchSubFlow = useCallback(
+    (steps: StepId[], returnStepId: StepId) => {
+      setState((prev) => ({
+        ...prev,
+        subFlow: {
+          steps,
+          index: 0,
+          returnStepId,
+          parentIndex: prev.activeStep,
+        },
+      }));
+    },
+    [],
+  );
+
+  const updateSubFlow = useCallback(
+    (steps: StepId[]) => {
+      setState((prev) =>
+        prev.subFlow
+          ? { ...prev, subFlow: { ...prev.subFlow, steps } }
+          : prev,
+      );
+    },
+    [],
+  );
+
+  const dismissSubFlow = useCallback(() => {
+    setState((prev) =>
+      prev.subFlow
+        ? { activeStep: prev.subFlow.parentIndex, subFlow: null }
+        : prev,
+    );
+  }, []);
 
   return (
     <StepperContext.Provider
@@ -176,14 +246,18 @@ export function StepperProvider({
         currentStepDef,
         currentGroup,
         sidebarGroupId: currentGroup.id,
-        isFirstStep: activeStep === 0,
-        isLastStep: activeStep === allSteps.length - 1,
+        isFirstStep,
+        isLastStep,
         devisVariant: variantConfig.id,
         next,
         back,
         goToStep,
         goToStepById,
         goToGroup,
+        subFlow,
+        launchSubFlow,
+        updateSubFlow,
+        dismissSubFlow,
       }}
     >
       {children}

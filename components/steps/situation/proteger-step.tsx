@@ -13,7 +13,7 @@ import { useSelectionValidation } from "@/hooks/use-selection-validation";
 import type { ProtegerValue, SecondaryBeneficiary } from "@/types/subscription";
 
 export function ProtegerStep() {
-  const { next } = useStepper();
+  const { next, launchSubFlow } = useStepper();
   const { session, setBeneficiaries } = useSituationForm();
   const { uiData, updateUI } = useSanteForm();
   const texts = useStepTexts("proteger");
@@ -28,7 +28,16 @@ export function ProtegerStep() {
 
   const handleSelect = (value: ProtegerValue) => {
     const familyCount = value === "conjoint_et_moi" ? 2 : null;
-    updateUI({ proteger: value, familyCount });
+
+    // Auto-set commenceParQui when the step will be skipped
+    const commenceParQui =
+      value === "conjoint_et_moi"
+        ? "conjoint" as const
+        : value === "enfants_et_moi"
+          ? "enfant" as const
+          : uiData.commenceParQui;
+
+    updateUI({ proteger: value, familyCount, commenceParQui });
 
     // Build beneficiaries: keep primary, set secondaries based on choice
     const primary = session.beneficiaries[0];
@@ -43,6 +52,31 @@ export function ProtegerStep() {
     setBeneficiaries(primary ? [primary, ...secondaries] : [...secondaries]);
   };
 
+  const handleNext = () => {
+    if (!validate()) return;
+
+    switch (selected) {
+      case "moi":
+        // No family steps needed — go to santé directly (natural next in main flow)
+        next();
+        break;
+      case "conjoint_et_moi":
+        // Only need conjoint DOB
+        launchSubFlow(["dateBirthConjoint"], "sante_yeux");
+        break;
+      case "enfants_et_moi":
+        // Need family count → children DOBs
+        launchSubFlow(["nousSommes", "dateBirthChildren"], "sante_yeux");
+        break;
+      case "famille":
+        // Need family count → who first → then DOBs (order decided by commenceParQui)
+        launchSubFlow(["nousSommes", "commenceParQui"], "sante_yeux");
+        break;
+      default:
+        next();
+    }
+  };
+
   return (
     <StepScreen
       title={texts.title} hideTitle={!!texts.navbarTitle}
@@ -54,7 +88,7 @@ export function ProtegerStep() {
       }
       infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}
       canProceed={selected !== null}
-      onNext={() => { if (validate()) next(); }}
+      onNext={handleNext}
       selectionError={error}
     >
       {options.map((opt) => (

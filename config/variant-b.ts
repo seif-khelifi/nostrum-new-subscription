@@ -37,10 +37,8 @@ export const variantB: VariantConfig = {
         { id: "profil", label: "Profil" },
         { id: "dob", label: "Date de naissance" },
         { id: "proteger", label: "Protection" },
-        { id: "nousSommes", label: "Nous sommes" },
-        { id: "commenceParQui", label: "On commence par qui" },
-        { id: "dateBirthConjoint", label: "Date de naissance conjoint" },
-        { id: "dateBirthChildren", label: "Date de naissance enfants" },
+        // nousSommes, commenceParQui, dateBirthConjoint, dateBirthChildren
+        // are floating steps — launched as sub-flows by proteger
       ],
     },
     {
@@ -60,8 +58,8 @@ export const variantB: VariantConfig = {
       steps: [
         { id: "devis_placeholder", label: "Devis" },
         { id: "garanties", label: "Garanties" },
-        { id: "comparateur_welcome", label: "Comparateur Bienvenue" },
-        { id: "offre_comparateur", label: "Offre Comparateur" },
+        // comparateur_welcome, offre_comparateur are floating steps —
+        // launched as sub-flows by devis/garanties
         { id: "options", label: "Options" },
       ],
     },
@@ -78,8 +76,8 @@ export const variantB: VariantConfig = {
         { id: "birthPlace", label: "Lieu de naissance" },
         { id: "socialSecurity", label: "Sécurité sociale" },
         { id: "resilierMutuelle", label: "Résilier mutuelle" },
-        { id: "currentInsurance", label: "Mutuelle actuelle" },
-        { id: "dateSignatureAncien", label: "Date signature ancien contrat" },
+        // currentInsurance, dateSignatureAncien are floating steps —
+        // launched as sub-flow by resilierMutuelle when user has existing insurance
         { id: "dateDebutNostrum", label: "Date début contrat Nostrum" },
         { id: "payment", label: "Paiement" },
         { id: "coupon", label: "Code promo" },
@@ -90,36 +88,9 @@ export const variantB: VariantConfig = {
   ],
 
   /* ────────────────────────────────────────────────────────────── */
-  /*  Skip rules — conditional step routing                        */
+  /*  Skip rules removed — all conditional routing is now handled  */
+  /*  by sub-flows launched from individual step components.        */
   /* ────────────────────────────────────────────────────────────── */
-
-  skipRules: [
-    // "Seulement moi" → skip family steps, jump to santé
-    { from: "proteger", field: "proteger", value: "moi", target: "sante_yeux" },
-    // "Mon conjoint(e) et moi" → skip nousSommes (familyCount is hard-set to 2), jump to commenceParQui
-    { from: "proteger", field: "proteger", value: "conjoint_et_moi", target: "commenceParQui" },
-    // "Mon enfant" → skip dateBirthConjoint, jump to children DOBs
-    {
-      from: "commenceParQui",
-      field: "commenceParQui",
-      value: "enfant",
-      target: "dateBirthChildren",
-    },
-    // "Conjoint et moi" has no children → skip dateBirthChildren after conjoint DOB
-    {
-      from: "dateBirthConjoint",
-      field: "proteger",
-      value: "conjoint_et_moi",
-      target: "sante_yeux",
-    },
-    // "Pas de mutuelle" → skip currentInsurance + dateSignatureAncien
-    {
-      from: "resilierMutuelle",
-      field: "resilierMutuelle",
-      value: "pas_de_mutuelle",
-      target: "dateDebutNostrum",
-    },
-  ],
 
   /* ────────────────────────────────────────────────────────────── */
   /*  Per-step texts                                               */

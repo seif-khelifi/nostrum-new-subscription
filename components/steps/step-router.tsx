@@ -41,6 +41,7 @@ import {
   ComparateurWelcomeVariantA,
   OptionsVariantA,
   OptionsVariantB,
+  RecapVariantA,
 } from "./devis";
 
 /* ------------------------------------------------------------------ */
@@ -97,6 +98,14 @@ function ComparateurStep() {
 function OptionsStep() {
   const { devisVariant } = useStepper();
   return devisVariant === "b" ? <OptionsVariantB /> : <OptionsVariantA />;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Variant-aware devis recap step                                     */
+/* ------------------------------------------------------------------ */
+
+function DevisRecapStep() {
+  return <RecapVariantA />;
 }
 
 /* ------------------------------------------------------------------ */
@@ -157,6 +166,9 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 
   // Options
   options: OptionsStep,
+
+  // Devis recap — offer summary before souscription
+  devis_recap: DevisRecapStep,
 
   // Placeholder steps — will be replaced with real screens later
   souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,

@@ -47,9 +47,12 @@ export function DesktopShell({
 	const { currentGroup, currentStepDef } = useStepper();
 	const { id: variantId, layout } = useVariant();
 
-	/* Hide sidebar on the Devis step (group 5), except for "options" which
-	   uses the standard layout with sidebars visible. */
-	const hideSidebar = currentGroup.id === 5 && currentStepDef.id !== "options";
+	/* Hide sidebar on the Devis step (group 5), except for "options" and
+	   "devis_recap" which use the standard layout with sidebars visible. */
+	const hideSidebar =
+		currentGroup.id === 5 &&
+		currentStepDef.id !== "options" &&
+		currentStepDef.id !== "devis_recap";
 
 	/* Right sidebar — driven by layout config */
 	const showRightSidebar = layout.sidebar.showRightSidebar && !hideSidebar;

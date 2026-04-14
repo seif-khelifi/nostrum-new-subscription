@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import Image from "next/image"
+import * as React from "react";
+import Image from "next/image";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 import {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 /* ------------------------------------------------------------------ */
 /*  OfferAdvantagesAccordion                                           */
@@ -21,24 +21,30 @@ import {
 /* ------------------------------------------------------------------ */
 
 export type AdvantageLineItem = {
-  title: string
-  subtitle?: string
-  imageSrc: string
-}
+  title: string;
+  subtitle?: string;
+  imageSrc: string;
+};
 
 export interface OfferAdvantagesAccordionProps {
   /** Unique value for the accordion item (e.g. the plan name) */
-  value: string
+  value: string;
   /** Trigger label — defaults to "Voir les avantages" */
-  triggerLabel?: string
+  triggerLabel?: string;
+  /** Optional image displayed next to the trigger label (emoji-sized) */
+  triggerImage?: string;
+  /** Custom colour for the trigger title text */
+  triggerTitleColor?: string;
   /** The advantage rows to render when open */
-  lines: AdvantageLineItem[]
-  className?: string
+  lines: AdvantageLineItem[];
+  className?: string;
 }
 
 function OfferAdvantagesAccordion({
   value,
   triggerLabel = "Voir les avantages",
+  triggerImage,
+  triggerTitleColor,
   lines,
   className,
 }: OfferAdvantagesAccordionProps) {
@@ -46,9 +52,23 @@ function OfferAdvantagesAccordion({
     <Accordion type="single" collapsible className={cn("w-full", className)}>
       <AccordionItem value={value} className="border-b-0">
         <AccordionTrigger className="py-4 hover:no-underline">
-          {/* Inter, bold — matches garanties-variant-a trigger style */}
-          <span className="text-xl  text-[#9000E3]">
-            {triggerLabel}
+          <span className="flex items-center gap-2">
+            {triggerImage && (
+              <Image
+                src={triggerImage}
+                alt=""
+                width={20}
+                height={20}
+                className="h-5 w-5 object-contain"
+              />
+            )}
+            {/* Inter, bold — matches garanties-variant-a trigger style */}
+            <span
+              className="text-xl font-bold"
+              style={{ color: triggerTitleColor ?? "#9000E3" }}
+            >
+              {triggerLabel}
+            </span>
           </span>
         </AccordionTrigger>
 
@@ -87,7 +107,7 @@ function OfferAdvantagesAccordion({
         </AccordionContent>
       </AccordionItem>
     </Accordion>
-  )
+  );
 }
 
-export { OfferAdvantagesAccordion }
+export { OfferAdvantagesAccordion };

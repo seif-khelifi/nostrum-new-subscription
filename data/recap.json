@@ -1,0 +1,70 @@
+{
+  "accordions": [
+    {
+      "accordionLabel": "Bien-être & équilibre",
+      "triggerImage": "/reacp/brain.svg",
+      "triggerTitleColor": "#4D017D",
+      "content": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
+    },
+    {
+      "accordionLabel": "Santé au quotidien",
+      "triggerImage": "/reacp/heart.svg",
+      "triggerTitleColor": "#4D017D",
+      "content": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
+    },
+    {
+      "accordionLabel": "Avantages exclusifs",
+      "triggerImage": "/reacp/brain.svg",
+      "triggerTitleColor": "#4D017D",
+      "content": [
+        {
+          "title": "Title",
+          "subtitle": "Subtitle",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Produits bien-être",
+          "subtitle": "Produits bien-être, CBD, Compléments alimentaires, contraception...",
+          "imageSrc": "/offerLogos/place-holder.svg"
+        },
+        {
+          "title": "Réseau de partenaires",
+          "subtitle": "Promotions et avantages exclusifs",
+          "imageSrc": "/offerLogos/flytex.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -30,6 +30,7 @@ export type StepId =
   | "comparateur_welcome"
   | "offre_comparateur"
   | "options"
+  | "devis_recap"
   | "socialSecurity"
   | "resilierMutuelle"
   | "currentInsurance"

@@ -5,13 +5,15 @@ import { parsePrice, formatPriceLabel } from "@/lib/utils";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useStepTexts } from "@/context/VariantContext";
+import { useSituationForm } from "@/context/SituationFormContext";
 import { OptionCard } from "@/components/ui/option-card";
 import { TotalSummary } from "@/components/ui/total-summary";
-import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-drawer";
 
 const optionsData = optionsJson as OptionDetails[];
+
+const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
 
 /* ------------------------------------------------------------------ */
 /*  Options Page – Variant A                                          */
@@ -23,6 +25,7 @@ const optionsData = optionsJson as OptionDetails[];
 export function OptionsVariantA() {
 	const { next } = useStepper();
 	const texts = useStepTexts("options");
+	const { session } = useSituationForm();
 
 	const { value: selectedOfferIndex } = useSessionStorage<number | null>(
 		"selectedOffer",
@@ -34,22 +37,21 @@ export function OptionsVariantA() {
 	const [drawerOpen, setDrawerOpen] = useState(false);
 	const [activeOption, setActiveOption] = useState<OptionDetails | null>(null);
 
-	const baseOffer = useMemo(() => {
-		const idx = selectedOfferIndex ?? 0;
-		return offersData.offers[idx] || offersData.offers[0];
-	}, [selectedOfferIndex]);
+	const planIndex = session.selectedPlan ?? 0;
+	const planName = PLAN_KEYS[planIndex] ?? "Bronze";
+	const basePrice = session.plans?.[planName] ?? "0";
 
 	const availableOptions = optionsData;
 
 	const totalPrice = useMemo(() => {
-		let total = parsePrice(baseOffer.price);
+		let total = parsePrice(basePrice);
 		availableOptions.forEach((opt) => {
 			if (selectedOptions.includes(opt.id)) {
 				total += parsePrice(opt.price);
 			}
 		});
 		return formatPriceLabel(total);
-	}, [baseOffer.price, availableOptions, selectedOptions]);
+	}, [basePrice, availableOptions, selectedOptions]);
 
 	const handleToggleOption = (id: string, checked: boolean) => {
 		if (checked) {
@@ -77,7 +79,7 @@ export function OptionsVariantA() {
 			</h1>
 
 			{/* 2-column card grid */}
-			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-3xl">
+			<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 max-w-3xl">
 				{availableOptions.map((opt, index) => (
 					<OptionCard
 						key={opt.id}
@@ -101,7 +103,7 @@ export function OptionsVariantA() {
 			{/* Mobile bottom bar — on desktop the summary lives in the right sidebar */}
 			<div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white ring-1 ring-[#EADFF1] z-10">
 				<TotalSummary
-					planName={baseOffer.plan}
+					planName={planName}
 					totalPrice={totalPrice}
 					optionCount={selectedOptions.length}
 					onContinue={next}

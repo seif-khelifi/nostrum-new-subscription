@@ -6,10 +6,12 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useVariant } from "@/context/VariantContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
+import { useSituationForm } from "@/context/SituationFormContext";
 import { parsePrice, formatPriceLabel } from "@/lib/utils";
 import { TotalSummary } from "@/components/ui/total-summary";
-import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
+
+const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
 
 export interface DesktopSidebarRightProps {
   className?: string;
@@ -86,34 +88,30 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
 /* ------------------------------------------------------------------ */
 
 function OptionsTotalSummaryCard({ onContinue }: { onContinue: () => void }) {
-  const { value: selectedOfferIndex } = useSessionStorage<number | null>(
-    "selectedOffer",
-    0,
-  );
+  const { session } = useSituationForm();
   const { value: selectedOptions = [] } = useSessionStorage<string[]>(
     "selectedOptions",
     [],
   );
 
-  const baseOffer = useMemo(() => {
-    const idx = selectedOfferIndex ?? 0;
-    return offersData.offers[idx] || offersData.offers[0];
-  }, [selectedOfferIndex]);
+  const planIndex = session.selectedPlan ?? 0;
+  const planName = PLAN_KEYS[planIndex] ?? "Bronze";
+  const basePrice = session.plans?.[planName] ?? "0";
 
   const totalPrice = useMemo(() => {
-    let total = parsePrice(baseOffer.price);
+    let total = parsePrice(basePrice);
     (optionsJson as Array<{ id: string; price: string }>).forEach((opt) => {
       if (selectedOptions.includes(opt.id)) {
         total += parsePrice(opt.price);
       }
     });
     return formatPriceLabel(total);
-  }, [baseOffer.price, selectedOptions]);
+  }, [basePrice, selectedOptions]);
 
   return (
     <TotalSummary
       card={false}
-      planName={baseOffer.plan}
+      planName={planName}
       totalPrice={totalPrice}
       optionCount={selectedOptions.length}
       onContinue={onContinue}

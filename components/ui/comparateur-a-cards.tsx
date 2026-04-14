@@ -324,12 +324,15 @@ export function SectionCarousel({
 	onIndexChange,
 	setApi,
 	showArrows = false,
+	onPlaceholderClick,
 }: {
 	sections: SectionMeta[];
 	activeIndex: number;
 	onIndexChange: (index: number) => void;
 	setApi: (api: CarouselApi) => void;
 	showArrows?: boolean;
+	/** Called when the user taps the "Changer d'offre" placeholder slide. */
+	onPlaceholderClick?: () => void;
 }) {
 	return (
 		<Carousel
@@ -340,25 +343,68 @@ export function SectionCarousel({
 			<CarouselContent>
 				{sections.map((section) => (
 					<CarouselItem key={section.key}>
-						<div className="flex flex-col items-center text-center px-6">
-							<div className="flex items-center gap-2.5 mb-2">
-								<Image
-									src={section.icon}
-									alt={section.title}
-									width={24}
-									height={24}
-								/>
-								<span className="text-[#E0B1FF] text-sm font-medium lg:text-base">
-									{section.title}
+						{section.key === "placeholder" ? (
+							/* ── "Changer d'offre" slide ── */
+							<button
+								type="button"
+								onClick={onPlaceholderClick}
+								className="flex w-full flex-col items-center text-center px-6 group cursor-pointer"
+							>
+								<div className="flex items-center gap-2.5 mb-2">
+									<Image
+										src={section.icon}
+										alt="Changer d'offre"
+										width={24}
+										height={24}
+									/>
+									<span className="text-[#E0B1FF] text-sm font-medium lg:text-base">
+										Changer d{"'"}offre
+									</span>
+								</div>
+								<p className="text-white font-bold text-base leading-snug lg:text-lg">
+									Envie d{"'"}explorer une autre formule ?
+								</p>
+					
+								<span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[#9000E3] px-4 py-1.5 text-xs font-semibold text-white transition-colors group-hover:bg-[#a020f0]">
+									Changer d{"'"}offre
+									<svg
+										width="14"
+										height="14"
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth="2.5"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										className="shrink-0"
+									>
+										<path d="M5 12h14" />
+										<path d="m12 5 7 7-7 7" />
+									</svg>
 								</span>
+							</button>
+						) : (
+							/* ── Normal section slide ── */
+							<div className="flex flex-col items-center text-center px-6">
+								<div className="flex items-center gap-2.5 mb-2">
+									<Image
+										src={section.icon}
+										alt={section.title}
+										width={24}
+										height={24}
+									/>
+									<span className="text-[#E0B1FF] text-sm font-medium lg:text-base">
+										{section.title}
+									</span>
+								</div>
+								<p className="text-white font-bold text-base leading-snug lg:text-lg">
+									{section.subtitle}
+								</p>
+								<p className="mt-1.5 text-[#E0B1FF] text-xs leading-relaxed max-w-md lg:text-sm">
+									{section.description}
+								</p>
 							</div>
-							<p className="text-white font-bold text-base leading-snug lg:text-lg">
-								{section.subtitle}
-							</p>
-							<p className="mt-1.5 text-[#E0B1FF] text-xs leading-relaxed max-w-md lg:text-sm">
-								{section.description}
-							</p>
-						</div>
+						)}
 					</CarouselItem>
 				))}
 			</CarouselContent>

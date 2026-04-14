@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { capitalize } from "@/lib/utils";
 import { type OfferPlan, ALL_PLANS, RECOMMENDED_OFFER } from "@/lib/plans";
@@ -18,6 +18,7 @@ import {
 	type SectionMeta,
 } from "@/components/ui/comparateur-a-cards";
 import type { CarouselApi } from "@/components/ui/carousel";
+import { ChangeOfferDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
 import comparateurData from "@/data/comparateur-variant-a.json";
 
@@ -68,6 +69,14 @@ export function ComparateurVariantA() {
 
 	const [activeSection, setActiveSection] = useState(0);
 	const [carouselApi, setCarouselApi] = useState<CarouselApi>();
+	const [changeOfferOpen, setChangeOfferOpen] = useState(false);
+
+	// Track whether we already opened the modal for the coming-soon slide
+	// so it doesn't re-fire on every select event while the drawer is open.
+	const comingSoonFiredRef = useRef(false);
+
+	/** Index of the "À venir" / placeholder section in the carousel */
+	const comingSoonIndex = sections.findIndex((s) => s.key === "placeholder");
 
 	const handleDotClick = useCallback(
 		(index: number) => {
@@ -77,8 +86,29 @@ export function ComparateurVariantA() {
 		[carouselApi],
 	);
 
-	const handleCarouselSelect = useCallback((index: number) => {
-		setActiveSection(index);
+	const handleCarouselSelect = useCallback(
+		(index: number) => {
+			setActiveSection(index);
+
+			// Auto-open change-offer modal when user scrolls to the "coming soon" slide
+			if (
+				index === comingSoonIndex &&
+				comingSoonIndex !== -1 &&
+				!comingSoonFiredRef.current
+			) {
+				comingSoonFiredRef.current = true;
+				setChangeOfferOpen(true);
+			}
+		},
+		[comingSoonIndex],
+	);
+
+	const handleChangeOfferOpenChange = useCallback((open: boolean) => {
+		setChangeOfferOpen(open);
+		if (!open) {
+			// Allow re-trigger if user navigates away and comes back
+			comingSoonFiredRef.current = false;
+		}
 	}, []);
 
 	const sectionKey = sections[activeSection]?.key ?? "dentaire";
@@ -106,6 +136,10 @@ export function ComparateurVariantA() {
 		</span>
 	);
 
+	const openChangeOffer = useCallback(() => {
+		setChangeOfferOpen(true);
+	}, []);
+
 	// Slider section helper
 	const sliderSection = (withArrows = false) => (
 		<>
@@ -115,6 +149,7 @@ export function ComparateurVariantA() {
 				onIndexChange={handleCarouselSelect}
 				setApi={setCarouselApi}
 				showArrows={withArrows}
+				onPlaceholderClick={openChangeOffer}
 			/>
 			<SectionDots
 				activeIndex={activeSection}
@@ -136,6 +171,12 @@ export function ComparateurVariantA() {
 
 	return (
 		<div className="fixed inset-0 z-50 overflow-hidden bg-[#25003C]">
+			{/* Change-offer modal (auto-opens on "À venir" slide) */}
+			<ChangeOfferDrawer
+				open={changeOfferOpen}
+				onOpenChange={handleChangeOfferOpenChange}
+			/>
+
 			{/* ─── Mobile (<lg) ─── */}
 			<div className="lg:hidden flex flex-col h-full overflow-y-auto overflow-x-hidden">
 				<div className="flex justify-center pt-10 pb-3 bg-[#25003C] shrink-0">

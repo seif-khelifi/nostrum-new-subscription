@@ -40,6 +40,17 @@ export const OFFER_OPTIONS: OfferOption[] = offersData.offers.map((o) => ({
 }))
 
 /* ------------------------------------------------------------------ */
+/*  Offer background colours                                           */
+/* ------------------------------------------------------------------ */
+
+export const OFFER_BG_COLORS: Record<OfferPlan, string> = {
+  decouverte: "#F3E5FA",
+  bronze: "#FFF7E8",
+  silver: "#F4F3FA",
+  gold: "#FEFFF4",
+}
+
+/* ------------------------------------------------------------------ */
 /*  Legend items (for breakdown bars)                                   */
 /* ------------------------------------------------------------------ */
 

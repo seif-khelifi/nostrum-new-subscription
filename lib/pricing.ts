@@ -128,6 +128,17 @@ function formatPrice(n: number): string {
 	return n.toFixed(2).replace(".", ",") + "€";
 }
 
+/**
+ * Ensure a price string is displayed as "XX,XX€".
+ * Handles both already-formatted ("106,78€") and session-stored ("106.78") values.
+ */
+export function formatDisplayPrice(raw: string): string {
+	if (raw.includes("€")) return raw;
+	const num = parseFloat(raw);
+	if (Number.isNaN(num)) return raw;
+	return formatPrice(num);
+}
+
 /* ------------------------------------------------------------------ */
 /*  Product pricing V3 (API)                                           */
 /* ------------------------------------------------------------------ */

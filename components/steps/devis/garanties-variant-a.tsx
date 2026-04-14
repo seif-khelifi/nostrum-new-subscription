@@ -323,7 +323,7 @@ export function GarantiesVariantA() {
             description={compare.description}
             ctaLabel={compare.ctaLabel}
             onCtaClick={() => {
-              launchSubFlow(["offre_comparateur"], "garanties");
+              launchSubFlow(["comparateur_welcome", "offre_comparateur"], "garanties");
             }}
           />
         </div>

@@ -70,7 +70,11 @@ export function DesktopShell({
 			<div
 				className={cn(
 					"flex flex-col flex-1 transition-[margin-left,margin-right] duration-300 ease-[cubic-bezier(0.4,0,0.2,1)]",
-					hideSidebar ? "ml-0 bg-[#FFFFFF]" : "sm:ml-[120px] lg:ml-64",
+					hideSidebar
+					? variantId === "a"
+						? "ml-0 bg-[#FFFFFF]"
+						: "ml-0 bg-[#F6F4F0]"
+					: "sm:ml-[120px] lg:ml-64",
 					/* Right sidebar margin — only at lg+ */
 					showRightSidebar ? "lg:mr-72 xl:mr-80" : "",
 				)}

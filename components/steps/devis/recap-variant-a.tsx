@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useCallback } from "react";
 import Image from "next/image";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
@@ -15,7 +15,8 @@ import {
   RecapBeneficiaryItem,
 } from "@/components/ui/recap-section-card";
 import { Button } from "@/components/ui/button";
-import { ChangeOfferDrawer, ChangeOptionsDrawer } from "@/components/steps/devis/drawers";
+import { ChangeOfferDrawer, ChangeOptionsDrawer, AddBeneficiaryDrawer, GeneralErrorDrawer } from "@/components/steps/devis/drawers";
+import { getPricing, fetchProductPricing } from "@/lib/pricing";
 import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import type { VitaBeneficiary } from "@/types/subscription";
@@ -81,9 +82,12 @@ function beneficiaryDisplay(
 /*  renders layout. Placed after options in the devis group.           */
 /* ------------------------------------------------------------------ */
 
+const PRICING_ERROR_MESSAGE =
+  "Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
+
 export function RecapVariantA() {
   const { next, goToStepById } = useStepper();
-  const { session, setBeneficiaries } = useSituationForm();
+  const { session, updateSession } = useSituationForm();
   const texts = useStepTexts("devis_recap");
 
   const { value: selectedOptions = [], setValue: setSelectedOptions } =
@@ -134,11 +138,27 @@ export function RecapVariantA() {
     setSelectedOptions(selectedOptions.filter((opt) => opt !== id));
   };
 
-  const handleRemoveBeneficiary = (idx: number) => {
+  const [removingIdx, setRemovingIdx] = useState<number | null>(null);
+  const [errorOpen, setErrorOpen] = useState(false);
+
+  const handleRemoveBeneficiary = useCallback(async (idx: number) => {
     const updated = [...beneficiaries];
     updated.splice(idx, 1);
-    setBeneficiaries(updated);
-  };
+
+    const selectedPlanIdx = session.selectedPlan ?? 0;
+    const prices = getPricing(updated);
+
+    setRemovingIdx(idx);
+    try {
+      const patch = await fetchProductPricing(updated, selectedPlanIdx, prices);
+      updateSession({ ...patch, beneficiaries: patch.beneficiaries ?? updated });
+    } catch (err) {
+      console.error("[recap] pricing fetch failed after removing beneficiary", err);
+      setErrorOpen(true);
+    } finally {
+      setRemovingIdx(null);
+    }
+  }, [beneficiaries, session, updateSession]);
 
   const [changeOfferOpen, setChangeOfferOpen] = useState(false);
 
@@ -152,8 +172,10 @@ export function RecapVariantA() {
     setChangeOptionsOpen(true);
   };
 
+  const [addBeneficiaryOpen, setAddBeneficiaryOpen] = useState(false);
+
   const handleAddBeneficiary = () => {
-    goToStepById("proteger");
+    setAddBeneficiaryOpen(true);
   };
 
   return (
@@ -168,6 +190,19 @@ export function RecapVariantA() {
       <ChangeOptionsDrawer
         open={changeOptionsOpen}
         onOpenChange={setChangeOptionsOpen}
+      />
+
+      {/* Add beneficiary modal */}
+      <AddBeneficiaryDrawer
+        open={addBeneficiaryOpen}
+        onOpenChange={setAddBeneficiaryOpen}
+      />
+
+      {/* Pricing error drawer */}
+      <GeneralErrorDrawer
+        open={errorOpen}
+        onOpenChange={setErrorOpen}
+        message={PRICING_ERROR_MESSAGE}
       />
 
       {/* Centered content container */}
@@ -216,6 +251,7 @@ export function RecapVariantA() {
           title="Vos informations"
           addLabel="J'ajoute un bénéficiaire"
           onAdd={handleAddBeneficiary}
+          addLoading={removingIdx !== null}
         >
           {beneficiaries.map((ben, idx) => {
             let childIndex = 0;
@@ -237,8 +273,9 @@ export function RecapVariantA() {
                 dob={display.dob}
                 tag={display.tag}
                 isPrimary={display.isPrimary}
+                loading={removingIdx === idx}
                 onRemove={
-                  ben.relationship !== "PRIMARY_SUBSCRIBER"
+                  ben.relationship !== "PRIMARY_SUBSCRIBER" && removingIdx === null
                     ? () => handleRemoveBeneficiary(idx)
                     : undefined
                 }

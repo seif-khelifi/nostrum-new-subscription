@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { Plus, X } from "lucide-react";
+import { Plus, X, Loader2 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -23,6 +23,8 @@ export interface RecapSectionCardProps {
   addLabel: string;
   /** Handler for the add button */
   onAdd?: () => void;
+  /** Whether the add button should show a loading spinner */
+  addLoading?: boolean;
   /** Item cards rendered inside (each is its own white card) */
   children: React.ReactNode;
   className?: string;
@@ -32,6 +34,7 @@ function RecapSectionCard({
   title,
   addLabel,
   onAdd,
+  addLoading = false,
   children,
   className,
 }: RecapSectionCardProps) {
@@ -58,6 +61,7 @@ function RecapSectionCard({
             className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-[clamp(0.8rem,2.5vw,0.95rem)] font-semibold text-center leading-snug lg:min-h-12 lg:py-2.5 lg:px-4 lg:text-[clamp(0.75rem,1.1vw,0.9rem)]"
             size="none"
             onClick={onAdd}
+            loading={addLoading}
           >
             <Plus className="h-4 w-4" />
             {addLabel}
@@ -151,6 +155,8 @@ export interface RecapBeneficiaryItemProps {
   tag: string;
   /** Whether this is the primary beneficiary (uses different colors) */
   isPrimary?: boolean;
+  /** Whether a remove/pricing operation is in progress */
+  loading?: boolean;
   onRemove?: () => void;
   className?: string;
 }
@@ -160,13 +166,15 @@ function RecapBeneficiaryItem({
   dob,
   tag,
   isPrimary = false,
+  loading = false,
   onRemove,
   className,
 }: RecapBeneficiaryItemProps) {
   return (
     <div
       className={cn(
-        "rounded-[24px] bg-white ring-1 ring-[#EADFF1] px-4 py-4",
+        "rounded-[24px] bg-white ring-1 ring-[#EADFF1] px-4 py-4 transition-opacity",
+        loading && "opacity-60",
         className,
       )}
     >
@@ -190,7 +198,7 @@ function RecapBeneficiaryItem({
           </div>
         </div>
 
-        {/* Right — heart + close button (vertically centered) */}
+        {/* Right — heart + close/loading button (vertically centered) */}
         {onRemove && (
           <div className="flex items-center gap-2 shrink-0">
             <Image
@@ -200,13 +208,20 @@ function RecapBeneficiaryItem({
               height={16}
               className="shrink-0"
             />
-            <button
-              type="button"
-              onClick={onRemove}
-              className="flex h-5 w-5 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors"
-            >
-              <X className="h-3 w-3 text-white" />
-            </button>
+            {loading ? (
+              <span className="flex h-5 w-5 items-center justify-center">
+                <Loader2 className="h-4 w-4 text-[#490076] animate-spin" />
+              </span>
+            ) : (
+              <button
+                type="button"
+                onClick={onRemove}
+                disabled={loading}
+                className="flex h-5 w-5 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors disabled:opacity-50"
+              >
+                <X className="h-3 w-3 text-white" />
+              </button>
+            )}
           </div>
         )}
       </div>

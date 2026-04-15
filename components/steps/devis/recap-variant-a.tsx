@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
@@ -15,6 +15,7 @@ import {
   RecapBeneficiaryItem,
 } from "@/components/ui/recap-section-card";
 import { Button } from "@/components/ui/button";
+import { ChangeOfferDrawer, ChangeOptionsDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import type { VitaBeneficiary } from "@/types/subscription";
@@ -139,12 +140,16 @@ export function RecapVariantA() {
     setBeneficiaries(updated);
   };
 
+  const [changeOfferOpen, setChangeOfferOpen] = useState(false);
+
   const handleChangeOffer = () => {
-    goToStepById("devis_placeholder");
+    setChangeOfferOpen(true);
   };
 
+  const [changeOptionsOpen, setChangeOptionsOpen] = useState(false);
+
   const handleAddOption = () => {
-    goToStepById("options");
+    setChangeOptionsOpen(true);
   };
 
   const handleAddBeneficiary = () => {
@@ -153,6 +158,18 @@ export function RecapVariantA() {
 
   return (
     <div className="flex flex-col gap-5 sm:gap-8 px-2 sm:px-0">
+      {/* Change offer modal */}
+      <ChangeOfferDrawer
+        open={changeOfferOpen}
+        onOpenChange={setChangeOfferOpen}
+      />
+
+      {/* Add options modal */}
+      <ChangeOptionsDrawer
+        open={changeOptionsOpen}
+        onOpenChange={setChangeOptionsOpen}
+      />
+
       {/* Centered content container */}
       <div className="mx-auto w-full max-w-2xl flex flex-col gap-6">
         {/* Title */}
@@ -230,30 +247,6 @@ export function RecapVariantA() {
           })}
         </RecapSectionCard>
 
-        {/* ── Footer image ── */}
-        <div className="w-full mt-4">
-          {/* Desktop */}
-          <div className="hidden sm:block">
-            <Image
-              src="/reacp/desktop-fotter.svg"
-              alt=""
-              width={800}
-              height={200}
-              className="w-full h-auto"
-            />
-          </div>
-          {/* Mobile */}
-          <div className="block sm:hidden">
-            <Image
-              src="/reacp/mobile-footer.svg"
-              alt=""
-              width={400}
-              height={200}
-              className="w-full h-auto"
-            />
-          </div>
-        </div>
-
         {/* Desktop CTA */}
         <div className="hidden sm:flex justify-center pb-8">
           <Button
@@ -266,10 +259,34 @@ export function RecapVariantA() {
         </div>
       </div>
 
+      {/* ── Footer image — edge-to-edge (breaks out of main padding) ── */}
+      <div className="-mx-4 sm:-mx-6 -mb-4 sm:-mb-6 mt-4">
+        {/* Desktop */}
+        <div className="hidden sm:block">
+          <Image
+            src="/reacp/desktop-fotter.svg"
+            alt=""
+            width={800}
+            height={200}
+            className="w-full h-auto"
+          />
+        </div>
+        {/* Mobile */}
+        <div className="block sm:hidden">
+          <Image
+            src="/reacp/mobile-footer.svg"
+            alt=""
+            width={400}
+            height={200}
+            className="w-full h-auto"
+          />
+        </div>
+      </div>
+
       {/* ── Mobile sticky footer ── */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white ring-1 ring-[#EADFF1] z-10">
         <div className="p-4 max-w-lg mx-auto">
-          <div className="flex items-start justify-between gap-3 mb-3">
+          <div className="flex items-center justify-between gap-3 mb-3">
             <div className="min-w-0">
               <div className="font-bold text-[#9000E3] text-[1.1rem] leading-none">
                 Total
@@ -283,6 +300,13 @@ export function RecapVariantA() {
                 </span>
               </div>
             </div>
+            <Image
+              src="/drawers/drawer-garanties-b.svg"
+              alt=""
+              width={48}
+              height={48}
+              className="h-12 w-12 shrink-0"
+            />
           </div>
 
           <Button

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { Plus, X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -92,13 +93,24 @@ function RecapOptionItem({
   return (
     <div
       className={cn(
-        "rounded-[24px] bg-white ring-1 ring-[#EADFF1] px-4 py-4",
+        "relative rounded-[24px] bg-white ring-1 ring-[#EADFF1] px-4 py-4",
         className,
       )}
     >
+      {/* Close button — absolute top-right corner */}
+      {onRemove && (
+        <button
+          type="button"
+          onClick={onRemove}
+          className="absolute top-3 right-3 flex h-5 w-5 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors"
+        >
+          <X className="h-3 w-3 text-white" />
+        </button>
+      )}
+
       <div className="flex items-start gap-3">
         {/* Left — title + description */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 pr-6">
           <div className="font-bold text-[#490076] text-[1rem] leading-tight">
             {title}
           </div>
@@ -107,17 +119,8 @@ function RecapOptionItem({
           </p>
         </div>
 
-        {/* Right — close + price */}
-        <div className="flex flex-col items-center gap-2 shrink-0">
-          {onRemove && (
-            <button
-              type="button"
-              onClick={onRemove}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors"
-            >
-              <X className="h-4 w-4 text-white" />
-            </button>
-          )}
+        {/* Right — price below close button area */}
+        <div className="flex flex-col items-end shrink-0 mt-5">
           <div className="flex items-end gap-0.5">
             <span className="font-bold tracking-tight text-[#9000E3] text-lg leading-none">
               {price}
@@ -167,14 +170,13 @@ function RecapBeneficiaryItem({
         className,
       )}
     >
-      <div className="flex items-start gap-3">
+      <div className="flex items-center gap-3">
         {/* Left — name + dob + tag */}
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
             <span className="font-bold text-[#490076] text-[1rem] leading-tight">
               {name}
             </span>
-            {isPrimary && <span className="text-[#9000E3] text-lg">♥</span>}
           </div>
 
           <div className="mt-1.5">
@@ -182,21 +184,28 @@ function RecapBeneficiaryItem({
           </div>
 
           <div className="mt-2">
-            <span className="inline-block rounded-full px-3 py-1 text-xs font-semibold text-white bg-[#9000E3]">
+            <span className="text-xs font-semibold text-[#9000E3]">
               {tag}
             </span>
           </div>
         </div>
 
-        {/* Right — close button */}
+        {/* Right — heart + close button (vertically centered) */}
         {onRemove && (
-          <div className="shrink-0">
+          <div className="flex items-center gap-2 shrink-0">
+            <Image
+              src="/reacp/heart.svg"
+              alt=""
+              width={16}
+              height={16}
+              className="shrink-0"
+            />
             <button
               type="button"
               onClick={onRemove}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors"
+              className="flex h-5 w-5 items-center justify-center rounded-full bg-[#490076] hover:bg-[#5a0a8f] transition-colors"
             >
-              <X className="h-4 w-4 text-white" />
+              <X className="h-3 w-3 text-white" />
             </button>
           </div>
         )}

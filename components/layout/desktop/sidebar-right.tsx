@@ -37,6 +37,7 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
 
   const stepBanner = texts[currentStepDef.id]?.banner;
   const isOptionsStep = currentStepDef.id === "options";
+  const isRecapStep = currentStepDef.id === "devis_recap";
 
   return (
     <aside
@@ -77,8 +78,8 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
         />
       )}
 
-      {/* Options step — total summary card */}
-      {isOptionsStep && <OptionsTotalSummaryCard onContinue={next} />}
+      {/* Options / Recap step — total summary card */}
+      {(isOptionsStep || isRecapStep) && <OptionsTotalSummaryCard onContinue={next} />}
     </aside>
   );
 }

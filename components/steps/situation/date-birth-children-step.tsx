@@ -15,9 +15,8 @@ import { formatBirthdate, parseBirthdate, frenchOrdinal } from "@/lib/utils";
 import {
   dateBirthChildrenSchema,
   type DateBirthChildrenFormValues,
-  ENFANT_MIN_AGE,
-  ENFANT_MAX_AGE,
 } from "@/lib/validations/situation";
+import { childMaxBirthdate } from "@/lib/utils";
 
 export function DateBirthChildrenStep() {
   const { next } = useStepper();
@@ -86,7 +85,6 @@ export function DateBirthChildrenStep() {
 
   if (childrenIndices.length === 0) return null;
 
-  const now = new Date();
   const isSingle = fields.length === 1;
 
   return (
@@ -129,8 +127,8 @@ export function DateBirthChildrenStep() {
                         placeholder="JJ/MM/AAAA"
                         hasError={!!fieldErrors}
                         inputClassName="min-w-[120px] sm:min-w-[160px]"
-                        fromYear={now.getFullYear() - ENFANT_MAX_AGE}
-                        toYear={now.getFullYear() - ENFANT_MIN_AGE}
+                        fromDate={childMaxBirthdate()}
+                        toDate={new Date()}
                       />
                     )}
                   />

@@ -12,7 +12,7 @@ import { useSituationForm } from "@/context/SituationFormContext";
 import type { PrimaryBeneficiary } from "@/types/subscription";
 import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
-import { formatBirthdate, parseBirthdate } from "@/lib/utils";
+import { formatBirthdate, parseBirthdate, minAgeBirthdate, maxAgeBirthdate } from "@/lib/utils";
 import {
   recapSchema,
   type RecapFormValues,
@@ -87,19 +87,16 @@ export function RecapStep() {
           <Controller
             name="birthdate"
             control={control}
-            render={({ field }) => {
-              const now = new Date();
-              return (
-                <PillDatePicker
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder="JJ/MM/AAAA"
-                  hasError={!!errors.birthdate}
-                  fromYear={now.getFullYear() - ADHERENT_MAX_AGE}
-                  toYear={now.getFullYear() - ADHERENT_MIN_AGE}
-                />
-              );
-            }}
+            render={({ field }) => (
+              <PillDatePicker
+                value={field.value}
+                onChange={field.onChange}
+                placeholder="JJ/MM/AAAA"
+                hasError={!!errors.birthdate}
+                fromDate={maxAgeBirthdate(ADHERENT_MAX_AGE)}
+                toDate={minAgeBirthdate(ADHERENT_MIN_AGE)}
+              />
+            )}
           />
           <PillInput
             type="email"

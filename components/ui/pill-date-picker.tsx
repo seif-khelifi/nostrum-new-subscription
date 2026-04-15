@@ -24,10 +24,14 @@ interface PillDatePickerProps {
   inputClassName?: string;
   /** When true, applies error ring styling */
   hasError?: boolean;
-  /** Start year for the dropdown */
+  /** @deprecated Use fromDate for day-level precision */
   fromYear?: number;
-  /** End year for the dropdown */
+  /** @deprecated Use toDate for day-level precision */
   toYear?: number;
+  /** Earliest selectable date (days before this are disabled) */
+  fromDate?: Date;
+  /** Latest selectable date (days after this are disabled) */
+  toDate?: Date;
 }
 
 export function PillDatePicker({
@@ -39,6 +43,8 @@ export function PillDatePicker({
   hasError,
   fromYear,
   toYear,
+  fromDate,
+  toDate,
 }: PillDatePickerProps) {
   const [open, setOpen] = React.useState(false);
   const filled = Boolean(value);
@@ -51,10 +57,10 @@ export function PillDatePicker({
       })
     : "";
 
-  // Compute year bounds from props (caller should pass fromYear / toYear based on min/max age)
+  // Prefer exact dates; fall back to legacy year-only props
   const now = new Date();
-  const startYear = fromYear ?? now.getFullYear() - 95;
-  const endYear = toYear ?? now.getFullYear() - 19;
+  const startDate = fromDate ?? new Date(fromYear ?? now.getFullYear() - 95, 0, 1);
+  const endDate = toDate ?? new Date(toYear ?? now.getFullYear() - 19, 11, 31);
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -102,10 +108,11 @@ export function PillDatePicker({
           mode="single"
           locale={fr}
           selected={value}
-          defaultMonth={value ?? new Date(endYear, 0)}
+          defaultMonth={value ?? endDate}
           captionLayout="dropdown"
-          startMonth={new Date(startYear, 0)}
-          endMonth={new Date(endYear, 11)}
+          startMonth={startDate}
+          endMonth={endDate}
+          disabled={[{ before: startDate }, { after: endDate }]}
           onSelect={(date) => {
             onChange?.(date);
             setOpen(false);

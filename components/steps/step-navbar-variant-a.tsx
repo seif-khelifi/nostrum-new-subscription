@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useStepper } from "@/context/StepperContext"
 import { useVariant } from "@/context/VariantContext"
+import { RecapNavbarVariantA } from "./recap-navbar-variant-a"
 
 export interface StepNavbarVariantAProps {
 	className?: string
@@ -17,6 +18,9 @@ export interface StepNavbarVariantAProps {
  * the step's own `title` is displayed as an h1 in the navbar
  * (and the step hides its inner heading on desktop to avoid duplication).
  *
+ * Special case: devis_placeholder (offers page) gets its own custom
+ * 3-section navbar (logo + back | title + modifier | advisor card).
+ *
  * No progress bar, no CTA — those live in the right sidebar instead.
  *
  * When variant A is removed, delete this file.
@@ -24,6 +28,11 @@ export interface StepNavbarVariantAProps {
 export function StepNavbarVariantA({ className }: StepNavbarVariantAProps) {
 	const { isFirstStep, back, currentStepDef } = useStepper()
 	const { texts } = useVariant()
+
+	/* ── Custom navbar for the devis offers page ── */
+	if (currentStepDef.id === "devis_placeholder") {
+		return <RecapNavbarVariantA className={className} />
+	}
 
 	const stepTexts = texts[currentStepDef.id]
 	/* Only show a title when the step opts in via navbarTitle */

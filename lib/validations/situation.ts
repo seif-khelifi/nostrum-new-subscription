@@ -91,16 +91,16 @@ const addressFields = {
 /* ═══════════════════════════════════════════════════════════════════ */
 
 /** Adhérent principal: minimum 1 year old, maximum 95 years old. */
-export const ADHERENT_MIN_AGE = 19;
+export const ADHERENT_MIN_AGE = 18;
 export const ADHERENT_MAX_AGE = 95;
 
 /** Conjoint: minimum 18 years old, maximum 95 years old. */
 export const CONJOINT_MIN_AGE = 18;
 export const CONJOINT_MAX_AGE = 95;
 
-/** Enfant à charge: minimum 0 years old, maximum 25 years old. */
+/** Enfant à charge: minimum 0 years old, maximum  years old. */
 export const ENFANT_MIN_AGE = 0;
-export const ENFANT_MAX_AGE = 25;
+export const ENFANT_MAX_AGE = 17;
 
 /* ═══════════════════════════════════════════════════════════════════ */
 /*  Situation step schemas                                            */
@@ -180,7 +180,6 @@ export const recapSchema = z.object({
   phone: phoneField,
 });
 export type RecapFormValues = z.infer<typeof recapSchema>;
-
 
 /** envoiSms step — OTP code (6 digits, validated by InputOTP) */
 export const otpSchema = z.object({
@@ -287,11 +286,9 @@ export const bankDetailsSchema = z.object({
     .min(1, "L'IBAN est requis")
     .transform((val) => val.replace(/\s/g, ""))
     .pipe(
-      z
-        .string()
-        .refine((val) => IBAN.isValid(val), {
-          message: "L'IBAN saisi est invalide",
-        }),
+      z.string().refine((val) => IBAN.isValid(val), {
+        message: "L'IBAN saisi est invalide",
+      }),
     ),
   bic: z
     .string()

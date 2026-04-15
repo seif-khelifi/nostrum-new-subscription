@@ -208,14 +208,19 @@ export function RecapVariantA() {
       {/* Centered content container */}
       <div className="mx-auto w-full max-w-2xl flex flex-col gap-6">
         {/* Title */}
-        <h1
-          className={
-            "font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4" +
-            (texts.navbarTitle ? " sm:hidden" : "")
-          }
-        >
-          {texts.title}
-        </h1>
+        <div>
+          <h1
+            className={
+              "font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#290E67] pb-2 sm:pb-4" +
+              (texts.navbarTitle ? " sm:hidden" : "")
+            }
+          >
+            {texts.title}
+          </h1>
+          <p className="sm:hidden text-base text-[#290E67]">
+            Vous pouvez également la consulter depuis votre boîte mail.
+          </p>
+        </div>
 
         {/* ── Section 1: Ton offre choisie ── */}
         <RecapOfferCard
@@ -284,16 +289,7 @@ export function RecapVariantA() {
           })}
         </RecapSectionCard>
 
-        {/* Desktop CTA */}
-        <div className="hidden sm:flex justify-center pb-8">
-          <Button
-            variant="ctaPurpleAccent"
-            size="cta"
-            onClick={next}
-          >
-            Je reçois mon devis
-          </Button>
-        </div>
+
       </div>
 
       {/* ── Footer image — edge-to-edge (breaks out of main padding) ── */}

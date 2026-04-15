@@ -10,7 +10,7 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
-import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
+import { useFormErrorToast } from "@/hooks/use-form-error-toast";
 import { formatBirthdate, parseBirthdate, frenchOrdinal } from "@/lib/utils";
 import {
   dateBirthChildrenSchema,
@@ -52,7 +52,21 @@ export function DateBirthChildrenStep() {
 
   const { fields } = useFieldArray({ control, name: "children" });
 
-  useFormErrorToast(errors, errorKey(errors), submitCount);
+  /*
+   * The `children` array produces nested errors (errors.children[i].birthdate)
+   * which useFormErrorToast / StepScreen can't read (they expect flat .message).
+   * Extract the first child error into a flat object so both the desktop toast
+   * and mobile inline message work — same pattern as every other form step.
+   */
+  const firstChildError = errors.children
+    ?.find?.((c) => c?.birthdate)
+    ?.birthdate;
+  const flatErrors = firstChildError ? { birthdate: firstChildError } : {};
+  const flatKey = firstChildError
+    ? `birthdate:${firstChildError.message ?? ""}`
+    : "";
+
+  useFormErrorToast(flatErrors, flatKey, submitCount);
 
   const onSubmit = (data: DateBirthChildrenFormValues) => {
     /* Bulk-update all beneficiaries at once to avoid stale-closure overwrites */
@@ -133,7 +147,7 @@ export function DateBirthChildrenStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
-        errors={errors}
+        errors={flatErrors}
       >
         <></>
       </StepScreen>

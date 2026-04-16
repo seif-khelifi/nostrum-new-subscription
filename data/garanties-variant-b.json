@@ -46,48 +46,48 @@
 	"tabs": {
 		"decouverte": {
 			"sante": {
-				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 8, "votreReste": 5 },
-				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 30, "votreReste": 70 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 47, "votreReste": 100 },
-				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 90, "votreReste": 10 },
-				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 20, "votreReste": 30 }
+				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 3, "votreReste": 10 },
+				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 15, "votreReste": 135 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 20, "votreReste": 177 },
+				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 50, "votreReste": 50 },
+				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 10, "votreReste": 40 }
 			},
 			"bienetre": {
-				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 5, "votreReste": 8 },
-				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 20, "votreReste": 80 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 30, "votreReste": 117 },
-				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 60, "votreReste": 40 },
-				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 30, "votreReste": 20 }
+				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 2, "votreReste": 11 },
+				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 10, "votreReste": 140 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 15, "votreReste": 182 },
+				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 30, "votreReste": 70 },
+				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 15, "votreReste": 35 }
 			}
 		},
 		"bronze": {
 			"sante": {
-				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 12, "votreReste": 1 },
-				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 60, "votreReste": 40 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 97, "votreReste": 50 },
-				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 90, "votreReste": 10 },
-				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 30, "votreReste": 20 }
+				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 10, "votreReste": 3 },
+				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 55, "votreReste": 45 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 80, "votreReste": 67 },
+				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 85, "votreReste": 15 },
+				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 25, "votreReste": 25 }
 			},
 			"bienetre": {
-				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 8, "votreReste": 5 },
-				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 40, "votreReste": 60 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 60, "votreReste": 87 },
-				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 80, "votreReste": 20 },
-				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 40, "votreReste": 10 }
+				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 7, "votreReste": 6 },
+				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 35, "votreReste": 65 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 50, "votreReste": 97 },
+				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 70, "votreReste": 30 },
+				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 35, "votreReste": 15 }
 			}
 		},
 		"silver": {
 			"sante": {
 				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 13, "votreReste": 0 },
 				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 90, "votreReste": 10 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 137, "votreReste": 10 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 145, "votreReste": 2 },
 				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 100, "votreReste": 0 },
-				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 45, "votreReste": 5 }
+				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 48, "votreReste": 2 }
 			},
 			"bienetre": {
-				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 10, "votreReste": 3 },
-				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 70, "votreReste": 30 },
-				"optique": { "assuranceMaladie": 3, "nostrumCare": 100, "votreReste": 47 },
+				"soins-courants": { "assuranceMaladie": 17, "nostrumCare": 12, "votreReste": 1 },
+				"dentaire": { "assuranceMaladie": 50, "nostrumCare": 80, "votreReste": 20 },
+				"optique": { "assuranceMaladie": 3, "nostrumCare": 120, "votreReste": 27 },
 				"hospitalisation": { "assuranceMaladie": 400, "nostrumCare": 95, "votreReste": 5 },
 				"medecine-douce": { "assuranceMaladie": 0, "nostrumCare": 50, "votreReste": 0 }
 			}

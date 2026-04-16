@@ -1,5 +1,9 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import { cn } from "@/lib/utils"
 import { LEGEND_ITEMS } from "@/lib/plans"
+import { Progress } from "@/components/ui/progress"
 
 /* ------------------------------------------------------------------ */
 /*  Shared types                                                       */
@@ -77,6 +81,12 @@ export function BreakdownBar({
   values: ResolvedBreakdownValues
   currency?: string
 }) {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => {
+    const id = requestAnimationFrame(() => setMounted(true))
+    return () => cancelAnimationFrame(id)
+  }, [])
+
   const items = [
     {
       value: values.assuranceMaladie,
@@ -103,20 +113,23 @@ export function BreakdownBar({
 
   return (
     <div className="flex w-full items-stretch gap-1">
-      {items.map((item) => (
+      {items.map((item, idx) => (
         <div
           key={item.key}
-          className={cn(
-            "flex h-12 min-w-[56px] items-center justify-center px-3 text-center text-sm font-bold rounded-[14px]",
-            item.textClassName,
-          )}
-          style={{
-            ...item.style,
-            flex: item.value,
-          }}
+          className="relative min-w-[56px] h-12"
+          style={{ flex: item.value }}
           title={`${item.label}: ${formatBreakdownPrice(item.value, currency)}`}
         >
-          <span className="truncate">
+          <Progress
+            value={mounted ? 100 : 0}
+            className="h-full w-full bg-transparent rounded-[14px]"
+            indicatorClassName="transition-transform duration-700 ease-out rounded-[14px]"
+            indicatorStyle={item.style}
+          />
+          <span className={cn(
+            "absolute inset-0 flex items-center justify-center px-3 text-sm font-bold truncate pointer-events-none",
+            item.textClassName,
+          )}>
             {formatBreakdownPrice(item.value, currency)}
           </span>
         </div>

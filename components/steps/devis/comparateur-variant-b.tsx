@@ -289,7 +289,7 @@ export function ComparateurVariantB() {
             {/* Tabs area */}
             <div className="w-full mt-2">
               <Tabs defaultValue="sante" className="w-full">
-                <TabsList variant="essential" className="mb-6 w-full max-w-sm">
+                <TabsList variant="essential" className="mb-6 w-full max-w-sm mx-auto">
                   <TabsTrigger
                     value="sante"
                     variant="essential"

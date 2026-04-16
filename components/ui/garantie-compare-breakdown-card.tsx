@@ -35,7 +35,7 @@ function GarantieCompareBreakdownCard({
     <div
       data-slot="garantie-compare-breakdown-card"
       className={cn(
-        "overflow-hidden rounded-[24px] bg-[#F3E5FA] p-3 flex flex-col gap-2",
+        "overflow-hidden rounded-[24px] border-2 border-[#CE99FF] p-2 flex flex-col gap-2",
         className,
       )}
       {...props}

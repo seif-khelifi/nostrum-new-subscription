@@ -17,7 +17,7 @@ import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
 import { getPricing, priceForPlan, fetchAllPlanPrices } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
-import { GeneralErrorDrawer } from "@/components/steps/devis/drawers";
+import { GeneralErrorDrawer, GarantiesCompareDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
 
 /**
@@ -46,6 +46,7 @@ export function DevisVariantB() {
 
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [errorOpen, setErrorOpen] = useState(false);
+  const [compareOpen, setCompareOpen] = useState(false);
 
   // Local pricing calculated from the beneficiaries in session (display only).
   const prices = getPricing(session.beneficiaries);
@@ -169,9 +170,7 @@ export function DevisVariantB() {
             title={compare.title}
             description={compare.description}
             ctaLabel={compare.ctaLabel}
-            onCtaClick={() =>
-              launchSubFlow(["offre_comparateur"], "devis_placeholder")
-            }
+            onCtaClick={() => setCompareOpen(true)}
           />
         </div>
       </div>
@@ -216,7 +215,7 @@ export function DevisVariantB() {
               <Button
                 variant="ctaPurple"
                 className="rounded-[24px] gap-2 px-6"
-                onClick={() => {}}
+                onClick={() => setCompareOpen(true)}
               >
                 <LayoutGrid className="h-4 w-4" />
                 Comparer nos offres
@@ -250,6 +249,11 @@ export function DevisVariantB() {
           </div>
         </div>
       </div>
+
+      <GarantiesCompareDrawer
+        open={compareOpen}
+        onOpenChange={setCompareOpen}
+      />
 
       <GeneralErrorDrawer
         open={errorOpen}

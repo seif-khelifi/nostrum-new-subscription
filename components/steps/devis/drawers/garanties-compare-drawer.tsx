@@ -41,7 +41,7 @@ export function GarantiesCompareDrawer({
 	open,
 	onOpenChange,
 }: GarantiesCompareDrawerProps) {
-	const { goToStepById } = useStepper();
+	const { launchSubFlow } = useStepper();
 	const { setValue: setCompareOffers } = useSessionStorage<string[]>(
 		"compareOffers",
 		[],
@@ -66,7 +66,7 @@ export function GarantiesCompareDrawer({
 	const handleValidate = () => {
 		setCompareOffers(Array.from(selected));
 		onOpenChange(false);
-		goToStepById("offre_comparateur");
+		launchSubFlow(["offre_comparateur"], "devis_placeholder");
 	};
 
 	return (

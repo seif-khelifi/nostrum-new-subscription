@@ -188,6 +188,65 @@ function toSessionPlans(prices: PlanPrices): PlanPrices {
 }
 
 /**
+ * Fetch prices for all 4 plans in parallel from the pricing API.
+ * Returns a session patch with API-sourced plans, productId,
+ * prorated_price, and TV3price for the selected plan.
+ */
+export async function fetchAllPlanPrices(
+	beneficiaries: VitaBeneficiary[],
+	selectedPlan: number,
+): Promise<Partial<VitaSessionStorage>> {
+	const mappedBens = beneficiaries.map(({ birthdate, relationship }) => ({
+		birthdate: birthdate || "01/01/2023",
+		relationship,
+	}));
+	const startDate = formatStartDate();
+
+	const [decouverte, bronze, silver, gold] = await Promise.all(
+		[0, 1, 2, 3].map((planIndex) =>
+			fetch("/api/pricing", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					beneficiaries: mappedBens,
+					startDate,
+					selectedPlan: planIndex,
+				}),
+			}).then((res) => res.json()),
+		),
+	);
+
+	// Check for upstream errors
+	for (const data of [decouverte, bronze, silver, gold]) {
+		if (data.error) throw new Error(data.error);
+	}
+
+	const results = [decouverte, bronze, silver, gold].map(
+		(data) => (data as ProductPricingResult[])[0],
+	);
+
+	// Normalize potential comma-format ("244,74") to dot-format ("244.74")
+	const normalize = (p: string) => p.replace(",", ".");
+
+	const plans: PlanPrices = {
+		"Découverte": normalize(results[0].price),
+		Bronze: normalize(results[1].price),
+		Silver: normalize(results[2].price),
+		Gold: normalize(results[3].price),
+	};
+
+	const selected = results[selectedPlan];
+
+	return {
+		beneficiaries: beneficiaries.map((b) => ({ ...b, productId: selected.id })),
+		plans,
+		TV3price: plans[PLAN_KEYS[selectedPlan]],
+		prorated_price: getProratedPrice(selected.total_price_by_period),
+		selectedPlan,
+	};
+}
+
+/**
  * Call the product-pricing-v3 API for a given plan and return the
  * session patch (plans, TV3price, prorated_price, selectedPlan,
  * and beneficiaries with productId assigned).
@@ -219,8 +278,11 @@ export async function fetchProductPricing(
 	// Convert plans from display format ("54,23€") to session format ("54.23")
 	const sessionPlans = toSessionPlans(plans);
 
-	// TV3price = the selected plan's price in dot notation
-	const tv3Price = sessionPlans[PLAN_KEYS[selectedPlan]];
+	// Override the selected plan's price with the API-returned value
+	const apiPrice = result.price.replace(",", ".");
+	sessionPlans[PLAN_KEYS[selectedPlan]] = apiPrice;
+
+	const tv3Price = apiPrice;
 
 	// Assign productId to all beneficiaries
 	const updatedBeneficiaries = beneficiaries.map((b) => ({

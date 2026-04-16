@@ -33,6 +33,8 @@ export interface RecapOfferCardProps {
   changeOfferLabel?: string;
   /** Handler for "change offer" */
   onChangeOffer?: () => void;
+  /** Show loading spinner on the "change offer" button */
+  changeOfferLoading?: boolean;
   className?: string;
 }
 
@@ -58,6 +60,7 @@ function RecapOfferCard({
   badgeTitle = "Mon offre choisie",
   changeOfferLabel = "Changer d'offre",
   onChangeOffer,
+  changeOfferLoading = false,
   className,
 }: RecapOfferCardProps) {
   return (
@@ -138,6 +141,7 @@ function RecapOfferCard({
           size="none"
           className="w-full rounded-[24px] min-h-[52px] h-auto py-3 bg-[#290E671A] text-[#290E67] text-sm font-semibold hover:bg-[#290E672A]"
           onClick={onChangeOffer}
+          loading={changeOfferLoading}
         >
           {changeOfferLabel}
         </Button>

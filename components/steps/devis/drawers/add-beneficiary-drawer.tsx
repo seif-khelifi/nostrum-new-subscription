@@ -3,6 +3,7 @@
 import { useState, useCallback } from "react";
 import { Plus, ArrowLeft } from "lucide-react";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { useSessionStorage } from "@/hooks/use-session-storage";
 import { formatBirthdate } from "@/lib/utils";
 import { getPricing, fetchProductPricing } from "@/lib/pricing";
 import type { VitaBeneficiary, BeneficiaryRelationship } from "@/types/subscription";
@@ -47,6 +48,8 @@ export function AddBeneficiaryDrawer({
 	onOpenChange,
 }: AddBeneficiaryDrawerProps) {
 	const { session, updateSession } = useSituationForm();
+	const { setValue: setBeneficiariesChanged } =
+		useSessionStorage<boolean>("beneficiariesChanged", false);
 
 	const [step, setStep] = useState<DrawerStep>("choose");
 	const [selectedType, setSelectedType] = useState<"MARRIED" | "CHILDREN" | null>(null);
@@ -113,6 +116,7 @@ export function AddBeneficiaryDrawer({
 				prices,
 			);
 			updateSession({ ...patch, beneficiaries: patch.beneficiaries ?? updatedBeneficiaries });
+			setBeneficiariesChanged(true);
 			handleOpenChange(false);
 		} catch (err) {
 			console.error("[recap] pricing fetch failed after adding beneficiary", err);

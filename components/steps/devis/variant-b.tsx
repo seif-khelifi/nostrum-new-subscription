@@ -15,7 +15,7 @@ import type { OfferPlan } from "@/lib/plans";
 import { PLAN_INDEX } from "@/lib/plans";
 import { capitalize } from "@/lib/utils";
 import { PlanLogo } from "@/components/ui/plan-logo";
-import { getPricing, priceForPlan, fetchProductPricing } from "@/lib/pricing";
+import { getPricing, priceForPlan, fetchAllPlanPrices } from "@/lib/pricing";
 import type { VitaSessionStorage } from "@/types/subscription";
 import { GeneralErrorDrawer } from "@/components/steps/devis/drawers";
 import offersData from "@/data/offers.json";
@@ -55,7 +55,7 @@ export function DevisVariantB() {
   /**
    * User chose an offer ("Je choisis la formule X").
    * 1. Save selected plan index to sessionStorage.
-   * 2. Call the pricing API to get the product id + prorated price.
+   * 2. Call the pricing API for all 4 plans in parallel to get correct prices.
    * 3. Persist the full pricing result into the main session.
    * 4. Navigate to the garanties step only on success.
    */
@@ -66,10 +66,9 @@ export function DevisVariantB() {
 
     setLoadingPlan(plan);
     try {
-      const patch = await fetchProductPricing(
+      const patch = await fetchAllPlanPrices(
         session.beneficiaries,
         planIndex,
-        prices,
       );
       setSession({ ...session, ...patch });
       goToStepById("garanties");

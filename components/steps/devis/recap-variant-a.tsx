@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/recap-section-card";
 import { Button } from "@/components/ui/button";
 import { ChangeOfferDrawer, ChangeOptionsDrawer, AddBeneficiaryDrawer, GeneralErrorDrawer } from "@/components/steps/devis/drawers";
-import { getPricing, fetchProductPricing } from "@/lib/pricing";
+import { getPricing, fetchProductPricing, fetchAllPlanPrices } from "@/lib/pricing";
 import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
 import type { VitaBeneficiary } from "@/types/subscription";
@@ -92,6 +92,8 @@ export function RecapVariantA() {
 
   const { value: selectedOptions = [], setValue: setSelectedOptions } =
     useSessionStorage<string[]>("selectedOptions", []);
+  const { value: beneficiariesChanged, setValue: setBeneficiariesChanged } =
+    useSessionStorage<boolean>("beneficiariesChanged", false);
 
   /* ── Selected plan ── */
   const planIndex = session.selectedPlan ?? 2;
@@ -152,6 +154,7 @@ export function RecapVariantA() {
     try {
       const patch = await fetchProductPricing(updated, selectedPlanIdx, prices);
       updateSession({ ...patch, beneficiaries: patch.beneficiaries ?? updated });
+      setBeneficiariesChanged(true);
     } catch (err) {
       console.error("[recap] pricing fetch failed after removing beneficiary", err);
       setErrorOpen(true);
@@ -161,10 +164,27 @@ export function RecapVariantA() {
   }, [beneficiaries, session, updateSession]);
 
   const [changeOfferOpen, setChangeOfferOpen] = useState(false);
+  const [changeOfferLoading, setChangeOfferLoading] = useState(false);
 
-  const handleChangeOffer = () => {
+  const handleChangeOffer = useCallback(async () => {
+    if (!beneficiariesChanged) {
+      setChangeOfferOpen(true);
+      return;
+    }
+
+    setChangeOfferLoading(true);
+    try {
+      const patch = await fetchAllPlanPrices(beneficiaries, planIndex);
+      updateSession(patch);
+      setBeneficiariesChanged(false);
+    } catch (err) {
+      console.error("[recap] all-pricing fetch failed", err);
+      setErrorOpen(true);
+    } finally {
+      setChangeOfferLoading(false);
+    }
     setChangeOfferOpen(true);
-  };
+  }, [beneficiariesChanged, beneficiaries, planIndex, updateSession, setBeneficiariesChanged]);
 
   const [changeOptionsOpen, setChangeOptionsOpen] = useState(false);
 
@@ -226,6 +246,7 @@ export function RecapVariantA() {
         <RecapOfferCard
           selectedOffer={selectedOfferData}
           onChangeOffer={handleChangeOffer}
+          changeOfferLoading={changeOfferLoading}
         />
 
         {/* ── Section 2: Vos options ── */}

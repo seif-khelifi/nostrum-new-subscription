@@ -35,10 +35,8 @@ export function DevisVariantB() {
     "selectedOffer",
     null,
   );
-  const { setValue: setMoreOffer, removeValue: clearMoreOffer } = useSessionStorage<number | null>(
-    "moreOffer",
-    null,
-  );
+  const { setValue: setMoreOffer, removeValue: clearMoreOffer } =
+    useSessionStorage<number | null>("moreOffer", null);
   const { value: session, setValue: setSession } =
     useSessionStorage<VitaSessionStorage>("session", {
       beneficiaries: [],
@@ -66,10 +64,7 @@ export function DevisVariantB() {
 
     setLoadingPlan(plan);
     try {
-      const patch = await fetchAllPlanPrices(
-        session.beneficiaries,
-        planIndex,
-      );
+      const patch = await fetchAllPlanPrices(session.beneficiaries, planIndex);
       setSession({ ...session, ...patch });
       goToStepById("garanties");
     } catch (err) {
@@ -174,16 +169,18 @@ export function DevisVariantB() {
             title={compare.title}
             description={compare.description}
             ctaLabel={compare.ctaLabel}
-            onCtaClick={() => launchSubFlow(["offre_comparateur"], "devis_placeholder")}
+            onCtaClick={() =>
+              launchSubFlow(["offre_comparateur"], "devis_placeholder")
+            }
           />
         </div>
       </div>
 
       {/* ─── Desktop layout (lg+) ─── */}
-      <div className="hidden lg:block px-6">
-        {/* 4-column grid — equal-width cards, stretch to match heights */}
-        <div className="grid grid-cols-4 gap-6 items-stretch">
-          {/* Recommended offer — black bg section spanning 1 col */}
+      <div className="hidden lg:block px-6 xl:px-10">
+        {/* Responsive outer grid: 40/60 at lg, 25/75 at xl+ */}
+        <div className="grid grid-cols-[2fr_3fr] xl:grid-cols-4 gap-6 items-stretch">
+          {/* Recommended offer — black bg section */}
           <div className="rounded-[24px] bg-black px-5 py-6 flex flex-col">
             <h1 className="text-4xl font-bold leading-tight text-white mb-6">
               Votre offre mutuelle sur-mesure
@@ -210,7 +207,7 @@ export function DevisVariantB() {
           </div>
 
           {/* Other offers — #F6F4F0 bg section spanning 3 cols */}
-          <div className="col-span-3 rounded-[24px] bg-[#F6F4F0] ring-1 ring-[#E9E3DD] px-6 py-6 flex flex-col">
+          <div className="col-span-1 xl:col-span-3 rounded-[24px] bg-[#F6F4F0] ring-1 ring-[#E9E3DD] px-6 py-6 flex flex-col">
             {/* Header row: title + compare button */}
             <div className="flex items-center justify-between mb-10">
               <h1 className="text-4xl font-bold leading-tight text-black">
@@ -226,8 +223,8 @@ export function DevisVariantB() {
               </Button>
             </div>
 
-            {/* 3-column grid of other offers with hover "En savoir plus" */}
-            <div className="grid grid-cols-3 gap-5 flex-1">
+            {/* Responsive inner grid: 2 cols at lg, 3 cols at xl+ — cards drop under each other as screen shrinks */}
+            <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 xl:pt-[4.5rem] flex-1">
               {others.map((offer) => (
                 <OfferCardHoverGroup
                   key={offer.plan}

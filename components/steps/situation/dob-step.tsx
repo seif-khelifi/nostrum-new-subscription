@@ -11,7 +11,6 @@ import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import { dobSchema, type DobFormValues, ADHERENT_MIN_AGE, ADHERENT_MAX_AGE } from "@/lib/validations/situation";
-import { minAgeBirthdate, maxAgeBirthdate } from "@/lib/utils";
 
 export function DobStep() {
   const { next } = useStepper();
@@ -41,9 +40,10 @@ export function DobStep() {
         subtitle={
           <div className="flex flex-wrap items-center gap-2">
             <span>Je suis né le</span>
-            <Controller name="birthdate" control={control} render={({ field }) => (
-              <PillDatePicker value={field.value} onChange={field.onChange} placeholder="JJ/MM/AAAA" hasError={!!errors.birthdate} inputClassName="min-w-[120px] sm:min-w-[160px]" fromDate={maxAgeBirthdate(ADHERENT_MAX_AGE)} toDate={minAgeBirthdate(ADHERENT_MIN_AGE)} />
-            )} />
+            <Controller name="birthdate" control={control} render={({ field }) => {
+              const now = new Date();
+              return (<PillDatePicker value={field.value} onChange={field.onChange} placeholder="JJ/MM/AAAA" hasError={!!errors.birthdate} inputClassName="min-w-[120px] sm:min-w-[160px]" fromYear={now.getFullYear() - ADHERENT_MAX_AGE} toYear={now.getFullYear() - ADHERENT_MIN_AGE} />);
+            }} />
           </div>
         }
         infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}

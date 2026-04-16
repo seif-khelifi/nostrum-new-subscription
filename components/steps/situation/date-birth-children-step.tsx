@@ -10,13 +10,14 @@ import { AlertBanner } from "@/components/ui/alert";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
-import { useFormErrorToast } from "@/hooks/use-form-error-toast";
+import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { formatBirthdate, parseBirthdate, frenchOrdinal } from "@/lib/utils";
 import {
   dateBirthChildrenSchema,
   type DateBirthChildrenFormValues,
+  ENFANT_MIN_AGE,
+  ENFANT_MAX_AGE,
 } from "@/lib/validations/situation";
-import { childMaxBirthdate } from "@/lib/utils";
 
 export function DateBirthChildrenStep() {
   const { next } = useStepper();
@@ -51,21 +52,7 @@ export function DateBirthChildrenStep() {
 
   const { fields } = useFieldArray({ control, name: "children" });
 
-  /*
-   * The `children` array produces nested errors (errors.children[i].birthdate)
-   * which useFormErrorToast / StepScreen can't read (they expect flat .message).
-   * Extract the first child error into a flat object so both the desktop toast
-   * and mobile inline message work — same pattern as every other form step.
-   */
-  const firstChildError = errors.children
-    ?.find?.((c) => c?.birthdate)
-    ?.birthdate;
-  const flatErrors = firstChildError ? { birthdate: firstChildError } : {};
-  const flatKey = firstChildError
-    ? `birthdate:${firstChildError.message ?? ""}`
-    : "";
-
-  useFormErrorToast(flatErrors, flatKey, submitCount);
+  useFormErrorToast(errors, errorKey(errors), submitCount);
 
   const onSubmit = (data: DateBirthChildrenFormValues) => {
     /* Bulk-update all beneficiaries at once to avoid stale-closure overwrites */
@@ -85,6 +72,7 @@ export function DateBirthChildrenStep() {
 
   if (childrenIndices.length === 0) return null;
 
+  const now = new Date();
   const isSingle = fields.length === 1;
 
   return (
@@ -127,8 +115,8 @@ export function DateBirthChildrenStep() {
                         placeholder="JJ/MM/AAAA"
                         hasError={!!fieldErrors}
                         inputClassName="min-w-[120px] sm:min-w-[160px]"
-                        fromDate={childMaxBirthdate()}
-                        toDate={new Date()}
+                        fromYear={now.getFullYear() - ENFANT_MAX_AGE}
+                        toYear={now.getFullYear() - ENFANT_MIN_AGE}
                       />
                     )}
                   />
@@ -145,7 +133,7 @@ export function DateBirthChildrenStep() {
         canProceed={isValid}
         onNext={() => handleSubmit(onSubmit)()}
         isForm
-        errors={flatErrors}
+        errors={errors}
       >
         <></>
       </StepScreen>

@@ -6,14 +6,14 @@ import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useStepTexts } from "@/context/VariantContext";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
+import { optionsData } from "@/lib/options";
 import { OptionCard } from "@/components/ui/option-card";
 import { TotalSummary } from "@/components/ui/total-summary";
-import optionsJson from "@/data/options.json";
-import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-drawer";
+import { OptionDetailsDrawer } from "./drawers/option-details-drawer";
+import type { OptionDetails } from "@/lib/options";
 
-const optionsData = optionsJson as OptionDetails[];
-
-const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 /* ------------------------------------------------------------------ */
 /*  Options Page – Variant A                                          */

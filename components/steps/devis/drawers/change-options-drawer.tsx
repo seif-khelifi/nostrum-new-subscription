@@ -5,24 +5,13 @@ import { Check } from "lucide-react";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { parsePrice, formatPriceLabel } from "@/lib/utils";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
+import { optionsData } from "@/lib/options";
 import { Button } from "@/components/ui/button";
 import { OptionSelectCard } from "@/components/ui/option-select-card";
 import { ResponsiveDrawer } from "@/components/ui/responsive-drawer";
-import optionsJson from "@/data/options.json";
 
-/* ------------------------------------------------------------------ */
-/*  Types                                                              */
-/* ------------------------------------------------------------------ */
-
-type OptionEntry = {
-	id: string;
-	title: string;
-	description: string;
-	price: string;
-};
-
-const optionsData = optionsJson as OptionEntry[];
-const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 /* ------------------------------------------------------------------ */
 /*  Props                                                              */

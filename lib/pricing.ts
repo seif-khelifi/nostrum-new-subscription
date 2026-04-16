@@ -1,5 +1,6 @@
 import type { PlanPrices, VitaBeneficiary, VitaSessionStorage } from "@/types/subscription";
 import { parseBirthdate, parsePrice } from "@/lib/utils";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
 import pricingTable from "@/data/pricing.json";
 
 /* ------------------------------------------------------------------ */
@@ -8,6 +9,10 @@ import pricingTable from "@/data/pricing.json";
 
 const CONTRIBUTION_2025 = 3.7;
 const ADDITIONAL_FEES = 2.09;
+
+/** Generic pricing-error message shown when an API call fails. */
+export const PRICING_ERROR_MESSAGE =
+  "Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
 
 /** The pricing table keyed by age (as string). */
 const pricing = pricingTable as Record<string, Record<string, number>>;
@@ -173,7 +178,7 @@ export function getProratedPrice(totalPriceByPeriod: string[]): number {
 }
 
 /** The PlanPrices keys in plan-index order (0=Découverte … 3=Gold). */
-const PLAN_KEYS: (keyof PlanPrices)[] = ["Découverte", "Bronze", "Silver", "Gold"];
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 /**
  * Convert PlanPrices from display format ("54,23€") to session format ("54.23").

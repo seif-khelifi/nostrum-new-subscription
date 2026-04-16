@@ -61,6 +61,7 @@ export const variantB: VariantConfig = {
         // comparateur_welcome, offre_comparateur are floating steps —
         // launched as sub-flows by devis/garanties
         { id: "options", label: "Options" },
+        { id: "devis_recap", label: "Récapitulatif" },
       ],
     },
     {
@@ -358,6 +359,12 @@ export const variantB: VariantConfig = {
 
     options: {
       title: "Renforcez votre couverture",
+    },
+
+    /* ── Devis Recap ── */
+
+    devis_recap: {
+      title: "Votre récapitulatif",
     },
 
     /* ── Garanties ── */

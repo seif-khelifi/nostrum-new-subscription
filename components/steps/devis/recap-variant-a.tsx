@@ -6,7 +6,10 @@ import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useStepTexts } from "@/context/VariantContext";
-import { parsePrice, formatPriceLabel } from "@/lib/utils";
+import { parsePrice, formatPriceLabel, beneficiaryDisplay } from "@/lib/utils";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
+import { optionsData } from "@/lib/options";
+import { getPricing, fetchProductPricing, fetchAllPlanPrices, PRICING_ERROR_MESSAGE } from "@/lib/pricing";
 import { RecapOfferCard } from "@/components/ui/recap-offer-card";
 import type { RecapOfferData } from "@/components/ui/recap-offer-card";
 import {
@@ -14,68 +17,16 @@ import {
   RecapOptionItem,
   RecapBeneficiaryItem,
 } from "@/components/ui/recap-section-card";
-import { Button } from "@/components/ui/button";
+import { RecapStickyFooter } from "@/components/ui/recap-sticky-footer";
 import {
   ChangeOfferDrawer,
   ChangeOptionsDrawer,
   AddBeneficiaryDrawer,
   GeneralErrorDrawer,
 } from "@/components/steps/devis/drawers";
-import { getPricing, fetchProductPricing, fetchAllPlanPrices } from "@/lib/pricing";
 import offersData from "@/data/offers.json";
-import optionsJson from "@/data/options.json";
-import type { VitaBeneficiary } from "@/types/subscription";
 
-/* ------------------------------------------------------------------ */
-/*  Constants                                                          */
-/* ------------------------------------------------------------------ */
-
-const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
-
-type OptionEntry = { id: string; title: string; description: string; price: string };
-const optionsData = optionsJson as OptionEntry[];
-
-const PRICING_ERROR_MESSAGE =
-  "Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
-
-/* ------------------------------------------------------------------ */
-/*  Helpers                                                            */
-/* ------------------------------------------------------------------ */
-
-function formatDob(raw: string): string {
-  const parts = raw.split("/");
-  if (parts.length === 3) return parts.join(" / ");
-  return raw;
-}
-
-function beneficiaryDisplay(
-  ben: VitaBeneficiary,
-  childIndex: number,
-): { name: string; dob: string; tag: string; isPrimary: boolean } {
-  const dob = formatDob((ben as { birthdate?: string }).birthdate ?? "");
-
-  if (ben.relationship === "PRIMARY_SUBSCRIBER") {
-    const firstname = (ben as { firstname?: string }).firstname ?? "";
-    const lastname = (ben as { lastname?: string }).lastname ?? "";
-    return {
-      name: `${firstname} ${lastname}`.trim() || "Bénéficiaire",
-      dob,
-      tag: "Bénéficiaire principal",
-      isPrimary: true,
-    };
-  }
-
-  if (ben.relationship === "MARRIED") {
-    return { name: "Conjoint(e)", dob, tag: "Conjoint(e)", isPrimary: false };
-  }
-
-  return {
-    name: `Enfant n°${childIndex}`,
-    dob,
-    tag: "Rattaché à vous et/ou conjoint(e)",
-    isPrimary: false,
-  };
-}
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 /* ------------------------------------------------------------------ */
 /*  Recap Page — Variant A                                             */
@@ -287,31 +238,7 @@ export function RecapVariantA() {
       </div>
 
       {/* Mobile sticky footer */}
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white ring-1 ring-[#EADFF1] z-10">
-        <div className="p-4 max-w-lg mx-auto">
-          <div className="flex items-center justify-between gap-3 mb-3">
-            <div className="min-w-0">
-              <div className="font-bold text-[#9000E3] text-[1.1rem] leading-none">Total</div>
-              <div className="mt-1 flex items-end gap-0.5">
-                <span className="font-bold tracking-tight text-[#9000E3] text-[2rem] leading-none">
-                  {totalPrice}
-                </span>
-                <span className="font-semibold text-[#490076] mb-0.5 text-sm">/mois</span>
-              </div>
-            </div>
-            <Image src="/drawers/drawer-garanties-b.svg" alt="" width={48} height={48} className="h-12 w-12 shrink-0" />
-          </div>
-
-          <Button
-            variant="ctaPurpleAccent"
-            size="cta"
-            className="w-full rounded-[20px] min-h-[52px] h-auto py-3 text-sm font-semibold"
-            onClick={next}
-          >
-            Je reçois mon devis
-          </Button>
-        </div>
-      </div>
+      <RecapStickyFooter totalPrice={totalPrice} onContinue={next} className="sm:hidden" />
 
       {/* Pad bottom on mobile for fixed bar */}
       <div className="h-40 sm:hidden" />

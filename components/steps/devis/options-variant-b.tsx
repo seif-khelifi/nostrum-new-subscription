@@ -5,14 +5,15 @@ import { parsePrice, formatPriceLabel } from "@/lib/utils";
 import { useStepper } from "@/context/StepperContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useSituationForm } from "@/context/SituationFormContext";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
+import { optionsData } from "@/lib/options";
 import { OptionCard } from "@/components/ui/option-card";
 import { TotalSummary } from "@/components/ui/total-summary";
-import optionsJson from "@/data/options.json";
-import { OptionDetailsDrawer, OptionDetails } from "./drawers/option-details-drawer";
+import { DevisSideCard } from "@/components/ui/devis-side-card";
+import { OptionDetailsDrawer } from "./drawers/option-details-drawer";
+import type { OptionDetails } from "@/lib/options";
 
-const optionsData = optionsJson as OptionDetails[];
-
-const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 /* ------------------------------------------------------------------ */
 /*  Options Page – Variant B                                         */
@@ -121,29 +122,21 @@ export function OptionsVariantB() {
 			{/* ─── Desktop layout (lg+) ─── */}
 			<div className="hidden lg:flex w-full bg-[#F6F4F0] min-h-screen">
 				<div className="grid grid-cols-12 gap-8 max-w-7xl mx-auto py-10 w-full px-4 lg:px-8">
-					{/* ── Left Column ── */}
-					<div className="lg:col-span-4 flex flex-col gap-6">
-						<div className="bg-[#F6F4F0] border-4 border-white rounded-[24px] overflow-hidden flex flex-col min-h-[500px]">
-							<div className="p-6 pt-8 flex-1">
-								<h1 className="text-3xl font-bold font-[family-name:var(--font-bricolage-grotesque)] leading-tight text-black mb-4">
-									Renforcez votre<br/>couverture
-								</h1>
-								<p className="text-[#1D1B20] text-[0.95rem] leading-relaxed mb-8">
-									Ajoutez des garanties de prévoyance ou une surcomplémentaire santé pour une protection plus complète.
-								</p>
-							</div>
-
-							<div className="mt-auto">
-								<TotalSummary
-									card
-									planName={planName}
-									totalPrice={totalPrice}
-									optionCount={selectedOptions.length}
-									onContinue={next}
-									ctaLabel="Continuer"
-								/>
-							</div>
-						</div>
+				{/* ── Left Column ── */}
+				<div className="lg:col-span-4 flex flex-col gap-6">
+						<DevisSideCard
+							title={<>Renforcez votre<br/>couverture</>}
+							subtitle="Ajoutez des garanties de prévoyance ou une surcomplémentaire santé pour une protection plus complète."
+						>
+							<TotalSummary
+								card
+								planName={planName}
+								totalPrice={totalPrice}
+								optionCount={selectedOptions.length}
+								onContinue={next}
+								ctaLabel="Continuer"
+							/>
+						</DevisSideCard>
 					</div>
 
 					{/* ── Right Column ── */}

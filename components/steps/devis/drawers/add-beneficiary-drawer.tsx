@@ -5,7 +5,7 @@ import { Plus, ArrowLeft } from "lucide-react";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
 import { formatBirthdate } from "@/lib/utils";
-import { getPricing, fetchProductPricing } from "@/lib/pricing";
+import { getPricing, fetchProductPricing, PRICING_ERROR_MESSAGE } from "@/lib/pricing";
 import type { VitaBeneficiary, BeneficiaryRelationship } from "@/types/subscription";
 import { Button } from "@/components/ui/button";
 import { PillDatePicker } from "@/components/ui/pill-date-picker";
@@ -25,8 +25,7 @@ import {
 const MAX_CHILDREN = 4;
 const MAX_BENEFICIARIES = 6; // primary + conjoint + 4 children
 
-const PRICING_ERROR_MESSAGE =
-	"Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
+/* PRICING_ERROR_MESSAGE is imported from @/lib/pricing */
 
 /* ------------------------------------------------------------------ */
 /*  Props                                                              */

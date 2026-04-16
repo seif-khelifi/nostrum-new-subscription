@@ -8,3 +8,4 @@ export { ComparateurWelcome as ComparateurWelcomeVariantA } from "./comparateur-
 export { OptionsVariantA } from "./options-variant-a";
 export { OptionsVariantB } from "./options-variant-b";
 export { RecapVariantA } from "./recap-variant-a";
+export { RecapVariantB } from "./recap-variant-b";

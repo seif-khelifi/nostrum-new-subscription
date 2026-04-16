@@ -11,13 +11,8 @@ import {
 	DrawerClose,
 } from "@/components/ui/drawer";
 
-export interface OptionDetails {
-	id: string;
-	title: string;
-	price: string;
-	description: string;
-	detailedDescription?: string;
-}
+import type { OptionDetails } from "@/lib/options";
+export type { OptionDetails } from "@/lib/options";
 
 interface OptionDetailsDrawerProps {
 	open: boolean;

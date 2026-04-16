@@ -101,3 +101,61 @@ export function resolveInitialSelection(
     ? { item: found, customName: null }
     : { item: null, customName: name }
 }
+
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  Beneficiary display helpers                                        */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+/**
+ * Format a "DD/MM/YYYY" date string to "DD / MM / YYYY" with spaces.
+ * Returns the input unchanged if it doesn't match the expected format.
+ */
+export function formatDob(raw: string): string {
+  const parts = raw.split("/")
+  if (parts.length === 3) return parts.join(" / ")
+  return raw
+}
+
+import type { VitaBeneficiary } from "@/types/subscription"
+
+export interface BeneficiaryDisplayInfo {
+  name: string
+  dob: string
+  tag: string
+  isPrimary: boolean
+}
+
+/**
+ * Derive display-friendly name, dob, tag, and primary flag from a
+ * VitaBeneficiary. Used in recap pages and beneficiary lists.
+ *
+ * @param childIndex – 1-based index among CHILDREN siblings (ignored for non-children).
+ */
+export function beneficiaryDisplay(
+  ben: VitaBeneficiary,
+  childIndex: number,
+): BeneficiaryDisplayInfo {
+  const dob = formatDob((ben as { birthdate?: string }).birthdate ?? "")
+
+  if (ben.relationship === "PRIMARY_SUBSCRIBER") {
+    const firstname = (ben as { firstname?: string }).firstname ?? ""
+    const lastname = (ben as { lastname?: string }).lastname ?? ""
+    return {
+      name: `${firstname} ${lastname}`.trim() || "Bénéficiaire",
+      dob,
+      tag: "Bénéficiaire principal",
+      isPrimary: true,
+    }
+  }
+
+  if (ben.relationship === "MARRIED") {
+    return { name: "Conjoint(e)", dob, tag: "Conjoint(e)", isPrimary: false }
+  }
+
+  return {
+    name: `Enfant n°${childIndex}`,
+    dob,
+    tag: "Rattaché à vous et/ou conjoint(e)",
+    isPrimary: false,
+  }
+}

@@ -42,6 +42,7 @@ import {
   OptionsVariantA,
   OptionsVariantB,
   RecapVariantA,
+  RecapVariantB,
 } from "./devis";
 
 /* ------------------------------------------------------------------ */
@@ -105,7 +106,8 @@ function OptionsStep() {
 /* ------------------------------------------------------------------ */
 
 function DevisRecapStep() {
-  return <RecapVariantA />;
+  const { devisVariant } = useStepper();
+  return devisVariant === "b" ? <RecapVariantB /> : <RecapVariantA />;
 }
 
 /* ------------------------------------------------------------------ */

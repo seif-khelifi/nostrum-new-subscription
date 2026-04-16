@@ -9,9 +9,10 @@ import { useSessionStorage } from "@/hooks/use-session-storage";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { parsePrice, formatPriceLabel } from "@/lib/utils";
 import { TotalSummary } from "@/components/ui/total-summary";
-import optionsJson from "@/data/options.json";
+import { PLAN_DISPLAY_KEYS } from "@/lib/plans";
+import { optionsData } from "@/lib/options";
 
-const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
+const PLAN_KEYS = PLAN_DISPLAY_KEYS;
 
 export interface DesktopSidebarRightProps {
   className?: string;
@@ -101,7 +102,7 @@ function OptionsTotalSummaryCard({ onContinue }: { onContinue: () => void }) {
 
   const totalPrice = useMemo(() => {
     let total = parsePrice(basePrice);
-    (optionsJson as Array<{ id: string; price: string }>).forEach((opt) => {
+    optionsData.forEach((opt) => {
       if (selectedOptions.includes(opt.id)) {
         total += parsePrice(opt.price);
       }

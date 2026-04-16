@@ -12,6 +12,13 @@ export type OfferPlan = "decouverte" | "bronze" | "silver" | "gold"
 
 export const ALL_PLANS: OfferPlan[] = ["decouverte", "bronze", "silver", "gold"]
 
+/**
+ * Display-name keys matching the PlanPrices record shape.
+ * Index-aligned: 0=Découverte, 1=Bronze, 2=Silver, 3=Gold.
+ * Use this anywhere you need to look up a plan by numeric index.
+ */
+export const PLAN_DISPLAY_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const
+
 export const PLAN_INDEX: Record<string, number> = {
   decouverte: 0,
   bronze: 1,

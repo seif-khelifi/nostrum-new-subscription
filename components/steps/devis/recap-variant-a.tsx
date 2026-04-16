@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
 import { useStepper } from "@/context/StepperContext";
 import { useSituationForm } from "@/context/SituationFormContext";
@@ -15,7 +15,12 @@ import {
   RecapBeneficiaryItem,
 } from "@/components/ui/recap-section-card";
 import { Button } from "@/components/ui/button";
-import { ChangeOfferDrawer, ChangeOptionsDrawer, AddBeneficiaryDrawer, GeneralErrorDrawer } from "@/components/steps/devis/drawers";
+import {
+  ChangeOfferDrawer,
+  ChangeOptionsDrawer,
+  AddBeneficiaryDrawer,
+  GeneralErrorDrawer,
+} from "@/components/steps/devis/drawers";
 import { getPricing, fetchProductPricing, fetchAllPlanPrices } from "@/lib/pricing";
 import offersData from "@/data/offers.json";
 import optionsJson from "@/data/options.json";
@@ -26,10 +31,12 @@ import type { VitaBeneficiary } from "@/types/subscription";
 /* ------------------------------------------------------------------ */
 
 const PLAN_KEYS = ["Découverte", "Bronze", "Silver", "Gold"] as const;
-const PLAN_SLUGS = ["decouverte", "bronze", "silver", "gold"] as const;
 
 type OptionEntry = { id: string; title: string; description: string; price: string };
 const optionsData = optionsJson as OptionEntry[];
+
+const PRICING_ERROR_MESSAGE =
+  "Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
 
 /* ------------------------------------------------------------------ */
 /*  Helpers                                                            */
@@ -43,33 +50,28 @@ function formatDob(raw: string): string {
 
 function beneficiaryDisplay(
   ben: VitaBeneficiary,
-  relationship: string,
-  childIndex: number
+  childIndex: number,
 ): { name: string; dob: string; tag: string; isPrimary: boolean } {
-  if (relationship === "PRIMARY_SUBSCRIBER") {
+  const dob = formatDob((ben as { birthdate?: string }).birthdate ?? "");
+
+  if (ben.relationship === "PRIMARY_SUBSCRIBER") {
     const firstname = (ben as { firstname?: string }).firstname ?? "";
     const lastname = (ben as { lastname?: string }).lastname ?? "";
     return {
       name: `${firstname} ${lastname}`.trim() || "Bénéficiaire",
-      dob: formatDob((ben as { birthdate?: string }).birthdate ?? ""),
+      dob,
       tag: "Bénéficiaire principal",
       isPrimary: true,
     };
   }
 
-  if (relationship === "MARRIED") {
-    return {
-      name: "Conjoint(e)",
-      dob: formatDob((ben as { birthdate?: string }).birthdate ?? ""),
-      tag: "Conjoint(e)",
-      isPrimary: false,
-    };
+  if (ben.relationship === "MARRIED") {
+    return { name: "Conjoint(e)", dob, tag: "Conjoint(e)", isPrimary: false };
   }
 
-  // CHILDREN
   return {
     name: `Enfant n°${childIndex}`,
-    dob: formatDob((ben as { birthdate?: string }).birthdate ?? ""),
+    dob,
     tag: "Rattaché à vous et/ou conjoint(e)",
     isPrimary: false,
   };
@@ -82,25 +84,25 @@ function beneficiaryDisplay(
 /*  renders layout. Placed after options in the devis group.           */
 /* ------------------------------------------------------------------ */
 
-const PRICING_ERROR_MESSAGE =
-  "Nous n'avons pas pu afficher nos tarifs pour le moment. Pas d'inquiétude, notre équipe est là pour vous aider ! Vous pouvez nous contacter directement au 01 62 45 01 05 (appel gratuit, du lundi au vendredi / 9h-19h) pour obtenir les informations dont vous avez besoin et souscrire en toute simplicité.";
-
 export function RecapVariantA() {
-  const { next, goToStepById } = useStepper();
+  const { next } = useStepper();
   const { session, updateSession } = useSituationForm();
   const texts = useStepTexts("devis_recap");
+
+  /* ── Session storage ── */
 
   const { value: selectedOptions = [], setValue: setSelectedOptions } =
     useSessionStorage<string[]>("selectedOptions", []);
   const { value: beneficiariesChanged, setValue: setBeneficiariesChanged } =
     useSessionStorage<boolean>("beneficiariesChanged", false);
 
-  /* ── Selected plan ── */
+  /* ── Derived data ── */
+
   const planIndex = session.selectedPlan ?? 2;
   const planName = PLAN_KEYS[planIndex] ?? "Silver";
   const basePrice = session.plans?.[planName] ?? "0";
+  const beneficiaries = session.beneficiaries ?? [];
 
-  /* ── Build offer data from offers.json + session prices ── */
   const allOffers: RecapOfferData[] = useMemo(() => {
     return offersData.offers.map((offer, idx) => {
       const sessionPrice = session.plans?.[PLAN_KEYS[idx]] ?? offer.price;
@@ -116,43 +118,43 @@ export function RecapVariantA() {
 
   const selectedOfferData = allOffers[planIndex] ?? allOffers[2];
 
-  /* ── Total price calculation ── */
   const totalPrice = useMemo(() => {
     let total = parsePrice(basePrice);
-    optionsData.forEach((opt) => {
-      if (selectedOptions.includes(opt.id)) {
-        total += parsePrice(opt.price);
-      }
-    });
+    for (const opt of optionsData) {
+      if (selectedOptions.includes(opt.id)) total += parsePrice(opt.price);
+    }
     return formatPriceLabel(total);
   }, [basePrice, selectedOptions]);
 
-  /* ── Selected options data ── */
-  const selectedOptionsData = useMemo(() => {
-    return optionsData.filter((opt) => selectedOptions.includes(opt.id));
-  }, [selectedOptions]);
+  const selectedOptionsData = useMemo(
+    () => optionsData.filter((opt) => selectedOptions.includes(opt.id)),
+    [selectedOptions],
+  );
 
-  /* ── Beneficiary data ── */
-  const beneficiaries = session.beneficiaries ?? [];
-
-  /* ── Handlers ── */
-  const handleRemoveOption = (id: string) => {
-    setSelectedOptions(selectedOptions.filter((opt) => opt !== id));
-  };
+  /* ── Local state ── */
 
   const [removingIdx, setRemovingIdx] = useState<number | null>(null);
   const [errorOpen, setErrorOpen] = useState(false);
+  const [changeOfferOpen, setChangeOfferOpen] = useState(false);
+  const [changeOfferLoading, setChangeOfferLoading] = useState(false);
+  const [changeOptionsOpen, setChangeOptionsOpen] = useState(false);
+  const [addBeneficiaryOpen, setAddBeneficiaryOpen] = useState(false);
 
-  const handleRemoveBeneficiary = useCallback(async (idx: number) => {
+  /* ── Handlers ── */
+
+  function handleRemoveOption(id: string) {
+    setSelectedOptions(selectedOptions.filter((opt) => opt !== id));
+  }
+
+  async function handleRemoveBeneficiary(idx: number) {
     const updated = [...beneficiaries];
     updated.splice(idx, 1);
 
-    const selectedPlanIdx = session.selectedPlan ?? 0;
     const prices = getPricing(updated);
 
     setRemovingIdx(idx);
     try {
-      const patch = await fetchProductPricing(updated, selectedPlanIdx, prices);
+      const patch = await fetchProductPricing(updated, planIndex, prices);
       updateSession({ ...patch, beneficiaries: patch.beneficiaries ?? updated });
       setBeneficiariesChanged(true);
     } catch (err) {
@@ -161,12 +163,9 @@ export function RecapVariantA() {
     } finally {
       setRemovingIdx(null);
     }
-  }, [beneficiaries, session, updateSession]);
+  }
 
-  const [changeOfferOpen, setChangeOfferOpen] = useState(false);
-  const [changeOfferLoading, setChangeOfferLoading] = useState(false);
-
-  const handleChangeOffer = useCallback(async () => {
+  async function handleChangeOffer() {
     if (!beneficiariesChanged) {
       setChangeOfferOpen(true);
       return;
@@ -184,46 +183,17 @@ export function RecapVariantA() {
       setChangeOfferLoading(false);
     }
     setChangeOfferOpen(true);
-  }, [beneficiariesChanged, beneficiaries, planIndex, updateSession, setBeneficiariesChanged]);
+  }
 
-  const [changeOptionsOpen, setChangeOptionsOpen] = useState(false);
-
-  const handleAddOption = () => {
-    setChangeOptionsOpen(true);
-  };
-
-  const [addBeneficiaryOpen, setAddBeneficiaryOpen] = useState(false);
-
-  const handleAddBeneficiary = () => {
-    setAddBeneficiaryOpen(true);
-  };
+  /* ── Render ── */
 
   return (
     <div className="flex flex-col gap-5 sm:gap-8 px-2 sm:px-0">
-      {/* Change offer modal */}
-      <ChangeOfferDrawer
-        open={changeOfferOpen}
-        onOpenChange={setChangeOfferOpen}
-      />
-
-      {/* Add options modal */}
-      <ChangeOptionsDrawer
-        open={changeOptionsOpen}
-        onOpenChange={setChangeOptionsOpen}
-      />
-
-      {/* Add beneficiary modal */}
-      <AddBeneficiaryDrawer
-        open={addBeneficiaryOpen}
-        onOpenChange={setAddBeneficiaryOpen}
-      />
-
-      {/* Pricing error drawer */}
-      <GeneralErrorDrawer
-        open={errorOpen}
-        onOpenChange={setErrorOpen}
-        message={PRICING_ERROR_MESSAGE}
-      />
+      {/* Drawers */}
+      <ChangeOfferDrawer open={changeOfferOpen} onOpenChange={setChangeOfferOpen} />
+      <ChangeOptionsDrawer open={changeOptionsOpen} onOpenChange={setChangeOptionsOpen} />
+      <AddBeneficiaryDrawer open={addBeneficiaryOpen} onOpenChange={setAddBeneficiaryOpen} />
+      <GeneralErrorDrawer open={errorOpen} onOpenChange={setErrorOpen} message={PRICING_ERROR_MESSAGE} />
 
       {/* Centered content container */}
       <div className="mx-auto w-full max-w-2xl flex flex-col gap-6">
@@ -242,18 +212,18 @@ export function RecapVariantA() {
           </p>
         </div>
 
-        {/* ── Section 1: Ton offre choisie ── */}
+        {/* Section 1: Offer */}
         <RecapOfferCard
           selectedOffer={selectedOfferData}
           onChangeOffer={handleChangeOffer}
           changeOfferLoading={changeOfferLoading}
         />
 
-        {/* ── Section 2: Vos options ── */}
+        {/* Section 2: Options */}
         <RecapSectionCard
           title="Vos options"
           addLabel="J'ajoute une option"
-          onAdd={handleAddOption}
+          onAdd={() => setChangeOptionsOpen(true)}
         >
           {selectedOptionsData.length > 0 ? (
             selectedOptionsData.map((opt) => (
@@ -272,26 +242,21 @@ export function RecapVariantA() {
           )}
         </RecapSectionCard>
 
-        {/* ── Section 3: Vos informations ── */}
+        {/* Section 3: Beneficiaries */}
         <RecapSectionCard
           title="Vos informations"
           addLabel="J'ajoute un bénéficiaire"
-          onAdd={handleAddBeneficiary}
+          onAdd={() => setAddBeneficiaryOpen(true)}
           addLoading={removingIdx !== null}
         >
           {beneficiaries.map((ben, idx) => {
             let childIndex = 0;
             if (ben.relationship === "CHILDREN") {
-              childIndex =
-                beneficiaries
-                  .slice(0, idx + 1)
-                  .filter((b) => b.relationship === "CHILDREN").length;
+              childIndex = beneficiaries
+                .slice(0, idx + 1)
+                .filter((b) => b.relationship === "CHILDREN").length;
             }
-            const display = beneficiaryDisplay(
-              ben,
-              ben.relationship,
-              childIndex
-            );
+            const display = beneficiaryDisplay(ben, childIndex);
             return (
               <RecapBeneficiaryItem
                 key={idx}
@@ -309,58 +274,32 @@ export function RecapVariantA() {
             );
           })}
         </RecapSectionCard>
-
-
       </div>
 
-      {/* ── Footer image — edge-to-edge (breaks out of main padding) ── */}
+      {/* Footer image — edge-to-edge */}
       <div className="-mx-4 sm:-mx-6 -mb-4 sm:-mb-6 mt-4">
-        {/* Desktop */}
         <div className="hidden sm:block">
-          <Image
-            src="/reacp/desktop-fotter.svg"
-            alt=""
-            width={800}
-            height={200}
-            className="w-full h-auto"
-          />
+          <Image src="/reacp/desktop-fotter.svg" alt="" width={800} height={200} className="w-full h-auto" />
         </div>
-        {/* Mobile */}
         <div className="block sm:hidden">
-          <Image
-            src="/reacp/mobile-footer.svg"
-            alt=""
-            width={400}
-            height={200}
-            className="w-full h-auto"
-          />
+          <Image src="/reacp/mobile-footer.svg" alt="" width={400} height={200} className="w-full h-auto" />
         </div>
       </div>
 
-      {/* ── Mobile sticky footer ── */}
+      {/* Mobile sticky footer */}
       <div className="sm:hidden fixed bottom-0 left-0 right-0 bg-white ring-1 ring-[#EADFF1] z-10">
         <div className="p-4 max-w-lg mx-auto">
           <div className="flex items-center justify-between gap-3 mb-3">
             <div className="min-w-0">
-              <div className="font-bold text-[#9000E3] text-[1.1rem] leading-none">
-                Total
-              </div>
+              <div className="font-bold text-[#9000E3] text-[1.1rem] leading-none">Total</div>
               <div className="mt-1 flex items-end gap-0.5">
                 <span className="font-bold tracking-tight text-[#9000E3] text-[2rem] leading-none">
                   {totalPrice}
                 </span>
-                <span className="font-semibold text-[#490076] mb-0.5 text-sm">
-                  /mois
-                </span>
+                <span className="font-semibold text-[#490076] mb-0.5 text-sm">/mois</span>
               </div>
             </div>
-            <Image
-              src="/drawers/drawer-garanties-b.svg"
-              alt=""
-              width={48}
-              height={48}
-              className="h-12 w-12 shrink-0"
-            />
+            <Image src="/drawers/drawer-garanties-b.svg" alt="" width={48} height={48} className="h-12 w-12 shrink-0" />
           </div>
 
           <Button

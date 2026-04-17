@@ -19,6 +19,13 @@ import { ResponsiveDrawer } from "@/components/ui/responsive-drawer";
 interface ChangeOfferDrawerProps {
 	open: boolean;
 	onOpenChange: (open: boolean) => void;
+	/**
+	 * Optional hook fired after the user confirms and the selected offer is
+	 * persisted to session storage, just before the drawer is closed.
+	 * Lets callers (e.g. ComparateurVariantA) inject extra navigation like
+	 * jumping to a specific step after the confirm.
+	 */
+	onConfirm?: (selectedPlan: OfferPlan) => void;
 }
 
 /* ------------------------------------------------------------------ */
@@ -28,6 +35,7 @@ interface ChangeOfferDrawerProps {
 export function ChangeOfferDrawer({
 	open,
 	onOpenChange,
+	onConfirm,
 }: ChangeOfferDrawerProps) {
 	const isDesktop = useMediaQuery("(min-width: 1024px)");
 
@@ -63,6 +71,7 @@ export function ChangeOfferDrawer({
 		setSelectedOffer(planIndex);
 		setSession({ ...session, selectedPlan: planIndex });
 		onOpenChange(false);
+		onConfirm?.(selectedPlan);
 	};
 
 	/* ── Derived data ── */

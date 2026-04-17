@@ -100,19 +100,28 @@ export function OptionsVariantA() {
 				)}
 			</div>
 
-			{/* Mobile bottom bar — on desktop the summary lives in the right sidebar */}
-			<div className="sm:hidden fixed bottom-0 left-0 right-0 p-4 bg-white ring-1 ring-[#EADFF1] z-10">
+			{/* Bottom bar — visible whenever the right sidebar is NOT.
+			    The right sidebar (which hosts the TotalSummary on desktop) only
+			    appears at `lg+`, so we must show this bar on everything below lg,
+			    not just below sm. Otherwise between 640–1023px the user had no
+			    accessible CTA. */}
+			{/* Bar sits flush against the left sidebar so its content (the
+			    price on the left edge) isn't covered. At `sm`–`lg` the left
+			    sidebar is `w-[120px]`; above `lg` the bar is hidden entirely
+			    because the right sidebar's TotalSummary takes over. This
+			    mirrors how the main column is offset in `DesktopShell`
+			    (`sm:ml-[120px]`). */}
+			<div className="lg:hidden fixed bottom-0 left-0 right-0 sm:left-[120px] p-4 bg-white ring-1 ring-[#EADFF1] z-10">
 				<TotalSummary
 					planName={planName}
 					totalPrice={totalPrice}
 					optionCount={selectedOptions.length}
 					onContinue={next}
-					className="max-w-lg mx-auto"
 				/>
 			</div>
 
-			{/* Pad bottom on mobile for fixed bar */}
-			<div className="h-32 sm:hidden" />
+			{/* Pad bottom for fixed bar — matches the bar's visibility */}
+			<div className="h-32 lg:hidden" />
 
 			<OptionDetailsDrawer
 				open={drawerOpen}

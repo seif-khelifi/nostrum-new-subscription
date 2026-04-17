@@ -41,11 +41,23 @@ export function RecapStickyFooter({
   return (
     <div
       className={cn(
-        "fixed bottom-0 left-0 right-0 bg-white ring-1 ring-[#EADFF1] z-10",
+        /* Bar sits flush against the left sidebar from `sm` upward so its
+           content (the price on the left edge) isn't covered by the fixed
+           sidebar. At `sm`–`lg` the sidebar is 120px wide (matches
+           `desktop-shell.tsx` `sm:ml-[120px]`); on mobile (<sm) the sidebar
+           isn't rendered at all, so `sm:left-[120px]` is a no-op there and
+           the bar spans the full viewport as before. */
+        "fixed bottom-0 left-0 right-0 sm:left-[120px] bg-white ring-1 ring-[#EADFF1] z-10",
         className,
       )}
     >
-      <div className="p-4 max-w-lg mx-auto">
+      {/* Inner container: fills the full width of the fixed bar.
+          On mobile the viewport is already narrower than any reasonable cap,
+          so no `max-w` is needed; on tablet (640–1023px, where this bar is
+          still visible because the right sidebar doesn't kick in until lg)
+          the content now spans the full bar width instead of floating in a
+          512px island. */}
+      <div className="p-4 w-full">
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="min-w-0">
             <div className="font-bold text-[#9000E3] text-[1.1rem] leading-none">

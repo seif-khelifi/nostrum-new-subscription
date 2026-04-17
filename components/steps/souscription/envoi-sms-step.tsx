@@ -31,6 +31,7 @@ export function EnvoiSmsStep() {
   const [contractDrawerOpen, setContractDrawerOpen] = useState(false);
   const [contractDrawerMessage, setContractDrawerMessage] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [resending, setResending] = useState(false);
 
   const {
     control,
@@ -54,10 +55,13 @@ export function EnvoiSmsStep() {
   async function sendOtp() {
     if (!phone) return;
     clearError();
+    setResending(true);
     try {
       await requestOtp(phone);
     } catch (err) {
       showError((err as Error).message);
+    } finally {
+      setResending(false);
     }
   }
 
@@ -108,7 +112,12 @@ export function EnvoiSmsStep() {
         errors={errors}
         selectionError={apiError}
         customAction={
-          isComplete ? (
+          /* Show "Valider" only when the user has typed a full 6-digit code
+             AND the API hasn't flagged it as invalid. As soon as `apiError`
+             is set (wrong code), flip back to "Renvoyer" immediately without
+             waiting for the user to delete a character. `clearError()` fires
+             on the next keystroke, swapping the button back to "Valider". */
+          isComplete && !apiError ? (
             <Button type="submit" variant="ctaPurple" size="cta" loading={submitting}>
               {texts.ctaLabel}
               <ArrowRight className="size-5" />
@@ -119,6 +128,7 @@ export function EnvoiSmsStep() {
               variant="ctaRenvoyer"
               size="cta"
               onClick={sendOtp}
+              loading={resending}
             >
               <RotateCcw className="size-4" />
               Renvoyer

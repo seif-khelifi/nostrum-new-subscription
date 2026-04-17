@@ -17,6 +17,7 @@ export const variantA: VariantConfig = {
   layout: {
     sidebar: { theme: "purple", showRightSidebar: true },
     navbar: { showProgressBar: false, showCta: false },
+    background: "#FFFEFB",
   },
 
   /* ────────────────────────────────────────────────────────────── */

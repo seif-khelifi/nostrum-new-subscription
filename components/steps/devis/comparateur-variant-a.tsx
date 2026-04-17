@@ -35,7 +35,7 @@ const infoCardData = comparateurData.infoCard as Record<string, CompareValues>;
 /* ------------------------------------------------------------------ */
 
 export function ComparateurVariantA() {
-	const { dismissSubFlow } = useStepper();
+	const { dismissSubFlow, goToStepById } = useStepper();
 
 	const { value: selectedOfferIndex, isReady } = useSessionStorage<number | null>(
 		"selectedOffer",
@@ -111,6 +111,16 @@ export function ComparateurVariantA() {
 		}
 	}, []);
 
+	/**
+	 * After the user confirms their new offer from inside the comparator,
+	 * exit the comparator sub-flow and jump straight to the first Santé step.
+	 * `goToStepById` clears the active sub-flow atomically, so we don't need
+	 * a separate `dismissSubFlow()` call.
+	 */
+	const handleChangeOfferConfirm = useCallback(() => {
+		goToStepById("sexe");
+	}, [goToStepById]);
+
 	const sectionKey = sections[activeSection]?.key ?? "dentaire";
 	const close = () => dismissSubFlow();
 	const savingsAmount = comparateurData.banner.savingsAmount;
@@ -175,6 +185,7 @@ export function ComparateurVariantA() {
 			<ChangeOfferDrawer
 				open={changeOfferOpen}
 				onOpenChange={handleChangeOfferOpenChange}
+				onConfirm={handleChangeOfferConfirm}
 			/>
 
 			{/* ─── Mobile (<lg) ─── */}

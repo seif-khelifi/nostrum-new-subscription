@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { AlertBanner } from "@/components/ui/alert";
+import { AdvisorSidebarCard } from "@/components/ui/advisor-sidebar-card";
 import { useStepper } from "@/context/StepperContext";
 import { useVariant } from "@/context/VariantContext";
 import { useSessionStorage } from "@/hooks/use-session-storage";
@@ -54,16 +55,12 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
         className,
       )}
     >
-      {/* Call card (always visible) */}
-      <AlertBanner
-        variant="sidebarDark"
-        layout="responsive"
-        title="Parler à un conseiller"
-        subtitle="On vous rappelle dans la journée"
-        imageSrc="/alertBanner/call.svg"
-        imageAlt="Appeler un conseiller"
-        imageFill
-      />
+      {/* Call card (always visible). Dedicated Layer 2 component — replaces
+          the previous `AlertBanner variant="sidebarDark"` so the sidebar owns
+          its own card primitive + structure (title+subtitle on top, image
+          hugging the edges at the bottom) rather than bending AlertBanner's
+          layout-model. */}
+      <AdvisorSidebarCard tel="+33000000000" />
 
       {/* Step banner — dynamic, from variant config */}
       {stepBanner && (
@@ -80,7 +77,9 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
       )}
 
       {/* Options / Recap step — total summary card */}
-      {(isOptionsStep || isRecapStep) && <OptionsTotalSummaryCard onContinue={next} />}
+      {(isOptionsStep || isRecapStep) && (
+        <OptionsTotalSummaryCard onContinue={next} />
+      )}
     </aside>
   );
 }

@@ -79,7 +79,7 @@ export function RecapNavbarVariantA({
       <div className="w-[2px] bg-[#E9E6DF] self-stretch" />
 
       {/* ── Section 3: Advisor Card ── */}
-      <div className="flex items-center px-5 py-4 shrink-0">
+      <div className="flex items-center px-3 xl:px-5 py-4 shrink-0">
         <AdvisorCard />
       </div>
     </header>

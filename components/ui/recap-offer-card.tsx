@@ -3,7 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { cva, type VariantProps } from "class-variance-authority";
-import { Check } from "lucide-react";
+import { Check, ChevronRight } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -100,6 +100,25 @@ const recapOfferChangeButtonVariants = cva(
   },
 );
 
+/**
+ * Lower lip — symmetric with the upper "Mon offre choisie" badge row.
+ * Text color follows the wrapper tone: purple on gradient, near-black on neutral.
+ */
+const recapOfferLipVariants = cva(
+  "inline-flex items-center gap-1 text-sm font-semibold transition-opacity hover:opacity-80 active:scale-95 active:opacity-60 disabled:pointer-events-none disabled:opacity-50",
+  {
+    variants: {
+      tone: {
+        gradient: "text-[#290E67]",
+        neutral: "text-[#1D1B20]",
+      },
+    },
+    defaultVariants: {
+      tone: "gradient",
+    },
+  },
+);
+
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
 /* ------------------------------------------------------------------ */
@@ -140,6 +159,14 @@ export interface RecapOfferCardProps
    * gradient tone and false for neutral.
    */
   showAccordions?: boolean;
+  /**
+   * Optional handler for the lower lip ("Voir toutes les garanties").
+   * When undefined, the lip is still rendered (as a clickable placeholder)
+   * but does nothing. Wire this up from the recap pages to navigate.
+   */
+  onViewGaranties?: () => void;
+  /** Label for the lower lip. Defaults to "Voir toutes les garanties". */
+  viewGarantiesLabel?: string;
   className?: string;
 }
 
@@ -171,6 +198,8 @@ function RecapOfferCard({
   logo,
   changeOfferInside,
   showAccordions,
+  onViewGaranties,
+  viewGarantiesLabel = "Voir toutes les garanties",
   className,
 }: RecapOfferCardProps) {
   const resolvedTone = tone ?? "gradient";
@@ -286,6 +315,21 @@ function RecapOfferCard({
               {buttonInside && changeButton}
             </CardContent>
           </Card>
+
+          {/* Lower lip — symmetric with the upper "Mon offre choisie" badge row.
+              Sits inside the tone wrapper, below the white card, above the
+              gradient/neutral background surface. Mirrors the "En savoir plus"
+              row on the recommended OfferCard. */}
+          <div className="flex items-center justify-center px-5 pt-3 pb-4">
+            <button
+              type="button"
+              onClick={onViewGaranties}
+              className={cn(recapOfferLipVariants({ tone: resolvedTone }))}
+            >
+              {viewGarantiesLabel}
+              <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
         </div>
       </div>
 

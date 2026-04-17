@@ -1,6 +1,12 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useLayoutEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import type { VariantConfig, VariantKey, StepTexts, StepId } from "@/config";
 import { resolveVariant } from "@/config";
 
@@ -33,6 +39,20 @@ export function VariantProvider({
   const [config] = useState<VariantConfig>(() =>
     resolveVariant(forceVariant ?? variant ?? "a"),
   );
+
+  /**
+   * Sync the global `--background` CSS var from `layout.background`.
+   * Because `globals.css` maps `--color-background → var(--background)`,
+   * every `bg-background` class site (body, shells, step wrappers) picks
+   * the per-variant color automatically. `useLayoutEffect` runs before
+   * paint so there's no flash when landing on variant A.
+   */
+  useLayoutEffect(() => {
+    document.documentElement.style.setProperty(
+      "--background",
+      config.layout.background,
+    );
+  }, [config.layout.background]);
 
   return (
     <VariantContext.Provider value={config}>{children}</VariantContext.Provider>

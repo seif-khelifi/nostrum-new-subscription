@@ -35,7 +35,11 @@ function GarantieCompareBreakdownCard({
     <div
       data-slot="garantie-compare-breakdown-card"
       className={cn(
-        "overflow-hidden rounded-[24px] border-2 border-[#CE99FF] p-2 flex flex-col gap-2",
+        // Outer purple shell — mirrors OptionCard's unselected outer
+        // (rounded-[28px] · p-[3px] · bg-[#F3E5FA]). `p-[3px]` creates
+        // the thin purple border effect around each inner white card,
+        // `gap-[3px]` keeps the same 3px bleed between stacked rows.
+        "overflow-hidden rounded-[28px] bg-[#F3E5FA] p-[3px] flex flex-col gap-[3px]",
         className,
       )}
       {...props}
@@ -45,7 +49,9 @@ function GarantieCompareBreakdownCard({
         return (
           <div
             key={i}
-            className="flex flex-col gap-2 rounded-[16px] bg-white px-4 py-3"
+            // Inner white card — mirrors OptionCard's inner white card
+            // (rounded-[25px] · bg-white · ring-1 ring-[#EADFF1] · px-5 py-5).
+            className="flex flex-col gap-2 rounded-[25px] bg-white ring-1 ring-[#EADFF1] px-5 py-5"
           >
             <span className="text-sm font-semibold text-[#290E67]">
               Offre{" "}

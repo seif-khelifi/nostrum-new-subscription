@@ -237,11 +237,15 @@ export function RecapVariantA() {
         </div>
       </div>
 
-      {/* Mobile sticky footer */}
-      <RecapStickyFooter totalPrice={totalPrice} onContinue={next} className="sm:hidden" />
+      {/* Sticky footer — visible whenever the right sidebar is NOT.
+          The right sidebar (which hosts the TotalSummary on desktop) only
+          appears at `lg+`, so we must show this bar on everything below lg,
+          not just below sm. Otherwise between 640–1023px the user had no
+          accessible CTA. */}
+      <RecapStickyFooter totalPrice={totalPrice} onContinue={next} className="lg:hidden" />
 
-      {/* Pad bottom on mobile for fixed bar */}
-      <div className="h-40 sm:hidden" />
+      {/* Pad bottom for fixed bar — matches the bar's visibility */}
+      <div className="h-40 lg:hidden" />
     </div>
   );
 }

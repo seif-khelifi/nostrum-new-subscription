@@ -123,6 +123,13 @@ export interface VariantLayoutConfig {
     /** Show the "Parler à un conseiller" CTA pill in the desktop navbar */
     showCta: boolean;
   };
+  /**
+   * Global page background for the variant. Any CSS color value (hex, oklch…).
+   * Applied by VariantProvider as the `--background` CSS custom property on
+   * `document.documentElement`, so every `bg-background` class site across
+   * the app (body, shells, step wrappers…) automatically follows the variant.
+   */
+  background: string;
 }
 
 /* ------------------------------------------------------------------ */

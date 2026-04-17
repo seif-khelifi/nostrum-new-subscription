@@ -11,6 +11,7 @@ const cardVariants = cva(
         default: "",
         dark: "bg-black text-white ring-0 rounded-[24px] p-6 gap-0",
         comparateurOutline: "bg-white rounded-[24px] overflow-hidden pt-6 px-6 pb-6 shadow-sm border border-[#E9E3DD] ring-0",
+        sidebarDark: "bg-[#490076] text-white ring-0 rounded-2xl py-0 gap-0",
       },
     },
     defaultVariants: {

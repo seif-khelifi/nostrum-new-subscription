@@ -85,6 +85,30 @@ export function calculateDatesOfContractsSwap(now: Date = new Date()): SwapDates
   }
 }
 
+/* ═══════════════════════════════════════════════════════════════════ */
+/*  Date-boundary helpers (for PillDatePicker fromDate / toDate)      */
+/* ═══════════════════════════════════════════════════════════════════ */
+
+function subtractYears(date: Date, years: number): Date {
+  const d = new Date(date);
+  d.setFullYear(d.getFullYear() - years);
+  return d;
+}
+
+export function minAgeBirthdate(minAge: number): Date {
+  return subtractYears(new Date(), minAge);
+}
+
+export function maxAgeBirthdate(maxAge: number): Date {
+  return subtractYears(new Date(), maxAge);
+}
+
+export function childMaxBirthdate(): Date {
+  const d = subtractYears(new Date(), 18);
+  d.setDate(d.getDate() + 1);
+  return d;
+}
+
 /** French ordinal label: 1 → "1er", 2 → "2ème", etc. */
 export function frenchOrdinal(n: number): string {
   return n === 1 ? "1er" : `${n}ème`

@@ -12,6 +12,7 @@ import { useStepTexts } from "@/context/VariantContext";
 import { useFormErrorToast, errorKey } from "@/hooks/use-form-error-toast";
 import { formatBirthdate, parseBirthdate } from "@/lib/utils";
 import { dateBirthConjointSchema, type DateBirthConjointFormValues, CONJOINT_MIN_AGE, CONJOINT_MAX_AGE } from "@/lib/validations/situation";
+import { minAgeBirthdate, maxAgeBirthdate } from "@/lib/utils";
 
 export function DateBirthConjointStep() {
   const { next } = useStepper();
@@ -47,10 +48,9 @@ export function DateBirthConjointStep() {
             <span>Je veux protéger en premier mon</span>
             <PillInput readOnly value={commenceLabel} placeholder="" inputClassName="min-w-[100px] sm:min-w-[140px]" />
             <span>et il est né(e) le</span>
-            <Controller name="conjointBirthDate" control={control} render={({ field }) => {
-              const now = new Date();
-              return (<PillDatePicker value={field.value} onChange={field.onChange} placeholder="JJ/MM/AAAA" hasError={!!errors.conjointBirthDate} inputClassName="min-w-[120px] sm:min-w-[160px]" fromYear={now.getFullYear() - CONJOINT_MAX_AGE} toYear={now.getFullYear() - CONJOINT_MIN_AGE} />);
-            }} />
+            <Controller name="conjointBirthDate" control={control} render={({ field }) => (
+              <PillDatePicker value={field.value} onChange={field.onChange} placeholder="JJ/MM/AAAA" hasError={!!errors.conjointBirthDate} inputClassName="min-w-[120px] sm:min-w-[160px]" fromDate={maxAgeBirthdate(CONJOINT_MAX_AGE)} toDate={minAgeBirthdate(CONJOINT_MIN_AGE)} />
+            )} />
           </div>
         }
         infoCard={texts.banner ? <AlertBanner {...texts.banner} /> : undefined}

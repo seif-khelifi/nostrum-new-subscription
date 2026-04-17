@@ -17,6 +17,7 @@ import {
 	ENFANT_MIN_AGE,
 	ENFANT_MAX_AGE,
 } from "@/lib/validations/situation";
+import { minAgeBirthdate, maxAgeBirthdate, childMaxBirthdate } from "@/lib/utils";
 
 /* ------------------------------------------------------------------ */
 /*  Constants                                                          */
@@ -126,10 +127,15 @@ export function AddBeneficiaryDrawer({
 	};
 
 	/* ── Date bounds ── */
-	const now = new Date();
 	const isConjoint = selectedType === "MARRIED";
 	const minAge = isConjoint ? CONJOINT_MIN_AGE : ENFANT_MIN_AGE;
 	const maxAge = isConjoint ? CONJOINT_MAX_AGE : ENFANT_MAX_AGE;
+	const dateFrom = isConjoint
+		? maxAgeBirthdate(CONJOINT_MAX_AGE)
+		: childMaxBirthdate();
+	const dateTo = isConjoint
+		? minAgeBirthdate(CONJOINT_MIN_AGE)
+		: new Date();
 
 	/* ── Step 1: Choose type ── */
 	if (step === "choose") {
@@ -229,8 +235,8 @@ export function AddBeneficiaryDrawer({
 							onChange={setDob}
 							placeholder="JJ/MM/AAAA"
 							inputClassName="min-w-[120px] sm:min-w-[160px]"
-							fromYear={now.getFullYear() - maxAge}
-							toYear={now.getFullYear() - minAge}
+						fromDate={dateFrom}
+						toDate={dateTo}
 						/>
 					</div>
 				</div>

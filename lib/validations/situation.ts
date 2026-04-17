@@ -21,7 +21,7 @@ function ageFromDate(date: Date): number {
 /*  Reusable field schemas                                            */
 /* ═══════════════════════════════════════════════════════════════════ */
 
-/** Zod refinement: date must represent someone aged between `min` and `max` years. */
+/** Zod refinement: date must represent someone aged between `min` and `max` full years. */
 const birthDateSchema = (min: number, max: number) =>
   z
     .date({ error: "Veuillez sélectionner une date" })
@@ -30,6 +30,16 @@ const birthDateSchema = (min: number, max: number) =>
     })
     .refine((d) => ageFromDate(d) <= max, {
       message: `L'âge maximum est de ${max} ans`,
+    });
+
+const childBirthDateSchema = (maxExclusive: number) =>
+  z
+    .date({ error: "Veuillez sélectionner une date" })
+    .refine((d) => d <= new Date(), {
+      message: "La date de naissance ne peut pas être dans le futur",
+    })
+    .refine((d) => ageFromDate(d) < maxExclusive, {
+      message: `L'enfant doit avoir moins de ${maxExclusive} ans`,
     });
 
 const firstNameField = z
@@ -90,15 +100,15 @@ const addressFields = {
 /*  Age-range constants                                               */
 /* ═══════════════════════════════════════════════════════════════════ */
 
-/** Adhérent principal: minimum 1 year old, maximum 95 years old. */
+/** Adhérent principal: ≥ 18 years old, max 95 years old. */
 export const ADHERENT_MIN_AGE = 18;
 export const ADHERENT_MAX_AGE = 95;
 
-/** Conjoint: minimum 18 years old, maximum 95 years old. */
+/** Conjoint: ≥ 18 years old, max 95 years old. */
 export const CONJOINT_MIN_AGE = 18;
 export const CONJOINT_MAX_AGE = 95;
 
-/** Enfant à charge: minimum 0 years old, maximum  years old. */
+/** Enfant à charge: strictly < 18 years old. */
 export const ENFANT_MIN_AGE = 0;
 export const ENFANT_MAX_AGE = 17;
 
@@ -128,12 +138,12 @@ export type DateBirthConjointFormValues = z.infer<
   typeof dateBirthConjointSchema
 >;
 
-/** dateBirthChildren step — each child's birthDate (dynamic array, at least 1) */
+/** dateBirthChildren step — each child's birthDate (strictly < 18, dynamic array, at least 1) */
 export const dateBirthChildrenSchema = z.object({
   children: z
     .array(
       z.object({
-        birthdate: birthDateSchema(ENFANT_MIN_AGE, ENFANT_MAX_AGE),
+        birthdate: childBirthDateSchema(18),
       }),
     )
     .min(1, "Au moins un enfant est requis"),

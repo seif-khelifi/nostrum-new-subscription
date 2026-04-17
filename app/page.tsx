@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { DesktopShell } from "@/components/layout/desktop";
 import { MobileShell } from "@/components/layout/mobile";
-import { DashboardContent } from "@/components/shared";
+import { StepRouter } from "@/components/steps/step-router";
 import { StepNavbar } from "@/components/steps/step-navbar";
 import { MobileStepNavbar } from "@/components/steps/mobile-step-navbar";
 
@@ -38,11 +38,11 @@ export default function Home() {
 
 	return isDesktop ? (
 		<DesktopShell customNavbar={<StepNavbar />}>
-			<DashboardContent />
+			<StepRouter />
 		</DesktopShell>
 	) : (
 		<MobileShell customHeader={<MobileStepNavbar />}>
-			<DashboardContent />
+			<StepRouter />
 		</MobileShell>
 	);
 }

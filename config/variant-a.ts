@@ -82,7 +82,8 @@ export const variantA: VariantConfig = {
         { id: "payment", label: "Paiement" },
         { id: "coupon", label: "Code promo" },
         { id: "bankDetails", label: "Mes remboursements" },
-        { id: "souscription_placeholder", label: "Souscription" },
+        { id: "contract", label: "Mon contrat" },
+        { id: "summary", label: "Récapitulatif" },
       ],
     },
   ],
@@ -375,6 +376,19 @@ export const variantA: VariantConfig = {
       title: "Mes remboursements",
       navbarTitle: "Souscription",
       subtitle: "On me remboursera sur ce compte",
+    },
+
+    contract: {
+      title: "Mon contrat",
+      navbarTitle: "Souscription",
+      subtitle: "Je lis et signe mon contrat.",
+      ctaLabel: "Finaliser votre souscription",
+    },
+
+    summary: {
+      title: "Finalisation de votre souscription",
+      navbarTitle: "Souscription",
+      subtitle: "On prépare votre contrat, merci de patienter quelques instants.",
     },
 
     /* ── Options ── */

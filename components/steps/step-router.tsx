@@ -29,6 +29,8 @@ import {
 import { PaymentStep } from "./souscription/payment-step";
 import { CouponStep } from "./souscription/coupon-step";
 import { BankDetailsStep } from "./souscription/bank-details-step";
+import { ContractStep } from "./souscription/contract-step";
+import { SummaryStep } from "./souscription/summary-step";
 import { YeuxStep, DentsStep, BienEtreStep } from "./sante";
 import { TransitionOfferStep } from "./transition";
 import { OnboardingStep } from "./onboarding-step";
@@ -145,6 +147,8 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
   payment: PaymentStep,
   coupon: CouponStep,
   bankDetails: BankDetailsStep,
+  contract: ContractStep,
+  summary: SummaryStep,
 
   // Santé group
   sante_yeux: YeuxStep,
@@ -171,21 +175,7 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
 
   // Devis recap — offer summary before souscription
   devis_recap: DevisRecapStep,
-
-  // Placeholder steps — will be replaced with real screens later
-  souscription_placeholder: () => <PlaceholderScreen label="Souscription" />,
 };
-
-function PlaceholderScreen({ label }: { label: string }) {
-  return (
-    <div className="mx-auto flex w-full max-w-lg flex-col items-center gap-4 py-16 text-center">
-      <h2 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold text-[#1D1B20]">
-        {label}
-      </h2>
-      <p className="text-[#444444]">Cette section sera bientôt disponible.</p>
-    </div>
-  );
-}
 
 /**
  * Renders the component for the currently active step.

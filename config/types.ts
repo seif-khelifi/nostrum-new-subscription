@@ -39,7 +39,8 @@ export type StepId =
   | "payment"
   | "coupon"
   | "bankDetails"
-  | "souscription_placeholder";
+  | "contract"
+  | "summary";
 
 export interface StepDef {
   id: StepId;

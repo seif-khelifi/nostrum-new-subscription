@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { Elements, useStripe } from "@stripe/react-stripe-js";
 import { StepScreen } from "@/components/steps/step-screen";
+import { SummarySuccessStep } from "@/components/steps/souscription/summary-success-step";
 import { useSituationForm } from "@/context/SituationFormContext";
 import { useStepTexts } from "@/context/VariantContext";
 import { useApiError } from "@/hooks/use-api-error";
@@ -138,30 +139,22 @@ function SummaryInner() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stripe]);
 
+  if (done) {
+    return <SummarySuccessStep />;
+  }
+
   return (
     <StepScreen
       title={texts.title}
       hideTitle={!!texts.navbarTitle}
-      subtitle={done ? undefined : texts.subtitle}
+      subtitle={texts.subtitle}
       canProceed={false}
       onNext={() => {}}
       selectionError={error}
       customAction={<></>}
     >
       <div className="flex min-h-[40vh] w-full items-center justify-center">
-        {done ? (
-          <div className="flex flex-col items-center gap-4 text-center">
-            <CheckCircle2 className="size-12 text-[#22c55e]" />
-            <p className="text-lg font-semibold text-[#1D1B20]">
-              Votre souscription est finalisée.
-            </p>
-            <p className="max-w-md text-sm text-[#444444]">
-              Vous recevrez prochainement un e-mail de confirmation avec votre contrat.
-            </p>
-          </div>
-        ) : (
-          !error && <Loader2 className="size-8 animate-spin text-[#8E7A9E]" />
-        )}
+        {!error && <Loader2 className="size-8 animate-spin text-[#8E7A9E]" />}
       </div>
     </StepScreen>
   );

@@ -24,11 +24,14 @@ const SUCCESS_BG =
 export function SummarySuccessStep() {
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col overflow-hidden text-white"
+      className="fixed inset-0 z-50 flex flex-col overflow-hidden text-white animate-overlay-in"
       style={{ background: SUCCESS_BG }}
     >
       {/* ── Header: Nostrum logo ─────────────────────────────────── */}
-      <header className="shrink-0 flex items-center px-4 pt-5 pb-3 lg:px-12 lg:pt-10 lg:pb-0">
+      <header
+        className="shrink-0 flex items-center px-4 pt-5 pb-3 lg:px-12 lg:pt-10 lg:pb-0 animate-fade-up"
+        style={{ animationDelay: "120ms" }}
+      >
         <Image
           src="/summary/nostrum.svg"
           alt="Nostrum"
@@ -49,18 +52,27 @@ export function SummarySuccessStep() {
         >
           {/* Text + CTAs (top on mobile, left on desktop) */}
           <div className="shrink-0 px-6 pt-2 lg:px-0 lg:pt-0 lg:order-1">
-            <h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-[32px] lg:text-5xl xl:text-6xl font-bold leading-tight lg:leading-[1.05]">
+            <h1
+              className="font-[family-name:var(--font-bricolage-grotesque)] text-[32px] lg:text-5xl xl:text-6xl font-bold leading-tight lg:leading-[1.05] animate-fade-up"
+              style={{ animationDelay: "200ms" }}
+            >
               Félicitations !
               <br />
               Vous êtes couvert.e 🎉
             </h1>
-            <p className="mt-4 lg:mt-6 text-base lg:text-lg leading-relaxed text-white/80 max-w-xl">
+            <p
+              className="mt-4 lg:mt-6 text-base lg:text-lg leading-relaxed text-white/80 max-w-xl animate-fade-up"
+              style={{ animationDelay: "300ms" }}
+            >
               Votre souscription est finalisée. Pour gérer vos demandes de
               remboursements, rendez-vous sur l&apos;application Nostrum Care !
             </p>
 
             {/* CTAs on desktop (inline with text, left column) */}
-            <div className="hidden lg:flex mt-10 items-center gap-6">
+            <div
+              className="hidden lg:flex mt-10 items-center gap-6 animate-fade-up"
+              style={{ animationDelay: "500ms" }}
+            >
               <Button variant="ctaPurpleSquared" className="px-8" asChild>
                 <a href={DOWNLOAD_APP_URL}>
                   Télécharger l&apos;application
@@ -76,8 +88,11 @@ export function SummarySuccessStep() {
             </div>
           </div>
 
-          {/* Illustration (middle on mobile, right on desktop) */}
-          <div className="flex-1 flex items-center justify-center px-6 min-h-0 lg:px-0 lg:order-2">
+          {/* Illustration (middle on mobile, right on desktop) — fades in with a subtle scale */}
+          <div
+            className="flex-1 flex items-center justify-center px-6 min-h-0 lg:px-0 lg:order-2 animate-fade-scale"
+            style={{ animationDelay: "240ms", animationDuration: "560ms" }}
+          >
             <picture>
               <source
                 srcSet="/summary/stars-desktop.svg"
@@ -93,7 +108,10 @@ export function SummarySuccessStep() {
         </div>
 
         {/* CTAs on mobile (bottom of viewport, full-width) */}
-        <div className="shrink-0 px-6 pb-8 flex flex-col items-start gap-4 lg:hidden">
+        <div
+          className="shrink-0 px-6 pb-8 flex flex-col items-start gap-4 lg:hidden animate-fade-up"
+          style={{ animationDelay: "520ms" }}
+        >
           <Button variant="ctaPurpleSquared" className="w-full" asChild>
             <a href={DOWNLOAD_APP_URL}>
               Télécharger l&apos;application

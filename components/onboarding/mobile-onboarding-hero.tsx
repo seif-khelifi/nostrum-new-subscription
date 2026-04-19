@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export interface MobileOnboardingHeroProps {
   onStart?: () => void;
@@ -39,7 +40,10 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
         }}
       >
         {/* ── Top bar ──────────────────────────────────────── */}
-        <div className="flex items-center justify-between px-8 lg:px-12 pt-6 pb-4">
+        <div
+          className="flex items-center justify-between px-8 lg:px-12 pt-6 pb-4 animate-fade-up"
+          style={{ animationDelay: "0ms" }}
+        >
           <Image
             src="/onboarding/Vector.svg"
             alt="Nostrum"
@@ -63,21 +67,35 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
           <div className="flex w-full max-w-6xl gap-10 lg:gap-16 items-center">
             {/* ── Left half: content ───────────────────────── */}
             <div className="flex flex-1 flex-col justify-center">
-              {/* Hero headline */}
+              {/*
+               * Hero headline — each colored line fades up in sequence.
+               * The purple accent spans (santé / & bien-être) arrive last
+               * so the brand color "lands" visibly rather than appearing
+               * already painted.
+               */}
               <h1 className="leading-[1.1] uppercase">
-                <span className="text-[#34266D]">La couverture</span>
+                <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "60ms" }}>La couverture</span>
                 <br />
-                <span className="text-[#C86FFE]">santé</span>
+                <span className="text-[#C86FFE] inline-block animate-fade-up" style={{ animationDelay: "300ms" }}>santé</span>
                 <br />
-                <span className="text-[#C86FFE]">& bien-être</span>
+                <span className="text-[#C86FFE] inline-block animate-fade-up" style={{ animationDelay: "360ms" }}>& bien-être</span>
                 <br />
-                <span className="text-[#34266D]">qui s&apos;adapte</span>
+                <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "180ms" }}>qui s&apos;adapte</span>
                 <br />
-                <span className="text-[#34266D]">vraiment à vous.</span>
+                <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "240ms" }}>vraiment à vous.</span>
               </h1>
 
-              {/* Feature cards (2×2 grid) */}
-              <div className="grid grid-cols-2 gap-3 mt-8 max-w-md">
+              {/* Feature cards (2×2 grid) — fade up after the headline lands */}
+              <div
+                className={cn(
+                  "grid grid-cols-2 gap-3 mt-8 max-w-md",
+                  "[&>*]:animate-fade-up",
+                  "[&>*:nth-child(1)]:[animation-delay:460ms]",
+                  "[&>*:nth-child(2)]:[animation-delay:510ms]",
+                  "[&>*:nth-child(3)]:[animation-delay:560ms]",
+                  "[&>*:nth-child(4)]:[animation-delay:610ms]",
+                )}
+              >
                 {/* Card 1 */}
                 <div className="rounded-2xl bg-white p-4 ring-1 ring-foreground/5">
                   <p className="text-sm text-[#34266D]">
@@ -130,8 +148,11 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
                 </div>
               </div>
 
-              {/* CTA section */}
-              <div className="flex items-center gap-4 mt-8">
+              {/* CTA section — lands last */}
+              <div
+                className="flex items-center gap-4 mt-8 animate-fade-up"
+                style={{ animationDelay: "720ms" }}
+              >
                 <Button
                   variant="ctaPurpleSquared"
                   className="h-14 px-8"
@@ -150,7 +171,10 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
 
             {/* ── Right half: illustration ─────────────────── */}
             <div className="flex flex-1 items-center justify-center">
-              <div className="w-full max-w-lg overflow-hidden rounded-[3rem]">
+              <div
+                className="w-full max-w-lg overflow-hidden rounded-[3rem] animate-fade-scale"
+                style={{ animationDelay: "420ms", animationDuration: "520ms" }}
+              >
                 <Image
                   src="/onboarding/Container.svg"
                   alt="Nostrum app preview"
@@ -178,7 +202,10 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
           }}
         >
           {/* ── Top bar ──────────────────────────────────────── */}
-          <div className="flex items-center justify-between px-4 pt-6 pb-3">
+          <div
+            className="flex items-center justify-between px-4 pt-6 pb-3 animate-fade-up"
+            style={{ animationDelay: "0ms" }}
+          >
             <Image
               src="/onboarding/Vector.svg"
               alt="Nostrum"
@@ -197,23 +224,32 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
             </Button>
           </div>
 
-          {/* ── Hero headline ────────────────────────────────── */}
+          {/* ── Hero headline (sequenced line reveal) ────────── */}
           <div className="px-4 pt-6 pb-6">
             <h1 className="leading-[1.1] uppercase">
-              <span className="text-[#34266D]">La couverture</span>
+              <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "60ms" }}>La couverture</span>
               <br />
-              <span className="text-[#C86FFE]">santé</span>
+              <span className="text-[#C86FFE] inline-block animate-fade-up" style={{ animationDelay: "300ms" }}>santé</span>
               <br />
-              <span className="text-[#C86FFE]">& bien-être</span>
+              <span className="text-[#C86FFE] inline-block animate-fade-up" style={{ animationDelay: "360ms" }}>& bien-être</span>
               <br />
-              <span className="text-[#34266D]">qui s&apos;adapte</span>
+              <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "180ms" }}>qui s&apos;adapte</span>
               <br />
-              <span className="text-[#34266D]">vraiment à vous.</span>
+              <span className="text-[#34266D] inline-block animate-fade-up" style={{ animationDelay: "240ms" }}>vraiment à vous.</span>
             </h1>
           </div>
 
-          {/* ── Feature cards (2×2 grid) ─────────────────────── */}
-          <div className="grid grid-cols-2 gap-3 px-4 pb-8">
+          {/* ── Feature cards (2×2 grid) — stagger after headline ── */}
+          <div
+            className={cn(
+              "grid grid-cols-2 gap-3 px-4 pb-8",
+              "[&>*]:animate-fade-up",
+              "[&>*:nth-child(1)]:[animation-delay:460ms]",
+              "[&>*:nth-child(2)]:[animation-delay:510ms]",
+              "[&>*:nth-child(3)]:[animation-delay:560ms]",
+              "[&>*:nth-child(4)]:[animation-delay:610ms]",
+            )}
+          >
             {/* Card 1 */}
             <div className="rounded-2xl bg-white p-4 ring-1 ring-foreground/5">
               <p className="text-sm text-[#34266D]">
@@ -268,7 +304,10 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
         </div>
 
         {/* ── Full-width container illustration ────────────────── */}
-        <div className="w-full">
+        <div
+          className="w-full animate-fade-scale"
+          style={{ animationDelay: "680ms", animationDuration: "520ms" }}
+        >
           <Image
             src="/onboarding/Container.svg"
             alt="Nostrum app preview"
@@ -280,7 +319,10 @@ export function MobileOnboardingHero({ onStart }: MobileOnboardingHeroProps) {
         </div>
 
         {/* ── Bottom CTA section ──────────────────────────────── */}
-        <div className="flex flex-col items-start gap-6 px-4 py-10">
+        <div
+          className="flex flex-col items-start gap-6 px-4 py-10 animate-fade-up"
+          style={{ animationDelay: "820ms" }}
+        >
           <h1 className="text-[#34266D]">Faisons connaissance</h1>
 
           <Button

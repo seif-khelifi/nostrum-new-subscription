@@ -71,15 +71,15 @@ export function OptionsVariantA() {
 			{/* Title — hidden on desktop when navbarTitle is set */}
 			<h1
 				className={
-					"font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4" +
+					"font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-[#1D1B20] pb-2 sm:pb-4 animate-fade-up" +
 					(texts.navbarTitle ? " sm:hidden" : "")
 				}
 			>
 				{texts.title}
 			</h1>
 
-			{/* 2-column card grid */}
-			<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 max-w-3xl">
+			{/* 2-column card grid — staggered entrance */}
+			<div className="grid grid-cols-1 xl:grid-cols-2 gap-4 max-w-3xl [&>*]:animate-fade-up [&>*:nth-child(1)]:[animation-delay:80ms] [&>*:nth-child(2)]:[animation-delay:120ms] [&>*:nth-child(3)]:[animation-delay:160ms] [&>*:nth-child(4)]:[animation-delay:200ms] [&>*:nth-child(5)]:[animation-delay:240ms] [&>*:nth-child(n+6)]:[animation-delay:280ms]">
 				{availableOptions.map((opt, index) => (
 					<OptionCard
 						key={opt.id}
@@ -100,18 +100,12 @@ export function OptionsVariantA() {
 				)}
 			</div>
 
-			{/* Bottom bar — visible whenever the right sidebar is NOT.
-			    The right sidebar (which hosts the TotalSummary on desktop) only
-			    appears at `lg+`, so we must show this bar on everything below lg,
-			    not just below sm. Otherwise between 640–1023px the user had no
-			    accessible CTA. */}
-			{/* Bar sits flush against the left sidebar so its content (the
-			    price on the left edge) isn't covered. At `sm`–`lg` the left
-			    sidebar is `w-[120px]`; above `lg` the bar is hidden entirely
-			    because the right sidebar's TotalSummary takes over. This
-			    mirrors how the main column is offset in `DesktopShell`
-			    (`sm:ml-[120px]`). */}
-			<div className="lg:hidden fixed bottom-0 left-0 right-0 sm:left-[120px] p-4 bg-white ring-1 ring-[#EADFF1] z-10">
+			{/*
+			  Bottom bar — mobile/tablet (<lg). Slides up on enter so the
+			  appearance of the sticky total feels like a distinct layer
+			  arriving rather than a content block flashing in.
+			*/}
+			<div className="lg:hidden fixed bottom-0 left-0 right-0 sm:left-[120px] p-4 bg-white ring-1 ring-[#EADFF1] z-10 animate-in slide-in-from-bottom-4 fade-in-0 duration-300 ease-out">
 				<TotalSummary
 					planName={planName}
 					totalPrice={totalPrice}

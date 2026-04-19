@@ -123,14 +123,21 @@ function SidebarStepper({
 						onClick={() => onValueChange(item.id)}
 						className={cn(itemVariants({ sidebarState, active, theme }))}
 					>
-						{/* Inner pill with icon + step number */}
+						{/*
+						Inner pill with icon + step number.
+						We key the pill on `active` so React remounts it when the
+						active step changes, triggering a subtle zoom-in that signals
+						"you're here now" without moving layout.
+					*/}
 						<span
+							key={active ? "on" : "off"}
 							className={cn(
 								"inline-flex items-center justify-center rounded-xl font-medium transition-colors",
 								sidebarState === "collapsed"
 									? "h-8 min-w-8 gap-1.5 px-1.5 text-xs"
 									: "h-9 min-w-9 gap-2 px-2 text-sm",
 								pillClasses(theme, active),
+								active && "animate-in fade-in-0 zoom-in-95 duration-200 ease-out",
 							)}
 						>
 							{item.icon}

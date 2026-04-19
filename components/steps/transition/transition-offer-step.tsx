@@ -103,8 +103,8 @@ export function TransitionOfferStep() {
     >
       {/* ── Title ── */}
       <h1
-        className="text-center text-2xl sm:text-3xl font-bold px-6"
-        style={{ color: "#F3E5FA" }}
+        className="text-center text-2xl sm:text-3xl font-bold px-6 animate-fade-up"
+        style={{ color: "#F3E5FA", animationDelay: "60ms" }}
       >
         On prépare
         <br />
@@ -113,14 +113,17 @@ export function TransitionOfferStep() {
 
       {/* ── Subtitle ── */}
       <p
-        className="mt-2 text-center text-sm sm:text-base px-6"
-        style={{ color: "#F3E5FA" }}
+        className="mt-2 text-center text-sm sm:text-base px-6 animate-fade-up"
+        style={{ color: "#F3E5FA", animationDelay: "160ms" }}
       >
         On s&apos;occupe de tout
       </p>
 
       {/* ── Carousels ── */}
-      <div className="mt-8 flex flex-col items-center w-full">
+      <div
+        className="mt-8 flex flex-col items-center w-full animate-fade-scale"
+        style={{ animationDelay: "240ms", animationDuration: "480ms" }}
+      >
         {/* ── Image Carousel (single element, manual scroll) ── */}
         <Carousel
           setApi={setImageApi}

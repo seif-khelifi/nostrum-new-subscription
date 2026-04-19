@@ -21,12 +21,15 @@ export function ComparateurWelcome() {
 
 	return (
 		<div
-			className="fixed inset-0 z-50 flex flex-col overflow-hidden"
+			className="fixed inset-0 z-50 flex flex-col overflow-hidden animate-overlay-in"
 			style={{ background: WELCOME_BG }}
 		>
 			{/* ── Mobile ── */}
 			<div className="flex flex-col h-full lg:hidden">
-				<div className="flex justify-center pt-10 pb-2 shrink-0">
+				<div
+					className="flex justify-center pt-10 pb-2 shrink-0 animate-fade-up"
+					style={{ animationDelay: "120ms" }}
+				>
 					<Button variant="closeComparateur" onClick={close}>
 						Fermer le comparateur d{"'"}offres
 						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
@@ -41,20 +44,28 @@ export function ComparateurWelcome() {
 						alt="Logo produit"
 						width={200}
 						height={200}
-						className="w-44 h-auto max-h-[40vh] object-contain"
+						className="w-44 h-auto max-h-[40vh] object-contain animate-fade-scale"
+						style={{ animationDelay: "200ms", animationDuration: "480ms" }}
 					/>
 				</div>
 
 				<div className="shrink-0 px-6 pb-8">
-					<h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold leading-tight text-white">
+					<h1
+						className="font-[family-name:var(--font-bricolage-grotesque)] text-2xl font-bold leading-tight text-white animate-fade-up"
+						style={{ animationDelay: "320ms" }}
+					>
 						{comparateurData.welcome.title}
 					</h1>
-					<p className="mt-3 text-sm leading-relaxed text-white/80">
+					<p
+						className="mt-3 text-sm leading-relaxed text-white/80 animate-fade-up"
+						style={{ animationDelay: "380ms" }}
+					>
 						{comparateurData.welcome.subtitle}
 					</p>
 					<Button
 						variant="ctaPurpleSquared"
-						className="mt-5 w-full"
+						className="mt-5 w-full animate-fade-up"
+						style={{ animationDelay: "460ms" }}
 						onClick={start}
 					>
 						{comparateurData.welcome.ctaLabel}
@@ -64,7 +75,10 @@ export function ComparateurWelcome() {
 
 			{/* ── Desktop ── */}
 			<div className="hidden lg:flex flex-col h-full">
-				<div className="flex justify-center pt-12 pb-4 shrink-0">
+				<div
+					className="flex justify-center pt-12 pb-4 shrink-0 animate-fade-up"
+					style={{ animationDelay: "120ms" }}
+				>
 					<Button variant="closeComparateur" onClick={close}>
 						Fermer le comparateur d{"'"}offres
 						<span className="flex h-[26px] w-[42px] items-center justify-center rounded-full bg-[#360057] transition-colors hover:bg-[#4a0076]">
@@ -76,15 +90,22 @@ export function ComparateurWelcome() {
 				<div className="flex-1 flex items-center justify-center px-12 min-h-0">
 					<div className="grid grid-cols-2 gap-16 max-w-5xl w-full">
 						<div className="flex flex-col justify-center">
-							<h1 className="font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-white">
+							<h1
+								className="font-[family-name:var(--font-bricolage-grotesque)] text-4xl font-bold leading-tight text-white animate-fade-up"
+								style={{ animationDelay: "200ms" }}
+							>
 								{comparateurData.welcome.title}
 							</h1>
-							<p className="mt-4 text-base leading-relaxed text-white/80">
+							<p
+								className="mt-4 text-base leading-relaxed text-white/80 animate-fade-up"
+								style={{ animationDelay: "280ms" }}
+							>
 								{comparateurData.welcome.subtitle}
 							</p>
 							<Button
 								variant="ctaPurpleSquared"
-								className="mt-8 w-fit px-10"
+								className="mt-8 w-fit px-10 animate-fade-up"
+								style={{ animationDelay: "380ms" }}
 								onClick={start}
 							>
 								{comparateurData.welcome.ctaLabel}
@@ -97,7 +118,8 @@ export function ComparateurWelcome() {
 								alt="Logo produit"
 								width={320}
 								height={320}
-								className="w-64 h-auto max-h-[50vh] object-contain"
+								className="w-64 h-auto max-h-[50vh] object-contain animate-fade-scale"
+								style={{ animationDelay: "200ms", animationDuration: "520ms" }}
 							/>
 						</div>
 					</div>

@@ -96,7 +96,7 @@ export function ProtegerStep() {
           onClick={() => handleSelect(opt.value as ProtegerValue)} className="justify-between">
           <span>{opt.label}</span>
           {selected === opt.value && (
-            <span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-[#490076] text-white">
+            <span className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-[#490076] text-white animate-in fade-in-0 zoom-in-75 duration-200 ease-out">
               <Check className="size-3 sm:size-3.5" />
             </span>
           )}

@@ -4,6 +4,130 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─────────────────────────────────────────────────────────────
+   Motion tokens — house animation grammar
+   One easing curve, small displacements, short durations.
+   All utilities honor prefers-reduced-motion at the bottom.
+   ───────────────────────────────────────────────────────────── */
+
+@theme inline {
+	--ease-out-app: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes nostrum-fade-up {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 6px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes nostrum-fade-scale {
+	from {
+		opacity: 0;
+		transform: scale(0.98);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes nostrum-overlay-in {
+	from {
+		opacity: 0;
+		transform: translate3d(0, 12px, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes nostrum-confirm {
+	0% {
+		transform: scale(1);
+	}
+	45% {
+		transform: scale(0.965);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+@keyframes nostrum-progress-sheen {
+	0% {
+		opacity: 0;
+		transform: translateX(-40%);
+	}
+	40% {
+		opacity: 0.7;
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(140%);
+	}
+}
+
+@utility animate-fade-up {
+	animation: nostrum-fade-up 280ms var(--ease-out-app) both;
+}
+
+@utility animate-fade-scale {
+	animation: nostrum-fade-scale 320ms var(--ease-out-app) both;
+}
+
+@utility animate-overlay-in {
+	animation: nostrum-overlay-in 360ms var(--ease-out-app) both;
+}
+
+@utility animate-confirm {
+	animation: nostrum-confirm 260ms var(--ease-out-app);
+}
+
+@utility animate-progress-sheen {
+	animation: nostrum-progress-sheen 900ms var(--ease-out-app) both;
+}
+
+/*
+ * Stagger primitive — children receive `--i` via inline style, and this
+ * utility translates it into a delay. Keeps JSX clean.
+ *
+ *   <ul className="stagger-children">
+ *     {items.map((x, i) => <li key={x} style={{ '--i': i }} className="animate-fade-up" />)}
+ *   </ul>
+ */
+@utility stagger-children {
+	& > * {
+		animation-delay: calc(var(--i, 0) * 40ms);
+	}
+}
+
+@utility stagger-children-lg {
+	& > * {
+		animation-delay: calc(var(--i, 0) * 60ms);
+	}
+}
+
+/* ─────────────────────────────────────────────────────────────
+   prefers-reduced-motion — collapse motion without killing state
+   ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-delay: 0ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
 @theme inline {
 	--color-background: var(--background);
 	--color-foreground: var(--foreground);

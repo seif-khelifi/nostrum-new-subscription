@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { useStepper } from "@/context/StepperContext";
 import { useVariant } from "@/context/VariantContext";
 import type { StepId } from "@/config";
+import { StepTransition } from "./step-transition";
 import {
   ProfilStep,
   DobStep,
@@ -183,7 +184,7 @@ const DEFAULT_STEP_COMPONENTS: Record<StepId, React.ComponentType> = {
  * then falls back to the default component map.
  */
 export function StepRouter() {
-  const { currentStepDef, activeStep, subFlow } = useStepper();
+  const { currentStepDef, subFlow } = useStepper();
   const { components: variantComponents } = useVariant();
   const prevStepIdRef = useRef(currentStepDef.id);
 
@@ -221,5 +222,21 @@ export function StepRouter() {
     );
   }
 
-  return <Component />;
+  /* Steps that render their own fixed-inset overlay with bespoke
+     entrance choreography opt out of the wrapper's enter animation. */
+  const overlayStep =
+    currentStepDef.id === "onboarding" ||
+    currentStepDef.id === "transition_offer" ||
+    currentStepDef.id === "comparateur_welcome" ||
+    currentStepDef.id === "offre_comparateur";
+
+  return (
+    <StepTransition
+      stepKey={currentStepDef.id}
+      subFlow={!!subFlow}
+      disabled={overlayStep}
+    >
+      <Component />
+    </StepTransition>
+  );
 }

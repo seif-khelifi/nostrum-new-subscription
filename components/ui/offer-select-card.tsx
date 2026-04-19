@@ -89,21 +89,24 @@ function OfferSelectCard({
         className={cn(offerSelectCardVariants({ layout, selected, className }))}
         {...props}
       >
-        {/* Logo hero with plan background */}
+        {/* Logo hero with plan background — taller than a row card so the
+            recommended offer visually stands out in the change-offer drawer.
+            Grows along the image axis (bigger logo + more padding) rather
+            than inflating the bottom white area, which would look lopsided. */}
         <div
-          className="flex items-center justify-center px-6 pt-6 pb-4"
+          className="flex flex-1 items-center justify-center px-6 pt-10 pb-8"
           style={{ backgroundColor: bgColor }}
         >
           <PlanLogo
             plan={plan}
-            className="h-16 w-auto"
-            width={128}
-            height={64}
+            className="h-22 w-auto"
+            width={176}
+            height={88}
           />
         </div>
 
         {/* Name + price + radio */}
-        <div className="flex flex-1 items-center gap-3 px-4 py-4">
+        <div className="flex items-center gap-3 px-4 py-4">
           <div className="flex flex-1 flex-col gap-0.5 min-w-0">
             <span className="text-sm font-semibold text-[#290E67]">
               {capitalize(plan)}

@@ -146,8 +146,8 @@ export function RecapVariantA() {
       <AddBeneficiaryDrawer open={addBeneficiaryOpen} onOpenChange={setAddBeneficiaryOpen} />
       <GeneralErrorDrawer open={errorOpen} onOpenChange={setErrorOpen} message={PRICING_ERROR_MESSAGE} />
 
-      {/* Centered content container */}
-      <div className="mx-auto w-full max-w-2xl flex flex-col gap-6">
+      {/* Centered content container — children fade up in sequence */}
+      <div className="mx-auto w-full max-w-2xl flex flex-col gap-6 [&>*]:animate-fade-up [&>*:nth-child(1)]:[animation-delay:40ms] [&>*:nth-child(2)]:[animation-delay:100ms] [&>*:nth-child(3)]:[animation-delay:160ms] [&>*:nth-child(4)]:[animation-delay:220ms] [&>*:nth-child(n+5)]:[animation-delay:280ms]">
         {/* Title */}
         <div>
           <h1
@@ -242,7 +242,7 @@ export function RecapVariantA() {
           appears at `lg+`, so we must show this bar on everything below lg,
           not just below sm. Otherwise between 640–1023px the user had no
           accessible CTA. */}
-      <RecapStickyFooter totalPrice={totalPrice} onContinue={next} className="lg:hidden" />
+      <RecapStickyFooter totalPrice={totalPrice} onContinue={next} className="lg:hidden animate-in slide-in-from-bottom-4 fade-in-0 duration-300 ease-out" />
 
       {/* Pad bottom for fixed bar — matches the bar's visibility */}
       <div className="h-40 lg:hidden" />

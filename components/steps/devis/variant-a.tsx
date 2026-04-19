@@ -110,13 +110,19 @@ export function DevisVariantA() {
       <div className="flex flex-col lg:hidden">
         {/* Hero section: edge-to-edge #F3E5FA bg (negate parent p-4) */}
         <div className="-mx-4 -mt-4 bg-[#F3E5FA] px-4 pt-6 pb-8 sm:-mx-6 sm:-mt-6 sm:px-6">
-          {/* Title — same size as other steps (text-4xl) */}
-          <h1 className="text-4xl font-bold leading-tight text-[#290E67]">
+          {/* Title — fades up first */}
+          <h1
+            className="text-4xl font-bold leading-tight text-[#290E67] animate-fade-up"
+            style={{ animationDelay: "40ms" }}
+          >
             Votre formule mutuelle sur-mesure
           </h1>
 
-          {/* Subtitle — matches StepScreen subtitle styling */}
-          <div className="mt-2 flex items-center gap-2 text-base font-semibold text-[#1D1B20] sm:text-lg">
+          {/* Subtitle */}
+          <div
+            className="mt-2 flex items-center gap-2 text-base font-semibold text-[#1D1B20] sm:text-lg animate-fade-up"
+            style={{ animationDelay: "100ms" }}
+          >
             <span>Pour vous et votre famille</span>
             <button
               type="button"
@@ -127,9 +133,12 @@ export function DevisVariantA() {
             </button>
           </div>
 
-          {/* Recommended card */}
+          {/* Recommended card — hero moment, fade-scale to draw the eye */}
           {recommended && (
-            <div className="mt-6">
+            <div
+              className="mt-6 animate-fade-scale"
+              style={{ animationDelay: "200ms", animationDuration: "420ms" }}
+            >
               <OfferCard
                 plan={recommended.plan as OfferPlan}
                 tone="recommended"
@@ -150,15 +159,18 @@ export function DevisVariantA() {
           )}
         </div>
 
-        {/* "Nos autres formules" heading — same size as step titles */}
-        <div className="pt-8">
+        {/* "Nos autres formules" heading */}
+        <div
+          className="pt-8 animate-fade-up"
+          style={{ animationDelay: "320ms" }}
+        >
           <h1 className="text-4xl font-bold leading-tight text-[#490076]">
             Nos autres formules
           </h1>
         </div>
 
-        {/* Default cards — #F3E5FA footer with "En savoir plus" */}
-        <div className="flex flex-col gap-5 pt-6">
+        {/* Default cards — staggered fade-up */}
+        <div className="flex flex-col gap-5 pt-6 [&>*]:animate-fade-up [&>*:nth-child(1)]:[animation-delay:400ms] [&>*:nth-child(2)]:[animation-delay:480ms] [&>*:nth-child(3)]:[animation-delay:560ms]">
           {others.map((offer) => (
             <OfferCardMoreFooter
               key={offer.plan}
@@ -183,7 +195,10 @@ export function DevisVariantA() {
         </div>
 
         {/* Compare card */}
-        <div className="pt-8 pb-4">
+        <div
+          className="pt-8 pb-4 animate-fade-up"
+          style={{ animationDelay: "640ms" }}
+        >
           <CompareCard
             title={compare.title}
             description={compare.description}
@@ -196,8 +211,11 @@ export function DevisVariantA() {
       {/* ─── Desktop layout (lg+) ─── */}
       <div className="hidden lg:flex flex-col items-center w-full py-10 px-6 lg:px-12">
         <Tabs defaultValue="recommended" className="w-full">
-          {/* Tabs pill — centred, constrained width */}
-          <div className="flex justify-center">
+          {/* Tabs pill — centred, constrained width; fades up first */}
+          <div
+            className="flex justify-center animate-fade-up"
+            style={{ animationDelay: "40ms" }}
+          >
             <TabsList variant="devis" className="max-w-md">
               <TabsTrigger value="recommended" variant="devis">
                 Mon offre recommandée
@@ -210,7 +228,10 @@ export function DevisVariantA() {
 
           {/* ── Tab 1: Recommended offer ── */}
           <TabsContent value="recommended">
-            <div className="mt-6 rounded-[24px] bg-[#F3E5FA] p-8">
+            <div
+              className="mt-6 rounded-[24px] bg-[#F3E5FA] p-8 animate-fade-scale"
+              style={{ animationDelay: "160ms", animationDuration: "420ms" }}
+            >
               <div className="grid grid-cols-5 gap-8 items-stretch">
                 {/* Left column — 40% (2 of 5 cols) */}
                 <div className="col-span-2 flex flex-col gap-6">
@@ -271,7 +292,10 @@ export function DevisVariantA() {
               </div>
             </div>
             {/* Compare card — inline layout, below tabs, always visible */}
-            <div className="mt-8 w-full">
+            <div
+              className="mt-8 w-full animate-fade-up"
+              style={{ animationDelay: "360ms" }}
+            >
               <CompareCard
                 layout="inline"
                 title={compare.title}
@@ -314,8 +338,8 @@ export function DevisVariantA() {
 
                 {/* Content — above the background */}
                 <div className="relative z-10 px-4 pt-8 pb-40 xl:px-12">
-                  {/* Responsive grid: 2 cols at lg, 3 cols at xl+ */}
-                  <div className="grid grid-cols-2 gap-5 xl:grid-cols-3">
+                  {/* Responsive grid with staggered entrance (2 cols at lg, 3 cols at xl+) */}
+                  <div className="grid grid-cols-2 gap-5 xl:grid-cols-3 [&>*]:animate-fade-up [&>*:nth-child(1)]:[animation-delay:120ms] [&>*:nth-child(2)]:[animation-delay:180ms] [&>*:nth-child(3)]:[animation-delay:240ms]">
                     {others.map((offer) => (
                       <OfferCardHoverGroup
                         key={offer.plan}

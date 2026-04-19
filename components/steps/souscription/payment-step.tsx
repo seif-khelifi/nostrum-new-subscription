@@ -19,10 +19,11 @@ import { useApiError } from "@/hooks/use-api-error";
 import { postCreateStripeCustomer, postSetupIntent } from "@/lib/payment-api";
 import { getStripePromise } from "@/lib/stripe-client";
 import {
-  elementsOptions,
+  buildElementsOptions,
   paymentElementOptions,
   expressCheckoutOptions,
 } from "@/config/stripe";
+import { useMediaQuery } from "@/hooks/use-media-query";
 
 /**
  * Inner form — must be rendered inside <Elements> so useStripe/useElements work.
@@ -229,8 +230,15 @@ function PaymentForm() {
 
 /** Wraps PaymentForm in Stripe's Elements provider — useStripe()/useElements() require this. */
 export function PaymentStep() {
+  // Stripe reads `appearance` only at mount, so we key the provider on the
+  // viewport size to force a remount when the breakpoint crosses.
+  const isMobile = useMediaQuery("(max-width: 640px)");
   return (
-    <Elements stripe={getStripePromise()!} options={elementsOptions}>
+    <Elements
+      key={isMobile ? "mobile" : "desktop"}
+      stripe={getStripePromise()!}
+      options={buildElementsOptions(isMobile)}
+    >
       <PaymentForm />
     </Elements>
   );

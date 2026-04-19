@@ -117,17 +117,26 @@ export function GarantiesVariantA() {
           style={{ backgroundColor: bgColor }}
         >
           {/* Title */}
-          <h3 className="font-[family-name:var(--font-bricolage-grotesque)] text-3xl font-bold leading-tight text-[#290E67]">
+          <h3
+            className="font-[family-name:var(--font-bricolage-grotesque)] text-3xl font-bold leading-tight text-[#290E67] animate-fade-up"
+            style={{ animationDelay: "40ms" }}
+          >
             {texts.title}
           </h3>
 
           {/* Subtitle */}
-          <p className="mt-2 text-base text-[#290E67]">
+          <p
+            className="mt-2 text-base text-[#290E67] animate-fade-up"
+            style={{ animationDelay: "100ms" }}
+          >
             {extra.subtitleTemplate.replace("{offer}", capitalize(planName))}
           </p>
 
-          {/* Offer summary card — reuses OfferCard with hideCta */}
-          <div className="mt-6">
+          {/* Offer summary card — fade-scales for emphasis */}
+          <div
+            className="mt-6 animate-fade-scale"
+            style={{ animationDelay: "200ms", animationDuration: "420ms" }}
+          >
             <OfferCard
               plan={planName as OfferPlan}
               tone="default"
@@ -142,7 +151,10 @@ export function GarantiesVariantA() {
           </div>
 
           {/* "Voir le tableau de garanties" link — uses linkChevron variant */}
-          <div className="mt-4 flex items-center justify-center">
+          <div
+            className="mt-4 flex items-center justify-center animate-fade-up"
+            style={{ animationDelay: "320ms" }}
+          >
             <Button variant="linkChevron" type="button">
               {extra.seeGuaranteesLabel}
               <ChevronRight className="h-4 w-4" />
@@ -153,7 +165,10 @@ export function GarantiesVariantA() {
         {/* ── Content outside colored section ── */}
 
         {/* Single illustration */}
-        <div className="px-2 pt-8">
+        <div
+          className="px-2 pt-8 animate-fade-up"
+          style={{ animationDelay: "420ms" }}
+        >
           <div className="overflow-hidden rounded-2xl">
             <Image
               src="/garanties/single.svg"

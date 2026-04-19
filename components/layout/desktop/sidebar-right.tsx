@@ -62,9 +62,14 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
           layout-model. */}
       <AdvisorSidebarCard tel="+33000000000" />
 
-      {/* Step banner — dynamic, from variant config */}
+      {/*
+        Step banner — dynamic, from variant config.
+        Keyed on the step id so it remounts + cross-fades between steps;
+        otherwise content-only replacements look jumpy across 20+ steps.
+      */}
       {stepBanner && (
         <AlertBanner
+          key={currentStepDef.id}
           variant="default"
           layout="responsive"
           title={stepBanner.title}
@@ -73,6 +78,7 @@ export function DesktopSidebarRight({ className }: DesktopSidebarRightProps) {
           imageSrc={stepBanner.imageSrcHorizontal ?? stepBanner.imageSrc}
           imageAlt={stepBanner.imageAlt}
           imageFill={!!(stepBanner.imageSrcHorizontal ?? stepBanner.imageSrc)}
+          className="animate-fade-scale"
         />
       )}
 
